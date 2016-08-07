@@ -1,0 +1,315 @@
+#tdcolor{
+color:#FF6600;
+}
+#dataTables-example td a{
+color:#000000;
+text-decoration:none;
+}
+#dataTables-example td a:hover{
+color:#428bca;
+}
+.pdf-thumb-box {
+display: inline-block !important;
+position: relative !important;
+overflow: hidden;
+}
+.pdf-thumb-box-overlay {
+display: none;
+}
+.pdf-thumb-box a:hover .pdf-thumb-box-overlay {
+display: inline;
+text-align: center;
+left:0;
+position: absolute;
+transition: background 0.2s ease, padding 0.8s linear;
+background-color: rgba(255, 0, 0, 0.58);
+color: #fff;
+width: 100%;
+height: 100%;
+text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+.pdf-thumb-box-overlay span {
+position: relative;
+top: 50%;
+-webkit-transform: translateY(-50%);
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+}
+#viewsize{
+font-size:17px;
+}
+#sentmailcheckbox{
+margin-right:15px;
+}
+#subject{
+margin-right:30px;
+margin-left:30px;
+}
+
+#subject{
+font-size:15px;
+}
+#btnmargin{
+margin-left:16px;
+}
+#franchiseecoursename{
+color:red;
+font-size:12px;
+padding:0px;
+margin:0px;
+}
+#margin-top{
+margin-top:30px;
+}
+#form1 .form-control-feedback{
+top:0;
+right:-15px;
+
+}
+#form2 .form-control-feedback{
+top:0;
+right:-15px;
+
+}
+.col-lg-5{
+margin-left:20px;
+}
+#margin-left{
+margin-left:20px;
+}
+#buttoncenter{
+text-align:center;
+}
+.form-control{
+background-color:#D6DDE4;
+}
+
+#studentdetailsborder, #parentdetailsborder, #schooldetailsborder, #coursedetailsborder, #residentialaddressborder,#siblingdetails {
+    border: 2px solid #2f2f2f;
+  border-radius: 25px;
+  padding-top:20px;
+
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+	#studentprogram{
+  font-family: verdana;
+  font-size: 12px;
+  background-color: #2e353d;
+display: inline-block;
+ margin-left:12px;
+  color: #ffffff;
+  
+  }
+ 
+ #check{
+ bottom:0px;
+ 
+ vertical-align: bottom;
+    position: relative;
+ }
+
+#checkbox{
+bottom:3px;
+ vertical-align: bottom;
+    position: relative;
+}
+	#studentprogram{
+  font-family: verdana;
+  font-size: 12px;
+  background-color: #2e353d;
+display: inline-block;
+   
+ margin-left:12px;
+  color: #ffffff;
+  
+  }
+ 
+ #check{
+ bottom:0px;
+ 
+ vertical-align: bottom;
+    position: relative;
+ }
+
+#checkbox{
+bottom:3px;
+ vertical-align: bottom;
+    position: relative;
+}
+
+.da-img{
+	width: 50px;
+	height: 50px;
+	display: block;
+	margin: 9em auto 1em;
+	background: url(../images/buttonimg.png);
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+.da-img:hover{
+	width: 50px;
+	height: 50px;
+	display: block;
+	background: url(../images/buttonimgh.png);
+}
+ 
+.popup-with-zoom-anim{
+text-decoration:none;
+}
+ 
+#prfl{
+width:42px;
+padding:-10px;
+margin:-12px;
+}
+#form1 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+
+#submit{
+     display: none;
+}
+
+
+#form2 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+.img{
+margin-top:-10px;
+height:40px;
+}
+
+#image {
+ visibility:hidden;
+ width:5px;
+ margin-top:-25px;
+ }
+#FranchiseeImage {
+ visibility:hidden;
+ width:5px;
+ margin-top:-25px;
+ }
+#StudentImage {
+ visibility:hidden;
+ width:5px;
+ margin-top:-25px;
+}
+#UserImage {
+ visibility:hidden;
+ width:5px;
+ margin-top:-25px;
+}
+
+#formcontrol{
+background:#fff;
+width:160px;
+}
+#paddingright{
+padding-right:30px;
+}
+
+#btncolor:active {
+    background-color: yellow;
+	color:#000;
+}
+#btncolor{
+    background-color:#5ea213;
+	color:#fff;
+}
+#btncolor:focus {
+         background-color:blue;
+    }
+	#personDataTable{
+	font-size:17px;
+	font-family:arial;
+	}
+	#checkbox6{
+	width:24px;
+	height:16px;
+	background:#231456;
+	color:#987456;
+	bottom:0px;
+	
+	}
+	
+	#personDataTable th{
+	background:#2e353d;
+	color:#fff;
+	}
+
+    .hasborder{
+	background:#BBB0B1;
+	border-radius:7px;
+	}
+	.hasborder:hover{
+	background:#99cc00;
+	
+	}
+	.hasborder:focus{
+	background-color:blue;
+	
+	}
+#th {
+    background:#2e353d;
+    color:#fff;
+    font-family:arial;
+    text-align:center;
+    padding:6px;
+}
+
+
+  
+.btn-lg {
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #2e353d;
+  border-color: #285e8e;
+}
+
+.buttoncolor {
+    background:#564789;
+    color:red;
+}
+#deletebutton .btn {
+    
+    color:#008080;
+    border-radius: 5px;
+    border-color:#008080;
+}
+    #deletebutton .btn:hover {
+    background:#008080;
+    color:#fff;
+    }
+#add_button {
+    margin-bottom: 3px;
+    margin-top: -3px;
+}
+
+#print{
+    margin-left:15px;
+    margin-right:15px;
+}

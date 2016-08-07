@@ -1,0 +1,74 @@
+.pager li a:hover{
+background:#00aff0;
+color:#ffffff;
+
+}
+#tdcolor{
+font-size:18px;
+}
+#tdsize{
+font-size:15px;
+}
+#personalinfromation{
+font-size:25px;
+font-family:arial;
+}
+#buttonSave{
+background:#99cc00;
+color:#fff;
+border: 2px solid #fff;
+padding: 5px 17px; 
+width:80px;
+border-radius: 15px;
+margin-right:15px;
+font-size:16px;
+}
+#buttonSave:hover{
+border: 2px solid #99cc00;
+
+}
+
+#buttonCancel{
+background:#99cc00;
+color:#fff;
+border: 2px solid #fff;
+padding: 5px 17px; 
+width:85px;
+border-radius: 15px;
+font-size:16px;
+}
+#buttonCancel:hover{
+border: 2px solid #99cc00;
+
+}
+#lablesize{
+font-size:17px;
+font-family:arial;
+}
+.form-control{
+background:#fff;
+border-color:#00aff0;
+}
+#tdcolor{
+color:#FF6600;
+}
+#Editprofile .form-control-feedback{
+top:0;
+right:-15px;
+
+}
+#changepassword .form-control-feedback{
+top:0;
+right:-15px;
+
+}
+#myBtnchangepassword{
+border-width: 2px; 
+border-color:#00aff0;
+border-style: solid;
+}
+#edit{
+border-width: 2px;
+ border-color:#00aff0;
+border-style: solid;
+ }

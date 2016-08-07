@@ -1,0 +1,303 @@
+* {
+}
+html, body,a{
+text-decoration:none;
+height: 100%;
+outline:none;
+}
+
+/**
+ * Override feedback icon position
+ * See http://formvalidation.io/examples/adjusting-feedback-icon-position/
+ */
+#active{
+background-color:black;
+}
+
+.middle{
+    text-align:center;    
+}
+
+#leftalign{
+    margin-left:-50px;
+}
+
+#rmobile,#remail,#amobile,#aemail{
+    outline:none;
+}
+
+#left{
+    margin-left:2px;
+}
+
+#top{
+    margin-top:7px;
+}
+
+#a{
+    color:white;
+    outline:none;
+}
+
+ .white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;  
+}
+.mfp-close-btn-in .mfp-close {
+  color: #333333;
+  margin-top:20px;
+  margin-right:30px;  
+  }
+ 
+ /* start slider */
+.slider_bg{
+	padding-top:50px;
+	background:  url('../images/banner.jpg') no-repeat;
+	background-size: auto 100%;
+}
+.da-slide {
+	padding: 11% 0%;
+}
+.da-slide h2 {
+	color: #FFF;
+	font-size: 3em;
+	font-weight: 700;
+	z-index: 10;
+	text-align: center;
+}
+.da-slide h2 span {
+	font-size: 1em;
+	font-weight: 300;
+}
+.da-slide p {
+	color: #FFF;
+	font-size: 1.4em;
+	text-align: center;
+	margin: 1.5em auto;
+	width: 77%;
+	font-weight: 300;
+	line-height: 1.4em;
+}
+.da-slide .da-link {
+	background-color: #1BBC9B;
+	display: block;
+	color: #FFF;
+	font-size: 1em;
+	text-transform: uppercase;
+	margin: 0 auto;
+	width: 10%;
+	text-align: center;
+	padding: 1em 2em;
+}
+.da-slide .da-link:hover
+{
+	background:#01CAA1;
+}
+.da-img{
+	width: 50px;
+	height: 50px;
+	display: block;
+	margin: 9em auto 1em;
+	background: url(../images/buttonimg.png);
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+.da-img:hover{
+	width: 50px;
+	height: 50px;
+	display: block;
+	background: url(../images/buttonimgh.png);
+}
+ 
+.popup-with-zoom-anim{
+text-decoration:none;
+}
+ 
+#prfl{
+width:42px;
+padding:-10px;
+margin:-12px;
+}
+#form1 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+
+#submit{
+     display: none;
+}
+
+
+#form2 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+
+#form3 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+#form4 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+
+#form5 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+#form6 .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+
+.form-control{
+background-color:#D6DDE4;
+}
+#commentmain{
+    margin-top:10px;
+margin-bottom:10px;
+}
+
+.caret{
+margin-top:-10px;
+color: white;
+}
+
+.col-lg-5{
+align:right;
+}
+
+.img{
+margin-top:-10px;
+height:40px;
+}
+
+#image {
+ visibility:hidden;
+ width:5px;
+ margin-top:-25px;
+ }
+
+
+#beside{
+padding:12px;
+margin-left:-58px;
+width:1%;
+color:white;
+font-size:24px;
+}
+
+#topdown{
+    margin-top:5px;
+}
+
+#right{
+text-align:right;
+}
+
+.icons{
+margin-top:15px;
+width:1%;
+color:white;
+font-size:9px;
+outline:none;
+}
+
+#down{
+margin-bottom:50px;
+}
+
+.navbar
+{
+background:#99CC00;
+}
+
+.icon{
+padding:12px;
+margin:-12px;
+width:1%;
+color:white;
+font-size:15px;
+outline:none;
+}
+
+.sec{
+padding-top:100px;
+}
+
+#photo {
+ visibility:hidden;
+ width:5px;
+ margin-top:-25px;
+ }
+
+ #pic{
+ right:-50px;
+ }
+
+#badge{
+font-size:9px;
+}
+
+#length{
+width:50%;
+}
+
+.navbr{
+ background: #99CC00;
+ }
+
+.wrapper {
+padding:50px;
+height:auto;
+width:auto;
+min-height: 100%;
+margin: 0 auto -2.5em;
+}
+
+#branch{
+margin-top:20px;
+}
+
+.marquee {
+    font-size:50px;
+    color:red;
+}
+.links {
+    text-align: right;
+    font-size: inherit;
+    font-family: 'Script MT';
+}
+.fonts {
+text-align:center;
+font-size:10px;
+font-family:calibri;
+}
+.align{
+    margin-top:75px;
+}
+#anchor{
+color: #4DB8FF;
+}
+
+.footer {
+padding-top:7px;
+height: auto;
+width:100%;
+color: white;
+text-align: center;
+display:block;
+background-color:#99CC00;
+}
