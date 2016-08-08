@@ -34,12 +34,13 @@ class FranchiseeManagement extends CI_Controller {
             'date_of_birth'=>$_POST['date_of_birth'],						
             'gender'=>$_POST['gender'],
 			);
-        $result= $this->franchisee->insertNewRecord('sea_users',$data);
+        header('application/json');
+        echo $result= $this->franchisee->insertNewRecord('sea_users',$data);
     }
 
     public function dashboard()
     {
-         $this->load->view('includes/header');
+        $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/dashboard');
         $this->load->view('includes/footer');   
     }
@@ -51,14 +52,14 @@ class FranchiseeManagement extends CI_Controller {
         $this->load->view('FranchiseeManagement/smfList',$data);
         $this->load->view('includes/footer');   
     }
-		public function dmfList()
+    public function dmfList()
     {
 		$data['data']['smf'] =$this->franchisee->listFromTable('sea_users','3');
 		$this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/smfList',$data);
         $this->load->view('includes/footer');   
     }
-		public function ufList()
+	public function ufList()
     {
 		$data['data']['smf'] =$this->franchisee->listFromTable('sea_users','4');
 		$this->load->view('includes/header');

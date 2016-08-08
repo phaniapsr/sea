@@ -12,11 +12,14 @@ $(function(){
                 data : postData,
                 success:function(data, textStatus, jqXHR)
                 {
-                    alert('phani'+data);
+                    if(data>0)
+                        $('#message_from_server').text('Franchisee registered successfully');
+                    else $('#message_from_server').text('Registration failed');
+                    //alert('phani'+data);
                 },
                 error: function(jqXHR, textStatus, errorThrown)
                 {
-                    alert('An'+jqXHR);
+                    //alert('An'+jqXHR);
                 }
             });
         e.preventDefault();

@@ -63,15 +63,16 @@ class Login extends CI_Controller {
                         $session_data = array(
                         'id' => $result[0]['id'],
 						'username' => $result[0]['username'],
+						'first_name' => $result[0]['first_name'],
 						'franchiseetypeId' => $result[0]['franchiseetypeId'],
 						);
 					   //setting session
 					   $this->session->set_userdata('user_logged_in', $session_data);
 					
-					   if($result[0]['franchiseetypeId']=='1')
+					   if($result[0]['franchiseetypeId']=='1'||$result[0]['franchiseetypeId']=='3'||$result[0]['franchiseetypeId']=='2')
 					   redirect('FranchiseeManagement');
-					   if($result[0]['franchiseetypeId']=='3')
-					   redirect('UserManagement');
+					   if($result[0]['franchiseetypeId']=='4')
+					   redirect('StudentManagement');
 					   
 
                 }

@@ -320,6 +320,11 @@
                                     </center>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p id="message_from_server" class="text-success"></p>
+                                </div>
+                            </div>
 
 
                             <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -403,5 +408,5 @@
         <script src="Scripts/admin/jquery-ui.js"></script>
 
     </div>
-    <footer><p>All right reserved by: <a href="http://friendsfocus.in/">LemonBridge</a></p></footer>
+    <footer><p>All right reserved by: <a href="#">LemonBridge</a></p></footer>
 </div>

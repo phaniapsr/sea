@@ -23,7 +23,7 @@
                                     <center><h4>STUDENT DETAILS</h4></center>
                                     <div id="studentdetailsborder">
                                         <div class="form-group">
-                                            <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">E-mail</label>
+                                            <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">E-mail*</label>
                                             <div class="col-lg-6 has-feedback">
                                                 <input data-fv-field="EmailId" class="form-control" name="email" placeholder="E-mail" type="text"><i data-fv-icon-for="EmailId" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="EmailId" data-fv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small></div>
@@ -373,14 +373,7 @@
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Login name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="stringLength" class="help-block" style="display: none;">Login name must be more than 6 and less than 30 characters long</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="regexp" class="help-block" style="display: none;">Login name can only consist of alphabetical, number, dot and underscore</small></div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="col-lg-5  control-label " style="text-align:left">Password *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="password" class="form-control" name="password" placeholder="Password" type="text"><i data-fv-icon-for="password" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="password" data-fv-validator="notEmpty" class="help-block" style="display: none;">Password is required</small></div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -529,6 +522,11 @@
 
                                     </center>
 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p id="message_from_server" class="text-success"></p>
                                 </div>
                             </div>
                             <script>

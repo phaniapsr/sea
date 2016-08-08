@@ -3,7 +3,7 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-header">State Master Franchise List</h1>
+                <h1 class="page-header">Students List</h1>
             </div>
         </div>
         <!-- /. ROW  -->
@@ -11,36 +11,33 @@
         <div class="row">
             <div class="col-lg-12">
                 <table class="table table-striped table-bordered table-hover no-footer dataTable" id="dt-state-franchisee" style="font-size:14px;" aria-describedby="dt-state-franchisee_info">
-                        <thead>
-                        <tr role="row">
-						<th>ID</th>
-						<th>USER NAME</th>
-						<th>EMAIL</th>
-						<th>FIRST NAME</th>
-						<th>LAST NAME</th>
-						<th>MIDDLE NAME</th>
-						<th></th>
-						<th></th>
+                    <thead>
+                    <tr role="row">
+                        <th>ID</th>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>MIDDLE NAME</th>
+                        <th>EMAIL</th>
+                        <th></th>
+                        <th></th>
 
-						</tr></thead>
-                        <tbody>
-						<?php 
-        $i=1;
-		foreach ($data['smf'] as $row){ ?>
-						<tr class="odd">
-						<td><?php echo $row['id'];?></td>
-						<td><?php echo $row['username'];?></td>
-						<td><?php echo $row['email'];?></td>
-						<td><?php echo $row['first_name'];?></td>
-						<td><?php echo $row['last_name'];?></td>
-						<td><?php echo $row['middle_name'];?></td>
-						<td><input type="button" class="btn btn-info" value="Revinue configuration" /></td>
-						<td><input type="button" class="btn btn-info" value="Active" /></td>
-						
-						</tr>
-		<?php }?>				
-						</tbody>
-                    </table>
+                    </tr></thead>
+                    <tbody>
+                    <?php
+                    $i=1;
+                    foreach ($data['smf'] as $row){ ?>
+                        <tr class="odd">
+                            <td><?php echo $row['id'];?></td>
+                            <td><?php echo $row['first_name'];?></td>
+                            <td><?php echo $row['last_name'];?></td>
+                            <td><?php echo $row['middle_name'];?></td>
+                            <td><?php echo $row['email'];?></td>
+                            <td><input type="button" class="btn btn-info" value="Courses Info" /></td>
+                            <td><input type="button" class="btn btn-info" value="Active" /></td>
+                        </tr>
+                    <?php }?>
+                    </tbody>
+                </table>
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
