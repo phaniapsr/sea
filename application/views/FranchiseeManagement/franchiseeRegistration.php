@@ -1,4 +1,4 @@
-<!--<script type="application/javascript" src="<?php /*echo base_url()*/?>scripts/admin/franchiseeRegistration/franchiseeRegistration.js"></script>-->
+<script type="application/javascript" src="<?php echo base_url()?>scripts/admin/franchiseeRegistration/franchiseeRegistration.js"></script>
 <div id="page-wrapper">
     <div id="page-inner">
         <div class="row">

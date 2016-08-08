@@ -248,7 +248,7 @@
 
 
                 <li>
-                    <a href="/StudentRegistration"><i class="fa fa-list-alt"></i> Student Registration</a>
+                    <a href="<?php echo base_url()?>StudentManagement"><i class="fa fa-list-alt"></i> Student Registration</a>
                 </li>
                 <li>
 

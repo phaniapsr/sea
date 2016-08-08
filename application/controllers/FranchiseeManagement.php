@@ -34,7 +34,6 @@ class FranchiseeManagement extends CI_Controller {
             'date_of_birth'=>$_POST['date_of_birth'],						
             'gender'=>$_POST['gender'],
 			);
-			print_r($data);
         $result= $this->franchisee->insertNewRecord('sea_users',$data);
     }
 

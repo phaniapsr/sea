@@ -9,21 +9,19 @@ class StudentManagement extends CI_Controller {
     function __construct(){
         // Construct the parent class
         parent::__construct();
-        $this->load->model('franchisee_mod','franchisee');
+        $this->load->model('student_mod','student');
         //$this->load->model('merchant_mod');
         //$this->load->library('form_validation');
     }
     public function index()
     {
         $this->load->view('includes/header');
-        $this->load->view('FranchiseeManagement/franchiseeRegistration');
+        $this->load->view('StudentManagement/studentRegistration');
         $this->load->view('includes/footer');
     }
 
     public function registerStudent(){
         $data=array(
-            'franchiseetypeId'=>$_POST['franchiseetypeId'],
-            'username'=>$_POST['franchiseeName'],
             'password'=>$_POST['password'],
             'email'=>$_POST['email'],
             'first_name'=>$_POST['first_name'],
@@ -32,7 +30,6 @@ class StudentManagement extends CI_Controller {
             'date_of_birth'=>$_POST['date_of_birth'],
             'gender'=>$_POST['gender'],
         );
-        print_r($data);
-        $result= $this->franchisee->insertNewRecord('sea_users',$data);
+        $result= $this->student->insertNewRecord('sea_users',$data);
     }
 }
