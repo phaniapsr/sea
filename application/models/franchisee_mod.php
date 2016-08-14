@@ -4,11 +4,10 @@
             parent::__Construct();
         }
 	public function listFromTable($table,$filter) {
-	        
-            $query="select * from $table where franchiseetypeId = '$filter'";
-        	$sql= $this->db->query($query);
-			return $sql->result_array();
-        }
+		$query="select * from $table where franchiseetypeId = '$filter'";
+		$sql= $this->db->query($query);
+		return $sql->result_array();
+	}
 	public function deleteRecordFromTable($table,$fieldLable,$id) {
 	  	    $this->db->where($fieldLable, $id);
             $this->db->delete($table); 

@@ -36,7 +36,6 @@ class Login extends CI_Controller {
 		//$this->load->view('includes/menu');
 	    $this->load->view('dashboard');
 		$this->load->view('includes/footer');
-
 	}
 	
 	public function hostings()
@@ -48,10 +47,10 @@ class Login extends CI_Controller {
 	public function logincheck()
 	{
 
-		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == TRUE) {
-			   $data = array('username' => $this->input->post('username'),
+			   $data = array('email' => $this->input->post('email'),
                              'password' => $this->input->post('password')
                 );
 				//model calling modelname->method
@@ -62,7 +61,7 @@ class Login extends CI_Controller {
                    
                         $session_data = array(
                         'id' => $result[0]['id'],
-						'username' => $result[0]['username'],
+						'email' => $result[0]['email'],
 						'first_name' => $result[0]['first_name'],
 						'franchiseetypeId' => $result[0]['franchiseetypeId'],
 						);
@@ -85,13 +84,11 @@ class Login extends CI_Controller {
 		else{
 					$data = array('error_message' => 'Please provide Username or Password');
                     $this->load->view('login', $data);
-		
 		}
-		
 	}
 	public function logout() {
         // Removing session data
-        $sess_array = array('username' => '');
+        $sess_array = array('email' => '');
         $this->session->unset_userdata('user_logged_in', $sess_array);
         $data['message_display'] = 'Successfully Logout';
         redirect('login');

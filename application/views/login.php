@@ -48,13 +48,12 @@
                 <div class="row form-group">
                     <div class="col-md-1 col-sm-1 "></div>
                     <div class="col-md-10 col-sm-10 col-xs-10">
-
                     </div>
                 </div>
                 <div class="row form-group" id="frmCheckUsername">
                     <div class="col-md-1 col-sm-1 "></div>
                     <div class="col-md-10 col-sm-10 col-xs-10 has-feedback">
-                        <input data-fv-field="username" id="username" name="username" placeholder="Enter User Name" class="form-control" type="text"><i data-fv-icon-for="username" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                        <input data-fv-field="username" id="username" name="email" placeholder="Enter email" class="form-control" type="text"><i data-fv-icon-for="username" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                         <small data-fv-result="NOT_VALIDATED" data-fv-for="username" data-fv-validator="notEmpty" class="help-block" style="display: none;">The username is required</small></div>
                 </div>
                 <div class="row form-group" id="frmCheckUsername1">
