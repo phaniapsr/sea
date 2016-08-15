@@ -18,7 +18,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Select Franchisee *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="franchiseetypeId">
+                                            <select class="form-control" name="franchiseetypeId" required>
 
                                                 <option value="">Select</option>
                                                 <option value="2">State Master Franchisee</option>
@@ -31,25 +31,25 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Franchisee Name *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="franchiseeName" placeholder="Franchisee name" />
+                                            <input type="text" class="form-control" name="franchiseeName" placeholder="Franchisee name" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Email Address *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="email" placeholder="Email address" />
+                                            <input type="email" class="form-control" name="email" placeholder="Email address" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Password *</label>
                                         <div class="col-lg-6">
-                                            <input type="password" class="form-control" name="password" placeholder="Password" />
+                                            <input type="password" class="form-control" name="password" placeholder="Password" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">First Name *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="first_name" placeholder="First name"/>
+                                            <input type="text" class="form-control" name="first_name" placeholder="First name" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Last Name *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="last_name" placeholder="Last name" />
+                                            <input type="text" class="form-control" name="last_name" placeholder="Last name" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -79,7 +79,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Gender *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="gender">
+                                            <select class="form-control" name="gender" required>
                                                 <option value="">Select</option>
                                                 <option value="Male" >Male</option>
                                                 <option value="Female" >Female</option>
@@ -96,7 +96,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Mobile Number *</label>
                                         <div class="col-lg-6">
-                                            <input type="number" class="form-control" name="MobileNumber" placeholder="Mobile Number" />
+                                            <input type="number" class="form-control" name="MobileNumber" placeholder="Mobile Number" required />
                                         </div>
                                     </div>
 
@@ -104,13 +104,13 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Place Of Birth *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="PlaceOfBirth" placeholder="Place of birth" />
+                                            <input type="text" class="form-control" name="PlaceOfBirth" placeholder="Place of birth" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Marital Status *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="MaritalStatus">
+                                            <select class="form-control" name="MaritalStatus" required>
                                                 <option value="">Select</option>
                                                 <option value="Single" >Single</option>
                                                 <option value="Married" >Married</option>
@@ -136,7 +136,7 @@
                                                     IAA
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox"  value="FUNMATHS" />
+                                                    <input type="checkbox"  value="FUNMATHS"/>
                                                     FUNMATHS
                                                 </label>
                                                 <input type="hidden" id="CourseApplied" name="CourseApplied" value="" />
@@ -161,7 +161,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">College/University *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="University" placeholder="College/University" />
+                                            <input type="text" class="form-control" name="University" placeholder="College/University" required/>
                                         </div>
                                     </div>
 
@@ -172,14 +172,14 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Qualification *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="Qualicfation" placeholder="Qualification" />
+                                            <input type="text" class="form-control" name="Qualicfation" placeholder="Qualification" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Completed in Year *</label>
                                         <div class="col-lg-6">
 
-                                            <input type="number" class="form-control" name="CompletedYear" placeholder="Completed in Year" value="0" />
+                                            <input type="number" class="form-control" name="CompletedYear" placeholder="Completed in Year" value="0" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -188,37 +188,37 @@
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Flat/Door Number *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="FlatNo" placeholder="flate/door Number" />
+                                            <input type="text" class="form-control" name="FlatNo" placeholder="flate/door Number" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Street Name *</label>
-                                        <div class="col-lg-6"><input type="text" class="form-control" name="StreetName" placeholder="Street Name" />
+                                        <div class="col-lg-6"><input type="text" class="form-control" name="StreetName" placeholder="Street Name" required />
 
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Area *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="Area" placeholder="Area" />
+                                            <input type="text" class="form-control" name="Area" placeholder="Area" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Town/City *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="City" placeholder="Town/City" />
+                                            <input type="text" class="form-control" name="City" placeholder="Town/City" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Pincode *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="PinCode" placeholder="Pincode" />
+                                            <input type="text" class="form-control" name="PinCode" placeholder="Pincode" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align:left">State *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="State">
+                                            <select class="form-control" name="State" required>
                                                 <option value="">Select</option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -255,7 +255,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Nationality *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="Nationality">
+                                            <select class="form-control" name="Nationality" required>
                                                 <option value="">Select</option>
                                                 <option value="Indian" >Indian</option>
                                                 <option value="Others" >Others</option>
