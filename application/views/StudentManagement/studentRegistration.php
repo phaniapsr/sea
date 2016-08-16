@@ -191,6 +191,10 @@
                                                 <div>
                                                     <select id="course" class="form-control" name="CourseId">
                                                         <option selected="selected" value="">Select</option>
+														<option value="ACMAS">ACMAS</option>
+														<option value="WRITEASY">WRITEASY</option>
+														<option value="IAA">IAA</option>
+														<option value="FUNMATHS">FUNMATHS</option>
                                                     </select>
                                                 </div>
                                             </div>
