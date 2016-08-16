@@ -16,9 +16,21 @@ class Login_mod extends CI_Model{
     }
     public function user_login_data($data) {
         $data=array('email'=>$data['email'],'password'=>$data['password']);
-        $this->db->select()->from('sea_users')->where($data);
+        $this->db->select('*');
+        $this->db->from('sea_users');
+        $this->db->join('sea_user_role','sea_users.id=sea_user_role.user_id');
+        $this->db->where($data);
         $query=$this->db->get();
         return $query->result_array();
-       }
+    }
+    public function user_level_data($data) {
+        $data=array('user_id'=>$data);
+        $this->db->select('level_id');
+        $this->db->from('sea_franchise_level');
+        $this->db->where($data);
+        $query=$this->db->get();
+        return $query->result_array();
+    }
+
 //class close
 }

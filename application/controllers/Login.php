@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Login extends CI_Controller {
 
 	/**
@@ -41,49 +40,43 @@ class Login extends CI_Controller {
 	public function hostings()
 	{
 	   redirect('hostings/hostings');
-	
 	}
 	
 	public function logincheck()
 	{
-
 		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == TRUE) {
-			   $data = array('email' => $this->input->post('email'),
-                             'password' => $this->input->post('password')
-                );
-				//model calling modelname->method
-            $result = $this->login_mod->user_login_data($data);
-                
-                if ($result == TRUE) {
-                    
-                   
-                        $session_data = array(
-                        'id' => $result[0]['id'],
-						'email' => $result[0]['email'],
-						'first_name' => $result[0]['first_name'],
-						'franchiseetypeId' => $result[0]['franchiseetypeId'],
-						);
-					   //setting session
-					   $this->session->set_userdata('user_logged_in', $session_data);
-					
-					   if($result[0]['franchiseetypeId']=='1'||$result[0]['franchiseetypeId']=='3'||$result[0]['franchiseetypeId']=='2')
-					   redirect('FranchiseeManagement');
-					   if($result[0]['franchiseetypeId']=='4')
-					   redirect('StudentManagement');
-					   
-
-                }
-				else
-				{
-					$data = array('error_message' => 'Invalid Username or Password');
-                    $this->load->view('login', $data);
-				}                
+			$data = array('email' => $this->input->post('email'),
+						 'password' => $this->input->post('password'));
+			$result = $this->login_mod->user_login_data($data);
+			if ($result == TRUE) {
+                //Get Level
+                if($result[0]['role_id']!=1)
+                    $level = $this->login_mod->user_level_data($result[0]['id']);
+                $session_data = array(
+                    'id' => $result[0]['id'],
+                    'email' => $result[0]['email'],
+                    'first_name' => $result[0]['first_name'],
+                    'role_id' => $result[0]['role_id'],
+                    'level_id' =>$level[0]['level_id']
+				);
+				//setting session
+			    $this->session->set_userdata('user_logged_in', $session_data);
+                if($result[0]['role_id']=='1'||$result[0]['role_id']=='3'||$result[0]['role_id']=='2')
+			    redirect('FranchiseeManagement');
+			    if($result[0]['role_id']=='4')
+			    redirect('StudentManagement');
+			}
+			else
+			{
+				$data = array('error_message' => 'Invalid Username or Password');
+				$this->load->view('login', $data);
+			}
 		}
 		else{
-					$data = array('error_message' => 'Please provide Username or Password');
-                    $this->load->view('login', $data);
+			$data = array('error_message' => 'Please provide Username or Password');
+			$this->load->view('login', $data);
 		}
 	}
 	public function logout() {

@@ -13,7 +13,7 @@ class FranchiseeManagement extends CI_Controller {
         parent::__construct();
         $this->load->model('franchisee_mod','franchisee');
         //$this->load->model('merchant_mod');
-        //$this->load->library('form_validation');
+        $this->load->library('form_validation');
     }
     public function index()
     {
@@ -24,8 +24,7 @@ class FranchiseeManagement extends CI_Controller {
 
     public function registerFranchisee(){
         $data=array(
-		    'franchiseetypeId'=>$_POST['franchiseetypeId'],
-            'username'=>$_POST['franchiseeName'],
+		    'username'=>$_POST['franchiseeName'],
             'password'=>$_POST['password'],
             'email'=>$_POST['email'],
             'first_name'=>$_POST['first_name'],
@@ -37,8 +36,25 @@ class FranchiseeManagement extends CI_Controller {
 			'birthplace'=>$_POST['PlaceOfBirth'],
 			'franch_name'=>$_POST['franchiseeName'],
 			);
+       /* $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == TRUE) {*/
+        $result= $this->franchisee->insertNewRecord('sea_users',$data);
+        $data=array(
+            'user_id'=>$result,
+            'level_id'=>$_POST['franchiseetypeId']
+        );
+        if($result>0)
+        {
+            $level=$this->franchisee->insertNewRecord('sea_franchise_level',$data);
+            $data=array(
+                'user_id'=>$result,
+                'role_id'=>$_POST['franchiseetypeId']
+            );
+            $role=$this->franchisee->insertNewRecord('sea_user_role',$data);
+        }
         header('application/json');
-        echo $result= $this->franchisee->insertNewRecord('sea_users',$data);
+        echo $result;
     }
 
     public function dashboard()
