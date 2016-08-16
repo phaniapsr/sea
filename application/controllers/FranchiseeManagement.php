@@ -33,6 +33,9 @@ class FranchiseeManagement extends CI_Controller {
             'middle_name'=>$_POST['middle_name'],
             'date_of_birth'=>$_POST['date_of_birth'],						
             'gender'=>$_POST['gender'],
+			'mobileno'=>$_POST['MobileNumber'],
+			'birthplace'=>$_POST['PlaceOfBirth'],
+			'franch_name'=>$_POST['franchiseeName'],
 			);
         header('application/json');
         echo $result= $this->franchisee->insertNewRecord('sea_users',$data);
