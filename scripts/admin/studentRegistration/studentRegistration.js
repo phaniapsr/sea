@@ -147,11 +147,12 @@
 		if(stu_state=='')
 		{
 			alert("plese select state from list");
-			document.forms["form1"]["State"].focus;
+			document.forms["form1"]["State"].focus();
 			return false;
 		}			
 		
-		return false;
+		//return false;
+		//$('#studentRegistration').submit();
 	});
     $('#studentRegistration').submit(function(e){
         var postData = $(this).serializeArray();

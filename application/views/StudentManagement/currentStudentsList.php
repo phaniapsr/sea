@@ -32,7 +32,7 @@
                             <td><?php echo $row['last_name'];?></td>
                             <td><?php echo $row['middle_name'];?></td>
                             <td><?php echo $row['email'];?></td>
-                            <td><input type="button" class="btn btn-info" value="Courses Info" /></td>
+                            <td><input type="button" class="btn btn-info" value="Courses Info" onclick="window.location.href='sdetailView/<?php echo $row['id']?>'"/></td>
                             <td><input type="button" class="btn btn-info" value="Active" /></td>
                         </tr>
                     <?php }?>

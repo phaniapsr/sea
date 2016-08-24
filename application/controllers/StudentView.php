@@ -11,8 +11,10 @@ class StudentView extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('includes/header');
+		$this->load->view('StudentManagement/studentView');
 		$this->load->view('includes/footer');
-		$this->load->view('studentView');
+		
+		
 	}
 
 }

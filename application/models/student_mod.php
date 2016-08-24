@@ -9,7 +9,13 @@
         	$sql= $this->db->query($query);
 			return $sql->result_array();
         }
-	public function currentStudentsList(){}
+	public function currentStudentsList($table,$filter){
+		
+		$query="select * from $table where stud_id= '$filter'";
+		$sql=$this->db->query($query);
+		return $sql->result_array();
+	}	
+	//public function currentStudentsList(){}
 	public function deleteRecordFromTable($table,$fieldLable,$id) {
 	  	    $this->db->where($fieldLable, $id);
             $this->db->delete($table); 
