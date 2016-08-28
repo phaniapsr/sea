@@ -83,6 +83,30 @@ class FranchiseeManagement extends CI_Controller {
             );
             $role=$this->franchisee->insertNewRecord('sea_user_role',$data);
         }
+        if($_POST['ACMAS'])
+            $ca=1;
+        else
+            $ca=0;
+        if($_POST['WRITEASY'])
+            $cw=1;
+        else
+            $cw=0;
+        if($_POST['IAA'])
+            $ci=1;
+        else
+            $ci=0;
+        if($_POST['FUNMATHS'])
+            $cf=1;
+        else
+            $cf=0;
+        $data4=array(
+            'user_id'=>$result,
+            'course_acmas'=>$ca,
+            'course_writeasy'=>$cw,
+            'course_iaa'=>$ci,
+            'course_funmaths'=>$cf,
+        );
+        $result4=$this->franchisee->insertNewRecord('sea_franchise_courses',$data4);
         header('application/json');
         echo $result;
     }
