@@ -2,8 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Created by PhpStorm.
- * User: pc32261
+ * Created by Phani Kumar.
  * Date: 8/6/2016
  * Time: 9:44 PM
  */
@@ -38,7 +37,7 @@ class FranchiseeManagement extends CI_Controller {
 			'franch_name'=>$_POST['franchiseeName'],
 			'franchiseetypeId'=>$_POST['franchiseetypeId'],
 			);
-       /* $this->form_validation->set_rules('email', 'Email', 'required');
+        /* $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == TRUE) {*/
         $result= $this->franchisee->insertNewRecord('sea_users',$data);
@@ -97,23 +96,23 @@ class FranchiseeManagement extends CI_Controller {
 
 	public function smfList()
     {
-		$data['data']['smf'] =$this->franchisee->listFromTable('sea_users','2');
+		$data['data']['smf'] =$this->franchisee->listFromTable('2');
 		$this->load->view('includes/header');
-        $this->load->view('FranchiseeManagement/smfList',$data);
+        $this->load->view('FranchiseeManagement/smfListNew',$data);
         $this->load->view('includes/footer');   
     }
     public function dmfList()
     {
-		$data['data']['smf'] =$this->franchisee->listFromTable('sea_users','3');
+		$data['data']['smf'] =$this->franchisee->listFromTable('3');
 		$this->load->view('includes/header');
-        $this->load->view('FranchiseeManagement/smfList',$data);
+        $this->load->view('FranchiseeManagement/dmfList',$data);
         $this->load->view('includes/footer');   
     }
 	public function ufList()
     {
-		$data['data']['smf'] =$this->franchisee->listFromTable('sea_users','4');
+		$data['data']['smf'] =$this->franchisee->listFromTable('4');
 		$this->load->view('includes/header');
-        $this->load->view('FranchiseeManagement/smfList',$data);
+        $this->load->view('FranchiseeManagement/umfList',$data);
         $this->load->view('includes/footer');   
     }
 	

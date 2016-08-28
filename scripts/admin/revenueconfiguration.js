@@ -1,8 +1,28 @@
 
 $(window).load(function () {
     $(document).ready(function () {
-        
-        $('#SMFFranchiseeKitFee').keyup(function () {
+        $('#SMFFranchiseeKitFee,#SMFFranchiseeLicenseFee').blur(function(){
+            if (parseFloat($(this).val()) > 0 ) {
+                $('#SMFPaidFranchiseeFee').val(parseFloat($('#SMFFranchiseeKitFee').val())+parseFloat($('#SMFFranchiseeLicenseFee').val()));
+                //$('#SMFFranchiseeLicenseFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()) - parseFloat($('#SMFFranchiseeKitFee').val()));
+            } else {
+                $(this).val('');
+                //$('#SMFPaidFranchiseeFee').val(0);
+                //$('#SMFFranchiseeLicenseFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()));
+            }
+            return false;
+        })
+        $(".f-rev-config").click(function () {
+            var userId = $(this).attr('userid');
+            $("#RevConfigUserId").val($(this).attr('userid'));
+            $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
+            /*revenueConfigManager.GetRevenueConfiguration(userId, function (resp) {
+             $("#SMFFranchiseeLicenseFee").val(parseFloat(resp.LicenseFee));
+             $("#SMFFranchiseeKitFee").val(parseFloat(resp.KitFee));
+             $("#RevConfigId").val(resp.Id);
+             });*/
+        });
+        /*$('#SMFFranchiseeKitFee').keyup(function () {
             if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#SMFPaidFranchiseeFee').val())) {
                 $('#SMFFranchiseeLicenseFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()) - parseFloat($('#SMFFranchiseeKitFee').val()));
             } else {
@@ -19,7 +39,7 @@ $(window).load(function () {
                 $('#SMFFranchiseeKitFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()));
             }
             return false;
-        });
+        });*/
 
         $('#DMFFranchiseeKitFee').keyup(function () {
             if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {

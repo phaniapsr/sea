@@ -4,16 +4,16 @@ class Franchisee_mod extends CI_Model{
         parent::__Construct();
     }
 
-	public function listFromTable($table,$filter) {
-		//$query="select * from $table where franchiseetypeId = '$filter'";
-        $this->db->select('*');
+	public function listFromTable($role) {
+		$this->db->select('*');
         $this->db->from('sea_users');
         $this->db->join('sea_user_role','sea_users.id=sea_user_role.user_id');
-        $this->db->where($data);
+        if($role==2||$role==3||$role==4){
+            $this->db->join('sea_franchise_resid_address','sea_users.id=sea_franchise_resid_address.user_id');
+        }
+        $this->db->where('sea_user_role.role_id='.$role);
         $query=$this->db->get();
         return $query->result_array();
-        /*$sql= $this->db->query($query);
-		return $sql->result_array();*/
 	}
 
 	public function deleteRecordFromTable($table,$fieldLable,$id) {
