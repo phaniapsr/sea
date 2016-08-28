@@ -1,4 +1,3 @@
-
 $(window).load(function () {
     $(document).ready(function () {
         $('#SMFFranchiseeKitFee,#SMFFranchiseeLicenseFee').blur(function(){
