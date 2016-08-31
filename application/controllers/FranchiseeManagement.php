@@ -139,7 +139,13 @@ class FranchiseeManagement extends CI_Controller {
         $this->load->view('FranchiseeManagement/umfList',$data);
         $this->load->view('includes/footer');   
     }
-	
+    public function detailsmfList($id)
+    {
+        $data['data']['smf']=$this->franchisee->franchiseDetailView($id);
+        $this->load->view('includes/header');
+        $this->load->view('FranchiseeManagement/detailsmfList',$data);
+        $this->load->view('includes/footer');
+    }
 //class close
 
 }
