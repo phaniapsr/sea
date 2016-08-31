@@ -190,7 +190,6 @@
                         destroy: true,
                         columns: [
                             {data: "UserId", className: "selected", title: "Franchisee Id"},
-
                             {
                                 data: "DisplayName",
                                 title: "Franchisee Name",
@@ -348,7 +347,10 @@
                     LicenseFee: $("#SMFFranchiseeLicenseFee").val(),
                     KitFee: $("#SMFFranchiseeKitFee").val(),
                     UserId: $("#RevConfigUserId").val(),
-                    Id: $("#RevConfigId").val()
+                    Id: $("#RevConfigId").val(),
+                    district_amount: $("#district_amount_id").val(),
+                    unit_amount: $("#unit_amount_id").val(),
+                    units: $("#units_id").val()
                 }
                 $.ajax({
                     url: "<?php echo base_url()?>/RevenueManagement/saveSMFLicenseFee",
@@ -370,7 +372,6 @@
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
                 <div class="modal-content" id="contentbackground">
-
                     <div class="modal-body" id="bodybackground">
                         <div id="border">
                             <div class="modal-header">
@@ -412,6 +413,36 @@
                                                 <label><input readonly class="form-control"
                                                               name="SMFPaidFranchiseeFee" id="SMFPaidFranchiseeFee"
                                                               type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>SMF Share</label>
+                                                <label><input class="form-control" name="district_amount"
+                                                              id="district_amount_id" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>DMF Share</label>
+                                                <label><input class="form-control" name="unit_amount" id="unit_amount_id" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Units</label>
+                                                <label>
+                                                    <select name="units" id="units_id">
+                                                        <option value="0">Amount</option>
+                                                        <option value="1">Percentage</option>
+                                                    </select>
+                                                </label>
                                             </div>
                                         </label>
                                     </div>

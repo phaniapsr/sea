@@ -23,12 +23,18 @@ class RevenueManagement extends CI_Controller {
 
     public function saveSMFLicenseFee(){
         $data=array(
-            'id'=>$_POST[''],
             'lf_amount'=>$_POST['LicenseFee'],
             'kf_amount'=>$_POST['KitFee'],
             'user_id'=>$_POST['UserId'],
         );
-        $result= $this->revenue->insertNewRecord('sea_franchise_revenue',$data);
+        $this->revenue->insertNewRecord('sea_franchise_revenue',$data);
+        $data=array(
+            'district_amount'=>$_POST['district_amount'],
+            'unit_amount'=>$_POST['unit_amount'],
+            'units'=>$_POST['units'],
+            'user_id'=>$_POST['UserId'],
+        );
+        $this->revenue->insertNewRecord('sea_franchise_revenue_config',$data);
     }
 
 }

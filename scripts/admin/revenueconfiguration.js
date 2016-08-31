@@ -14,6 +14,7 @@ $(window).load(function () {
         $(".f-rev-config").click(function () {
             var userId = $(this).attr('userid');
             $("#RevConfigUserId").val($(this).attr('userid'));
+            $("#RevConfigId").val($(this).attr('rowid'));
             $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
             /*revenueConfigManager.GetRevenueConfiguration(userId, function (resp) {
              $("#SMFFranchiseeLicenseFee").val(parseFloat(resp.LicenseFee));
