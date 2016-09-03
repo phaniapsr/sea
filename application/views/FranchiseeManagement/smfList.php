@@ -419,7 +419,7 @@
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>SMF Share</label>
+                                                <label>DMF Share(When joins a DMF)</label>
                                                 <label><input class="form-control" name="district_amount"
                                                               id="district_amount_id" type="text"></label>
                                             </div>
@@ -428,7 +428,7 @@
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>DMF Share</label>
+                                                <label>UF Share (When a UF joins)</label>
                                                 <label><input class="form-control" name="unit_amount" id="unit_amount_id" type="text"></label>
                                             </div>
                                         </label>
