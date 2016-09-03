@@ -32,8 +32,8 @@ class StudentManagement extends CI_Controller {
             'gender'=>$_POST['gender'],
 			'age'=>$_POST['Age'],
         );
-        header('application/json');
-        echo $result= $this->student->insertNewRecord('sea_users',$data);
+
+        $result= $this->student->insertNewRecord('sea_users',$data);
 		$data1=array(
 		'stud_id'=>$result,
 		'stud_mothertong'=>$_POST['MotherTounge'],
@@ -64,7 +64,8 @@ class StudentManagement extends CI_Controller {
 		'ssib_gender'=>$_POST['Sibling2Gender'],
 		'ssib_stand'=>$_POST['Sibling2Standard'],
 		);
-		echo $result= $this->student->insertNewRecord('sea_student_pers_details',$data1);
+        header('application/json');
+        echo $result= $this->student->insertNewRecord('sea_student_pers_details',$data1);
     }
 
     public function currentStudentsList()
@@ -74,13 +75,12 @@ class StudentManagement extends CI_Controller {
         $this->load->view('StudentManagement/currentStudentsList',$data);
         $this->load->view('includes/footer');
     }
-	public function sdetailView($id)
-	{
-		$data['data']['smf']=$this->student->currentStudentsList('sea_student_pers_details',$id);
-		$this->load->view('includes/header');
-		$this->load->view('StudentManagement/studentView',$data);
-		$this->load->view('includes/footer');
-		
-	}
+    public function sdetailView($id)
+    {
+        $data['data']['smf']=$this->student->currentStudentsList('sea_student_pers_details',$id);
+        $this->load->view('includes/header');
+        $this->load->view('StudentManagement/studentView',$data);
+        $this->load->view('includes/footer');
+    }
 
 }
