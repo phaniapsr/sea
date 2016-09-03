@@ -122,6 +122,7 @@ class FranchiseeManagement extends CI_Controller {
     {
 		$data['data']['smf'] =$this->franchisee->listFromTable('2');
 		$this->load->view('includes/header');
+
         $this->load->view('FranchiseeManagement/smfList',$data);
         $this->load->view('includes/footer');   
     }
