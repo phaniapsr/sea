@@ -20,7 +20,9 @@
                     <li>
                         <a href="<?php echo base_url();?>FranchiseeManagement/ufList">Unit Franchisee(s)</a>
                     </li>
-
+                    <li>
+                        <a href="<?php echo base_url();?>FranchiseeManagement/consultantsList">Consultants</a>
+                    </li>
                 </ul>
             </li>
 
