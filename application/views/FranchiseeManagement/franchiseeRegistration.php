@@ -18,38 +18,39 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Select Franchisee *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="franchiseetypeId" required>
+                                            <select class="form-control" name="franchiseetypeId">
 
                                                 <option value="">Select</option>
                                                 <option value="2">State Master Franchisee</option>
                                                 <option value="3">District Master Franchisee</option>
                                                 <option value="4">Unit Franchisee</option>
-				                            </select>
+                                                <option value="5">Consultant</option>
+                                            </select>
 
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Franchisee Name *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="franchiseeName" placeholder="Franchisee name" required/>
+                                            <input type="text" class="form-control" name="franchiseeName" placeholder="Franchisee name"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Email Address *</label>
                                         <div class="col-lg-6">
-                                            <input type="email" class="form-control" name="email" placeholder="Email address" required/>
+                                            <input type="email" class="form-control" name="email" placeholder="Email address"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Password *</label>
                                         <div class="col-lg-6">
-                                            <input type="password" class="form-control" name="password" placeholder="Password" required/>
+                                            <input type="password" class="form-control" name="password" placeholder="Password"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">First Name *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="first_name" placeholder="First name" required/>
+                                            <input type="text" class="form-control" name="first_name" placeholder="First name"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -61,7 +62,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Last Name *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="last_name" placeholder="Last name" required/>
+                                            <input type="text" class="form-control" name="last_name" placeholder="Last name"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -79,7 +80,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Gender *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="gender" required>
+                                            <select class="form-control" name="gender">
                                                 <option value="">Select</option>
                                                 <option value="Male" >Male</option>
                                                 <option value="Female" >Female</option>
@@ -96,7 +97,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Mobile Number *</label>
                                         <div class="col-lg-6">
-                                            <input type="number" class="form-control" name="MobileNumber" placeholder="Mobile Number" required />
+                                            <input type="number" class="form-control" name="MobileNumber" placeholder="Mobile Number"/>
                                         </div>
                                     </div>
 
@@ -104,13 +105,13 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Place Of Birth *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="PlaceOfBirth" placeholder="Place of birth" required />
+                                            <input type="text" class="form-control" name="PlaceOfBirth" placeholder="Place of birth"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Marital Status *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="MaritalStatus" required>
+                                            <select class="form-control" name="MaritalStatus">
                                                 <option value="">Select</option>
                                                 <option value="Single" >Single</option>
                                                 <option value="Married" >Married</option>
@@ -123,20 +124,20 @@
                                             <div class="course-section">
                                                 <label>
 
-                                                    <input type="checkbox"   value="ACMAS" />
+                                                    <input type="checkbox" name="ACMAS"  value="ACMAS" />
                                                     ACMAS
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox"  value="WRITEASY" />
+                                                    <input type="checkbox" name="WRITEASY"  value="WRITEASY" />
                                                     WRITEASY
                                                 </label>
                                                 <br />
                                                 <label>
-                                                    <input type="checkbox"  value="IAA" />
+                                                    <input type="checkbox" name="IAA" value="IAA" />
                                                     IAA
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox"  value="FUNMATHS"/>
+                                                    <input type="checkbox" name="FUNMATHS"  value="FUNMATHS"/>
                                                     FUNMATHS
                                                 </label>
                                                 <input type="hidden" id="CourseApplied" name="CourseApplied" value="" />
@@ -161,7 +162,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">College/University *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="University" placeholder="College/University" required/>
+                                            <input type="text" class="form-control" name="University" placeholder="College/University"/>
                                         </div>
                                     </div>
 
@@ -172,7 +173,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Qualification *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="Qualicfation" placeholder="Qualification" required />
+                                            <input type="text" class="form-control" name="Qualification" placeholder="Qualification"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -183,42 +184,42 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <center style="font-size:20px;">RESIDENTIAL ADDRESS</center>
+                                        <center style="font-size:20px;">BUSINESS ADDRESS</center>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Flat/Door Number *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="FlatNo" placeholder="flate/door Number" required />
+                                            <input type="text" class="form-control" name="FlatNo" placeholder="flate/door Number"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Street Name *</label>
-                                        <div class="col-lg-6"><input type="text" class="form-control" name="StreetName" placeholder="Street Name" required />
+                                        <div class="col-lg-6"><input type="text" class="form-control" name="StreetName" placeholder="Street Name"/>
 
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Area *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="Area" placeholder="Area" required />
+                                            <input type="text" class="form-control" name="Area" placeholder="Area"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Town/City *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="City" placeholder="Town/City" required />
+                                            <input type="text" class="form-control" name="City" placeholder="Town/City"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Pincode *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="PinCode" placeholder="Pincode" required />
+                                            <input type="text" class="form-control" name="PinCode" placeholder="Pincode"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align:left">State *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="State" required>
+                                            <select class="form-control" name="State">
                                                 <option value="">Select</option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -255,7 +256,90 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Nationality *</label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" name="Nationality" required>
+                                            <select class="form-control" name="Nationality">
+                                                <option value="">Select</option>
+                                                <option value="Indian" >Indian</option>
+                                                <option value="Others" >Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <center style="font-size:20px;">RESIDENTIAL ADDRESS</center>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><input type="checkbox" id="checkbox" name="checkbox" onclick="copy()">Click here if same as Business Address!</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5  control-label " style="text-align: left">Flat/Door Number *</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" name="RflatNo" placeholder="flate/door Number"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label " style="text-align: left">Street Name *</label>
+                                        <div class="col-lg-6"><input type="text" class="form-control" name="RstreetName" placeholder="Street Name"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label " style="text-align: left">Area *</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" name="Rarea" placeholder="Area"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5  control-label " style="text-align: left">Town/City *</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" name="Rcity" placeholder="Town/City"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5  control-label " style="text-align: left">Pincode *</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" name="RpinCode" placeholder="Pincode"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label " style="text-align:left">State *</label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control" name="Rstate">
+                                                <option value="">Select</option>
+                                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                <option value="Assam">Assam</option>
+                                                <option value="Bihar">Bihar</option>
+                                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                                <option value="Goa">Goa</option>
+                                                <option value="Gujarat">Gujarat</option>
+                                                <option value="Haryana">Haryana</option>
+                                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                                <option value="Jharkhand">Jharkhand</option>
+                                                <option value="Karnataka">Karnataka</option>
+                                                <option value="Kerala">Kerala</option>
+                                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                <option value="Maharashtra">Maharashtra</option>
+                                                <option value="Manipur">Manipur</option>
+                                                <option value="Meghalaya">LevMeghalayael7</option>
+                                                <option value="Mizoram">Mizoram</option>
+                                                <option value="Nagaland">LevNagalandel9</option>
+                                                <option value="Orissa">Orissa</option>
+                                                <option value="Punjab">Punjab</option>
+                                                <option value="Rajasthan">Rajasthan</option>
+                                                <option value="Sikkim">Sikkim</option>
+                                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                                <option value="Telangana">Telangana</option>
+                                                <option value="Tripura">Tripura</option>
+                                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                <option value="Uttarakhand">Uttarakhand</option>
+                                                <option value="West Bengal">West Bengal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Nationality *</label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control" name="Rnationality">
                                                 <option value="">Select</option>
                                                 <option value="Indian" >Indian</option>
                                                 <option value="Others" >Others</option>
@@ -304,10 +388,15 @@
                                     <div class="form-group">
                                         <label class="col-lg-5   control-label " style="text-align: left">Franchisee License Fee *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="FranchiseFee" placeholder="Franchisee Fee" value="0" />
+                                            <input type="text" id="franchiseFee" class="form-control" name="FranchiseFee" placeholder="Franchisee Fee" onchange="CalTax(this.value)" value="0" />
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label class="col-lg-5   control-label " style="text-align: left">Tax( ST/GST ) *</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="tax" class="form-control" name="FranchiseTax" placeholder="Franchisee Tax" value="0" readonly />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -344,6 +433,13 @@
                             </div><!-- /.modal -->
                             <!-- /Modal -->
                             <script type='text/javascript'>
+                                // CalTax is for calicualting 15% tax on Franchisee License Fee
+                                function CalTax(val)
+                                {
+                                    val=(val*15)/100;
+                                    document.getElementById('tax').value=val;
+
+                                }
                                 $(document).ready(function () {
                                     $('#myModal2').on('shown.bs.modal', function () {
                                         $(this).find('.modal-dialog').css({

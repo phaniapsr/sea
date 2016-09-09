@@ -22,80 +22,91 @@ class FranchiseeManagement extends CI_Controller {
     }
 
     public function registerFranchisee(){
+        $bday=new DateTime($_POST['date_of_birth']);
+        $pday=new DateTime('today');
+        $age=$bday->diff($pday)->y;
         $data=array(
-		    'username'=>$_POST['franchiseeName'],
+            'username'=>$_POST['franchiseeName'],
             'password'=>$_POST['password'],
             'email'=>$_POST['email'],
             'first_name'=>$_POST['first_name'],
             'last_name'=>$_POST['last_name'],
             'middle_name'=>$_POST['middle_name'],
-            'date_of_birth'=>$_POST['date_of_birth'],						
+            'date_of_birth'=>date('Y-m-d',strtotime($_POST['date_of_birth'])),
             'gender'=>$_POST['gender'],
-			'landno'=>$_POST['LandlineNumber'],
-			'mobileno'=>$_POST['MobileNumber'],
-			'birthplace'=>$_POST['PlaceOfBirth'],
-			'franch_name'=>$_POST['franchiseeName'],
-			'franchiseetypeId'=>$_POST['franchiseetypeId'],
-			);
+            'age'=>$age,
+            'landno'=>$_POST['LandlineNumber'],
+            'mobileno'=>$_POST['MobileNumber'],
+            'birthplace'=>$_POST['PlaceOfBirth'],
+            'franch_name'=>$_POST['franchiseeName'],
+            'franchiseetypeId'=>$_POST['franchiseetypeId'],
+        );
         /* $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == TRUE) {*/
         $result= $this->franchisee->insertNewRecord('sea_users',$data);
-		$data1=array(
-		   'user_id'=>$result,
-		   'college_university'=>$_POST['University'],
-		   'qualification'=>$_POST['Qualicfation'],
-		   'completed_in_year'=>$_POST['CompletedYear'],
-		);
-		$result1=$this->franchisee->insertNewRecord('sea_franchise_education_details',$data1);
+        $data1=array(
+            'user_id'=>$result,
+            'college_university'=>$_POST['University'],
+            'qualification'=>$_POST['Qualification'],
+            'completed_in_year'=>$_POST['CompletedYear'],
+        );
+        $result1=$this->franchisee->insertNewRecord('sea_franchise_education_details',$data1);
         $data=array(
             'user_id'=>$result,
-            'level_id'=>$_POST['franchiseetypeId']
+            'level_id'=>$_POST['franchiseetypeId'],
         );
-		$data2=array(
-		'user_id'=>$result,
-		'doorno'=>$_POST['FlatNo'],
-        'streetname'=>$_POST['StreetName'],
-        'area'=>$_POST['Area'],
-        'city'=>$_POST['City'],
-        'pincode'=>$_POST['PinCode'],
-        'state'=>$_POST['State'],
-        'nationality'=>$_POST['Nationality'],		
-		);
-		$result2=$this->franchisee->insertNewRecord('sea_franchise_resid_address',$data2);
-		$data3=array(
-		'user_id'=>$result,
-		'course_type'=>$_POST['OfCourse'],
-        'course_name'=>$_POST['CourseName'],
-		'institution'=>$_POST['Instiution'],
-		'course_compl_year'=>$_POST['OtherCompletedYear'],
-		'occupation'=>$_POST['PresentOcupation'],
-		'purpose'=>$_POST['Goal'],
-		'fees'=>$_POST['FranchiseFee'],
-		);
-		$result3=$this->franchisee->insertNewRecord('sea_franchise_oth_train_att',$data3);
+        $data2=array(
+            'user_id'=>$result,
+            'doorno'=>$_POST['FlatNo'],
+            'streetname'=>$_POST['StreetName'],
+            'area'=>$_POST['Area'],
+            'city'=>$_POST['City'],
+            'pincode'=>$_POST['PinCode'],
+            'state'=>$_POST['State'],
+            'nationality'=>$_POST['Nationality'],
+            'r_doorno'=>$_POST['RflatNo'],
+            'r_streetname'=>$_POST['RstreetName'],
+            'r_area'=>$_POST['Rarea'],
+            'r_city'=>$_POST['Rcity'],
+            'r_pincode'=>$_POST['RpinCode'],
+            'r_state'=>$_POST['Rstate'],
+            'r_nationality'=>$_POST['Rnationality'],
+        );
+        $result2=$this->franchisee->insertNewRecord('sea_franchise_resid_address',$data2);
+        $data3=array(
+            'user_id'=>$result,
+            'course_type'=>$_POST['OfCourse'],
+            'course_name'=>$_POST['CourseName'],
+            'institution'=>$_POST['Instiution'],
+            'course_compl_year'=>$_POST['OtherCompletedYear'],
+            'occupation'=>$_POST['PresentOcupation'],
+            'purpose'=>$_POST['Goal'],
+            'fees'=>$_POST['FranchiseFee'],
+        );
+        $result3=$this->franchisee->insertNewRecord('sea_franchise_oth_train_att',$data3);
         if($result>0)
         {
             $level=$this->franchisee->insertNewRecord('sea_franchise_level',$data);
             $data=array(
                 'user_id'=>$result,
-                'role_id'=>$_POST['franchiseetypeId']
+                'role_id'=>$_POST['franchiseetypeId'],
             );
             $role=$this->franchisee->insertNewRecord('sea_user_role',$data);
         }
-        if($_POST['ACMAS'])
+        if(isset($_POST['ACMAS']))
             $ca=1;
         else
             $ca=0;
-        if($_POST['WRITEASY'])
+        if(isset($_POST['WRITEASY']))
             $cw=1;
         else
             $cw=0;
-        if($_POST['IAA'])
+        if(isset($_POST['IAA']))
             $ci=1;
         else
             $ci=0;
-        if($_POST['FUNMATHS'])
+        if(isset($_POST['FUNMATHS']))
             $cf=1;
         else
             $cf=0;
@@ -115,30 +126,30 @@ class FranchiseeManagement extends CI_Controller {
     {
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/dashboard');
-        $this->load->view('includes/footer');   
+        $this->load->view('includes/footer');
     }
 
-	public function smfList()
+    public function smfList()
     {
-		$data['data']['smf'] =$this->franchisee->listFromTable('2');
-		$this->load->view('includes/header');
+        $data['data']['smf'] =$this->franchisee->listFromTable('2');
+        $this->load->view('includes/header');
 
         $this->load->view('FranchiseeManagement/smfList',$data);
-        $this->load->view('includes/footer');   
+        $this->load->view('includes/footer');
     }
     public function dmfList()
     {
-		$data['data']['smf'] =$this->franchisee->listFromTable('3');
-		$this->load->view('includes/header');
+        $data['data']['smf'] =$this->franchisee->listFromTable('3');
+        $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/dmfList',$data);
-        $this->load->view('includes/footer');   
+        $this->load->view('includes/footer');
     }
-	public function ufList()
+    public function ufList()
     {
-		$data['data']['smf'] =$this->franchisee->listFromTable('4');
-		$this->load->view('includes/header');
+        $data['data']['smf'] =$this->franchisee->listFromTable('4');
+        $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/umfList',$data);
-        $this->load->view('includes/footer');   
+        $this->load->view('includes/footer');
     }
     public function consultantsList()
     {

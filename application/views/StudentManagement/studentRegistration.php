@@ -1,7 +1,7 @@
 <script type="application/javascript" src="<?php echo base_url()?>scripts/admin/studentRegistration/studentRegistration.js"></script>
 <div id="page-wrapper">
     <div id="page-inner">
-       <script src="Skills%20Education%20Academy_files/Franchisees.js"></script>
+        <script src="Skills%20Education%20Academy_files/Franchisees.js"></script>
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">
@@ -17,27 +17,27 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div id="margin-top" class="panel-body">
-                        <form id="studentRegistration" action="<?php echo base_url()?>StudentManagement/registerStudent" name="form1" class="form-horizontal fv-form fv-form-bootstrap" method="post" ng-app="app" ng-controller="Ctrl"  enctype="multipart/form-data" >                            
-						<div class="row">
+                        <form id="studentRegistration" action="<?php echo base_url()?>StudentManagement/registerStudent" name="form1" class="form-horizontal fv-form fv-form-bootstrap" method="post" ng-app="app" ng-controller="Ctrl"  enctype="multipart/form-data" >
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <center><h4>STUDENT DETAILS</h4></center>
                                     <div id="studentdetailsborder">
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">E-mail*</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="EmailId" class="form-control" name="email" placeholder="E-mail" type="email" required/><i data-fv-icon-for="EmailId" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="EmailId" class="form-control" name="email" placeholder="E-mail" type="email"/><i data-fv-icon-for="EmailId" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="EmailId" data-fv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Password *</label>
                                             <div class="col-lg-6">
-											<input type="password" class="form-control" name="password" placeholder="Password" required/>
+                                                <input type="password" class="form-control" name="password" placeholder="Password" required/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left;">First Name *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="FirstName" class="form-control" name="first_name" placeholder="First name" type="text" required/><i data-fv-icon-for="FirstName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="FirstName" class="form-control" name="first_name" placeholder="First name" type="text"/><i data-fv-icon-for="FirstName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="FirstName" data-fv-validator="notEmpty" class="help-block" style="display: none;">First Name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="FirstName" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                         <div class="form-group">
@@ -49,40 +49,41 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Last Name *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="LastName" class="form-control" name="last_name" placeholder="Last name" type="text" required/><i data-fv-icon-for="LastName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="LastName" class="form-control" name="last_name" placeholder="Last name" type="text"/><i data-fv-icon-for="LastName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="LastName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Last Name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="LastName" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Date Of Birth *</label>
-                                            <div class="col-lg-6 has-feedback">
+                                            <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Date Of Birth *</label>
+                                            <div class="col-lg-6">
                                                 <div class="input-group input-append date" id="datePicker">
-                                                    <input data-fv-field="DateOfBirth" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" readonly="readonly" value="01/01/0001" type="text">
-                                                <span class="input-group-addon add-on" id="btn" style="cursor:pointer;">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                                </div><i data-fv-icon-for="DateOfBirth" class="form-control-feedback fv-icon-no-label fv-bootstrap-icon-input-group" style="display: none;"></i>
-                                                <small data-fv-result="NOT_VALIDATED" data-fv-for="DateOfBirth" data-fv-validator="notEmpty" class="help-block" style="display: none;">Date Of Birth is required</small></div>
+                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
+                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                                </div>
+                                                <input type="hidden" id="hiddenFieldID" name="DateOfBirth"/>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Gender *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <select data-fv-field="Gender" class="form-control" name="gender" required/>
-                                                    <option selected="selected" value="">Select</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
+                                                <select data-fv-field="Gender" class="form-control" name="gender"/>
+                                                <option selected="selected" value="">Select</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
                                                 </select><i data-fv-icon-for="Gender" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="Gender" data-fv-validator="notEmpty" class="help-block" style="display: none;">Gender is required</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Age *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="Age" class="form-control" name="Age" placeholder="Age" type="text" required/><i data-fv-icon-for="Age" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="Age" class="form-control" name="Age" placeholder="Age" type="text"/><i data-fv-icon-for="Age" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="Age" data-fv-validator="notEmpty" class="help-block" style="display: none;">Age is required</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Mother Tongue *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="MotherTounge" class="form-control" name="MotherTounge" placeholder="Mother tongue" type="text" required/><i data-fv-icon-for="MotherTounge" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="MotherTounge" class="form-control" name="MotherTounge" placeholder="Mother tongue" type="text"/><i data-fv-icon-for="MotherTounge" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="MotherTounge" data-fv-validator="notEmpty" class="help-block" style="display: none;">Mother Tongue  is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="MotherTounge" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                     </div>
@@ -91,31 +92,31 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Father's Name *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="FatherName" class="form-control" name="FatherName" placeholder="Father's Name" type="text" required/><i data-fv-icon-for="FatherName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="FatherName" class="form-control" name="FatherName" placeholder="Father's Name" type="text"/><i data-fv-icon-for="FatherName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="FatherName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Father Name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="FatherName" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Father's Mobile Number *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="FatherMobileNumber" class="form-control" name="FatherMobileNumber" placeholder="Father's Mobile Number" type="text" required/><i data-fv-icon-for="FatherMobileNumber" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="FatherMobileNumber" class="form-control" name="FatherMobileNumber" placeholder="Father's Mobile Number" type="text"/><i data-fv-icon-for="FatherMobileNumber" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="FatherMobileNumber" data-fv-validator="notEmpty" class="help-block" style="display: none;">Father Mobile Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="FatherMobileNumber" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small><small data-fv-result="NOT_VALIDATED" data-fv-for="FatherMobileNumber" data-fv-validator="between" class="help-block" style="display: none;">The MobileNumber should be 10 digits only</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Mother's Name *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="MotherName" class="form-control" name="MotherName" placeholder="Mother's Name" type="text" required/><i data-fv-icon-for="MotherName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="MotherName" class="form-control" name="MotherName" placeholder="Mother's Name" type="text"/><i data-fv-icon-for="MotherName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="MotherName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Mother Name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="MotherName" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                         <div class=" form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Mother's Mobile Number *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="MotherMobileNumber" class="form-control" name="MotherMobileNumber" placeholder="Mother's Mobile Number" type="text" required/><i data-fv-icon-for="MotherMobileNumber" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="MotherMobileNumber" class="form-control" name="MotherMobileNumber" placeholder="Mother's Mobile Number" type="text"/><i data-fv-icon-for="MotherMobileNumber" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="MotherMobileNumber" data-fv-validator="notEmpty" class="help-block" style="display: none;">Mother Mobile Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="MotherMobileNumber" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small><small data-fv-result="NOT_VALIDATED" data-fv-for="MotherMobileNumber" data-fv-validator="between" class="help-block" style="display: none;">The MobileNumber should be 10 digits only</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">E-mail *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="ParentEmailId" class="form-control" name="ParentEmailId" placeholder="E-mail" type="email" required/><i data-fv-icon-for="ParentEmailId" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="ParentEmailId" class="form-control" name="ParentEmailId" placeholder="E-mail" type="email"/><i data-fv-icon-for="ParentEmailId" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="ParentEmailId" data-fv-validator="notEmpty" class="help-block" style="display: none;">Email address is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ParentEmailId" data-fv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small></div>
                                         </div>
                                         <div class="form-group">
@@ -127,7 +128,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Father Occupation *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="FatherOccupation" class="form-control" name="FatherOccupation" placeholder="Father Occupation" type="text" required/><i data-fv-icon-for="FatherOccupation" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="FatherOccupation" class="form-control" name="FatherOccupation" placeholder="Father Occupation" type="text"/><i data-fv-icon-for="FatherOccupation" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="FatherOccupation" data-fv-validator="notEmpty" class="help-block" style="display: none;">Father Occupation is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="FatherOccupation" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                         <div class="form-group">
@@ -139,7 +140,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Mother Occupation *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="MotherOccupation" class="form-control" name="MotherOccupation" placeholder="Mother Occupation" type="text" required/><i data-fv-icon-for="MotherOccupation" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="MotherOccupation" class="form-control" name="MotherOccupation" placeholder="Mother Occupation" type="text"/><i data-fv-icon-for="MotherOccupation" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="MotherOccupation" data-fv-validator="notEmpty" class="help-block" style="display: none;">Mother Occupation is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="MotherOccupation" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                         <div class="form-group">
@@ -157,19 +158,19 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">School Name *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="SchoolName" class="form-control" name="SchoolName" placeholder="School Name" type="text" required/><i data-fv-icon-for="SchoolName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="SchoolName" class="form-control" name="SchoolName" placeholder="School Name" type="text"/><i data-fv-icon-for="SchoolName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="SchoolName" data-fv-validator="notEmpty" class="help-block" style="display: none;">School Name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="SchoolName" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">School Address *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="SchoolAddress" class="form-control" name="SchoolAddress" placeholder="School Address" type="text" required/><i data-fv-icon-for="SchoolAddress" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="SchoolAddress" class="form-control" name="SchoolAddress" placeholder="School Address" type="text"/><i data-fv-icon-for="SchoolAddress" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="SchoolAddress" data-fv-validator="notEmpty" class="help-block" style="display: none;">School Address is required</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">School Mobile/PhoneNumber *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="SchoolNumber" class="form-control" name="SchoolNumber" placeholder="School PhoneNumber" value="0" type="text" required/><i data-fv-icon-for="SchoolNumber" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="SchoolNumber" class="form-control" name="SchoolNumber" placeholder="School PhoneNumber" value="0" type="text"/><i data-fv-icon-for="SchoolNumber" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="SchoolNumber" data-fv-validator="regexp" class="help-block" style="display: none;">You should enter numbers only</small></div>
                                         </div>
 
@@ -181,8 +182,12 @@
                                             <div class="col-lg-6">
                                                 <select id="program" class="form-control" name="ProgramId">
                                                     <option selected="selected" value="">Select</option>
-
-                                                    <option value="1">Senior</option><option value="2">Junior</option><option value="3">Sub Junior</option></select>
+                                                    <option value="ACMAS">ACMAS</option>
+                                                    <option value="WRITEASY">WRITEASY</option>
+                                                    <option value="IAA">IAA</option>
+                                                    <option value="FUNMATHS">FUNMATHS</option>
+                                                    <!--<option value="1">Senior</option><option value="2">Junior</option><option value="3">Sub Junior</option>-->
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -191,10 +196,10 @@
                                                 <div>
                                                     <select id="course" class="form-control" name="CourseId">
                                                         <option selected="selected" value="">Select</option>
-														<option value="ACMAS">ACMAS</option>
-														<option value="WRITEASY">WRITEASY</option>
-														<option value="IAA">IAA</option>
-														<option value="FUNMATHS">FUNMATHS</option>
+                                                        <!--<option value="ACMAS">ACMAS</option>
+                                                        <option value="WRITEASY">WRITEASY</option>
+                                                        <option value="IAA">IAA</option>
+                                                        <option value="FUNMATHS">FUNMATHS</option>-->
                                                     </select>
                                                 </div>
                                             </div>
@@ -292,21 +297,21 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 control-label " style="text-align:left">Flat/Door Number *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="FlatNo" class="form-control" name="FlatNo" placeholder="flate/doorNumber" type="text" required/><i data-fv-icon-for="FlatNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="FlatNo" class="form-control" name="FlatNo" placeholder="flate/doorNumber" type="text"/><i data-fv-icon-for="FlatNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
 
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="FlatNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Flate/Door Number is required</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 control-label " style="text-align:left">Street Name *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="StreetName" class="form-control" name="StreetName" placeholder="Street Name" type="text" required/><i data-fv-icon-for="StreetName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="StreetName" class="form-control" name="StreetName" placeholder="Street Name" type="text"/><i data-fv-icon-for="StreetName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
 
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="StreetName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Street Name is required</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 control-label " style="text-align:left">Area *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="Area" class="form-control" name="Area" placeholder="Area" type="text" required/><i data-fv-icon-for="Area" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="Area" class="form-control" name="Area" placeholder="Area" type="text"/><i data-fv-icon-for="Area" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
 
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="Area" data-fv-validator="notEmpty" class="help-block" style="display: none;">Area is required</small></div>
                                         </div>
@@ -315,13 +320,13 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 control-label " style="text-align:left">Town/City *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="City" class="form-control" name="City" placeholder="Town/City" type="text" required/><i data-fv-icon-for="City" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="City" class="form-control" name="City" placeholder="Town/City" type="text"/><i data-fv-icon-for="City" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="City" data-fv-validator="notEmpty" class="help-block" style="display: none;">City is required</small></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-5 control-label " style="text-align:left">Pincode *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="PinCode" class="form-control" name="PinCode" placeholder="Pincode" type="text" required/><i data-fv-icon-for="PinCode" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="PinCode" class="form-control" name="PinCode" placeholder="Pincode" type="text"/><i data-fv-icon-for="PinCode" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="PinCode" data-fv-validator="notEmpty" class="help-block" style="display: none;">Pincode is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="PinCode" data-fv-validator="regexp" class="help-block" style="display: none;">You should enter numbers only</small></div>
                                         </div>
                                         <div class="form-group">
@@ -594,6 +599,21 @@
                                                 $("#KitFee").val(result.KitFee);
                                             }
                                         });
+                                    });
+                                });
+                            </script>
+                            <script>
+                                $('#btn').click(function () {
+                                    //alert('clcikec');
+                                    $(document).ready(function () {
+                                        $("#datepicker-my").datepicker({
+                                            //dateFormat: "dd-mm-yy".replace('T00:00:00', ''),
+                                            changeMonth: true,
+                                            altField: '#hiddenFieldID',
+                                            altFormat: "mm/dd/yy",
+                                            changeYear: true,
+                                            yearRange: '1950:2017'
+                                        }).focus();
                                     });
                                 });
                             </script>

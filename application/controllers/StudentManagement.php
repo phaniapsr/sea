@@ -30,42 +30,60 @@ class StudentManagement extends CI_Controller {
             'middle_name'=>$_POST['middle_name'],
             'date_of_birth'=>$_POST['date_of_birth'],
             'gender'=>$_POST['gender'],
-			'age'=>$_POST['Age'],
+            'age'=>$_POST['Age'],
         );
 
         $result= $this->student->insertNewRecord('sea_users',$data);
-		$data1=array(
-		'stud_id'=>$result,
-		'stud_mothertong'=>$_POST['MotherTounge'],
-		'fath_name'=>$_POST['FatherName'],
-        'fath_mobno'=>$_POST['FatherMobileNumber'],
-		'moth_name'=>$_POST['MotherName'],
-		'moth_mobno'=>$_POST['MotherMobileNumber'],
-		'fath_email'=>$_POST['ParentEmailId'],
-		'fath_qualif'=>$_POST['FatherQualicfation'],
-		'fath_occup'=>$_POST['FatherOccupation'],
-		'moth_qualif'=>$_POST['MotherQualicfation'],
-		'moth_occup'=>$_POST['MotherOccupation'],
-		'land_no'=>$_POST['LandlineNumber'],
-		'school_name'=>$_POST['SchoolName'],
-		'school_add'=>$_POST['SchoolAddress'],
-		'school_mobno'=>$_POST['SchoolNumber'],
-		'program_name'=>$_POST['ProgramId'],
-		'course_name'=>$_POST['CourseId'],
-		'level_name'=>$_POST['ProgramCourseLevelId'],
-		'fsib_name'=>$_POST['Sibling1Name'],
-		'ssib_name'=>$_POST['Sibling2Name'],
-		'fsib_sname'=>$_POST['Sibling1SchoolName'],
-		'fsib_age'=>$_POST['Sibling1Age'],
-		'fsib_gender'=>$_POST['Sibling1Gender'],
-		'fsib_stand'=>$_POST['Sibling1Standard'],
-		'ssib_sname'=>$_POST['Sibling2SchoolName'],
-		'ssib_age'=>$_POST['Sibling2Age'],
-		'ssib_gender'=>$_POST['Sibling2Gender'],
-		'ssib_stand'=>$_POST['Sibling2Standard'],
-		);
+        $data1=array(
+            'stud_id'=>$result,
+            'stud_mothertong'=>$_POST['MotherTounge'],
+            'fath_name'=>$_POST['FatherName'],
+            'fath_mobno'=>$_POST['FatherMobileNumber'],
+            'moth_name'=>$_POST['MotherName'],
+            'moth_mobno'=>$_POST['MotherMobileNumber'],
+            'fath_email'=>$_POST['ParentEmailId'],
+            'fath_qualif'=>$_POST['FatherQualicfation'],
+            'fath_occup'=>$_POST['FatherOccupation'],
+            'moth_qualif'=>$_POST['MotherQualicfation'],
+            'moth_occup'=>$_POST['MotherOccupation'],
+            'land_no'=>$_POST['LandlineNumber'],
+            'school_name'=>$_POST['SchoolName'],
+            'school_add'=>$_POST['SchoolAddress'],
+            'school_mobno'=>$_POST['SchoolNumber'],
+            'program_name'=>$_POST['ProgramId'],
+            'course_name'=>$_POST['CourseId'],
+            'level_name'=>$_POST['ProgramCourseLevelId'],
+            'fsib_name'=>$_POST['Sibling1Name'],
+            'ssib_name'=>$_POST['Sibling2Name'],
+            'fsib_sname'=>$_POST['Sibling1SchoolName'],
+            'fsib_age'=>$_POST['Sibling1Age'],
+            'fsib_gender'=>$_POST['Sibling1Gender'],
+            'fsib_stand'=>$_POST['Sibling1Standard'],
+            'ssib_sname'=>$_POST['Sibling2SchoolName'],
+            'ssib_age'=>$_POST['Sibling2Age'],
+            'ssib_gender'=>$_POST['Sibling2Gender'],
+            'ssib_stand'=>$_POST['Sibling2Standard'],
+        );
+        $result1= $this->student->insertNewRecord('sea_student_pers_details',$data1);
+        $data2=array(
+            'user_id'=>$result,
+            'doorno'=>$_POST['FlatNo'],
+            'streetname'=>$_POST['StreetName'],
+            'area'=>$_POST['Area'],
+            'city'=>$_POST['City'],
+            'pincode'=>$_POST['PinCode'],
+            'state'=>$_POST['State'],
+        );
+        $result2=$this->student->insertNewRecord('sea_franchise_resid_address',$data2);
+        $data3=array(
+            'user_id'=>$result,
+            'stu_program'=>$_POST['ProgramId'],
+            'stu_category'=>$_POST['CourseId'],
+            'stu_level'=>$_POST['ProgramCourseLevelId'],
+        );
+        $result3=$this->student->insertNewRecord('sea_student_course_level',$data3);
         header('application/json');
-        echo $result= $this->student->insertNewRecord('sea_student_pers_details',$data1);
+        echo $result;
     }
 
     public function currentStudentsList()
