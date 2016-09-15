@@ -136,7 +136,12 @@ class FranchiseeManagement extends CI_Controller {
             //End of hierarchy table data insertion
 
             //Inserting record into revenue configuration table
-            
+            //todo : This code has to recheck once payment gateway integration is done
+            $revenueShares=$this->franchisee->getFranchiseRevenueConfigurations();
+            $revenue_data=array(
+
+            );
+            //End of revenue configuration shares
         }
         if(isset($_POST['ACMAS']))
             $ca=1;
