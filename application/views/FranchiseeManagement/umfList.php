@@ -147,7 +147,7 @@
         </div>
         <script>
             //var franchiseeManager = new Franchises();
-            var revenueConfigManager = new Revenueconfiguration();
+            //var revenueConfigManager = new Revenueconfiguration();
             $(document).ready(function () {
                 LoadStateFranchises();
                 $("#btnUpdateStatus").click(function () {
@@ -380,28 +380,32 @@
                                     <button type="button" class="close" data-dismiss="modal"
                                             style="color:red;font-size:29px;">×
                                     </button>
-                                    <center><h2 class="modal-title">State Master Franchisee Revenue Configuration</h2>
+                                    <center><h2 class="modal-title">Unit Master Franchisee Revenue Configuration</h2>
                                     </center>
                                 </div>
                             </div>
                             <br>
-                            <form id="SMFRevenueConfiguration" name="SMFRevenueConfiguration" method="post">
+                            <form id="RevenueConfigurationForm" name="UMFRevenueConfiguration" method="post">
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee License Fee</label>
-                                                <label><input class="form-control" name="LicenseFee"
-                                                              id="SMFFranchiseeLicenseFee" type="text"></label>
+                                                <label>Student commission</label>
+                                                <label><input class="form-control" name="student_commission"
+                                                              id="student_commission" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee Kit Fee</label>
-                                                <label><input class="form-control" name="KitFee"
-                                                              id="SMFFranchiseeKitFee" type="text"></label>
+                                                <label>Units</label>
+                                                <label>
+                                                    <select name="units" id="units_id">
+                                                        <option value="0">Amount</option>
+                                                        <option value="1">Percentage</option>
+                                                    </select>
+                                                </label>
                                             </div>
                                         </label>
                                     </div>
@@ -409,12 +413,6 @@
                                         <label>
                                             <input id="RevConfigUserId" name="UserId" type="hidden">
                                             <input id="RevConfigId" name="RevConfigId" type="hidden">
-                                            <div class="col-lg-12">
-                                                <label>Total Amount</label>
-                                                <label><input readonly class="form-control"
-                                                              name="SMFPaidFranchiseeFee" id="SMFPaidFranchiseeFee"
-                                                              type="text"></label>
-                                            </div>
                                         </label>
                                     </div>
                                 </div>
@@ -422,7 +420,17 @@
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
-                                                onclick="return FranchiseeRevenueConfiguration()" role="button"
+                                                role="button"
+                                                id="revenue_button_save"><span>Save</span></button>
+                                        <button class="btn primaryCta small" type="button" id="buttonCancel"
+                                                data-dismiss="modal"><span>Cancel</span></button>
+                                    </center>
+                                </div>
+                                <div class="row" id="roww1">
+                                    <center>
+                                        <label class="danger" id="rev-config-msg"></label>
+                                        <button class="btn primaryCta small" type="button"
+                                                onclick="return RevenueConfiguration()" role="button"
                                                 id="buttonSave"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>

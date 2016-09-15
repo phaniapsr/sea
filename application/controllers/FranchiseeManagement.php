@@ -93,6 +93,50 @@ class FranchiseeManagement extends CI_Controller {
                 'role_id'=>$_POST['franchiseetypeId'],
             );
             $role=$this->franchisee->insertNewRecord('sea_user_role',$data);
+
+            //Logic for inserting record in hierarchy table
+            //If admin/consultant login and creating SMF/DMF/UF
+            if($this->session->user_logged_in['role_id']==1){
+                $data_hierarchy=array(
+                    'user_id'=>$result,
+                    'created_by'=>$this->session->user_logged_in['id'],
+                );
+            }
+            // else if SMF login and creating DMF/UMF
+            elseif($this->session->user_logged_in['role_id']==2){
+                $data_hierarchy=array(
+                    'user_id'=>$result,
+                    'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
+                    'smf_id'=>$this->session->user_logged_in['id'],
+                    'created_by'=>$this->session->user_logged_in['id'],
+                );
+            }
+            // else if DMF login and creating UMF
+            elseif($this->session->user_logged_in['role_id']==3){
+                $data_hierarchy=array(
+                    'user_id'=>$result,
+                    'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
+                    'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
+                    'dmf_id'=>$this->session->user_logged_in['id'],
+                    'created_by'=>$this->session->user_logged_in['id'],
+                );
+            }
+            // else if UMF login and creating Student
+            elseif($this->session->user_logged_in['role_id']==4){
+                $data_hierarchy=array(
+                    'user_id'=>$result,
+                    'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
+                    'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
+                    'dmf_id'=>$this->session->user_logged_in['parent_dmf_id'],
+                    'uf_id'=>$this->session->user_logged_in['id'],
+                    'created_by'=>$this->session->user_logged_in['id'],
+                );
+            }
+            $role=$this->franchisee->insertNewRecord('sea_user_hierarchy',$data);
+            //End of hierarchy table data insertion
+
+            //Inserting record into revenue configuration table
+            
         }
         if(isset($_POST['ACMAS']))
             $ca=1;
@@ -118,6 +162,14 @@ class FranchiseeManagement extends CI_Controller {
             'course_funmaths'=>$cf,
         );
         $result4=$this->franchisee->insertNewRecord('sea_franchise_courses',$data4);
+        $data5=array(
+            'user_id'=>$result,
+            'counsultant_id'=>$ca,
+            'smf_id'=>$cw,
+            'dmf_id'=>$ci,
+            'uf_id'=>$cf,
+        );
+        $result5=$this->franchisee->insertNewRecord('sea_user_hierarchy',$data5);
         header('application/json');
         echo $result;
     }
@@ -133,10 +185,10 @@ class FranchiseeManagement extends CI_Controller {
     {
         $data['data']['smf'] =$this->franchisee->listFromTable('2');
         $this->load->view('includes/header');
-
         $this->load->view('FranchiseeManagement/smfList',$data);
         $this->load->view('includes/footer');
     }
+
     public function dmfList()
     {
         $data['data']['smf'] =$this->franchisee->listFromTable('3');
@@ -153,7 +205,7 @@ class FranchiseeManagement extends CI_Controller {
     }
     public function consultantsList()
     {
-        $data['data']['smf'] =$this->franchisee->listFromTable('6');
+        $data['data']['smf'] =$this->franchisee->listFromTable('5');
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/consultantsList',$data);
         $this->load->view('includes/footer');

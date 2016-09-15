@@ -21,18 +21,22 @@ class RevenueManagement extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function saveSMFLicenseFee(){
+    public function saveRevenueConfig(){
+        isset($_POST['direct_smf_share'])&&$_POST['direct_smf_share']!=''?$direct_smf_share=$_POST['direct_smf_share']:$direct_smf_share=null;
+        isset($_POST['direct_dmf_share'])&&$_POST['direct_dmf_share']!=''?$direct_dmf_share=$_POST['direct_dmf_share']:$direct_dmf_share=null;
+        isset($_POST['direct_umf_share'])&&$_POST['direct_umf_share']!=''?$direct_umf_share=$_POST['direct_umf_share']:$direct_umf_share=null;
+        isset($_POST['indirect_dmf_share'])&&$_POST['indirect_dmf_share']!=''?$indirect_dmf_share=$_POST['indirect_dmf_share']:$indirect_dmf_share=null;
+        isset($_POST['indirect_umf_share'])&&$_POST['indirect_umf_share']!=''?$indirect_umf_share=$_POST['indirect_umf_share']:$indirect_umf_share=null;
+        isset($_POST['student_commission'])&&$_POST['student_commission']!=''?$student_commission=$_POST['student_commission']:$student_commission=null;
         $data=array(
-            'lf_amount'=>$_POST['LicenseFee'],
-            'kf_amount'=>$_POST['KitFee'],
             'user_id'=>$_POST['UserId'],
-        );
-        $this->revenue->insertNewRecord('sea_franchise_revenue',$data);
-        $data=array(
-            'district_amount'=>$_POST['district_amount'],
-            'unit_amount'=>$_POST['unit_amount'],
+            'direct_state_amount'=>$direct_smf_share,
+            'direct_district_amount'=>$direct_dmf_share,
+            'direct_unit_amount'=>$direct_umf_share,
+            'indirect_dmf_amount'=>$indirect_dmf_share,
+            'indirect_uf_amount'=>$indirect_umf_share,
+            'student_amount'=>$student_commission,
             'units'=>$_POST['units'],
-            'user_id'=>$_POST['UserId'],
         );
         $this->revenue->insertNewRecord('sea_franchise_revenue_config',$data);
     }

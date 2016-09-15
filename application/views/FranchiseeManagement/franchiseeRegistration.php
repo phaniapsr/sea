@@ -19,14 +19,12 @@
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Select Franchisee *</label>
                                         <div class="col-lg-6">
                                             <select class="form-control" name="franchiseetypeId">
-
                                                 <option value="">Select</option>
                                                 <option value="2">State Master Franchisee</option>
                                                 <option value="3">District Master Franchisee</option>
                                                 <option value="4">Unit Franchisee</option>
                                                 <option value="5">Consultant</option>
                                             </select>
-
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -386,15 +384,27 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-lg-5   control-label " style="text-align: left">Franchisee Kit Fee *</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="franchiseKitFee" class="form-control" name="FranchiseKitFee" placeholder="Franchisee Kit Fee" value="0" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-lg-5   control-label " style="text-align: left">Franchisee License Fee *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" id="franchiseFee" class="form-control" name="FranchiseFee" placeholder="Franchisee Fee" onchange="CalTax(this.value)" value="0" />
+                                            <input type="text" id="franchiseFee" class="form-control" name="FranchiseFee" placeholder="Franchisee Fee" value="0" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5   control-label " style="text-align: left">Tax( ST/GST ) *</label>
                                         <div class="col-lg-6">
                                             <input type="text" id="tax" class="form-control" name="FranchiseTax" placeholder="Franchisee Tax" value="0" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5   control-label " style="text-align: left">Total Amount</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="total_amt" class="form-control" name="TotalAmount" placeholder="Total Amount" value="0" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -434,12 +444,7 @@
                             <!-- /Modal -->
                             <script type='text/javascript'>
                                 // CalTax is for calicualting 15% tax on Franchisee License Fee
-                                function CalTax(val)
-                                {
-                                    val=(val*15)/100;
-                                    document.getElementById('tax').value=val;
 
-                                }
                                 $(document).ready(function () {
                                     $('#myModal2').on('shown.bs.modal', function () {
                                         $(this).find('.modal-dialog').css({
@@ -448,6 +453,16 @@
                                             'max-height': '100%'
                                         });
                                     });
+                                    $('#franchiseFee,#franchiseKitFee').change(function(){
+                                        if (parseFloat($(this).val()) > 0 ) {
+                                            $('#tax').val((parseFloat($('#franchiseFee').val())+parseFloat($('#franchiseKitFee').val()))*15/100)
+                                            $('#total_amt').val(parseFloat($('#franchiseFee').val())+parseFloat($('#franchiseKitFee').val())+parseFloat($('#tax').val()))
+                                        } else {
+                                            $(this).val('');
+                                        }
+                                        return false;
+                                        //$('#tax').val($('#franchiseKitFee').val()+$('#franchiseFee').val())*15)/100;
+                                    })
                                     $('.course-section').find('input:checkbox').change(function () {
                                         $('#CourseApplied').val('');
                                         var arr = $('.course-section').find('input:checkbox').each(function (i,el) {

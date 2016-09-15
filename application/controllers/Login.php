@@ -59,7 +59,12 @@ class Login extends CI_Controller {
                     'email' => $result[0]['email'],
                     'first_name' => $result[0]['first_name'],
                     'role_id' => $result[0]['role_id'],
-                    'level_id' =>$level[0]['level_id']
+                    'level_id' =>$level[0]['level_id'],
+					'parent_consultant_id'=>$result[0]['counsultant_id'],
+					'parent_smf_id'=>$result[0]['smf_id'],
+					'parent_dmf_id'=>$result[0]['dmf_id'],
+					'parent_uf_id'=>$result[0]['uf_id'],
+					'created_by_id'=>$result[0]['created_by']
 				);
 				//setting session
 			    $this->session->set_userdata('user_logged_in', $session_data);

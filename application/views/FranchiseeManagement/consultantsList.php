@@ -90,7 +90,7 @@
                                             <td class="selected sorting_1"><?php echo $row['id'];?></td>
                                             <td class=" selected"><a data-ajax="true" data-ajax-mode="replace"
                                                                      data-ajax-update="#details"
-                                                                     href="detailsmfList/<?php echo $row['user_id']?>"><?php echo $row['first_name'];?></a></td>
+                                                                     href="detailsConsulView/<?php echo $row['user_id']?>"><?php echo $row['first_name'];?></a></td>
                                             <td><?php echo $row['city'];?></td>
                                             <td><?php echo $row['state'];?></td>
                                             <td class="text-center selected">
@@ -145,9 +145,9 @@
         <!-- /. ROW  -->
         <div id="details" class="row">
         </div>
-        <script>
+        <!--<script>
             //var franchiseeManager = new Franchises();
-            var revenueConfigManager = new Revenueconfiguration();
+            //var revenueConfigManager = new Revenueconfiguration();
             $(document).ready(function () {
                 LoadStateFranchises();
                 $("#btnUpdateStatus").click(function () {
@@ -342,32 +342,10 @@
                 }, function (xhr) {
                 });
             }
-            function FranchiseeRevenueConfiguration() {
-                var data = {
-                    LicenseFee: $("#SMFFranchiseeLicenseFee").val(),
-                    KitFee: $("#SMFFranchiseeKitFee").val(),
-                    UserId: $("#RevConfigUserId").val(),
-                    Id: $("#RevConfigId").val(),
-                    district_amount: $("#district_amount_id").val(),
-                    unit_amount: $("#unit_amount_id").val(),
-                    units: $("#units_id").val()
-                }
-                $.ajax({
-                    url: "<?php echo base_url()?>/RevenueManagement/saveSMFLicenseFee",
-                    type: "POST",
-                    data: data,
-                    success: function () {
-                        alert("Successfully Submited......!!");
-                        $("#SMFFranchiseeLicenseFee").val('');
-                        $("#SMFFranchiseeKitFee").val('');
-                    },
-                    error: function () {
-                    }
-                });
-            }
+
             function deactivateform() {
             }
-        </script>
+        </script>-->
         <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
@@ -379,58 +357,66 @@
                                     <button type="button" class="close" data-dismiss="modal"
                                             style="color:red;font-size:29px;">×
                                     </button>
-                                    <center><h2 class="modal-title">State Master Franchisee Revenue Configuration</h2>
+                                    <center><h2 class="modal-title">Consultant Revenue Configuration</h2>
                                     </center>
                                 </div>
                             </div>
                             <br>
-                            <form id="SMFRevenueConfiguration" name="SMFRevenueConfiguration" method="post">
+                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueConfig" method="post">
                                 <div class="row">
+                                    <div class="row col-lg-12"><b>Consultant directly appoints</b></div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee License Fee</label>
-                                                <label><input class="form-control" name="LicenseFee"
-                                                              id="SMFFranchiseeLicenseFee" type="text"></label>
+                                                <label>SMF Share</label>
+                                                <label><input class="form-control" name="direct_smf_share"
+                                                              id="direct_smf_share" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee Kit Fee</label>
-                                                <label><input class="form-control" name="KitFee"
-                                                              id="SMFFranchiseeKitFee" type="text"></label>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label>
-                                            <input id="RevConfigUserId" name="UserId" type="hidden">
-                                            <input id="RevConfigId" name="RevConfigId" type="hidden">
-                                            <div class="col-lg-12">
-                                                <label>Total Amount</label>
-                                                <label><input readonly class="form-control"
-                                                              name="SMFPaidFranchiseeFee" id="SMFPaidFranchiseeFee"
-                                                              type="text"></label>
-                                            </div>
-                                        </label>
-                                    </div>
-
-                                    <div class="col-lg-4">
-                                        <label>
-                                            <div class="col-lg-12">
-                                                <label>DMF Share(When joins a DMF)</label>
-                                                <label><input class="form-control" name="district_amount"
-                                                              id="district_amount_id" type="text"></label>
+                                                <label>DMF Share</label>
+                                                <label><input class="form-control" name="direct_dmf_share"
+                                                              id="direct_dmf_share" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>UF Share (When a UF joins)</label>
-                                                <label><input class="form-control" name="unit_amount" id="unit_amount_id" type="text"></label>
+                                                <label>UMF Share</label>
+                                                <label><input class="form-control" name="direct_umf_share"
+                                                              id="direct_umf_share" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="row col-lg-12"><b>Consultant indirectly appoints(through hierarchy)</b></div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>DMF Share</label>
+                                                <label><input class="form-control" name="indirect_dmf_share"
+                                                              id="indirect_dmf_share" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Unit Share</label>
+                                                <label><input class="form-control" name="indirect_umf_share"
+                                                              id="indirect_umf_share" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Student commission</label>
+                                                <label><input class="form-control" name="student_commission"
+                                                              id="student_commission" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
@@ -447,13 +433,19 @@
                                             </div>
                                         </label>
                                     </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <input id="RevConfigUserId" name="UserId" type="hidden">
+                                            <input id="RevConfigId" name="RevConfigId" type="hidden">
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="row" id="roww1">
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
-                                                onclick="return FranchiseeRevenueConfiguration()" role="button"
-                                                id="buttonSave"><span>Save</span></button>
+                                                role="button"
+                                                id="revenue_button_save"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>

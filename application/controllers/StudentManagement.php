@@ -82,6 +82,7 @@ class StudentManagement extends CI_Controller {
             'stu_level'=>$_POST['ProgramCourseLevelId'],
         );
         $result3=$this->student->insertNewRecord('sea_student_course_level',$data3);
+
         header('application/json');
         echo $result;
     }

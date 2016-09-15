@@ -95,7 +95,7 @@
                                             <td><?php echo $row['state'];?></td>
                                             <td class="text-center selected">
                                                 <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
-                                                        data-target="#myModalSMFRevenueConfiguration"
+                                                        data-target="#myModalDMFRevenueConfiguration"
                                                         class="btn btn-primary btn-xs f-rev-config">Revenue Configuration
                                                 </button>
                                             </td>
@@ -147,7 +147,7 @@
         </div>
         <script>
             //var franchiseeManager = new Franchises();
-            var revenueConfigManager = new Revenueconfiguration();
+            //var revenueConfigManager = new Revenueconfiguration();
             $(document).ready(function () {
                 LoadStateFranchises();
                 $("#btnUpdateStatus").click(function () {
@@ -207,7 +207,7 @@
                             {
                                 data: "UserId", title: "Revenue Configuration",
                                 render: function (data, type, row) {
-                                    return '<button type="button" userid="' + row.UserId + '" fee="' + row.FranchiseFee + '"  data-toggle="modal" data-target="#myModalSMFRevenueConfiguration" class="btn btn-primary btn-xs f-rev-config">Revenue Configuration</button>';
+                                    return '<button type="button" userid="' + row.UserId + '" fee="' + row.FranchiseFee + '"  data-toggle="modal" data-target="#myModalDMFRevenueConfiguration" class="btn btn-primary btn-xs f-rev-config">Revenue Configuration</button>';
                                 },
                                 orderable: false,
                                 className: "text-center selected"
@@ -345,30 +345,8 @@
                 }, function (xhr) {
                 });
             }
-            function FranchiseeRevenueConfiguration() {
-                var data = {
-                    LicenseFee: $("#SMFFranchiseeLicenseFee").val(),
-                    KitFee: $("#SMFFranchiseeKitFee").val(),
-                    UserId: $("#RevConfigUserId").val(),
-                    Id: $("#RevConfigId").val()
-                }
-                $.ajax({
-                    url: "<?php echo base_url()?>/RevenueManagement/saveSMFLicenseFee",
-                    type: "POST",
-                    data: data,
-                    success: function () {
-                        alert("Successfully Submited......!!");
-                        $("#SMFFranchiseeLicenseFee").val('');
-                        $("#SMFFranchiseeKitFee").val('');
-                    },
-                    error: function () {
-                    }
-                });
-            }
-            function deactivateform() {
-            }
         </script>
-        <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueConfiguration"
+        <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalDMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
                 <div class="modal-content" id="contentbackground">
@@ -380,12 +358,12 @@
                                     <button type="button" class="close" data-dismiss="modal"
                                             style="color:red;font-size:29px;">×
                                     </button>
-                                    <center><h2 class="modal-title">State Master Franchisee Revenue Configuration</h2>
+                                    <center><h2 class="modal-title">District Master Franchisee Revenue Configuration</h2>
                                     </center>
                                 </div>
                             </div>
                             <br>
-                            <form id="SMFRevenueConfiguration" name="SMFRevenueConfiguration" method="post">
+                            <form id="RevenueConfigurationForm" name="DMFRevenueConfiguration" method="post">
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label>
@@ -422,7 +400,7 @@
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
-                                                onclick="return FranchiseeRevenueConfiguration()" role="button"
+                                                onclick="return FrRevenueConfiguration()" role="button"
                                                 id="buttonSave"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>

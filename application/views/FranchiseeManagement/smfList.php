@@ -147,7 +147,7 @@
         </div>
         <script>
             //var franchiseeManager = new Franchises();
-            var revenueConfigManager = new Revenueconfiguration();
+            //var revenueConfigManager = new Revenueconfiguration();
             $(document).ready(function () {
                 LoadStateFranchises();
                 $("#btnUpdateStatus").click(function () {
@@ -342,29 +342,6 @@
                 }, function (xhr) {
                 });
             }
-            function FranchiseeRevenueConfiguration() {
-                var data = {
-                    LicenseFee: $("#SMFFranchiseeLicenseFee").val(),
-                    KitFee: $("#SMFFranchiseeKitFee").val(),
-                    UserId: $("#RevConfigUserId").val(),
-                    Id: $("#RevConfigId").val(),
-                    district_amount: $("#district_amount_id").val(),
-                    unit_amount: $("#unit_amount_id").val(),
-                    units: $("#units_id").val()
-                }
-                $.ajax({
-                    url: "<?php echo base_url()?>/RevenueManagement/saveSMFLicenseFee",
-                    type: "POST",
-                    data: data,
-                    success: function () {
-                        alert("Successfully Submited......!!");
-                        $("#SMFFranchiseeLicenseFee").val('');
-                        $("#SMFFranchiseeKitFee").val('');
-                    },
-                    error: function () {
-                    }
-                });
-            }
             function deactivateform() {
             }
         </script>
@@ -384,53 +361,43 @@
                                 </div>
                             </div>
                             <br>
-                            <form id="SMFRevenueConfiguration" name="SMFRevenueConfiguration" method="post">
+                            <form id="RevenueConfigurationForm" name="SMFRevenueConfiguration" method="post">
                                 <div class="row">
+                                    <div class="row col-lg-12"><b>State directly appoints</b></div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee License Fee</label>
-                                                <label><input class="form-control" name="LicenseFee"
-                                                              id="SMFFranchiseeLicenseFee" type="text"></label>
+                                                <label>DMF Share</label>
+                                                <label><input class="form-control" name="direct_dmf_share"
+                                                              id="direct_dmf_share" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee Kit Fee</label>
-                                                <label><input class="form-control" name="KitFee"
-                                                              id="SMFFranchiseeKitFee" type="text"></label>
+                                                <label>UMF Share</label>
+                                                <label><input class="form-control" name="direct_umf_share"
+                                                              id="direct_umf_share" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <label>
-                                            <input id="RevConfigUserId" name="UserId" type="hidden">
-                                            <input id="RevConfigId" name="RevConfigId" type="hidden">
-                                            <div class="col-lg-12">
-                                                <label>Total Amount</label>
-                                                <label><input readonly class="form-control"
-                                                              name="SMFPaidFranchiseeFee" id="SMFPaidFranchiseeFee"
-                                                              type="text"></label>
-                                            </div>
-                                        </label>
-                                    </div>
-
+                                    <div class="row col-lg-12"><b>State indirectly appoints(through hierarchy)</b></div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>DMF Share(When joins a DMF)</label>
-                                                <label><input class="form-control" name="district_amount"
-                                                              id="district_amount_id" type="text"></label>
+                                                <label>Unit Share</label>
+                                                <label><input class="form-control" name="indirect_umf_share"
+                                                              id="indirect_umf_share" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>UF Share (When a UF joins)</label>
-                                                <label><input class="form-control" name="unit_amount" id="unit_amount_id" type="text"></label>
+                                                <label>Student commission</label>
+                                                <label><input class="form-control" name="student_commission"
+                                                              id="student_commission" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
@@ -447,17 +414,24 @@
                                             </div>
                                         </label>
                                     </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <input id="RevConfigUserId" name="UserId" type="hidden">
+                                            <input id="RevConfigId" name="RevConfigId" type="hidden">
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="row" id="roww1">
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
-                                                onclick="return FranchiseeRevenueConfiguration()" role="button"
+                                                onclick="return FrRevenueConfiguration()" role="button"
                                                 id="buttonSave"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>
                                 </div>
+
                             </form>
                         </div>
                     </div>

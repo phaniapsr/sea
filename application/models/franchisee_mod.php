@@ -8,7 +8,7 @@ class Franchisee_mod extends CI_Model{
 		$this->db->select('*');
         $this->db->from('sea_users');
         $this->db->join('sea_user_role','sea_users.id=sea_user_role.user_id');
-        if($role==2||$role==3||$role==4){
+        if($role==2||$role==3||$role==4||$role==5){
             $this->db->join('sea_franchise_resid_address','sea_users.id=sea_franchise_resid_address.user_id');
         }
         $this->db->where('sea_user_role.role_id='.$role);

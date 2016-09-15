@@ -1,15 +1,38 @@
 $(window).load(function () {
     $(document).ready(function () {
-        $('#SMFFranchiseeKitFee,#SMFFranchiseeLicenseFee').blur(function(){
+        $('#direct_smf_share,#direct_dmf_share,#direct_umf_share,#indirect_dmf_share,#indirect_umf_share,#student_commission').blur(function(){
             if (parseFloat($(this).val()) > 0 ) {
-                $('#SMFPaidFranchiseeFee').val(parseFloat($('#SMFFranchiseeKitFee').val())+parseFloat($('#SMFFranchiseeLicenseFee').val()));
-                //$('#SMFFranchiseeLicenseFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()) - parseFloat($('#SMFFranchiseeKitFee').val()));
+
             } else {
                 $(this).val('');
-                //$('#SMFPaidFranchiseeFee').val(0);
-                //$('#SMFFranchiseeLicenseFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()));
             }
             return false;
+        });
+        $('#revenue_button_save').click(function(){
+            var data = {
+                UserId: $("#RevConfigUserId").val(),
+                Id: $("#RevConfigId").val(),
+                direct_smf_share: $("#direct_smf_share").val(),
+                direct_dmf_share: $("#direct_dmf_share").val(),
+                direct_umf_share: $("#direct_umf_share").val(),
+                indirect_dmf_share: $("#indirect_dmf_share").val(),
+                indirect_umf_share: $("#indirect_umf_share").val(),
+                student_commission: $("#student_commission").val(),
+                units: $("#units_id").val()
+            }
+
+            $.ajax({
+                url: $('#RevenueConfigurationForm').attr('action'),
+                type: "POST",
+                data: data,
+                success: function () {
+                    alert("Successfully Submited......!!");
+                    $("#SMFFranchiseeLicenseFee").val('');
+                    $("#SMFFranchiseeKitFee").val('');
+                },
+                error: function () {
+                }
+            });
         })
         $(".f-rev-config").click(function () {
             var userId = $(this).attr('userid');
