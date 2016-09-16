@@ -77,7 +77,22 @@
                 <a href="/Bulksms"><i class="fa fa-comment"></i> Bulk SMS</a>
             </li>
             <li>
-                <a href="/Reports/Revenue"><i class="fa fa-rupee"></i> Revenue</a>
+                <!--<a href="/Reports/Revenue"><i class="fa fa-rupee"></i> Revenue</a>-->
+				<a href="#"><i class="fa fa-rupee"></i> Revenue<span class="fa fa-angle-right"></span></a>
+				<ul class="nav nav-second-level">
+                    <li>
+                        <a href="<?php echo base_url();?>RevenueManagement/companyRevenue">Company</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>RevenueManagement/consultantRevenue">Consultants</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>RevenueManagement/stateRevenue">State</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>RevenueManagement/districtRevenue">District</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="/Attendance"><i class="fa fa-book"></i> Attendance</a>

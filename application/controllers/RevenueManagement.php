@@ -40,5 +40,37 @@ class RevenueManagement extends CI_Controller {
         );
         $this->revenue->insertNewRecord('sea_franchise_revenue_config',$data);
     }
-
+	public function companyRevenue()
+	{
+		$this->load->model('revenue_mod');
+		$data['company']=$this->revenue_mod->getAllRevenue();
+		//print_r($data['company']);
+		$data['content'] = 'Revenue/companyRevenue';
+        $this->load->view('includes/template',$data);
+		
+	}
+	public function consultantRevenue()
+	{
+		$this->load->model('revenue_mod');
+		$data['consultant']=$this->revenue_mod->getAllConsultantRevenue();
+		$data['content'] = 'Revenue/consultantRevenue';
+        $this->load->view('includes/template',$data);
+		
+	}
+	public function stateRevenue()
+	{
+		$this->load->model('revenue_mod');
+		$data['state']=$this->revenue_mod->getAllStateRevenue();
+		$data['content'] = 'Revenue/stateRevenue';
+        $this->load->view('includes/template',$data);
+		
+	}
+	public function districtRevenue()
+	{
+		$this->load->model('revenue_mod');
+		$data['dmf']=$this->revenue_mod->getAllStateRevenue();
+		$data['content'] = 'Revenue/districtRevenue';
+        $this->load->view('includes/template',$data);
+		
+	}
 }
