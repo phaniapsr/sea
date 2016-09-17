@@ -43,10 +43,10 @@ class Franchisee_mod extends CI_Model{
         return $query->result_array();
     }
 
-    public function getFranchiseRevenueConfigurations(){
+    public function getFranchiseRevenueConfigurations($user_id){
         $this->db->select('*');
         $this->db->from('sea_franchise_revenue_config');
-        $this->db->where('user_id',$this->session->user_logged_in['id']);
+        $this->db->where('user_id',$user_id);
         $query=$this->db->get();
         return $query->result_array();
     }

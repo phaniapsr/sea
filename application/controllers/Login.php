@@ -70,7 +70,7 @@ class Login extends CI_Controller {
 			    $this->session->set_userdata('user_logged_in', $session_data);
                 if($result[0]['role_id']=='1'||$result[0]['role_id']=='3'||$result[0]['role_id']=='2')
 			    redirect('FranchiseeManagement');
-			    if($result[0]['role_id']=='4')
+			    elseif($result[0]['role_id']=='4'||$result[0]['role_id']=='5')
 			    redirect('StudentManagement');
 			}
 			else

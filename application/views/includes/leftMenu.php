@@ -2,40 +2,43 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li>
-                <a href="<?php echo base_url();?>FranchiseeManagement/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a>
+                <a href="<?php echo base_url(); ?>FranchiseeManagement/dashboard"><i class="fa fa-dashboard"></i>
+                    Dashboard</a>
             </li>
             <li>
-                <a href="<?php echo base_url();?>FranchiseeManagement"><i class="fa fa-list-alt"></i> Franchisee Registration</a>
+                <a href="<?php echo base_url(); ?>FranchiseeManagement"><i class="fa fa-list-alt"></i> Franchisee
+                    Registration</a>
             </li>
 
             <li>
                 <a href="#"><i class="fa fa-gift"></i> Franchisee Details<span class="fa fa-angle-right"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo base_url();?>FranchiseeManagement/smfList">State Master Franchisee(s)</a>
+                        <a href="<?php echo base_url(); ?>FranchiseeManagement/smfList">State Master Franchisee(s)</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>FranchiseeManagement/dmfList">District Master Franchisee(s)</a>
+                        <a href="<?php echo base_url(); ?>FranchiseeManagement/dmfList">District Master
+                            Franchisee(s)</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>FranchiseeManagement/ufList">Unit Franchisee(s)</a>
+                        <a href="<?php echo base_url(); ?>FranchiseeManagement/ufList">Unit Franchisee(s)</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>FranchiseeManagement/consultantsList">Consultants</a>
+                        <a href="<?php echo base_url(); ?>FranchiseeManagement/consultantsList">Consultants</a>
                     </li>
                 </ul>
             </li>
 
 
             <li>
-                <a href="<?php echo base_url()?>StudentManagement"><i class="fa fa-list-alt"></i> Student Registration</a>
+                <a href="<?php echo base_url() ?>StudentManagement"><i class="fa fa-list-alt"></i> Student Registration</a>
             </li>
             <li>
 
                 <a href="#"><i class="fa fa-users"></i> Student Details<span class="fa fa-angle-right"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo base_url()?>StudentManagement/currentStudentsList">Current Students</a>
+                        <a href="<?php echo base_url() ?>StudentManagement/currentStudentsList">Current Students</a>
                     </li>
                     <li>
                         <a href="/CourseComlpetedStudents">Course Completed Students</a>
@@ -78,19 +81,19 @@
             </li>
             <li>
                 <!--<a href="/Reports/Revenue"><i class="fa fa-rupee"></i> Revenue</a>-->
-				<a href="#"><i class="fa fa-rupee"></i> Revenue<span class="fa fa-angle-right"></span></a>
-				<ul class="nav nav-second-level">
+                <a href="#"><i class="fa fa-rupee"></i> Revenue<span class="fa fa-angle-right"></span></a>
+                <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo base_url();?>RevenueManagement/companyRevenue">Company</a>
+                        <a href="<?php echo base_url(); ?>RevenueManagement/companyRevenue">Company</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>RevenueManagement/consultantRevenue">Consultants</a>
+                        <a href="<?php echo base_url(); ?>RevenueManagement/consultantRevenue">Consultants</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>RevenueManagement/stateRevenue">State</a>
+                        <a href="<?php echo base_url(); ?>RevenueManagement/stateRevenue">State</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>RevenueManagement/districtRevenue">District</a>
+                        <a href="<?php echo base_url(); ?>RevenueManagement/districtRevenue">District</a>
                     </li>
                 </ul>
             </li>

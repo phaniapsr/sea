@@ -19,7 +19,7 @@ class Login_mod extends CI_Model{
         $this->db->select('*');
         $this->db->from('sea_users');
         $this->db->join('sea_user_role','sea_users.id=sea_user_role.user_id');
-        //$this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id');
+        $this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id','left');
         $this->db->where($data);
         $query=$this->db->get();
         return $query->result_array();

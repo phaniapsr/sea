@@ -392,7 +392,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-5   control-label " style="text-align: left">Franchisee License Fee *</label>
                                         <div class="col-lg-6">
-                                            <input type="text" id="franchiseFee" class="form-control" name="FranchiseFee" placeholder="Franchisee Fee" value="0" />
+                                            <input type="text" id="franchiseFee" class="form-control" name="FranchiseLicenseFee" placeholder="Franchisee Fee" value="0" />
                                         </div>
                                     </div>
                                     <div class="form-group">

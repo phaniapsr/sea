@@ -1,12 +1,12 @@
 <div id="page-wrapper">
     <div id="page-inner">
-        <link href="Content/css/tjquery-ui.css" rel="stylesheet" />
+        <link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
         <script src="Scripts/admin/validations/jquery-teacher.js"></script>
         <script src="Scripts/admin/jquery-ui.js"></script>
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">
-                    Revenue
+                    Company Revenue
                 </h1>
             </div>
         </div>
@@ -67,7 +67,7 @@
                                         </th>
                                         <th aria-label="City: activate to sort column ascending" style="width: 53px;"
                                             colspan="1" rowspan="1" aria-controls="dt-state-franchisee" tabindex="0"
-                                            class="sorting">LicenseFee 
+                                            class="sorting">LicenseFee
                                         </th>
                                         <th aria-label="State: activate to sort column ascending" style="width: 68px;"
                                             colspan="1" rowspan="1" aria-controls="dt-state-franchisee" tabindex="0"
@@ -84,30 +84,30 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                  // print_r($company);exit;
-                                    foreach ($company as $row){
- ?>
+                                    // print_r($company);exit;
+                                    foreach ($company as $row) {
+                                        ?>
                                         <tr class="odd">
-                                            <td class="selected sorting_1"><?php echo $row['first_name'];?></td>
-											<td class="text-center selected">
-                                                <?php 
-												$RoleId = $row['role_id']; 
-												$this->db->select('role');
-												$this->db->from('sea_roles');
-												$this->db->where('id',$RoleId);
-												$Role = $this->db->get()->row();
-												echo $Role->role;
-												?>
+                                            <td class="selected sorting_1"><?php echo $row['first_name']; ?></td>
+                                            <td class="text-center selected">
+                                                <?php
+                                                $RoleId = $row['role_id'];
+                                                $this->db->select('role');
+                                                $this->db->from('sea_roles');
+                                                $this->db->where('id', $RoleId);
+                                                $Role = $this->db->get()->row();
+                                                echo $Role->role;
+                                                ?>
                                             </td>
-                                            <td class=" selected"><?php echo $row['lf_amount'];?></td>
-                                            <td><?php echo $row['kf_amount'];?></td>
-                                            <td><?php echo $row['tax_amount'];?></td>
-                                            
-                                            <td class=" text-center"><?php echo $row['lf_company_amount'];?>
-                                                    
+                                            <td class=" selected"><?php echo $row['lf_amount']; ?></td>
+                                            <td><?php echo $row['kf_amount']; ?></td>
+                                            <td><?php echo $row['tax_amount']; ?></td>
+
+                                            <td class=" text-center"><?php echo $row['lf_company_amount']; ?>
+
                                                 </a></td>
                                         </tr>
-                                    <?php }?>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                                 <div class="row">
@@ -348,9 +348,8 @@
             function deactivateform() {
             }
         </script>
-        
 
-        
+
         <script>
             $(document).ready(function () {
                 $("#state").hide();

@@ -50,13 +50,13 @@ $(function(){
 			return false;
 		}
 		var regexp_name=/^[a-zA-Z]+$/;
-		if(!regexp_name.test(fr_name))
+		/*if(!regexp_name.test(fr_name))
 		{
 			alert("Franchisee Name Should Contain Only Alphabets");
 			document.forms["form2"]["franchiseeName"].focus();
 			return false;
 		}
-
+*/
 		var fr_pass=document.forms["form2"]["password"].value;
 		var regexp_pass=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 		if(!regexp_pass.test(fr_pass))
