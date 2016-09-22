@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 /**
  * Created by Phani Kumar.
  * Date: 8/6/2016
@@ -40,6 +39,7 @@ class FranchiseeManagement extends CI_Controller {
             'birthplace'=>$_POST['PlaceOfBirth'],
             'franch_name'=>$_POST['franchiseeName'],
             'franchiseetypeId'=>$_POST['franchiseetypeId'],
+            'image_path'=>trim($_POST['img'],'"'),
         );
 
         $result= $this->franchisee->insertNewRecord('sea_users',$data);

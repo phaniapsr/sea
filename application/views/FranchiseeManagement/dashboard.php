@@ -196,7 +196,6 @@
 
     </div>
 </div>
-
-            </div>
-            <footer><p>All right reserved by: <a href="http://lemonbridgeit.com/">LemonBridge</a></p></footer>
-        </div>
+</div>
+<footer><p>All right reserved by: <a href="http://lemonbridgeit.com/">LemonBridge</a></p></footer>
+</div>

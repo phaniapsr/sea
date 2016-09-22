@@ -27,7 +27,7 @@
 						 <tr><td>GENDER</td><td><?php echo $row['gender'];?></td></tr>
 						 <tr><td>AGE</td><td><?php echo $row['age'];?></td></tr>
 						 <tr><td>MOBILE NO</td><td><?php echo $row['mobileno'];?></td></tr>
-						  </tr>
+						 <tr><td>IMAGE</td><td><image href=<?php echo base_url()?>uploads/<?php echo $row['image_path'];?>><?php echo $row['image_path'];?></image></td></tr>
 					 </tbody>
                     </table>
 				</br></br>
@@ -69,10 +69,7 @@
 					 </tbody>			
 					</table>
 				</br></br>	 												
-						 												
-                    <?php }?>
-                        
-                   
+<?php }?>
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->

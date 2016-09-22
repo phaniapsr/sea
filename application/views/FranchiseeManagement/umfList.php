@@ -385,7 +385,7 @@
                                 </div>
                             </div>
                             <br>
-                            <form id="RevenueConfigurationForm" name="UMFRevenueConfiguration" method="post">
+                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueConfig" method="post">
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label>
@@ -422,16 +422,6 @@
                                         <button class="btn primaryCta small" type="button"
                                                 role="button"
                                                 id="revenue_button_save"><span>Save</span></button>
-                                        <button class="btn primaryCta small" type="button" id="buttonCancel"
-                                                data-dismiss="modal"><span>Cancel</span></button>
-                                    </center>
-                                </div>
-                                <div class="row" id="roww1">
-                                    <center>
-                                        <label class="danger" id="rev-config-msg"></label>
-                                        <button class="btn primaryCta small" type="button"
-                                                onclick="return RevenueConfiguration()" role="button"
-                                                id="buttonSave"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>

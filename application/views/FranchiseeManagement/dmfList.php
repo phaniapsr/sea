@@ -145,7 +145,7 @@
         <!-- /. ROW  -->
         <div id="details" class="row">
         </div>
-        <script>
+        <!--<script>
             //var franchiseeManager = new Franchises();
             //var revenueConfigManager = new Revenueconfiguration();
             $(document).ready(function () {
@@ -345,7 +345,7 @@
                 }, function (xhr) {
                 });
             }
-        </script>
+        </script>-->
         <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalDMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
@@ -363,23 +363,36 @@
                                 </div>
                             </div>
                             <br>
-                            <form id="RevenueConfigurationForm" name="DMFRevenueConfiguration" method="post">
+                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueConfig" method="post">
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee License Fee</label>
-                                                <label><input class="form-control" name="LicenseFee"
-                                                              id="SMFFranchiseeLicenseFee" type="text"></label>
+                                                <label>UMF Share</label>
+                                                <label><input class="form-control" name="direct_umf_share"
+                                                              id="direct_umf_share" type="text"></label>
                                             </div>
                                         </label>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Franchisee Kit Fee</label>
-                                                <label><input class="form-control" name="KitFee"
-                                                              id="SMFFranchiseeKitFee" type="text"></label>
+                                                <label>Student commission</label>
+                                                <label><input class="form-control" name="student_commission"
+                                                              id="student_commission" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Units</label>
+                                                <label>
+                                                    <select name="units" id="units_id">
+                                                        <option value="0">Amount</option>
+                                                        <option value="1">Percentage</option>
+                                                    </select>
+                                                </label>
                                             </div>
                                         </label>
                                     </div>
@@ -387,12 +400,6 @@
                                         <label>
                                             <input id="RevConfigUserId" name="UserId" type="hidden">
                                             <input id="RevConfigId" name="RevConfigId" type="hidden">
-                                            <div class="col-lg-12">
-                                                <label>Total Amount</label>
-                                                <label><input readonly class="form-control"
-                                                              name="SMFPaidFranchiseeFee" id="SMFPaidFranchiseeFee"
-                                                              type="text"></label>
-                                            </div>
                                         </label>
                                     </div>
                                 </div>
@@ -400,8 +407,8 @@
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
-                                                onclick="return FrRevenueConfiguration()" role="button"
-                                                id="buttonSave"><span>Save</span></button>
+                                                role="button"
+                                                id="revenue_button_save"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>

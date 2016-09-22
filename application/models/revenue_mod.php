@@ -1,5 +1,4 @@
 <?php
-
 class Revenue_mod extends CI_Model
 {
     function __Construct()

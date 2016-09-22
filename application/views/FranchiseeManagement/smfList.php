@@ -145,7 +145,7 @@
         <!-- /. ROW  -->
         <div id="details" class="row">
         </div>
-        <script>
+        <!--<script>
             //var franchiseeManager = new Franchises();
             //var revenueConfigManager = new Revenueconfiguration();
             $(document).ready(function () {
@@ -344,7 +344,7 @@
             }
             function deactivateform() {
             }
-        </script>
+        </script>-->
         <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
@@ -361,7 +361,7 @@
                                 </div>
                             </div>
                             <br>
-                            <form id="RevenueConfigurationForm" name="SMFRevenueConfiguration" method="post">
+                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueConfig" method="post">
                                 <div class="row">
                                     <div class="row col-lg-12"><b>State directly appoints</b></div>
                                     <div class="col-lg-4">
@@ -425,8 +425,8 @@
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
-                                                onclick="return FrRevenueConfiguration()" role="button"
-                                                id="buttonSave"><span>Save</span></button>
+                                                role="button"
+                                                id="revenue_button_save"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>

@@ -3,7 +3,6 @@
 <!-- DATA TABLE SCRIPTS -->
 <script src="<?php echo base_url();?>scripts/admin/dataTables/jquery.dataTables.js"></script>
 <script src="<?php echo base_url();?>scripts/admin/dataTables/dataTables.bootstrap.js"></script>
-
 <script>
     $(document).ready(function () {
         $('#dataTables-example').dataTable();
@@ -75,15 +74,6 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- Modal For Deactivate -->
-
-
-
-
 <script src="<?php echo base_url();?>scripts/admin/jquery-ui.js"></script>
-
-
-
-
-
 </body>
 </html>
