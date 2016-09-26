@@ -50,12 +50,13 @@ class Login extends CI_Controller {
 			$data = array('email' => $this->input->post('email'),
 						 'password' => $this->input->post('password'));
 			$result = $this->login_mod->user_login_data($data);
+            //print_r($result);exit;
 			if ($result == TRUE) {
                 //Get Level
                 if($result[0]['role_id']!=1)
                     $level = $this->login_mod->user_level_data($result[0]['id']);
                 $session_data = array(
-                    'id' => $result[0]['id'],
+                    'id' => $result[0]['user_id'],
                     'email' => $result[0]['email'],
                     'first_name' => $result[0]['first_name'],
                     'role_id' => $result[0]['role_id'],

@@ -2,6 +2,7 @@
  * Created by phani kumar on 8/6/2016.
  */
 $(function(){
+
 	$('#checkbox').click(function(){
 		if(document.forms["form2"]["checkbox"].checked==true)
 		{
@@ -43,9 +44,16 @@ $(function(){
 			return false;
 		}
 		var fr_email=document.forms["form2"]["email"].value;
+		var re=new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b");
 		if(fr_email=='')
 		{
 			alert("Plese Eneter Email Id");
+			document.forms["form2"]["email"].focus();
+			return false;
+		}
+		if(!re.test(fr_email))
+		{
+			alert("Plese Eneter Valid Email Id");
 			document.forms["form2"]["email"].focus();
 			return false;
 		}

@@ -411,7 +411,7 @@
                                             </div>
                                         </label>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <!--<div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
                                                 <label>Student commission</label>
@@ -419,7 +419,7 @@
                                                               id="student_commission" type="text"></label>
                                             </div>
                                         </label>
-                                    </div>
+                                    </div>-->
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">

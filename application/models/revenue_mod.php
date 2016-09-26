@@ -69,4 +69,11 @@ class Revenue_mod extends CI_Model
         return $query->result_array();
 
     }
+
+    public function getStudentRevenueTypes(){
+        $this->db->select('*');
+        $this->db->from('sea_student_revenue_type');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

@@ -44,8 +44,25 @@
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Email
                                             Address *</label>
                                         <div class="col-lg-6">
-                                            <input type="email" class="form-control" name="email"
+                                            <input id="email" type="text" class="form-control" name="email"
                                                    placeholder="Email address"/>
+                                            <script>
+                                                $('#email').blur(function(){
+                                                    var em=$('#email').val();
+                                                    $.ajax({
+                                                        type:'post',
+                                                        url:'<?php echo base_url()?>/FranchiseeManagement/checkEmail',
+                                                        data:{email:em},
+                                                        success:function(res){
+                                                            if(res==1)
+                                                            {
+                                                                alert("This email id already taken");
+                                                                $('#email').val('').focus();
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                     <div class="form-group">

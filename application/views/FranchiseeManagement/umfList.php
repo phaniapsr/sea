@@ -145,7 +145,7 @@
         <!-- /. ROW  -->
         <div id="details" class="row">
         </div>
-        <script>
+        <!--<script>
             //var franchiseeManager = new Franchises();
             //var revenueConfigManager = new Revenueconfiguration();
             $(document).ready(function () {
@@ -353,7 +353,7 @@
                     Id: $("#RevConfigId").val()
                 }
                 $.ajax({
-                    url: "<?php echo base_url()?>/RevenueManagement/saveSMFLicenseFee",
+                    url: "<?php /*echo base_url()*/?>/RevenueManagement/saveSMFLicenseFee",
                     type: "POST",
                     data: data,
                     success: function () {
@@ -367,7 +367,7 @@
             }
             function deactivateform() {
             }
-        </script>
+        </script>-->
         <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
@@ -390,9 +390,8 @@
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
-                                                <label>Student commission</label>
-                                                <label><input class="form-control" name="student_commission"
-                                                              id="student_commission" type="text"></label>
+                                                <label>Revenue Type</label>
+                                                <label><select name="student_revenue_type" id="student_revenue_type_id"></select></label>
                                             </div>
                                         </label>
                                     </div>

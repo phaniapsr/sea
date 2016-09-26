@@ -79,4 +79,10 @@ class RevenueManagement extends CI_Controller
         $this->load->view('includes/template', $data);
 
     }
+
+    public function getStudentRevenueTypes(){
+        $this->load->model('revenue_mod');
+        header('application/json');
+        echo json_encode(array('student_revenue_type'=>$this->revenue_mod->getStudentRevenueTypes()));
+    }
 }

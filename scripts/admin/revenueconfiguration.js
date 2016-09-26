@@ -39,30 +39,22 @@ $(window).load(function () {
             $("#RevConfigUserId").val($(this).attr('userid'));
             $("#RevConfigId").val($(this).attr('rowid'));
             $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
-            /*revenueConfigManager.GetRevenueConfiguration(userId, function (resp) {
-             $("#SMFFranchiseeLicenseFee").val(parseFloat(resp.LicenseFee));
-             $("#SMFFranchiseeKitFee").val(parseFloat(resp.KitFee));
-             $("#RevConfigId").val(resp.Id);
-             });*/
+            $.ajax({
+                url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getStudentRevenueTypes',
+                dataType:'json',
+                method:'GET',
+                success:function(data){
+                    var option='<option value=""></option>'
+                    $.each(data.student_revenue_type,function(data_key,data_val){
+                        option+='<option value="'+data_val.ssrt_id+'">'+data_val.ssrt_revenue_type+'</option>'
+                    })
+                    $('#student_revenue_type_id').html(option);
+                },
+                error:function(){
+                    alert('Some thing went wrong in collecting the student revenue type data')
+                }
+            });
         });
-        /*$('#SMFFranchiseeKitFee').keyup(function () {
-            if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#SMFPaidFranchiseeFee').val())) {
-                $('#SMFFranchiseeLicenseFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()) - parseFloat($('#SMFFranchiseeKitFee').val()));
-            } else {
-                $('#SMFFranchiseeKitFee').val(0);
-                $('#SMFFranchiseeLicenseFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()));
-            }
-            return false;
-        });
-        $('#SMFFranchiseeLicenseFee').keyup(function () {
-            if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#SMFPaidFranchiseeFee').val())) {
-                $('#SMFFranchiseeKitFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()) - parseFloat($('#SMFFranchiseeLicenseFee').val()));
-            } else {
-                $('#SMFFranchiseeLicenseFee').val(0);
-                $('#SMFFranchiseeKitFee').val(parseFloat($('#SMFPaidFranchiseeFee').val()));
-            }
-            return false;
-        });*/
 
         $('#DMFFranchiseeKitFee').keyup(function () {
             if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {

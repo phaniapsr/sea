@@ -447,4 +447,8 @@ class FranchiseeManagement extends CI_Controller {
         $this->load->view('FranchiseeManagement/detailsmfList',$data);
         $this->load->view('includes/footer');
     }
+
+    public function checkEmail(){
+        echo $this->franchisee->checkmail($_POST['email'])==0?0:1;
+    }
 }

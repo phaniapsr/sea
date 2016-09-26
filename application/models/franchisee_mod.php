@@ -50,4 +50,12 @@ class Franchisee_mod extends CI_Model{
         $query=$this->db->get();
         return $query->result_array();
     }
+
+    public function checkmail($mail){
+        $this->db->select('*');
+        $this->db->from('sea_users');
+        $this->db->where('sea_users.email',$mail);
+        $query=$this->db->get();
+        return count($query->result_array());
+    }
 }
