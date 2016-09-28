@@ -447,6 +447,33 @@ class FranchiseeManagement extends CI_Controller {
         $this->load->view('FranchiseeManagement/detailsmfList',$data);
         $this->load->view('includes/footer');
     }
+//code on 270916 statrs here
+   public function detaildmfList($id)
+   {
+	   $data['data']['smf']=$this->franchisee->franchiseDetailView($id);
+	   $this->load->view('includes/header');
+	   $this->load->view('FranchiseeManagement/detaildmfList',$data);
+       $this->load->view('includes/footer');
+	   
+   }
+   
+    public function detailufList($id)
+   {
+	   $data['data']['smf']=$this->franchisee->franchiseDetailView($id);
+	   $this->load->view('includes/header');
+	   $this->load->view('FranchiseeManagement/detailufList',$data);
+       $this->load->view('includes/footer');
+	   
+   }
+    public function detailConsulView($id)
+   {
+	   $data['data']['smf']=$this->franchisee->franchiseDetailView($id);
+	   $this->load->view('includes/header');
+	   $this->load->view('FranchiseeManagement/detailConsulView',$data);
+       $this->load->view('includes/footer');
+	   
+   }
+//code on 270916 ends here
 
     public function checkEmail(){
         echo $this->franchisee->checkmail($_POST['email'])==0?0:1;

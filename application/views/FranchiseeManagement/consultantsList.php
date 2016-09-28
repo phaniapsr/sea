@@ -90,7 +90,7 @@
                                             <td class="selected sorting_1"><?php echo $row['id'];?></td>
                                             <td class=" selected"><a data-ajax="true" data-ajax-mode="replace"
                                                                      data-ajax-update="#details"
-                                                                     href="detailsConsulView/<?php echo $row['user_id']?>"><?php echo $row['first_name'];?></a></td>
+                                                                     href="detailConsulView/<?php echo $row['user_id']?>"><?php echo $row['first_name'];?></a></td>
                                             <td><?php echo $row['city'];?></td>
                                             <td><?php echo $row['state'];?></td>
                                             <td class="text-center selected">

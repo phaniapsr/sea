@@ -28,7 +28,7 @@
                     foreach ($data['smf'] as $row){ ?>
                         <tr class="odd">
                             <td><?php echo $row['id'];?></td>
-                            <td><?php echo $row['first_name'];?></td>
+                            <td><a href="sdetailView/<?php echo $row['id']?>"><?php echo $row['first_name'];?></a></td>
                             <td><?php echo $row['last_name'];?></td>
                             <td><?php echo $row['middle_name'];?></td>
                             <td><?php echo $row['email'];?></td>

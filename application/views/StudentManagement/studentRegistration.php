@@ -376,14 +376,13 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="col-lg-5  control-label " style="text-align:left">Login Name *</label>
+                                        <label class="col-lg-5  control-label " style="text-align:left">UF Franchisee Code *</label>
                                         <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="loginName" class="form-control" name="loginName" placeholder="Login Name" type="text" required/><i data-fv-icon-for="loginName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <input data-fv-field="loginName" class="form-control" name="uffcode" placeholder="UF Franchisee Code" type="text"/><i data-fv-icon-for="loginName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Login name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="stringLength" class="help-block" style="display: none;">Login name must be more than 6 and less than 30 characters long</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="regexp" class="help-block" style="display: none;">Login name can only consist of alphabetical, number, dot and underscore</small></div>
                                     </div>
                                 </div>
-
-                            </div>
+							</div>	
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -393,36 +392,41 @@
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="StudentCode" data-fv-validator="notEmpty" class="help-block" style="display: none;">Student Code is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="StudentCode" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Receipt No *</label>
+                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Class Start Date *</label>
+                                        <div class="col-lg-6">
+                                             <div class="input-group input-append date" id="datePicker">
+                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
+                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                                </div>
+                                            <input type="hidden" id="csd" name="ClassStartDate"/>
+                                        </div>
+                                        </div>
+									<div class="form-group">
+                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Level End Date *</label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group input-append date" id="datePicker">
+                                                <input type="text" class="form-control" name="level_end_date" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
+                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                            </div>
+                                            <input type="hidden" id="led" name="LevelEndDate"/>
+                                        </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Class Time *</label>
                                         <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="ReceiptNo" class="form-control" name="ReceiptNo" placeholder="Receipt Number" type="text" required/><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <input data-fv-field="ReceiptNo" class="form-control" name="ClassTime" placeholder="Class Time" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Batch No *</label>
+                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Class Day *</label>
                                         <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="BatchNo" class="form-control" name="BatchNo" placeholder="Batch Number" type="text" required/><i data-fv-icon-for="BatchNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="BatchNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Batch Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="BatchNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
+                                            <input data-fv-field="ReceiptNo" class="form-control" name="ClassDay" placeholder="Class Day" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Admission Date *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <div class="input-group input-append date" id="datePicker">
-                                                <input data-fv-field="AdmissionDate" class="form-control" name="AdmissionDate" id="datepicker-my3" placeholder="Admission Date" value="01/01/0001" readonly="readonly" type="text">
-                                            <span class="input-group-addon add-on" id="btn3" style="cursor:pointer;">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-
-                                            </div><i data-fv-icon-for="AdmissionDate" class="form-control-feedback fv-icon-no-label fv-bootstrap-icon-input-group" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="AdmissionDate" data-fv-validator="notEmpty" class="help-block" style="display: none;">Admission Date is required</small></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Center Location/City *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="CenterLocationCity" class="form-control" name="CenterLocationCity" placeholder="Centerlocation/City" type="text" required/><i data-fv-icon-for="CenterLocationCity" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="CenterLocationCity" data-fv-validator="notEmpty" class="help-block" style="display: none;">Center Location/City is required</small></div>
-                                    </div>
-
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Upload Image</label>
                                         <div class="col-lg-6 has-feedback">
@@ -439,66 +443,11 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="col-lg-5  control-label" style="text-align:left">Batch Day *</label>
+								<div class="form-group">
+                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Course Instructor Name *</label>
                                         <div class="col-lg-6 has-feedback">
-                                            <select data-fv-field="BatchDay" class="form-control" name="BatchDay">
-                                                <option selected="selected" value="">Select</option>
-                                                <option value="Monday">Monday</option>
-                                                <option value="Tuesday">Tuesday</option>
-                                                <option value="Wednesday">Wednesday</option>
-                                                <option value="Thursday">Thursday</option>
-                                                <option value="Friday">Friday</option>
-                                                <option value="Saturday">Saturday</option>
-                                                <option value="Sunday">Sunday</option>
-                                            </select><i data-fv-icon-for="BatchDay" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="BatchDay" data-fv-validator="notEmpty" class="help-block" style="display: none;">Batch Day is required</small></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-5  control-label" style="text-align:left">Batch Time *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <select data-fv-field="BatchTime" class="form-control" name="BatchTime">
-                                                <option selected="selected" value="">Select</option>
-                                                <option value="6:00am to 8:00am">6:00 a.m to 8:00 a.m</option>
-                                                <option value="6:30am to 8:30am">6:30 a.m to 8:30 a.m</option>
-                                                <option value="7:00am to 9:00am">7:00 a.m to 9:00 a.m</option>
-                                                <option value="7:30am to 9:30am">7:30 a.m to 9:30 a.m</option>
-                                                <option value="8:00am to 10:00am">8:00 a.m to 10:00 a.m</option>
-                                                <option value="8:30am to 10:30am">8:30 a.m to 10:30 a.m</option>
-                                                <option value="9:00am to 11:00am">9:00 a.m to 11:00 a.m</option>
-                                                <option value="9:30am to 11:30am">9:30 a.m to 11:30 a.m</option>
-                                                <option value="10:00am to 12:00pm">10:00 a.m to 12:00 p.m</option>
-                                                <option value="10:30am to 12:30pm">10:30 a.m to 12:30 p.m</option>
-                                                <option value="11:00am to 1:00pm">11:00 a.m to 1:00 p.m</option>
-                                                <option value="11:30am to 1:30pm">11:30 a.m to 1:30 p.m</option>
-                                                <option value="12:00pm to 2:00pm">12:00 p.m to 2:00 p.m</option>
-                                                <option value="12:30pm to 2:30pm">12:30 p.m to 2:30 p.m</option>
-                                                <option value="1:00pm to 3:00pm">1:00 p.m to 3:00 p.m</option>
-                                                <option value="1:30pm to 3:30pm">1:30 p.m to 3:30 p.m</option>
-                                                <option value="2:00pm to 4:00pm">3:00 p.m to 4:00 p.m</option>
-                                                <option value="2:30pm to 4:30pm">2:30 p.m to 4:30 p.m</option>
-                                                <option value="3:00pm to 5:00pm">3:00 p.m to 5:00 p.m</option>
-
-                                                <option value="3:30pm to 5:30pm">3:30 p.m to 5:30 p.m</option>
-                                                <option value="4:00pm to 6:00pm">4:00 p.m to 6:00 p.m</option>
-                                                <option value="4:30pm to 6:30pm">4:30 p.m to 6:30 p.m</option>
-                                                <option value="5:00pm to 7:00pm">5:00 p.m to 7:00 p.m</option>
-
-                                                <option value="5:30pm to 7:30pm">5:30 p.m to 7:30 p.m</option>
-                                                <option value="6:00pm to 8:00pm">6:00 p.m to 8:00 p.m</option>
-                                                <option value="6:30pm to 8:30pm">6:30 p.m to 8:30 p.m</option>
-                                                <option value="7:00pm to 9:00pm">7:00 p.m to 9:00 p.m</option>
-                                                <option value="7:30pm to 9:30pm">7:30 p.m to 9:30 p.m</option>
-                                                <option value="8:00pm to 10:00pm">8:00 p.m to 10:00 p.m</option>
-                                            </select><i data-fv-icon-for="BatchTime" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="BatchTime" data-fv-validator="notEmpty" class="help-block" style="display: none;">Batch Time is required</small></div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-lg-5  control-label " style="text-align:left">Franchisee Name *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="FranchiseeName" class="form-control" name="FranchiseeName" placeholder="Franchisee Name" value="Admin" type="text" required><i data-fv-icon-for="FranchiseeName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="FranchiseeName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Franchisee Name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="FranchiseeName" data-fv-validator="regexp" class="help-block" style="display: none;">Numbers are not allowed</small></div>
+                                            <input data-fv-field="ReceiptNo" class="form-control" name="CiName" placeholder="Course Instructor Name" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Registration Fee *</label>
@@ -512,10 +461,22 @@
                                             <input data-fv-field="CourseFee" class="form-control" id="CourseFee" name="CourseFee" placeholder="Course Fee" value="0" type="text" required/><i data-fv-icon-for="CourseFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="CourseFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Coursefee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="CourseFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
                                     </div>
+									<div class="form-group">
+                                        <label class="col-lg-5  control-label " style="text-align:left">Tax( ST/GST ) *</label>
+                                        <div class="col-lg-6 has-feedback">
+                                            <input data-fv-field="KitFee" class="form-control" id="tax" name="Tax" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Kit Fee *</label>
                                         <div class="col-lg-6 has-feedback">
                                             <input data-fv-field="KitFee" class="form-control" id="KitFee" name="KitFee" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
+                                    </div>
+									<div class="form-group">
+                                        <label class="col-lg-5  control-label " style="text-align:left">Anual Competetion Fee *</label>
+                                        <div class="col-lg-6 has-feedback">
+                                            <input data-fv-field="KitFee" class="form-control" id="AcFee" name="AcFee" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
                                     </div>
 

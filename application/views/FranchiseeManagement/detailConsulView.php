@@ -1,9 +1,12 @@
 <!--<script type="application/javascript" src="<?php /*echo base_url()*/?>scripts/admin/franchiseeRegistration/franchiseeRegistration.js"></script>-->
 <div id="page-wrapper">
     <div id="page-inner">
+	<link href="Content/css/tjquery-ui.css" rel="stylesheet" />
+        <script src="Scripts/admin/validations/jquery-teacher.js"></script>
+        <script src="Scripts/admin/jquery-ui.js"></script>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-header">STATE MASTER FRANCHISEE DETAIL VIEW</h1>
+                <h1 class="page-header">CONSULTANTS DETAIL VIEW</h1>
             </div>
         </div>
         <!-- /. ROW  -->
