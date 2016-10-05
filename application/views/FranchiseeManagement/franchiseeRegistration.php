@@ -495,14 +495,14 @@
                                                       placeholder="purpose/goal"></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="col-lg-5   control-label " style="text-align: left">Franchisee Kit
                                             Fee *</label>
                                         <div class="col-lg-6">
                                             <input type="text" id="franchiseKitFee" class="form-control"
                                                    name="FranchiseKitFee" placeholder="Franchisee Kit Fee" value="0"/>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <label class="col-lg-5   control-label " style="text-align: left">Franchisee
                                             License Fee *</label>
@@ -582,10 +582,10 @@
                                             'max-height': '100%'
                                         });
                                     });
-                                    $('#franchiseFee,#franchiseKitFee').change(function () {
+                                    $('#franchiseFee').change(function () {
                                         if (parseFloat($(this).val()) > 0) {
-                                            $('#tax').val((parseFloat($('#franchiseFee').val()) + parseFloat($('#franchiseKitFee').val())) * 15 / 100)
-                                            $('#total_amt').val(parseFloat($('#franchiseFee').val()) + parseFloat($('#franchiseKitFee').val()) + parseFloat($('#tax').val()))
+                                            $('#tax').val(parseFloat($('#franchiseFee').val()) * 15 / 100)
+                                            $('#total_amt').val(parseFloat($('#franchiseFee').val()) +parseFloat($('#tax').val()))
                                         } else {
                                             $(this).val('');
                                         }

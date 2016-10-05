@@ -197,5 +197,5 @@
     </div>
 </div>
 </div>
-<footer><p>All right reserved by: <a href="http://lemonbridgeit.com/">LemonBridge</a></p></footer>
+<footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
 </div>

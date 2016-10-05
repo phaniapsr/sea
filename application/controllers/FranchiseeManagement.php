@@ -21,9 +21,6 @@ class FranchiseeManagement extends CI_Controller {
     }
 
     public function registerFranchisee(){
-        /*$bday= date('Y-m-d',strtotime($_POST['date_of_birth']));
-        $pday= date('Y-m-d');
-        //$age=$bday->diff($pday)->y;*/
         $data=array(
             'username'=>$_POST['franchiseeName'],
             'password'=>$_POST['password'],
@@ -33,7 +30,6 @@ class FranchiseeManagement extends CI_Controller {
             'middle_name'=>$_POST['middle_name'],
             'date_of_birth'=>date('Y-m-d',strtotime($_POST['date_of_birth'])),
             'gender'=>$_POST['gender'],
-            //'age'=>$age,
             'landno'=>$_POST['LandlineNumber'],
             'mobileno'=>$_POST['MobileNumber'],
             'birthplace'=>$_POST['PlaceOfBirth'],
@@ -119,262 +115,10 @@ class FranchiseeManagement extends CI_Controller {
                     'created_by'=>$this->session->user_logged_in['id'],
                 );
             }
-            // else if UMF login and creating Student
-            elseif($this->session->user_logged_in['role_id']==4){
-                $data_hierarchy=array(
-                    'user_id'=>$result,
-                    'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
-                    'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
-                    'dmf_id'=>$this->session->user_logged_in['parent_dmf_id'],
-                    'uf_id'=>$this->session->user_logged_in['id'],
-                    'created_by'=>$this->session->user_logged_in['id'],
-                );
-            }
-
             $hierarchy=$this->franchisee->insertNewRecord('sea_user_hierarchy',$data_hierarchy);
             //End of hierarchy table data insertion
 
-            //Inserting record into revenue configuration table
-            //todo : This code has to recheck once payment gateway integration is done
-            //if admin creating smf/consultant/dmf/uf
-            if($this->session->user_logged_in['role_id']==1){
-                $revenue_data=array(
-                    'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                    'lf_company_amount'=>$_POST['FranchiseLicenseFee'],
-                    'tax_amount'=>$_POST['FranchiseTax'],
-                    'user_id'=>$result,
-                    'created_by_id'=>$this->session->user_logged_in['id']
-                );
-            }
-
-            // else if Consultant login and creating SMF/DMF/UMF
-            elseif($this->session->user_logged_in['role_id']==5){
-                $revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
-                //Consultant directly creating SMF
-                if($_POST['franchiseetypeId']==2){
-                    //if share in percentage
-                    if($revenueShares[0]['units']==1){
-                        $consultant_amount=round(($_POST['FranchiseLicenseFee']*$revenueShares[0]['direct_state_amount'])/100,2);
-                        $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
-                    }
-                    //else if share in amount
-                    else{
-                        $consultant_amount=$revenueShares[0]['direct_state_amount'];
-                        $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
-                    }
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_consultant_amount'=>$consultant_amount,
-                        'consultant_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //Consultant directly creating DMF
-                elseif($_POST['franchiseetypeId']==3){
-                    //if share in percentage
-                    if($revenueShares[0]['units']==1){
-                        $consultant_amount=round(($_POST['FranchiseLicenseFee']*$revenueShares[0]['direct_district_amount'])/100,2);
-                        $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
-                    }
-                    //else if share in amount
-                    else{
-                        $consultant_amount=$revenueShares[0]['direct_district_amount'];
-                        $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
-                    }
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_consultant_amount'=>$consultant_amount,
-                        'consultant_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //Consultant directly creating UMF
-                elseif($_POST['franchiseetypeId']==4){
-                    //if share in percentage
-                    if($revenueShares[0]['units']==1){
-                        $consultant_amount=round(($_POST['FranchiseLicenseFee']*$revenueShares[0]['direct_unit_amount'])/100,2);
-                        $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
-                    }
-                    //else if share in amount
-                    else{
-                        $consultant_amount=$revenueShares[0]['direct_unit_amount'];
-                        $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
-                    }
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_consultant_amount'=>$consultant_amount,
-                        'consultant_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-            }
-
-            // else if SMF login and creating DMF/UMF
-            elseif($this->session->user_logged_in['role_id']==2){
-                $smf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
-                //SMF creating DMF and this SMF is directly appointed by Admin
-                if($_POST['franchiseetypeId']==3&&$this->session->user_logged_in['parent_consultant_id']==''){
-                    $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_district_amount'])/100,2):round($smf_revenueShares[0]['direct_district_amount'],2);
-                    $company_amount=$smf_revenueShares[0]['units']==1?round($_POST['FranchiseLicenseFee']-$smf_amount,2):round($_POST['FranchiseLicenseFee']-$smf_amount,2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_smf_amount'=>$smf_amount,
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //SMF creating DMF and this SMF is directly appointed by Consultant
-                elseif($_POST['franchiseetypeId']==3&&$this->session->user_logged_in['parent_consultant_id']!=''){
-                    $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                    $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_district_amount'])/100,2):round($smf_revenueShares[0]['direct_district_amount'],2);
-                    $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_dmf_amount'])/100,2):$consultant_revenueShares[0]['direct_district_amount'];
-                    $company_amount=round(($_POST['FranchiseLicenseFee']-$smf_amount-$consultant_amount),2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_smf_amount'=>$smf_amount,
-                        'smf_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'lf_consultant_amount'=>$consultant_amount,
-                        'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //SMF creating UMF directly and this SMF is directly appointed by Admin
-                elseif($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_consultant_id']==''){
-                    $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_unit_amount'])/100,2):$smf_revenueShares[0]['direct_unit_amount'];
-                    $company_amount=round($_POST['FranchiseLicenseFee']-$smf_amount,2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_smf_amount'=>$smf_amount,
-                        'smf_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //SMF creating UMF directly and this SMF is directly appointed by Consultant
-                elseif($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_consultant_id']!=''){
-                    $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                    $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_unit_amount'])/100,2):round($smf_revenueShares[0]['direct_unit_amount'],2);
-                    $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_uf_amount'])/100,2):$consultant_revenueShares[0]['indirect_uf_amount'];
-                    $company_amount=round(($_POST['FranchiseLicenseFee']-$smf_amount-$consultant_amount),2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_smf_amount'=>$smf_amount,
-                        'smf_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'lf_consultant_amount'=>$consultant_amount,
-                        'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-            }
-
-            //elseif DMF login and creating UMF
-            elseif($this->session->user_logged_in['role_id']==3){
-                //DMF creating UMF and this DMF is directly appointed by Admin
-                $dmf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
-                if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']==''&&$this->session->user_logged_in['parent_consultant_id']==''){
-                    $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
-                    $company_amount=round($_POST['FranchiseLicenseFee']-$dmf_amount,2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_dmf_amount'=>$dmf_amount,
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //DMF creating UMF and this DMF is directly appointed by State and this State is created by Admin
-                else if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']!=''&&$this->session->user_logged_in['parent_consultant_id']==''){
-                    $smf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_smf']);
-                    $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_unit_amount'])/100,2):round($smf_revenueShares[0]['indirect_uf_amount'],2);
-                    $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
-                    $company_amount=round($_POST['FranchiseLicenseFee']-$smf_amount-$dmf_amount,2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_smf_amount'=>$smf_amount,
-                        'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
-                        'lf_dmf_amount'=>$dmf_amount,
-                        'dmf_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //DMF creating UMF and this DMF is directly appointed by State and this State is created by Consultant
-                else if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']!=''&&$this->session->user_logged_in['parent_consultant_id']!=''){
-                    $smf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_smf_id']);
-                    $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                    $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_uf_amount'])/100,2):round($consultant_revenueShares[0]['indirect_uf_amount'],2);
-                    $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['indirect_uf_amount'])/100,2):round($smf_revenueShares[0]['indirect_uf_amount'],2);
-                    $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
-                    $company_amount=round($_POST['FranchiseLicenseFee']-$smf_amount-$dmf_amount-$consultant_amount,2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_consultant_amount'=>$consultant_amount,
-                        'consultant_id'=>$this->session->user_logged_in['parent_smf_id'],
-                        'lf_smf_amount'=>$smf_amount,
-                        'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
-                        'lf_dmf_amount'=>$dmf_amount,
-                        'dmf_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-                //DMF creating UMF and this DMF is directly appointed by Consultant
-                else if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']==''&&$this->session->user_logged_in['parent_consultant_id']!=''){
-                    $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                    $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_uf_amount'])/100,2):round($consultant_revenueShares[0]['indirect_uf_amount'],2);
-                    $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
-                    $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount-$dmf_amount,2);
-                    $revenue_data=array(
-                        'kf_amount'=>$_POST['FranchiseKitFee'],
-                        'lf_amount'=>$_POST['FranchiseLicenseFee'],
-                        'tax_amount'=>$_POST['FranchiseTax'],
-                        'user_id'=>$result,
-                        'lf_consultant_amount'=>$consultant_amount,
-                        'consultant_id'=>$this->session->user_logged_in['parent_smf_id'],
-                        'lf_dmf_amount'=>$dmf_amount,
-                        'dmf_id'=>$this->session->user_logged_in['id'],
-                        'lf_company_amount'=>$company_amount,
-                        'created_by_id'=>$this->session->user_logged_in['id']
-                    );
-                }
-            }
-            $revenue_response=$this->franchisee->insertNewRecord('sea_franchise_revenue',$revenue_data);
-            //End of revenue configuration shares
+            $this->franchiseeRevenueDistribution($result);
         }
         if(isset($_POST['ACMAS']))
             $ca=1;
@@ -477,5 +221,250 @@ class FranchiseeManagement extends CI_Controller {
 
     public function checkEmail(){
         echo $this->franchisee->checkmail($_POST['email'])==0?0:1;
+    }
+
+    public function franchiseeRevenueDistribution($userId){
+        //Inserting record into revenue configuration table
+        //todo : This code has to recheck once payment gateway integration is done
+        //if admin creating smf/consultant/dmf/uf
+
+        if($this->session->user_logged_in['role_id']==1){
+            $revenue_data=array(
+                //'kf_amount'=>$_POST['FranchiseKitFee'],
+                'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                'lf_company_amount'=>$_POST['FranchiseLicenseFee'],
+                'tax_amount'=>$_POST['FranchiseTax'],
+                'user_id'=>$userId,
+                'created_by_id'=>$this->session->user_logged_in['id']
+            );
+        }
+
+        // else if Consultant login and creating SMF/DMF/UMF
+        elseif($this->session->user_logged_in['role_id']==5){
+            $revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
+            //Consultant directly creating SMF
+            if($_POST['franchiseetypeId']==2){
+                //if share in percentage
+                if($revenueShares[0]['units']==1){
+                    $consultant_amount=round(($_POST['FranchiseLicenseFee']*$revenueShares[0]['direct_state_amount'])/100,2);
+                    $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
+                }
+                //else if share in amount
+                else{
+                    $consultant_amount=$revenueShares[0]['direct_state_amount'];
+                    $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
+                }
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_consultant_amount'=>$consultant_amount,
+                    'consultant_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //Consultant directly creating DMF
+            elseif($_POST['franchiseetypeId']==3){
+                //if share in percentage
+                if($revenueShares[0]['units']==1){
+                    $consultant_amount=round(($_POST['FranchiseLicenseFee']*$revenueShares[0]['direct_district_amount'])/100,2);
+                    $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
+                }
+                //else if share in amount
+                else{
+                    $consultant_amount=$revenueShares[0]['direct_district_amount'];
+                    $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
+                }
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_consultant_amount'=>$consultant_amount,
+                    'consultant_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //Consultant directly creating UMF
+            elseif($_POST['franchiseetypeId']==4){
+                //if share in percentage
+                if($revenueShares[0]['units']==1){
+                    $consultant_amount=round(($_POST['FranchiseLicenseFee']*$revenueShares[0]['direct_unit_amount'])/100,2);
+                    $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
+                }
+                //else if share in amount
+                else{
+                    $consultant_amount=$revenueShares[0]['direct_unit_amount'];
+                    $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount,2);
+                }
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_consultant_amount'=>$consultant_amount,
+                    'consultant_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+        }
+
+        // else if SMF login and creating DMF/UMF
+        elseif($this->session->user_logged_in['role_id']==2){
+            $smf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
+            //SMF creating DMF and this SMF is directly appointed by Admin
+            if($_POST['franchiseetypeId']==3&&$this->session->user_logged_in['parent_consultant_id']==''){
+                $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_district_amount'])/100,2):round($smf_revenueShares[0]['direct_district_amount'],2);
+                $company_amount=$smf_revenueShares[0]['units']==1?round($_POST['FranchiseLicenseFee']-$smf_amount,2):round($_POST['FranchiseLicenseFee']-$smf_amount,2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_smf_amount'=>$smf_amount,
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //SMF creating DMF and this SMF is directly appointed by Consultant
+            elseif($_POST['franchiseetypeId']==3&&$this->session->user_logged_in['parent_consultant_id']!=''){
+                $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
+                $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_district_amount'])/100,2):round($smf_revenueShares[0]['direct_district_amount'],2);
+                $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_dmf_amount'])/100,2):$consultant_revenueShares[0]['direct_district_amount'];
+                $company_amount=round(($_POST['FranchiseLicenseFee']-$smf_amount-$consultant_amount),2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_smf_amount'=>$smf_amount,
+                    'smf_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'lf_consultant_amount'=>$consultant_amount,
+                    'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //SMF creating UMF directly and this SMF is directly appointed by Admin
+            elseif($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_consultant_id']==''){
+                $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_unit_amount'])/100,2):$smf_revenueShares[0]['direct_unit_amount'];
+                $company_amount=round($_POST['FranchiseLicenseFee']-$smf_amount,2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_smf_amount'=>$smf_amount,
+                    'smf_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //SMF creating UMF directly and this SMF is directly appointed by Consultant
+            elseif($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_consultant_id']!=''){
+                $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
+                $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_unit_amount'])/100,2):round($smf_revenueShares[0]['direct_unit_amount'],2);
+                $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_uf_amount'])/100,2):$consultant_revenueShares[0]['indirect_uf_amount'];
+                $company_amount=round(($_POST['FranchiseLicenseFee']-$smf_amount-$consultant_amount),2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_smf_amount'=>$smf_amount,
+                    'smf_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'lf_consultant_amount'=>$consultant_amount,
+                    'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+        }
+
+        //elseif DMF login and creating UMF
+        elseif($this->session->user_logged_in['role_id']==3){
+            //DMF creating UMF and this DMF is directly appointed by Admin
+            $dmf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
+            if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']==''&&$this->session->user_logged_in['parent_consultant_id']==''){
+                $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
+                $company_amount=round($_POST['FranchiseLicenseFee']-$dmf_amount,2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_dmf_amount'=>$dmf_amount,
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //DMF creating UMF and this DMF is directly appointed by State and this State is created by Admin
+            else if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']!=''&&$this->session->user_logged_in['parent_consultant_id']==''){
+                $smf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_smf']);
+                $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['direct_unit_amount'])/100,2):round($smf_revenueShares[0]['indirect_uf_amount'],2);
+                $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
+                $company_amount=round($_POST['FranchiseLicenseFee']-$smf_amount-$dmf_amount,2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_smf_amount'=>$smf_amount,
+                    'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
+                    'lf_dmf_amount'=>$dmf_amount,
+                    'dmf_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //DMF creating UMF and this DMF is directly appointed by State and this State is created by Consultant
+            else if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']!=''&&$this->session->user_logged_in['parent_consultant_id']!=''){
+                $smf_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_smf_id']);
+                $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
+                $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_uf_amount'])/100,2):round($consultant_revenueShares[0]['indirect_uf_amount'],2);
+                $smf_amount=$smf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$smf_revenueShares[0]['indirect_uf_amount'])/100,2):round($smf_revenueShares[0]['indirect_uf_amount'],2);
+                $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
+                $company_amount=round($_POST['FranchiseLicenseFee']-$smf_amount-$dmf_amount-$consultant_amount,2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_consultant_amount'=>$consultant_amount,
+                    'consultant_id'=>$this->session->user_logged_in['parent_smf_id'],
+                    'lf_smf_amount'=>$smf_amount,
+                    'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
+                    'lf_dmf_amount'=>$dmf_amount,
+                    'dmf_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+            //DMF creating UMF and this DMF is directly appointed by Consultant
+            else if($_POST['franchiseetypeId']==4&&$this->session->user_logged_in['parent_smf_id']==''&&$this->session->user_logged_in['parent_consultant_id']!=''){
+                $consultant_revenueShares=$this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
+                $consultant_amount=$consultant_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$consultant_revenueShares[0]['indirect_uf_amount'])/100,2):round($consultant_revenueShares[0]['indirect_uf_amount'],2);
+                $dmf_amount=$dmf_revenueShares[0]['units']==1?round(($_POST['FranchiseLicenseFee']*$dmf_revenueShares[0]['direct_unit_amount'])/100,2):round($dmf_revenueShares[0]['direct_unit_amount'],2);
+                $company_amount=round($_POST['FranchiseLicenseFee']-$consultant_amount-$dmf_amount,2);
+                $revenue_data=array(
+                    //'kf_amount'=>$_POST['FranchiseKitFee'],
+                    'lf_amount'=>$_POST['FranchiseLicenseFee'],
+                    'tax_amount'=>$_POST['FranchiseTax'],
+                    'user_id'=>$userId,
+                    'lf_consultant_amount'=>$consultant_amount,
+                    'consultant_id'=>$this->session->user_logged_in['parent_smf_id'],
+                    'lf_dmf_amount'=>$dmf_amount,
+                    'dmf_id'=>$this->session->user_logged_in['id'],
+                    'lf_company_amount'=>$company_amount,
+                    'created_by_id'=>$this->session->user_logged_in['id']
+                );
+            }
+        }
+        $revenue_response=$this->franchisee->insertNewRecord('sea_franchise_revenue',$revenue_data);
+        //End of revenue configuration shares
     }
 }

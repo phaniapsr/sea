@@ -186,7 +186,6 @@
                                                     <option value="WRITEASY">WRITEASY</option>
                                                     <option value="IAA">IAA</option>
                                                     <option value="FUNMATHS">FUNMATHS</option>
-                                                    <!--<option value="1">Senior</option><option value="2">Junior</option><option value="3">Sub Junior</option>-->
                                                 </select>
                                             </div>
                                         </div>
@@ -196,10 +195,6 @@
                                                 <div>
                                                     <select id="course" class="form-control" name="CourseId">
                                                         <option selected="selected" value="">Select</option>
-                                                        <!--<option value="ACMAS">ACMAS</option>
-                                                        <option value="WRITEASY">WRITEASY</option>
-                                                        <option value="IAA">IAA</option>
-                                                        <option value="FUNMATHS">FUNMATHS</option>-->
                                                     </select>
                                                 </div>
                                             </div>
@@ -596,5 +591,5 @@
         <script src="Skills%20Education%20Academy_files/jquery-students.js"></script>
         <script src="Skills%20Education%20Academy_files/jquery-ui.js"></script>
     </div>
-    <footer><p>All right reserved by: <a href="http://lemonbridgeit.com/">LemonBridge</a></p></footer>
+    <footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
 </div>

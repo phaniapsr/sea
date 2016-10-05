@@ -22,8 +22,25 @@ class RevenueManagement extends CI_Controller
         $this->load->view('includes/footer');
     }
 
+    public function saveStudentRevenueConfig()
+    {
+        foreach($_POST['student_revenue_type'] as $key=>$val){
+            $data=array(
+                'user_id'=>$_POST['UserId'],
+                'revenue_type_id'=>$val,
+                'consultant_share'=>isset($_POST['consultant_share'][$key]) && $_POST['consultant_share'][$key]!=''?$_POST['consultant_share'][$key]:null,
+                'state_share'=>isset($_POST['state_share'][$key]) && $_POST['state_share'][$key]!=''?$_POST['state_share'][$key]:null,
+                'district_share'=>isset($_POST['district_share'][$key]) && $_POST['district_share'][$key]!=''?$_POST['district_share'][$key]:null,
+                'unit_share'=>isset($_POST['unit_share'][$key]) && $_POST['unit_share'][$key]!=''?$_POST['unit_share'][$key]:null,
+                'units'=>$_POST['units'],
+            );
+            $this->revenue->insertNewRecord('sea_student_revenue_config', $data);
+        }
+    }
+
     public function saveRevenueConfig()
     {
+        //if($this->session->user_logged_in['role_id']==4){
         isset($_POST['direct_smf_share']) && $_POST['direct_smf_share'] != '' ? $direct_smf_share = $_POST['direct_smf_share'] : $direct_smf_share = null;
         isset($_POST['direct_dmf_share']) && $_POST['direct_dmf_share'] != '' ? $direct_dmf_share = $_POST['direct_dmf_share'] : $direct_dmf_share = null;
         isset($_POST['direct_umf_share']) && $_POST['direct_umf_share'] != '' ? $direct_umf_share = $_POST['direct_umf_share'] : $direct_umf_share = null;
@@ -37,7 +54,7 @@ class RevenueManagement extends CI_Controller
             'direct_unit_amount' => $direct_umf_share,
             'indirect_dmf_amount' => $indirect_dmf_share,
             'indirect_uf_amount' => $indirect_umf_share,
-            'student_amount' => $student_commission,
+            //'student_amount' => $student_commission,
             'units' => $_POST['units'],
         );
         $this->revenue->insertNewRecord('sea_franchise_revenue_config', $data);

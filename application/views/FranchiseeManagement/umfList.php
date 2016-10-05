@@ -1,6 +1,6 @@
 <div id="page-wrapper">
     <div id="page-inner">
-        <link href="Content/css/tjquery-ui.css" rel="stylesheet" />
+        <link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
         <script src="Scripts/admin/validations/jquery-teacher.js"></script>
         <script src="Scripts/admin/jquery-ui.js"></script>
         <div class="row">
@@ -84,27 +84,31 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $i=1;
-                                    foreach ($data['smf'] as $row){ ?>
+                                    $i = 1;
+                                    foreach ($data['smf'] as $row) { ?>
                                         <tr class="odd">
-                                            <td class="selected sorting_1"><?php echo $row['id'];?></td>
+                                            <td class="selected sorting_1"><?php echo $row['id']; ?></td>
                                             <td class=" selected"><a data-ajax="true" data-ajax-mode="replace"
                                                                      data-ajax-update="#details"
-                                                                     href="detailufList/<?php echo $row['user_id']?>"><?php echo $row['first_name'];?></a></td>
-                                            <td><?php echo $row['city'];?></td>
-                                            <td><?php echo $row['state'];?></td>
+                                                                     href="detailufList/<?php echo $row['user_id'] ?>"><?php echo $row['first_name']; ?></a>
+                                            </td>
+                                            <td><?php echo $row['city']; ?></td>
+                                            <td><?php echo $row['state']; ?></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                <button type="button" userid="<?php echo $row['user_id']; ?>"
+                                                        rowid="<?php echo $row['id']; ?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueConfiguration"
-                                                        class="btn btn-primary btn-xs f-rev-config">Revenue Configuration
+                                                        class="btn btn-primary btn-xs f-rev-config">Revenue
+                                                    Configuration
                                                 </button>
                                             </td>
                                             <td class=" text-center"><a class="popup-with-zoom-anim-mec btn-activate"
                                                                         userid="8" status="0" href="#small-dialog3">
-                                                    <button type="button" class="btn btn-primary btn-xs">Deactivate</button>
+                                                    <button type="button" class="btn btn-primary btn-xs">Deactivate
+                                                    </button>
                                                 </a></td>
                                         </tr>
-                                    <?php }?>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                                 <div class="row">
@@ -145,229 +149,6 @@
         <!-- /. ROW  -->
         <div id="details" class="row">
         </div>
-        <!--<script>
-            //var franchiseeManager = new Franchises();
-            //var revenueConfigManager = new Revenueconfiguration();
-            $(document).ready(function () {
-                LoadStateFranchises();
-                $("#btnUpdateStatus").click(function () {
-                    $("#dvStatus").addClass("hidden");
-                    //var UserId = $("#franchiseeId").val();
-                    var reason = $("#DeactivateReson").val();
-                    if (reason == "") {
-                        $("#dvStatus").removeClass("hidden");
-                        return false;
-                    } else {
-                        UpdateFranchiseeStatus($("#franchiseeId").val(), $("#franchiseeStatus").val(), $("#DeactivateReson").val());
-                    }
-                });
-
-                function UpdateFranchiseeStatus(userId, status, reason) {
-                    franchiseeManager.InActivateFranchisee({
-                        UserId: userId,
-                        Status: status,
-                        Reason: reason
-                    }, function (dataSet) {
-                        $(".mfp-close").click();
-                        $('#dt-state-franchisee').dataTable({
-                            "filter": false,
-                            "destroy": true
-                        });
-                        $.magnificPopup.instance.close();
-                        LoadStateFranchises();
-                    }, function (xhr) {
-                    });
-                }
-            });
-            function LoadStateFranchises() {
-                franchiseeManager.StateFranchises({
-                    IncludeInActive: $("#cbx-inactive").prop("checked"),
-                    IncludeActive: $("#cbx-active").prop("checked")
-                }, function (dataSet) {
-                    $('#dt-state-franchisee').DataTable({
-                        className: "selected",
-                        data: dataSet,
-                        destroy: true,
-                        columns: [
-                            {data: "UserId", className: "selected", title: "Franchisee Id"},
-
-                            {
-                                data: "DisplayName",
-                                title: "Franchisee Name",
-                                className: "selected",
-                                render: function (data, type, row) {
-                                    return '<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#details" href="/Admin/FranchiseeDetail?userId=' + row.UserId + '">' + data + '</a>';
-                                    //'<a href="#state" class="f-details" userid="' + row.UserId + '">' + data + '</a>';
-                                }
-                            },
-                            {data: "City", title: "City"},
-                            {data: "State", title: "State"},
-
-
-                            {
-                                data: "UserId", title: "Revenue Configuration",
-                                render: function (data, type, row) {
-                                    return '<button type="button" userid="' + row.UserId + '" fee="' + row.FranchiseFee + '"  data-toggle="modal" data-target="#myModalSMFRevenueConfiguration" class="btn btn-primary btn-xs f-rev-config">Revenue Configuration</button>';
-                                },
-                                orderable: false,
-                                className: "text-center selected"
-                            },
-
-                            {
-                                data: "UserId", title: "Deactive",
-                                render: function (data, type, row) {
-                                    if (row.Status == 0) {
-                                        return '<a class="popup-with-zoom-anim-mec btn-activate" userid="' + row.UserId + '" status="0"  href="#small-dialog3"><button type="button"  class="btn btn-primary btn-xs">Deactivate</button></a>';
-                                    } else {
-                                        return '<a class="popup-with-zoom-anim-mec btn-activate" userid="' + row.UserId + '" status="1"  href="#small-dialog3"><button type="button"  class="btn btn-primary btn-xs">Activate</button></a>';
-                                    }
-                                },
-                                orderable: false,
-                                className: "text-center"
-                            },
-
-                        ]
-                    });
-
-                    $(".btn-activate").click(function () {
-                        $("#dvStatus").addClass("hidden");
-                        var userId = $(this).attr('userid');
-                        var status = $(this).attr('status');
-                        $("#franchiseeId").val(userId);
-                        $("#franchiseeStatus").val(status);
-                    });
-                    function Closepopup() {
-                        $.magnificPopup.instance.close()
-                    }
-
-
-                    $(".f-details").click(function () {
-                        BindFranchisesdetails($(this).attr('userid'));
-                    });
-                    $(".f-rev-config").click(function () {
-                        var userId = $(this).attr('userid');
-                        $("#RevConfigUserId").val($(this).attr('userid'));
-                        $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
-                        /*revenueConfigManager.GetRevenueConfiguration(userId, function (resp) {
-                         $("#SMFFranchiseeLicenseFee").val(parseFloat(resp.LicenseFee));
-                         $("#SMFFranchiseeKitFee").val(parseFloat(resp.KitFee));
-                         $("#RevConfigId").val(resp.Id);
-                         });*/
-                    });
-
-                    $('.popup-with-zoom-anim-mec').magnificPopup({
-                        type: 'inline',
-                        fixedContentPos: false,
-                        fixedBgPos: true,
-                        overflowY: 'auto',
-                        closeBtnInside: true,
-                        preloader: false,
-                        midClick: true,
-                        removalDelay: 300,
-                        mainClass: 'my-mfp-zoom-in'
-                    });
-
-                    $('.popup-with-zoom-anim-it').magnificPopup({
-                        type: 'inline',
-                        fixedContentPos: false,
-                        fixedBgPos: true,
-                        overflowY: 'auto',
-                        closeBtnInside: true,
-                        preloader: false,
-                        midClick: true,
-                        removalDelay: 300,
-                        mainClass: 'my-mfp-zoom-in'
-                    });
-
-
-                }, function (xhr) {
-                });
-            }
-            function BindFranchisesdetails(franchiseeUserId) {
-                franchiseeManager.FranchiseDetails({UserId: franchiseeUserId}, function (franchisee) {
-                    if (franchisee != null) {
-                        $("#f-name").text(franchisee.DisplayName);
-                        $("#f-area").text(franchisee.Area);
-                        $("#f-emailid").text(franchisee.EmailId);
-                        $("#f-franchiseefee").text(franchisee.FranchiseFee);
-                        $("#f-goal").text(franchisee.Goal);
-                        $("#f-qualicfation").text(franchisee.Qualification);
-                        $("#f-presentocupation").text(franchisee.PresentOcupation);
-                        $("#f-university").text(franchisee.University);
-                        $("#f-compltedyear").text(franchisee.CompletedYear);
-                        $("#f-nationality").text(franchisee.Nationality);
-                        $("#f-institution").text(franchisee.Instution);
-                        $("#f-pincode").text(franchisee.PinCode);
-                        $("#f-coursename").text(franchisee.CourseName);
-                        $("#f-courseappliedfor").text(franchisee.CourseApplied);
-                        $("#f-maritualstatus").text(franchisee.MaritalStatus);
-                        $("#f-placeofbirth").text(franchisee.PlaceOfBirth);
-                        $("#f-state").text(franchisee.State);
-                        $("#f-city").text(franchisee.City);
-                        $("#f-mobilenumber").text(franchisee.PhoneNumber);
-                        $("#f-landlinenumber").text(franchisee.LandLineNumber);
-                        $("#f-streetname").text(franchisee.StreetName);
-                        $("#f-gender").text(franchisee.Gender);
-                        $("#f-dateofbirth").text((new Date(franchisee.DateOfBirth.replace('T00:00:00', ''))).formatDate('dd/MM/yyyy'));
-                        $("#f-flatno").text(franchisee.FlatNo);
-                        $("#f-typeofcourse").text(franchisee.TypeOfCourse);
-                        $("#f-completedinyear").text(franchisee.OtherCompletedYear);
-                        $("#f-imageurl").attr('src', franchisee.ImageUrl);
-                    } else {
-                        $("#f-name").text('');
-                        $("#f-completedinyear").text('');
-                        $("#f-imageurl").attr('');
-                        $("#f-typeofcourse").text('');
-                        $("#f-area").text('');
-                        $("#f-emailid").text('');
-                        $("#f-franchiseefee").text('');
-                        $("#f-goal").text('');
-                        $("#f-qualicfation").text('');
-                        $("#f-presentocupation").text('');
-                        $("#f-university").text('');
-                        $("#f-compltedyear").text('');
-                        $("#f-nationality").text('');
-                        $("#f-institution").text('');
-                        $("#f-coursename").text('');
-                        $("#f-courseappliedfor").text('');
-                        $("#f-maritualstatus").text('');
-                        $("#f-placeofbirth").text('');
-                        $("#f-state").text('');
-                        $("#f-city").text('');
-                        $("#f-mobilenumber").text('');
-                        $("#f-landlinenumber").text('');
-                        $("#f-streetname").text('');
-                        $("#f-gender").text('');
-                        $("#f-dateofbirth").text('');
-                        $("#f-flatno").text('');
-                        $("#f-pincode").text('');
-                    }
-                }, function (xhr) {
-                });
-            }
-            function FranchiseeRevenueConfiguration() {
-                var data = {
-                    LicenseFee: $("#SMFFranchiseeLicenseFee").val(),
-                    KitFee: $("#SMFFranchiseeKitFee").val(),
-                    UserId: $("#RevConfigUserId").val(),
-                    Id: $("#RevConfigId").val()
-                }
-                $.ajax({
-                    url: "<?php /*echo base_url()*/?>/RevenueManagement/saveSMFLicenseFee",
-                    type: "POST",
-                    data: data,
-                    success: function () {
-                        alert("Successfully Submited......!!");
-                        $("#SMFFranchiseeLicenseFee").val('');
-                        $("#SMFFranchiseeKitFee").val('');
-                    },
-                    error: function () {
-                    }
-                });
-            }
-            function deactivateform() {
-            }
-        </script>-->
         <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
@@ -385,105 +166,131 @@
                                 </div>
                             </div>
                             <br>
-                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueConfig" method="post">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label>
-                                            <div class="col-lg-12">
-                                                <label>Revenue Type</label>
-                                                <label><select name="student_revenue_type" id="student_revenue_type_id"></select></label>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label>
-                                            <div class="col-lg-12">
-                                                <label>Units</label>
-                                                <label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div id="margin-top" class="panel-body">
+                                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration"
+                                                  action="<?php echo base_url() ?>RevenueManagement/saveStudentRevenueConfig"
+                                                  method="post">
+                                                <input id="RevConfigUserId" name="UserId" type="hidden">
+                                                <input id="RevConfigId" name="RevConfigId" type="hidden">
+                                                <table width="100%" class="repeat_tr" id="tbl_student_revenue_types_1">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Revenue Type</td>
+                                                        <td>
+                                                            <span id="student_revenue_type_1"></span>
+                                                            <input type="hidden" class="number"
+                                                                   id="hid_student_revenue_type_1"
+                                                                   name="student_revenue_type[]">
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Consultant Share</td>
+                                                        <td>
+                                                            <input type="text" class="number" name="consultant_share[]"
+                                                                   id="consultant_share_1">
+                                                        </td>
+                                                        <td>State Share</td>
+                                                        <td>
+                                                            <input type="text" class="number" name="state_share[]"
+                                                                   id="state_share_1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>District Share</td>
+                                                        <td>
+                                                            <input type="text" class="number" name="district_share[]"
+                                                                   id="district_share_1">
+                                                        </td>
+                                                        <td>Unit Share</td>
+                                                        <td>
+                                                            <input type="text" class="number" name="unit_share[]"
+                                                                   id="unit_share_1">
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="col-lg-4">
+                                                    <label>Units</label>
                                                     <select name="units" id="units_id">
                                                         <option value="0">Amount</option>
                                                         <option value="1">Percentage</option>
                                                     </select>
-                                                </label>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label>
-                                            <input id="RevConfigUserId" name="UserId" type="hidden">
-                                            <input id="RevConfigId" name="RevConfigId" type="hidden">
-                                        </label>
+                                                </div>
+                                                <label class="danger" id="rev-config-msg"></label>
+                                                <button class="btn primaryCta small" type="button"
+                                                        role="button"
+                                                        id="student_revenue_button_save"><span>Save</span></button>
+                                                <button class="btn primaryCta small" type="button" id="buttonCancel"
+                                                        data-dismiss="modal"><span>Cancel</span></button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row" id="roww1">
-                                    <center>
-                                        <label class="danger" id="rev-config-msg"></label>
-                                        <button class="btn primaryCta small" type="button"
-                                                role="button"
-                                                id="revenue_button_save"><span>Save</span></button>
-                                        <button class="btn primaryCta small" type="button" id="buttonCancel"
-                                                data-dismiss="modal"><span>Cancel</span></button>
-                                    </center>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="small-dialog3" class="mfp-hide">
+            <div id="small-dialog3" class="mfp-hide">
 
-            <form id="DeactivateYes" method="post" class="form-horizontal" name="DeactivateYes">
-                <div class="pop_up">
-                    <div class="row form-group">
-                        <br>
-                        <center>
-                            <h4 style="color:red;">
-                                <input id="franchiseeId" name="UserId" type="hidden">
-                                <input id="franchiseeStatus" name="Status" type="hidden">
-                                Are you sure to Activate/Deactivate the Franchisee?
-                            </h4>
-                        </center>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-1 col-sm-1"></div>
-                        <div class="col-md-10 col-sm-10 col-xs-10">
-                            <input id="DeactivateReson" name="DeactivateReson" placeholder="Enter the reason"
-                                   class="form-control" type="text">
-                        </div>
-                        <br>
-                        <br>
-                        <div class="hidden" id="dvStatus" style="color:red">
-                            <center>*Please Enter the reason, why you activate/deactivate this Franchisee</center>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-3 col-sm-3"></div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
+                <form id="DeactivateYes" method="post" class="form-horizontal" name="DeactivateYes">
+                    <div class="pop_up">
+                        <div class="row form-group">
+                            <br>
                             <center>
-                                <a class="popup-with-zoom-anim-it">
-                                    <button type="button" id="btnUpdateStatus" class="btn btn-primary btn-md as_button">
-                                        <b id="yesmargin">Yes</b></button>
-                                </a>
-                                <button type="button" name="cancel" class="btn btn-primary btn-md as_button pull-right"
-                                        onclick="return Closepopup();"><b id="yesmargin">No</b></button>
+                                <h4 style="color:red;">
+                                    <input id="franchiseeId" name="UserId" type="hidden">
+                                    <input id="franchiseeStatus" name="Status" type="hidden">
+                                    Are you sure to Activate/Deactivate the Franchisee?
+                                </h4>
                             </center>
                         </div>
+                        <div class="row form-group">
+                            <div class="col-md-1 col-sm-1"></div>
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <input id="DeactivateReson" name="DeactivateReson" placeholder="Enter the reason"
+                                       class="form-control" type="text">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="hidden" id="dvStatus" style="color:red">
+                                <center>*Please Enter the reason, why you activate/deactivate this Franchisee</center>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3 col-sm-3"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <center>
+                                    <a class="popup-with-zoom-anim-it">
+                                        <button type="button" id="btnUpdateStatus"
+                                                class="btn btn-primary btn-md as_button">
+                                            <b id="yesmargin">Yes</b></button>
+                                    </a>
+                                    <button type="button" name="cancel"
+                                            class="btn btn-primary btn-md as_button pull-right"
+                                            onclick="return Closepopup();"><b id="yesmargin">No</b></button>
+                                </center>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $("#state").hide();
+                    $(".table").click(
+                        function () {
+                            $("#state").show();
+                        }
+                    );
+                });
+            </script>
         </div>
-        <script>
-            $(document).ready(function () {
-                $("#state").hide();
-                $(".table").click(
-                    function () {
-                        $("#state").show();
-                    }
-                );
-            });
-        </script>
+        <footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
     </div>
-    <footer><p>All right reserved by: <a href="http://lemonbridgeit.com/">LemonBridge</a></p></footer>
-</div>

@@ -83,6 +83,28 @@ class StudentManagement extends CI_Controller {
         );
         $result3=$this->student->insertNewRecord('sea_student_course_level',$data3);
 
+        //Logic for inserting record in hierarchy table
+        //If admin/consultant login and creating SMF/DMF/UF
+        if($this->session->user_logged_in['role_id']==1||$this->session->user_logged_in['role_id']==5){
+            $data_hierarchy=array(
+                'user_id'=>$result,
+                'created_by'=>$this->session->user_logged_in['id'],
+            );
+        }
+        // else if UMF login and creating Student
+        elseif($this->session->user_logged_in['role_id']==4){
+            $data_hierarchy=array(
+                'user_id'=>$result,
+                'consultant_id'=>$this->session->user_logged_in['parent_consultant_id'],
+                'smf_id'=>$this->session->user_logged_in['parent_smf_id'],
+                'dmf_id'=>$this->session->user_logged_in['parent_dmf_id'],
+                'uf_id'=>$this->session->user_logged_in['id'],
+                'created_by'=>$this->session->user_logged_in['id'],
+            );
+        }
+        $hierarchy=$this->franchisee->insertNewRecord('sea_user_hierarchy',$data_hierarchy);
+        //End of hierarchy table data insertion
+        $this->studentRevenueDistribution($result);
         header('application/json');
         echo $result;
     }
@@ -101,5 +123,114 @@ class StudentManagement extends CI_Controller {
         $this->load->view('StudentManagement/studentView',$data);
         $this->load->view('includes/footer');
     }
+    /*public function paymentDetailsDisplay(){
 
+    }*/
+
+    public function studentRevenueDistribution($student_id){
+        if($this->session->user_logged_in['role_id']==1&&isset($_POST['ProgramId'])&&$_POST['ProgramId']!=''){
+
+            //For Student Registration Fee
+            $revenue_split=array(
+                'company_amount'=>$_POST['RegistrationFee'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['SR_FEE']
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+
+            //For Kit fee split
+            $revenue_split=array(
+                'company_amount'=>$_POST['KitFee'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['KIT_FEE'][$_POST['ProgramId']][$_POST['ProgramCourseLevelId']]
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+
+            //For Level Fee
+            $revenue_split=array(
+                'company_amount'=>$_POST['CourseFee'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['LEVEL_FEE'][$_POST['ProgramId']]
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+
+            //For Annual competition Fee
+            $revenue_split=array(
+                'company_amount'=>$_POST['AcFee'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['AC_FEE']
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+        }
+        //Logged in user is UF
+        elseif($this->session->user_logged_in['role_id']==4&&isset($_POST['ProgramId'])&&$_POST['ProgramId']!=''){
+            //For Student Registration Fee
+            $revenueShares=$this->student->getFranchiseRevenueConfigurations(array('user_id'=>$this->session->user_logged_in['id'],'revenue_type_id'=>GlobalsHelper::$course_level_config_array['SR_FEE']));
+            $revenue_split=array(
+                'company_amount'=>$_POST['RegistrationFee'],
+                'smf_amount'=>$revenueShares[0]['units']==1?round(($_POST['RegistrationFee']*$revenueShares[0]['state_share'])/100,2):round($revenueShares[0]['state_share'],2),
+                'smf_id'=>$this->session->user_logged_in['parent_smf_id']==''?null:$this->session->user_logged_in['parent_smf_id'],
+                'consultant_amount'=>$revenueShares[0]['units']==1?round(($_POST['RegistrationFee']*$revenueShares[0]['consultant_share'])/100,2):round($revenueShares[0]['consultant_share'],2),
+                'consultant_id'=>$this->session->user_logged_in['parent_consultant_id']==''?null:$this->session->user_logged_in['parent_consultant_id'],
+                'dmf_amount'=>$revenueShares[0]['units']==1?round(($_POST['RegistrationFee']*$revenueShares[0]['district_share'])/100,2):round($revenueShares[0]['district_share'],2),
+                'dmf_id'=>$this->session->user_logged_in['parent_dmf_id']==''?null:$this->session->user_logged_in['parent_dmf_id'],
+                'uf_amount'=>$revenueShares[0]['units']==1?round(($_POST['RegistrationFee']*$revenueShares[0]['unit_share'])/100,2):round($revenueShares[0]['unit_share'],2),
+                'uf_id'=>$this->session->user_logged_in['id'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['SR_FEE']
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+
+            //For Kit fee split
+            $revenueShares=$this->student->getFranchiseRevenueConfigurations(array('user_id'=>$this->session->user_logged_in['id'],'revenue_type_id'=>GlobalsHelper::$course_level_config_array['KIT_FEE'][$_POST['ProgramId']][$_POST['ProgramCourseLevelId']]));
+            $revenue_split=array(
+                'company_amount'=>$_POST['KitFee'],
+                'smf_amount'=>$revenueShares[0]['units']==1?round(($_POST['KitFee']*$revenueShares[0]['state_share'])/100,2):round($revenueShares[0]['state_share'],2),
+                'smf_id'=>$this->session->user_logged_in['parent_smf_id']==''?null:$this->session->user_logged_in['parent_smf_id'],
+                'consultant_amount'=>$revenueShares[0]['units']==1?round(($_POST['KitFee']*$revenueShares[0]['consultant_share'])/100,2):round($revenueShares[0]['consultant_share'],2),
+                'consultant_id'=>$this->session->user_logged_in['parent_consultant_id']==''?null:$this->session->user_logged_in['parent_consultant_id'],
+                'dmf_amount'=>$revenueShares[0]['units']==1?round(($_POST['KitFee']*$revenueShares[0]['district_share'])/100,2):round($revenueShares[0]['district_share'],2),
+                'dmf_id'=>$this->session->user_logged_in['parent_dmf_id']==''?null:$this->session->user_logged_in['parent_dmf_id'],
+                'uf_amount'=>$revenueShares[0]['units']==1?round(($_POST['KitFee']*$revenueShares[0]['unit_share'])/100,2):round($revenueShares[0]['unit_share'],2),
+                'uf_id'=>$this->session->user_logged_in['id'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['KIT_FEE'][$_POST['ProgramId']][$_POST['ProgramCourseLevelId']]
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+
+            //For Level Fee
+            $revenueShares=$this->student->getFranchiseRevenueConfigurations(array('user_id'=>$this->session->user_logged_in['id'],'revenue_type_id'=>GlobalsHelper::$course_level_config_array['LEVEL_FEE'][$_POST['ProgramId']]));
+            $revenue_split=array(
+                'company_amount'=>$_POST['CourseFee'],
+                'smf_amount'=>$revenueShares[0]['units']==1?round(($_POST['CourseFee']*$revenueShares[0]['state_share'])/100,2):round($revenueShares[0]['state_share'],2),
+                'smf_id'=>$this->session->user_logged_in['parent_smf_id']==''?null:$this->session->user_logged_in['parent_smf_id'],
+                'consultant_amount'=>$revenueShares[0]['units']==1?round(($_POST['CourseFee']*$revenueShares[0]['consultant_share'])/100,2):round($revenueShares[0]['consultant_share'],2),
+                'consultant_id'=>$this->session->user_logged_in['parent_consultant_id']==''?null:$this->session->user_logged_in['parent_consultant_id'],
+                'dmf_amount'=>$revenueShares[0]['units']==1?round(($_POST['CourseFee']*$revenueShares[0]['district_share'])/100,2):round($revenueShares[0]['district_share'],2),
+                'dmf_id'=>$this->session->user_logged_in['parent_dmf_id']==''?null:$this->session->user_logged_in['parent_dmf_id'],
+                'uf_amount'=>$revenueShares[0]['units']==1?round(($_POST['CourseFee']*$revenueShares[0]['unit_share'])/100,2):round($revenueShares[0]['unit_share'],2),
+                'uf_id'=>$this->session->user_logged_in['id'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['LEVEL_FEE'][$_POST['ProgramId']]
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+
+            //For Annual competition Fee
+            $revenueShares=$this->student->getFranchiseRevenueConfigurations(array('user_id'=>$this->session->user_logged_in['id'],'revenue_type_id'=>GlobalsHelper::$course_level_config_array['AC_FEE']));
+            $revenue_split=array(
+                'company_amount'=>$_POST['AcFee'],
+                'smf_amount'=>$revenueShares[0]['units']==1?round(($_POST['AcFee']*$revenueShares[0]['state_share'])/100,2):round($revenueShares[0]['state_share'],2),
+                'smf_id'=>$this->session->user_logged_in['parent_smf_id']==''?null:$this->session->user_logged_in['parent_smf_id'],
+                'consultant_amount'=>$revenueShares[0]['units']==1?round(($_POST['AcFee']*$revenueShares[0]['consultant_share'])/100,2):round($revenueShares[0]['consultant_share'],2),
+                'consultant_id'=>$this->session->user_logged_in['parent_consultant_id']==''?null:$this->session->user_logged_in['parent_consultant_id'],
+                'dmf_amount'=>$revenueShares[0]['units']==1?round(($_POST['AcFee']*$revenueShares[0]['district_share'])/100,2):round($revenueShares[0]['district_share'],2),
+                'dmf_id'=>$this->session->user_logged_in['parent_dmf_id']==''?null:$this->session->user_logged_in['parent_dmf_id'],
+                'uf_amount'=>$revenueShares[0]['units']==1?round(($_POST['AcFee']*$revenueShares[0]['unit_share'])/100,2):round($revenueShares[0]['unit_share'],2),
+                'uf_id'=>$this->session->user_logged_in['id'],
+                'student_id'=>$student_id,
+                'revenue_type_id'=>GlobalsHelper::$course_level_config_array['AC_FEE']
+            );
+            $this->student->insertNewRecord('sea_student_revenue',$revenue_split);
+        }
+    }
 }
