@@ -80,6 +80,9 @@
                                         <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
                                             class="text-center sorting_disabled">Deactive
                                         </th>
+                                        <th aria-label="Split License Amount" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Split License Amount
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -99,10 +102,16 @@
                                                         class="btn btn-primary btn-xs f-rev-config">Revenue Configuration
                                                 </button>
                                             </td>
-                                            <td class=" text-center"><a class="popup-with-zoom-anim-mec btn-activate"
-                                                                        userid="8" status="0" href="#small-dialog3">
+                                            <td class="text-center"><a class="popup-with-zoom-anim-mec btn-activate"
+                                                                        userid="<?php echo $row['user_id'];?>" status="0" href="#small-dialog3">
                                                     <button type="button" class="btn btn-primary btn-xs">Deactivate</button>
                                                 </a></td>
+                                            <td class="text-center selected">
+                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                        data-target="#myModalSMFRevenueSplit"
+                                                        class="btn btn-primary btn-xs f-rev-split">Split
+                                                </button>
+                                            </td>
                                         </tr>
                                     <?php }?>
                                     </tbody>
@@ -145,206 +154,6 @@
         <!-- /. ROW  -->
         <div id="details" class="row">
         </div>
-        <!--<script>
-            //var franchiseeManager = new Franchises();
-            //var revenueConfigManager = new Revenueconfiguration();
-            $(document).ready(function () {
-                LoadStateFranchises();
-                $("#btnUpdateStatus").click(function () {
-                    $("#dvStatus").addClass("hidden");
-                    //var UserId = $("#franchiseeId").val();
-                    var reason = $("#DeactivateReson").val();
-                    if (reason == "") {
-                        $("#dvStatus").removeClass("hidden");
-                        return false;
-                    } else {
-                        UpdateFranchiseeStatus($("#franchiseeId").val(), $("#franchiseeStatus").val(), $("#DeactivateReson").val());
-                    }
-                });
-
-                function UpdateFranchiseeStatus(userId, status, reason) {
-                    franchiseeManager.InActivateFranchisee({
-                        UserId: userId,
-                        Status: status,
-                        Reason: reason
-                    }, function (dataSet) {
-                        $(".mfp-close").click();
-                        $('#dt-state-franchisee').dataTable({
-                            "filter": false,
-                            "destroy": true
-                        });
-                        $.magnificPopup.instance.close();
-                        LoadStateFranchises();
-                    }, function (xhr) {
-                    });
-                }
-            });
-            function LoadStateFranchises() {
-                franchiseeManager.StateFranchises({
-                    IncludeInActive: $("#cbx-inactive").prop("checked"),
-                    IncludeActive: $("#cbx-active").prop("checked")
-                }, function (dataSet) {
-                    $('#dt-state-franchisee').DataTable({
-                        className: "selected",
-                        data: dataSet,
-                        destroy: true,
-                        columns: [
-                            {data: "UserId", className: "selected", title: "Franchisee Id"},
-                            {
-                                data: "DisplayName",
-                                title: "Franchisee Name",
-                                className: "selected",
-                                render: function (data, type, row) {
-                                    return '<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#details" href="/Admin/FranchiseeDetail?userId=' + row.UserId + '">' + data + '</a>';
-                                    //'<a href="#state" class="f-details" userid="' + row.UserId + '">' + data + '</a>';
-                                }
-                            },
-                            {data: "City", title: "City"},
-                            {data: "State", title: "State"},
-
-                            {
-                                data: "UserId", title: "Revenue Configuration",
-                                render: function (data, type, row) {
-                                    return '<button type="button" userid="' + row.UserId + '" fee="' + row.FranchiseFee + '"  data-toggle="modal" data-target="#myModalSMFRevenueConfiguration" class="btn btn-primary btn-xs f-rev-config">Revenue Configuration</button>';
-                                },
-                                orderable: false,
-                                className: "text-center selected"
-                            },
-                            {
-                                data: "UserId", title: "Deactive",
-                                render: function (data, type, row) {
-                                    if (row.Status == 0) {
-                                        return '<a class="popup-with-zoom-anim-mec btn-activate" userid="' + row.UserId + '" status="0"  href="#small-dialog3"><button type="button"  class="btn btn-primary btn-xs">Deactivate</button></a>';
-                                    } else {
-                                        return '<a class="popup-with-zoom-anim-mec btn-activate" userid="' + row.UserId + '" status="1"  href="#small-dialog3"><button type="button"  class="btn btn-primary btn-xs">Activate</button></a>';
-                                    }
-                                },
-                                orderable: false,
-                                className: "text-center"
-                            },
-
-                        ]
-                    });
-
-                    $(".btn-activate").click(function () {
-                        $("#dvStatus").addClass("hidden");
-                        var userId = $(this).attr('userid');
-                        var status = $(this).attr('status');
-                        $("#franchiseeId").val(userId);
-                        $("#franchiseeStatus").val(status);
-                    });
-                    function Closepopup() {
-                        $.magnificPopup.instance.close()
-                    }
-
-
-                    $(".f-details").click(function () {
-                        BindFranchisesdetails($(this).attr('userid'));
-                    });
-                    $(".f-rev-config").click(function () {
-                        var userId = $(this).attr('userid');
-                        $("#RevConfigUserId").val($(this).attr('userid'));
-                        $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
-                        /*revenueConfigManager.GetRevenueConfiguration(userId, function (resp) {
-                         $("#SMFFranchiseeLicenseFee").val(parseFloat(resp.LicenseFee));
-                         $("#SMFFranchiseeKitFee").val(parseFloat(resp.KitFee));
-                         $("#RevConfigId").val(resp.Id);
-                         });*/
-                    });
-
-                    $('.popup-with-zoom-anim-mec').magnificPopup({
-                        type: 'inline',
-                        fixedContentPos: false,
-                        fixedBgPos: true,
-                        overflowY: 'auto',
-                        closeBtnInside: true,
-                        preloader: false,
-                        midClick: true,
-                        removalDelay: 300,
-                        mainClass: 'my-mfp-zoom-in'
-                    });
-
-                    $('.popup-with-zoom-anim-it').magnificPopup({
-                        type: 'inline',
-                        fixedContentPos: false,
-                        fixedBgPos: true,
-                        overflowY: 'auto',
-                        closeBtnInside: true,
-                        preloader: false,
-                        midClick: true,
-                        removalDelay: 300,
-                        mainClass: 'my-mfp-zoom-in'
-                    });
-
-
-                }, function (xhr) {
-                });
-            }
-            function BindFranchisesdetails(franchiseeUserId) {
-                franchiseeManager.FranchiseDetails({UserId: franchiseeUserId}, function (franchisee) {
-                    if (franchisee != null) {
-                        $("#f-name").text(franchisee.DisplayName);
-                        $("#f-area").text(franchisee.Area);
-                        $("#f-emailid").text(franchisee.EmailId);
-                        $("#f-franchiseefee").text(franchisee.FranchiseFee);
-                        $("#f-goal").text(franchisee.Goal);
-                        $("#f-qualicfation").text(franchisee.Qualification);
-                        $("#f-presentocupation").text(franchisee.PresentOcupation);
-                        $("#f-university").text(franchisee.University);
-                        $("#f-compltedyear").text(franchisee.CompletedYear);
-                        $("#f-nationality").text(franchisee.Nationality);
-                        $("#f-institution").text(franchisee.Instution);
-                        $("#f-pincode").text(franchisee.PinCode);
-                        $("#f-coursename").text(franchisee.CourseName);
-                        $("#f-courseappliedfor").text(franchisee.CourseApplied);
-                        $("#f-maritualstatus").text(franchisee.MaritalStatus);
-                        $("#f-placeofbirth").text(franchisee.PlaceOfBirth);
-                        $("#f-state").text(franchisee.State);
-                        $("#f-city").text(franchisee.City);
-                        $("#f-mobilenumber").text(franchisee.PhoneNumber);
-                        $("#f-landlinenumber").text(franchisee.LandLineNumber);
-                        $("#f-streetname").text(franchisee.StreetName);
-                        $("#f-gender").text(franchisee.Gender);
-                        $("#f-dateofbirth").text((new Date(franchisee.DateOfBirth.replace('T00:00:00', ''))).formatDate('dd/MM/yyyy'));
-                        $("#f-flatno").text(franchisee.FlatNo);
-                        $("#f-typeofcourse").text(franchisee.TypeOfCourse);
-                        $("#f-completedinyear").text(franchisee.OtherCompletedYear);
-                        $("#f-imageurl").attr('src', franchisee.ImageUrl);
-                    } else {
-                        $("#f-name").text('');
-                        $("#f-completedinyear").text('');
-                        $("#f-imageurl").attr('');
-                        $("#f-typeofcourse").text('');
-                        $("#f-area").text('');
-                        $("#f-emailid").text('');
-                        $("#f-franchiseefee").text('');
-                        $("#f-goal").text('');
-                        $("#f-qualicfation").text('');
-                        $("#f-presentocupation").text('');
-                        $("#f-university").text('');
-                        $("#f-compltedyear").text('');
-                        $("#f-nationality").text('');
-                        $("#f-institution").text('');
-                        $("#f-coursename").text('');
-                        $("#f-courseappliedfor").text('');
-                        $("#f-maritualstatus").text('');
-                        $("#f-placeofbirth").text('');
-                        $("#f-state").text('');
-                        $("#f-city").text('');
-                        $("#f-mobilenumber").text('');
-                        $("#f-landlinenumber").text('');
-                        $("#f-streetname").text('');
-                        $("#f-gender").text('');
-                        $("#f-dateofbirth").text('');
-                        $("#f-flatno").text('');
-                        $("#f-pincode").text('');
-                    }
-                }, function (xhr) {
-                });
-            }
-            function deactivateform() {
-            }
-        </script>-->
         <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
@@ -431,14 +240,56 @@
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>
                                 </div>
-
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueSplit" role="dialog">
+            <div class="modal-dialog modal-lg" id="split_sizeofmodel">
+                <div class="modal-content" id="split_contentbackground">
+                    <div class="modal-body" id="split_bodybackground">
+                        <div id="split_border">
+                            <div class="modal-header">
+                                <div id="split_headerbackground">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            style="color:red;font-size:29px;">×
+                                    </button>
+                                    <center><h2 class="modal-title">State Master Franchisee Revenue Split</h2></center>
+                                </div>
+                            </div>
+                            <br>
+                            <form id="SplitRevenueConfigurationForm" name="SplitRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/splitSMFRevenue" method="post">
+                                <div class="row">
+                                    <div class="row col-lg-12"><label>Total License Amount Paid : <span id="license_amt_paid"></span></label></div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Kit Fee</label>
+                                                <label><input class="form-control" name="kit_fee_identified"
+                                                              id="kit_fee_identified" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="row col-lg-12"><label id="splitting_amount">Amount to be Split : <span id="splitting_amount"></span></label></div>
+                                </div>
+                                <div class="row" id="roww1">
+                                    <center>
+                                        <label class="danger" id="rev-config-msg"></label>
+                                        <button class="btn primaryCta small" type="button"
+                                                role="button"
+                                                id="revenue_button_save"><span>Save</span></button>
+                                        <button class="btn primaryCta small" type="button" id="buttonCancel"
+                                                data-dismiss="modal"><span>Cancel</span></button>
+                                    </center>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="small-dialog3" class="mfp-hide">
 
             <form id="DeactivateYes" method="post" class="form-horizontal" name="DeactivateYes">

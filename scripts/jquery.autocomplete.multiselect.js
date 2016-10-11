@@ -27,8 +27,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 // Hackish autosizing
                 var $this = $(this);
                 $this.width(1).width(this.scrollWidth+fontSize-1);
-            };
-
+            }
             var kc = $.ui.keyCode;
             self.element.bind({
                 "keydown.autocomplete": function(e){
@@ -64,7 +63,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 self.selectedItems[ui.item.label] = ui.item;
                 self._value("");
                 return false;
-            }
+            };
 
             /*self.options.open = function(e, ui) {
                 var pos = self.multiselect.position();

@@ -20,7 +20,7 @@ $(window).load(function () {
                 indirect_umf_share: $("#indirect_umf_share").val(),
                 student_commission: $("#student_commission").val(),
                 units: $("#units_id").val()
-            }
+            };
 
             $.ajax({
                 url: $('#RevenueConfigurationForm').attr('action'),
@@ -34,10 +34,10 @@ $(window).load(function () {
                 error: function () {
                 }
             });
-        })
+        });
         $('#student_revenue_button_save').click(function(){
             $('#RevenueConfigurationForm').submit();
-        })
+        });
         $('#RevenueConfigurationForm').submit(function(e){
 
             e.preventDefault();
@@ -55,7 +55,12 @@ $(window).load(function () {
             });
             e.preventDefault();
             return false;
+        });
+
+        $(".f-rev-split").click(function(){
+            //$('#license_amt_paid')
         })
+
         $(".f-rev-config").click(function () {
             var userId = $(this).attr('userid');
             $("#RevConfigUserId").val($(this).attr('userid'));
@@ -71,10 +76,10 @@ $(window).load(function () {
                         cloned.attr('id',cloned.attr('id').replace(/\d+/, data_val.ssrt_id));
                         cloned.find('span,input').each(function(){
                             $(this).attr('id',$(this).attr("id").replace(/\d+/, data_val.ssrt_id))
-                        })
-                        $('#student_revenue_type_'+data_val.ssrt_id).text(data_val.ssrt_revenue_type)
+                        });
+                        $('#student_revenue_type_'+data_val.ssrt_id).text(data_val.ssrt_revenue_type);
                         $('#hid_student_revenue_type_'+data_val.ssrt_id).val(data_val.ssrt_id)
-                    })
+                    });
                     $('#tbl_student_revenue_types_1').each(function () {
                         $('[id="' + this.id + '"]:gt(0)').remove();
                     })

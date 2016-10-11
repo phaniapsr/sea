@@ -584,14 +584,14 @@
                                     });
                                     $('#franchiseFee').change(function () {
                                         if (parseFloat($(this).val()) > 0) {
-                                            $('#tax').val(parseFloat($('#franchiseFee').val()) * 15 / 100)
+                                            $('#tax').val(parseFloat($('#franchiseFee').val()) * 15 / 100);
                                             $('#total_amt').val(parseFloat($('#franchiseFee').val()) +parseFloat($('#tax').val()))
                                         } else {
                                             $(this).val('');
                                         }
                                         return false;
                                         //$('#tax').val($('#franchiseKitFee').val()+$('#franchiseFee').val())*15)/100;
-                                    })
+                                    });
                                     $('.course-section').find('input:checkbox').change(function () {
                                         $('#CourseApplied').val('');
                                         var arr = $('.course-section').find('input:checkbox').each(function (i, el) {

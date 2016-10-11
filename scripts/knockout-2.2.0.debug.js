@@ -425,7 +425,7 @@ ko.utils = new (function () {
             var result = [];
             for (var i = 0, j = arrayLikeObject.length; i < j; i++) {
                 result.push(arrayLikeObject[i]);
-            };
+            }
             return result;
         },
 
@@ -442,7 +442,7 @@ ko.utils = new (function () {
             for (var i = fields.length - 1; i >= 0; i--) {
                 if (isMatchingField(fields[i]))
                     matches.push(fields[i]);
-            };
+            }
             return matches;
         },
 
@@ -900,7 +900,7 @@ ko.subscribable = function () {
     ko.exportProperty(this, 'subscribe', this.subscribe);
     ko.exportProperty(this, 'extend', this.extend);
     ko.exportProperty(this, 'getSubscriptionsCount', this.getSubscriptionsCount);
-}
+};
 
 var defaultEvent = "change";
 
@@ -1014,8 +1014,8 @@ ko.observable = function (initialValue) {
     if (DEBUG) observable._latestValue = _latestValue;
     ko.subscribable.call(observable);
     observable.peek = function() { return _latestValue };
-    observable.valueHasMutated = function () { observable["notifySubscribers"](_latestValue); }
-    observable.valueWillMutate = function () { observable["notifySubscribers"](_latestValue, "beforeChange"); }
+    observable.valueHasMutated = function () { observable["notifySubscribers"](_latestValue); };
+    observable.valueWillMutate = function () { observable["notifySubscribers"](_latestValue, "beforeChange"); };
     ko.utils.extend(observable, ko.observable['fn']);
 
     ko.exportProperty(observable, 'peek', observable.peek);
@@ -1023,7 +1023,7 @@ ko.observable = function (initialValue) {
     ko.exportProperty(observable, "valueWillMutate", observable.valueWillMutate);
 
     return observable;
-}
+};
 
 ko.observable['fn'] = {
     "equalityComparer": function valuesArePrimitiveAndEqual(a, b) {
@@ -1043,7 +1043,7 @@ ko.hasPrototype = function(instance, prototype) {
 
 ko.isObservable = function (instance) {
     return ko.hasPrototype(instance, ko.observable);
-}
+};
 ko.isWriteableObservable = function (instance) {
     // Observable
     if ((typeof instance == "function") && instance[protoProperty] === ko.observable)
@@ -1053,7 +1053,7 @@ ko.isWriteableObservable = function (instance) {
         return true;
     // Anything else
     return false;
-}
+};
 
 
 ko.exportSymbol('observable', ko.observable);
@@ -1070,7 +1070,7 @@ ko.observableArray = function (initialValues) {
     var result = ko.observable(initialValues);
     ko.utils.extend(result, ko.observableArray['fn']);
     return result;
-}
+};
 
 ko.observableArray['fn'] = {
     'remove': function (valueOrPredicate) {
@@ -1150,7 +1150,7 @@ ko.observableArray['fn'] = {
             this.valueHasMutated();
         }
     }
-}
+};
 
 // Populate ko.observableArray.fn with read/write functions from native arrays
 // Important: Do not add any additional functions here that may reasonably be used to *read* data from the array
@@ -1425,8 +1425,7 @@ ko.exportSymbol('isComputed', ko.isComputed);
             for (var propertyName in rootObject)
                 visitorCallback(propertyName);
         }
-    };
-
+    }
     function objectLookup() {
         var keys = [];
         var values = [];
@@ -1443,7 +1442,7 @@ ko.exportSymbol('isComputed', ko.isComputed);
             var existingIndex = ko.utils.arrayIndexOf(keys, key);
             return (existingIndex >= 0) ? values[existingIndex] : undefined;
         };
-    };
+    }
 })();
 
 ko.exportSymbol('toJS', ko.toJS);
@@ -1986,7 +1985,7 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
         this['$data'] = dataItem;
         if (dataItemAlias)
             this[dataItemAlias] = dataItem;
-    }
+    };
     ko.bindingContext.prototype['createChildContext'] = function (dataItem, dataItemAlias) {
         return new ko.bindingContext(dataItem, this, dataItemAlias);
     };
@@ -2117,15 +2116,14 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
         return {
             shouldBindDescendants: bindingHandlerThatControlsDescendantBindings === undefined
         };
-    };
-
+    }
     var storedBindingContextDomDataKey = "__ko_bindingContext__";
     ko.storedBindingContextForNode = function (node, bindingContext) {
         if (arguments.length == 2)
             ko.utils.domData.set(node, storedBindingContextDomDataKey, bindingContext);
         else
             return ko.utils.domData.get(node, storedBindingContextDomDataKey);
-    }
+    };
 
     ko.applyBindingsToNode = function (node, bindings, viewModel) {
         if (node.nodeType === 1) // If it's an element, workaround IE <= 8 HTML parsing weirdness
@@ -2484,9 +2482,8 @@ function ensureDropdownSelectionIsConsistentWithModelValue(element, modelValue, 
     // change the model value to match the dropdown.
     if (modelValue !== ko.selectExtensions.readValue(element))
         ko.dependencyDetection.ignore(ko.utils.triggerEvent, null, [element, "change"]);
-};
-
-ko.bindingHandlers['options'] = {
+}
+    ko.bindingHandlers['options'] = {
     'update': function (element, valueAccessor, allBindingsAccessor) {
         if (ko.utils.tagNameLower(element) !== "select")
             throw new Error("options binding applies only to SELECT elements");
@@ -2664,7 +2661,7 @@ ko.bindingHandlers['value'] = {
             var modelValue = valueAccessor();
             var elementValue = ko.selectExtensions.readValue(element);
             ko.expressionRewriting.writeValueToProperty(modelValue, allBindingsAccessor, 'value', elementValue);
-        }
+        };
 
         // Workaround for https://github.com/SteveSanderson/knockout/issues/122
         // IE doesn't fire "change" events on textboxes if the user selects a value from its autocomplete list
@@ -2898,7 +2895,7 @@ ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextS
 
     ko.templateSources.domElement = function(element) {
         this.domElement = element;
-    }
+    };
 
     ko.templateSources.domElement.prototype['text'] = function(/* valueToWrite */) {
         var tagNameLower = ko.utils.tagNameLower(this.domElement),
@@ -2933,7 +2930,7 @@ ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextS
     var anonymousTemplatesDomDataKey = "__ko_anon_template__";
     ko.templateSources.anonymousTemplate = function(element) {
         this.domElement = element;
-    }
+    };
     ko.templateSources.anonymousTemplate.prototype = new ko.templateSources.domElement();
     ko.templateSources.anonymousTemplate.prototype['text'] = function(/* valueToWrite */) {
         if (arguments.length == 0) {
@@ -2966,7 +2963,7 @@ ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextS
         if ((templateEngine != undefined) && !(templateEngine instanceof ko.templateEngine))
             throw new Error("templateEngine must inherit from ko.templateEngine");
         _templateEngine = templateEngine;
-    }
+    };
 
     function invokeForEachNodeOrCommentInContinuousRange(firstNode, lastNode, action) {
         var node, nextInQueue = firstNode, firstOutOfRangeNode = ko.virtualElements.nextSibling(lastNode);
@@ -3091,7 +3088,7 @@ ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextS
             arrayItemContext['$index'] = index;
             var templateName = typeof(template) == 'function' ? template(arrayValue, arrayItemContext) : template;
             return executeTemplate(null, "ignoreTargetNode", templateName, arrayItemContext, options);
-        }
+        };
 
         // This will be called whenever setDomNodeChildrenFromArrayMapping has added nodes to targetNode
         var activateBindingsCallback = function(arrayValue, addedNodesArray, index) {
@@ -3484,7 +3481,7 @@ ko.exportSymbol('utils.compareArrays', ko.utils.compareArrays);
 ko.exportSymbol('utils.setDomNodeChildrenFromArrayMapping', ko.utils.setDomNodeChildrenFromArrayMapping);
 ko.nativeTemplateEngine = function () {
     this['allowTemplateRewriting'] = false;
-}
+};
 
 ko.nativeTemplateEngine.prototype = new ko.templateEngine();
 ko.nativeTemplateEngine.prototype['renderTemplateSource'] = function (templateSource, bindingContext, options) {

@@ -754,7 +754,7 @@ window.Modernizr = (function( window, document, undefined ) {
         // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
         try {
             if ( bool = !!elem.canPlayType ) {
-                bool      = new Boolean(bool);
+                bool      = Boolean(bool);
                 bool.ogg  = elem.canPlayType('video/ogg; codecs="theora"')      .replace(/^no$/,'');
 
                 // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
@@ -774,7 +774,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
         try {
             if ( bool = !!elem.canPlayType ) {
-                bool      = new Boolean(bool);
+                bool      = Boolean(bool);
                 bool.ogg  = elem.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,'');
                 bool.mp3  = elem.canPlayType('audio/mpeg;')               .replace(/^no$/,'');
 
@@ -1028,8 +1028,8 @@ window.Modernizr = (function( window, document, undefined ) {
 
     /*>>shiv*/
     /*! HTML5 Shiv v3.6.1 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed */
-    ;(function(window, document) {
-    /*jshint evil:true */
+    (function (window, document) {
+        /*jshint evil:true */
       /** Preset options */
       var options = window.html5 || {};
 

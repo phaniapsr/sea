@@ -21,6 +21,7 @@ class FranchiseeManagement extends CI_Controller {
     }
 
     public function registerFranchisee(){
+        $this->db->trans_begin();
         $data=array(
             'username'=>$_POST['franchiseeName'],
             'password'=>$_POST['password'],
@@ -117,8 +118,15 @@ class FranchiseeManagement extends CI_Controller {
             }
             $hierarchy=$this->franchisee->insertNewRecord('sea_user_hierarchy',$data_hierarchy);
             //End of hierarchy table data insertion
-
             $this->franchiseeRevenueDistribution($result);
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+            }
+            else
+            {
+                $this->db->trans_commit();
+            }
         }
         if(isset($_POST['ACMAS']))
             $ca=1;
@@ -198,7 +206,7 @@ class FranchiseeManagement extends CI_Controller {
 	   $this->load->view('includes/header');
 	   $this->load->view('FranchiseeManagement/detaildmfList',$data);
        $this->load->view('includes/footer');
-	   
+
    }
    
     public function detailufList($id)
@@ -207,7 +215,7 @@ class FranchiseeManagement extends CI_Controller {
 	   $this->load->view('includes/header');
 	   $this->load->view('FranchiseeManagement/detailufList',$data);
        $this->load->view('includes/footer');
-	   
+
    }
     public function detailConsulView($id)
    {
@@ -215,7 +223,7 @@ class FranchiseeManagement extends CI_Controller {
 	   $this->load->view('includes/header');
 	   $this->load->view('FranchiseeManagement/detailConsulView',$data);
        $this->load->view('includes/footer');
-	   
+
    }
 //code on 270916 ends here
 

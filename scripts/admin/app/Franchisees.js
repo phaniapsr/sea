@@ -32,7 +32,7 @@
             success: success,
             error: error
         });
-    }
+    };
     this.InActivateFranchisee = function (params, success, error) {
         params.Status = params.Status || "1";
         $.ajax({
@@ -160,7 +160,7 @@ this.InvoiceFranchises = function (params, success, error) {
         success: success,
         error: error
     });
-}
+};
 //kit orders
 function Kitorders() { 
     this.KitOrderRequest = function (params, success, error) {

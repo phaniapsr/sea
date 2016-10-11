@@ -31,7 +31,7 @@
 
         }
 
-    }
+    };
     // Initializing ///
 
     $(document).ready(function () {

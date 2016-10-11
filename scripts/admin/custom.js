@@ -190,7 +190,7 @@
 
         }
 
-    }
+    };
     // Initializing ///
 
     $(document).ready(function () {

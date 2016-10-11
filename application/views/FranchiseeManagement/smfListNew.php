@@ -351,7 +351,7 @@
                     district_amount: $("#district_amount_id").val(),
                     unit_amount: $("#unit_amount_id").val(),
                     units: $("#units_id").val()
-                }
+                };
                 $.ajax({
                     url: "<?php echo base_url()?>/RevenueManagement/saveSMFLicenseFee",
                     type: "POST",

@@ -15,15 +15,13 @@ function bytesToSize(bytes) {
     if (bytes == 0) return 'n/a';
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
     return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
-};
-
+}
 // check for selected crop region
 function checkForm() {
     if (parseInt($('#w').val())) return true;
     $('.error').html('Please select a crop region and then press Upload').show();
     return false;
-};
-
+}
 // update info by cropping (onChange and onSelect events handler)
 function updateInfo(e) {
     $('#x1').val(e.x);
@@ -32,14 +30,12 @@ function updateInfo(e) {
     $('#y2').val(e.y2);
     $('#w').val(e.w);
     $('#h').val(e.h);
-};
-
+}
 // clear info by cropping (onRelease event handler)
 function clearInfo() {
     $('.info #w').val('');
     $('.info #h').val('');
-};
-
+}
 // Create variables (in this scope) to hold the Jcrop API and image size
 var jcrop_api, boundx, boundy;
 
