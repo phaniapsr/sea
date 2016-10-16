@@ -225,6 +225,93 @@ class FranchiseeManagement extends CI_Controller {
        $this->load->view('includes/footer');
 
    }
+   public function editsmfList($id)
+	{
+		$data['data']['smf']=$this->franchisee->franchiseDetailView($id);
+		$this->load->view('includes/header');
+	   $this->load->view('FranchiseeManagement/editsmfList',$data);
+       $this->load->view('includes/footer');
+	}
+   
+   public function updateFranchisee(){
+		$fl="id";
+		$id=$_POST['id'];
+        $data=array(
+            'username'=>$_POST['franchiseeName'],
+            'email'=>$_POST['email'],
+            'first_name'=>$_POST['first_name'],
+            'middle_name'=>$_POST['middle_name'],
+			'last_name'=>$_POST['last_name'],
+            'date_of_birth'=>date('Y-m-d',strtotime($_POST['DateOfBirth'])), 
+			'gender'=>$_POST['gender'],
+			'landno'=>$_POST['LandlineNumber'],
+            'mobileno'=>$_POST['MobileNumber'],
+            'birthplace'=>$_POST['PlaceOfBirth'],
+            );
+		$result= $this->franchisee->updateTableRecord('sea_users',$fl,$data,$id);
+		$fl="user_id";
+		$data=array(
+		   'college_university'=>$_POST['University'],
+           'qualification'=>$_POST['Qualification'],
+           'completed_in_year'=>$_POST['CompletedYear'],
+		);
+		$result= $this->franchisee->updateTableRecord('sea_franchise_education_details',$fl,$data,$id);
+		$data=array(
+		    'doorno'=>$_POST['FlatNo'],
+            'streetname'=>$_POST['StreetName'],
+            'area'=>$_POST['Area'],
+            'city'=>$_POST['City'],
+            'pincode'=>$_POST['PinCode'],
+			'state'=>$_POST['State'],
+            'nationality'=>$_POST['Nationality'],
+            'r_doorno'=>$_POST['RflatNo'],
+            'r_streetname'=>$_POST['RstreetName'],
+            'r_area'=>$_POST['Rarea'],
+            'r_city'=>$_POST['Rcity'],
+            'r_pincode'=>$_POST['RpinCode'],
+            'r_state'=>$_POST['Rstate'],
+            'r_nationality'=>$_POST['Rnationality'],
+		);
+		$result= $this->franchisee->updateTableRecord('sea_franchise_resid_address',$fl,$data,$id);
+		$data=array(
+		    'course_type'=>$_POST['OfCourse'],
+            'course_name'=>$_POST['CourseName'],
+            'institution'=>$_POST['Instiution'],
+            'course_compl_year'=>$_POST['OtherCompletedYear'],
+            'occupation'=>$_POST['PresentOcupation'],
+            'purpose'=>$_POST['Goal'],
+            );
+		$result= $this->franchisee->updateTableRecord('sea_franchise_oth_train_att',$fl,$data,$id);
+		if(isset($_POST['ACMAS']))
+            $ca=1;
+        else
+            $ca=0;
+        if(isset($_POST['WRITEASY']))
+            $cw=1;
+        else
+            $cw=0;
+        if(isset($_POST['IAA']))
+            $ci=1;
+        else
+            $ci=0;
+        if(isset($_POST['FUNMATHS']))
+            $cf=1;
+        else
+            $cf=0;
+        $data4=array(
+            'user_id'=>$id,
+            'course_acmas'=>$ca,
+            'course_writeasy'=>$cw,
+            'course_iaa'=>$ci,
+            'course_funmaths'=>$cf,
+        );
+        $result4=$this->franchisee->updateTableRecord('sea_franchise_courses',$fl,$data4,$id);
+		$data['data']['smf']=$this->franchisee->franchiseDetailView($id);
+		$this->load->view('includes/header');
+	    $this->load->view('FranchiseeManagement/editsmfList',$data);
+        $this->load->view('includes/footer');
+		
+	}
 //code on 270916 ends here
 
     public function checkEmail(){

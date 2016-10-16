@@ -108,6 +108,7 @@ class StudentManagement extends CI_Controller {
         header('application/json');
         echo $result;
     }
+	
 
     public function currentStudentsList()
     {
@@ -123,6 +124,83 @@ class StudentManagement extends CI_Controller {
         $this->load->view('StudentManagement/studentView',$data);
         $this->load->view('includes/footer');
     }
+	
+	public function editstuList($id)
+	{
+		$data['data']['smf']=$this->student->franchiseDetailView($id);
+		$this->load->view('includes/header');
+	   $this->load->view('StudentManagement/editstuList',$data);
+       $this->load->view('includes/footer');
+	}
+	public function updateStudent(){
+		$id=$_POST['how'];
+		$fl="id";
+		$data=array(
+	        'email'=>$_POST['email'],
+            'first_name'=>$_POST['first_name'],
+            'last_name'=>$_POST['last_name'],
+            'middle_name'=>$_POST['middle_name'],
+            'date_of_birth'=>date('Y-m-d',strtotime($_POST['DateOfBirth'])), 
+            'gender'=>$_POST['gender'],
+            'age'=>$_POST['Age'],
+		);
+		$result= $this->student->updateTableRecord('sea_users',$fl,$data,$id);
+		$data=array(
+		'stud_mothertong'=>$_POST['MotherTounge'],
+            'fath_name'=>$_POST['FatherName'],
+            'fath_mobno'=>$_POST['FatherMobileNumber'],
+            'moth_name'=>$_POST['MotherName'],
+            'moth_mobno'=>$_POST['MotherMobileNumber'],
+            'fath_email'=>$_POST['ParentEmailId'],
+            'fath_qualif'=>$_POST['FatherQualicfation'],
+            'fath_occup'=>$_POST['FatherOccupation'],
+            'moth_qualif'=>$_POST['MotherQualicfation'],
+            'moth_occup'=>$_POST['MotherOccupation'],
+            'land_no'=>$_POST['LandlineNumber'],
+            'school_name'=>$_POST['SchoolName'],
+            'school_add'=>$_POST['SchoolAddress'],
+            'school_mobno'=>$_POST['SchoolNumber'],
+            'program_name'=>$_POST['ProgramId'],
+            'course_name'=>$_POST['CourseId'],
+            'level_name'=>$_POST['ProgramCourseLevelId'],
+            'fsib_name'=>$_POST['Sibling1Name'],
+            'ssib_name'=>$_POST['Sibling2Name'],
+            'fsib_sname'=>$_POST['Sibling1SchoolName'],
+            'fsib_age'=>$_POST['Sibling1Age'],
+            'fsib_gender'=>$_POST['Sibling1Gender'],
+            'fsib_stand'=>$_POST['Sibling1Standard'],
+            'ssib_sname'=>$_POST['Sibling2SchoolName'],
+            'ssib_age'=>$_POST['Sibling2Age'],
+            'ssib_gender'=>$_POST['Sibling2Gender'],
+            'ssib_stand'=>$_POST['Sibling2Standard'],
+        );
+		$fl="stud_id";
+		$result=$this->student->updateTableRecord('sea_student_pers_details',$fl,$data,$id);
+		$data=array(
+			'doorno'=>$_POST['FlatNo'],
+            'streetname'=>$_POST['StreetName'],
+            'area'=>$_POST['Area'],
+            'city'=>$_POST['City'],
+            'pincode'=>$_POST['PinCode'],
+            'state'=>$_POST['State'],
+		
+		);
+		$fl="user_id";
+		$result=$this->student->updateTableRecord('sea_franchise_resid_address',$fl,$data,$id);
+		$data=array(
+            'stu_program'=>$_POST['ProgramId'],
+			'stu_category'=>$_POST['CourseId'],
+            'stu_level'=>$_POST['ProgramCourseLevelId'],
+            
+        );
+		$fl="user_id";
+        $result3=$this->student->updateTableRecord('sea_student_course_level',$fl,$data,$id);
+		$data['data']['smf']=$this->student->franchiseDetailView($id);
+		$this->load->view('includes/header');
+	   $this->load->view('StudentManagement/editstuList',$data);
+       $this->load->view('includes/footer');
+		
+	}
     /*public function paymentDetailsDisplay(){
 
     }*/

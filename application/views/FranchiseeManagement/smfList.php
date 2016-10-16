@@ -83,6 +83,9 @@
                                         <th aria-label="Split License Amount" style="width: 108px;" colspan="1" rowspan="1"
                                             class="text-center sorting_disabled">Split License Amount
                                         </th>
+										<th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Edit
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -112,6 +115,10 @@
                                                         class="btn btn-primary btn-xs f-rev-split">Split
                                                 </button>
                                             </td>
+											<td class=" text-center"><a href="editsmfList/<?php echo $row['user_id']?>" class="popup-with-zoom-anim-mec btn-activate"
+                                                                        userid="8" status="0" href="#small-dialog3">
+                                                    <button type="button" class="btn btn-primary btn-xs">Edit</button>
+                                                </a></td>	
                                         </tr>
                                     <?php }?>
                                     </tbody>
