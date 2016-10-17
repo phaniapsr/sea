@@ -217,9 +217,45 @@ var stu_fname=document.forms["form1"]["first_name"].value;
 				document.forms["form1"]["CourseId"].focus();
 				return false;
 			}
-			return false;
+			
+		}
+		if(stu_progid=='ACMAS')
+		{
+		if(stu_levelid=='')
+			{
+				alert("please select Level from drop down");
+				document.forms["form1"]["ProgramCourseLevelId"].focus();
+				return false;
+			}
+		}
+		if(stu_progid=='IAA')
+		{
+			if(stu_courseid=='')
+			{
+				alert("please select Course from drop down");
+				document.forms["form1"]["CourseId"].focus();
+				return false;
+			}
 		}
 		
+		if(stu_progid=='IAA')
+		{
+		if(stu_levelid=='')
+			{
+				alert("please select Level from drop down");
+				document.forms["form1"]["ProgramCourseLevelId"].focus();
+				return false;
+			}	
+		}
+		if(stu_progid=='FUNMATHS')
+		{
+			if(stu_levelid=='')
+			{
+				alert("please select Level from drop down");
+				document.forms["form1"]["ProgramCourseLevelId"].focus();
+				return false;
+			}	
+		}
 		var stu_flatno=document.forms["form1"]["FlatNo"].value;
 		if(stu_flatno=='')
 		{
