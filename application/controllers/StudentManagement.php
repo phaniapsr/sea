@@ -105,7 +105,7 @@ class StudentManagement extends CI_Controller {
         $hierarchy=$this->franchisee->insertNewRecord('sea_user_hierarchy',$data_hierarchy);
         //End of hierarchy table data insertion
         $this->studentRevenueDistribution($result);
-        header('application/json');
+        //header('application/json');
         echo $result;
     }
 

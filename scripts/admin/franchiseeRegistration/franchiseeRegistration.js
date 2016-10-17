@@ -273,14 +273,21 @@ $(function(){
 				data : postData,
 				success:function(data, textStatus, jqXHR)
 				{
-					if(data>0)
+					/*if(data>0)
 						$('#message_from_server').text('Franchisee registered successfully');
-					else $('#message_from_server').text('Registration failed');
-					//alert('phani'+data);
+					else $('#message_from_server').text('Registration failed');*/
+					if(data>0){
+						if(confirm('Registration successfully completed. Press Okay to proceed for Payment')){
+                            $('#page-inner').load(formURL.split('/registerFranchisee')[0]+'/registrationAmountToBePaid',{userId:data})
+                        }
+                        else{
+                            $('#message_from_server').text('Franchisee registered successfully');
+                        }
+					}
 				},
 				error: function(jqXHR, textStatus, errorThrown)
 				{
-					//alert('An'+jqXHR);
+					alert('There is some technical issue to complete this registration process. Please try later');
 				}
 			});
 		e.preventDefault();

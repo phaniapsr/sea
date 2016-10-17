@@ -152,7 +152,7 @@ class FranchiseeManagement extends CI_Controller {
             'course_funmaths'=>$cf,
         );
         $result4=$this->franchisee->insertNewRecord('sea_franchise_courses',$data4);
-        header('application/json');
+        //header('application/json');
         echo $result;
     }
 
@@ -474,5 +474,11 @@ class FranchiseeManagement extends CI_Controller {
         }
         $revenue_response=$this->franchisee->insertNewRecord('sea_franchise_revenue',$revenue_data);
         //End of revenue configuration shares
+    }
+
+    public function registrationAmountToBePaid(){
+        $userId=$_POST['userId'];
+        $data =$this->franchisee->getRegistrationFeeDetails($userId);
+        $this->load->view('FranchiseeManagement/registrationAmountToBePaid',$data);
     }
 }
