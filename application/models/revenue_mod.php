@@ -1,4 +1,5 @@
 <?php
+
 class Revenue_mod extends CI_Model
 {
     function __Construct()
@@ -70,7 +71,8 @@ class Revenue_mod extends CI_Model
 
     }
 
-    public function getStudentRevenueTypes(){
+    public function getStudentRevenueTypes()
+    {
         $this->db->select('*');
         $this->db->from('sea_student_revenue_type');
         $query = $this->db->get();

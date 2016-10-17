@@ -40,15 +40,16 @@ class Student_mod extends CI_Model
         $this->db->where($fieldLable, $id);
         $this->db->update($table, $data);
     }
-	
-	 public function franchiseDetailView($filter) {
+
+    public function franchiseDetailView($filter)
+    {
         $this->db->select('*');
         $this->db->from('sea_users');
-        $this->db->join('sea_student_pers_details','sea_student_pers_details.stud_id=sea_users.id');
-		$this->db->join('sea_franchise_resid_address','sea_franchise_resid_address.user_id=sea_users.id');
-		$this->db->join('sea_student_course_level','sea_student_course_level.user_id=sea_users.id');
-        $this->db->where('sea_users.id',$filter);
-        $query=$this->db->get();
+        $this->db->join('sea_student_pers_details', 'sea_student_pers_details.stud_id=sea_users.id');
+        $this->db->join('sea_franchise_resid_address', 'sea_franchise_resid_address.user_id=sea_users.id');
+        $this->db->join('sea_student_course_level', 'sea_student_course_level.user_id=sea_users.id');
+        $this->db->where('sea_users.id', $filter);
+        $query = $this->db->get();
         return $query->result_array();
     }
 
