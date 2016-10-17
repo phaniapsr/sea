@@ -33,6 +33,10 @@
                             <td><?php echo $row['email'];?></td>
                             <td><input type="button" class="btn btn-info" value="Courses Info" onclick="window.location.href='sdetailView/<?php echo $row['id']?>'"/></td>
                             <td><input type="button" class="btn btn-info" value="Active" /></td>
+							<td class=" text-center"><a href="editstuList/<?php echo $row['id']?>" class="popup-with-zoom-anim-mec btn-activate"
+                                                                        userid="8" status="0" href="#small-dialog3">
+                                                    <button type="button" class="btn btn-primary btn-xs">Edit</button>
+                                                </a></td>
                         </tr>
                     <?php }?>
                     </tbody>

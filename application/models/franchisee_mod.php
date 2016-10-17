@@ -38,6 +38,7 @@ class Franchisee_mod extends CI_Model{
         $this->db->from('sea_users');
         $this->db->join('sea_franchise_education_details','sea_franchise_education_details.user_id=sea_users.id');
         $this->db->join('sea_franchise_resid_address','sea_franchise_resid_address.user_id=sea_users.id');
+		$this->db->join('sea_franchise_courses','sea_franchise_courses.user_id=sea_users.id');
         $this->db->join('sea_franchise_oth_train_att','sea_franchise_oth_train_att.user_id=sea_users.id');
         $this->db->where('sea_franchise_oth_train_att.user_id',$filter);
         $query=$this->db->get();
