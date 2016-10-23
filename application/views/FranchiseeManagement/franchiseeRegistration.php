@@ -575,7 +575,7 @@
                                 // CalTax is for calicualting 15% tax on Franchisee License Fee
 
                                 $(document).ready(function () {
-                                    $('#myModal2').on('shown.bs.modal', function () {
+									$('#myModal2').on('shown.bs.modal', function () {
                                         $(this).find('.modal-dialog').css({
                                             width: '50%',
                                             height: 'auto',

@@ -1,4 +1,4 @@
-<div id="page-wrapper">
+	<div id="page-wrapper">
     <div id="page-inner">
         <link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
         <script src="Scripts/admin/validations/jquery-teacher.js"></script>
@@ -98,7 +98,7 @@
                                             <td><?php echo $row['city']; ?></td>
                                             <td><?php echo $row['state']; ?></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id']; ?>"
+                                                <button type="button" id="umfRev" userid="<?php echo $row['user_id']; ?>"
                                                         rowid="<?php echo $row['id']; ?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueConfiguration"
                                                         class="btn btn-primary btn-xs f-rev-config">Revenue

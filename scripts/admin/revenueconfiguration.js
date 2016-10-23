@@ -1,6 +1,6 @@
 $(window).load(function () {
-    $(document).ready(function () {
-        $('.number,#direct_smf_share,#direct_dmf_share,#direct_umf_share,#indirect_dmf_share,#indirect_umf_share,#student_commission').blur(function(){
+	$(document).ready(function () {
+		$('.number,#direct_smf_share,#direct_dmf_share,#direct_umf_share,#indirect_dmf_share,#indirect_umf_share,#student_commission').blur(function(){
             if (parseFloat($(this).val()) > 0 ) {
 
             } else {
@@ -8,6 +8,7 @@ $(window).load(function () {
             }
             return false;
         });
+		
 
         $('#revenue_button_save').click(function(){
             var data = {
@@ -60,13 +61,33 @@ $(window).load(function () {
         $(".f-rev-split").click(function(){
             //$('#license_amt_paid')
         })
-
-        $(".f-rev-config").click(function () {
-            var userId = $(this).attr('userid');
-            $("#RevConfigUserId").val($(this).attr('userid'));
+       
+        $(".f-rev-config").click(function() {
+			var userId = $(this).attr('userid');
+		    $("#RevConfigUserId").val($(this).attr('userid'));
             $("#RevConfigId").val($(this).attr('rowid'));
             $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
             $.ajax({
+					    
+                             type:'post',
+                             url:'/sea/RevenueManagement/checkRevenueConfig',
+                             data:{user_id:userId},
+							 success:function(res){
+								var obj=JSON.parse(res);
+								$.each(obj,function(k,v){
+									$('#direct_smf_share').val(v.direct_state_amount);
+									$('#direct_dmf_share').val(v.direct_district_amount);
+									$('#direct_umf_share').val(v.direct_unit_amount);
+									$('#indirect_dmf_share').val(v.indirect_dmf_amount);
+									$('#indirect_umf_share').val(v.indirect_uf_amount);
+									
+								});
+								
+							 }
+							 
+                             
+            });
+			$.ajax({
                 url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getStudentRevenueTypes',
                 dataType:'json',
                 method:'GET',
@@ -92,7 +113,7 @@ $(window).load(function () {
         });
 
         $('#DMFFranchiseeKitFee').keyup(function () {
-            if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {
+			if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {
                 $('#DMFFranchiseeLicenseFee').val(parseFloat($('#DMFPaidFranchiseeFee').val()) - parseFloat($('#DMFFranchiseeKitFee').val()));
             } else {
                 $('#DMFFranchiseeKitFee').val(0);
@@ -229,3 +250,4 @@ function ValidateShares() {
         }
     }
 }
+

@@ -76,4 +76,29 @@ class Revenue_mod extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+	
+	////for updating the values of Revenue configuration
+	public function getRevConfig($id){
+		 $this->db->select('*');
+		 $this->db->from('sea_franchise_revenue_config');
+		 $this->db->where('sea_franchise_revenue_config.user_id',$id);
+		 $query = $this->db->get();
+		 return $query->num_rows();
+		
+	}
+	
+	public function updateTableRecord($table,$fieldLable,$data,$id){
+        $this->db->where($fieldLable, $id);
+        $this->db->update($table,$data);
+	}
+	
+	public function checkRevenueConfig($id)
+	{
+        $this->db->select('*');
+		$this->db->from('sea_franchise_revenue_config');
+		$this->db->where('sea_franchise_revenue_config.user_id',$id);
+		$query = $this->db->get();         	
+ 	    return $query->result_array();
+	}
+	//end of updating the values of Revenue configuration
 }

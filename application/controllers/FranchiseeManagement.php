@@ -21,7 +21,7 @@ class FranchiseeManagement extends CI_Controller {
     }
 
     public function registerFranchisee(){
-        $this->db->trans_begin();
+        //$this->db->trans_begin();
         $data=array(
             'username'=>$_POST['franchiseeName'],
             'password'=>$_POST['password'],
@@ -29,7 +29,7 @@ class FranchiseeManagement extends CI_Controller {
             'first_name'=>$_POST['first_name'],
             'last_name'=>$_POST['last_name'],
             'middle_name'=>$_POST['middle_name'],
-            'date_of_birth'=>date('Y-m-d',strtotime($_POST['date_of_birth'])),
+            'date_of_birth'=>date('Y-m-d',strtotime($_POST['DateOfBirth'])),
             'gender'=>$_POST['gender'],
             'landno'=>$_POST['LandlineNumber'],
             'mobileno'=>$_POST['MobileNumber'],
@@ -119,14 +119,14 @@ class FranchiseeManagement extends CI_Controller {
             $hierarchy=$this->franchisee->insertNewRecord('sea_user_hierarchy',$data_hierarchy);
             //End of hierarchy table data insertion
             $this->franchiseeRevenueDistribution($result);
-            if ($this->db->trans_status() === FALSE)
+            /*if ($this->db->trans_status() === FALSE)
             {
                 $this->db->trans_rollback();
             }
             else
             {
                 $this->db->trans_commit();
-            }
+            }*/
         }
         if(isset($_POST['ACMAS']))
             $ca=1;

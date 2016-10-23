@@ -47,6 +47,14 @@ class RevenueManagement extends CI_Controller
         isset($_POST['indirect_dmf_share']) && $_POST['indirect_dmf_share'] != '' ? $indirect_dmf_share = $_POST['indirect_dmf_share'] : $indirect_dmf_share = null;
         isset($_POST['indirect_umf_share']) && $_POST['indirect_umf_share'] != '' ? $indirect_umf_share = $_POST['indirect_umf_share'] : $indirect_umf_share = null;
         isset($_POST['student_commission']) && $_POST['student_commission'] != '' ? $student_commission = $_POST['student_commission'] : $student_commission = null;
+		//for updating the values of Revenue configuration
+		$this->load->model('revenue_mod');
+		$id=$_POST['UserId'];
+		$exrec=$this->revenue_mod->getRevConfig($id);
+		if($exrec==0)
+		{
+		//end of updating the values of Revenue configuration
+		//phani code as it is
         $data = array(
             'user_id' => $_POST['UserId'],
             'direct_state_amount' => $direct_smf_share,
@@ -58,6 +66,22 @@ class RevenueManagement extends CI_Controller
             'units' => $_POST['units'],
         );
         $this->revenue->insertNewRecord('sea_franchise_revenue_config', $data);
+		//up to here
+		}
+		else
+		{
+		  $data=array(
+		    'direct_state_amount' => $direct_smf_share,
+            'direct_district_amount' => $direct_dmf_share,
+            'direct_unit_amount' => $direct_umf_share,
+            'indirect_dmf_amount' => $indirect_dmf_share,
+            'indirect_uf_amount' => $indirect_umf_share,
+            //'student_amount' => $student_commission,
+            'units' => $_POST['units'],
+		  );
+         $this->revenue->updateTableRecord('sea_franchise_revenue_config','user_id',$data,$_POST['UserId']);		  
+		}  
+		
     }
 
     public function companyRevenue()
@@ -102,4 +126,11 @@ class RevenueManagement extends CI_Controller
         header('application/json');
         echo json_encode(array('student_revenue_type'=>$this->revenue_mod->getStudentRevenueTypes()));
     }
+	
+	public function checkRevenueConfig(){
+		$this->load->model('revenue_mod');
+		$data=$this->revenue_mod->checkRevenueConfig($_POST['user_id']);
+		echo json_encode($data);
+		
+	}
 }

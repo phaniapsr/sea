@@ -24,7 +24,7 @@
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Franchisee
                                             Name *</label>
                                         <div class="col-lg-6">
-										    <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+										    <input type="hidden" name="id" value="<?php echo $row['user_id'];?>">
                                             <input type="text" class="form-control" name="franchiseeName" value="<?php echo $row['username'];?>"/>
 											</div>
                                     </div>
@@ -247,7 +247,7 @@
                                         <div class="col-lg-6">
 
                                             <input type="number" class="form-control" name="CompletedYear"
-                                                   placeholder="Completed in Year" value="<?php echo $row['completed_in_year'];?>" required/>
+                                                   placeholder="Completed in Year"  value="<?php echo $row['completed_in_year'];?>" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">

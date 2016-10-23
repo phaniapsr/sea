@@ -89,7 +89,7 @@
                                     <?php
                                     $i=1;
                                     foreach ($data['smf'] as $row){ ?>
-                                        <tr class="odd">
+									    <tr class="odd">
                                             <td class="selected sorting_1"><?php echo $row['id'];?></td>
                                             <td class=" selected"><a data-ajax="true" data-ajax-mode="replace"
                                                                      data-ajax-update="#details"
@@ -97,7 +97,7 @@
                                             <td><?php echo $row['city'];?></td>
                                             <td><?php echo $row['state'];?></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                <button type="button"  userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalDMFRevenueConfiguration"
                                                         class="btn btn-primary btn-xs f-rev-config">Revenue Configuration
                                                 </button>

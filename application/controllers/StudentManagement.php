@@ -22,7 +22,7 @@ class StudentManagement extends CI_Controller {
 
     public function registerStudent(){
         $data=array(
-            'franchiseetypeId'=>4,
+            //'franchiseetypeId'=>4,
             'password'=>$_POST['password'],
             'email'=>$_POST['email'],
             'first_name'=>$_POST['first_name'],
@@ -112,7 +112,7 @@ class StudentManagement extends CI_Controller {
 
     public function currentStudentsList()
     {
-        $data['data']['smf'] =$this->student->listFromTable('sea_users','4');
+        $data['data']['smf'] =$this->student->listFromTable('sea_users','6');
         $this->load->view('includes/header');
         $this->load->view('StudentManagement/currentStudentsList',$data);
         $this->load->view('includes/footer');

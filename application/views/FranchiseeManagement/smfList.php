@@ -92,7 +92,7 @@
                                     <?php
                                     $i=1;
                                     foreach ($data['smf'] as $row){ ?>
-                                        <tr class="odd">
+									    <tr class="odd">
                                             <td class="selected sorting_1"><?php echo $row['id'];?></td>
                                             <td class=" selected"><a data-ajax="true" data-ajax-mode="replace"
                                                                      data-ajax-update="#details"
@@ -100,7 +100,7 @@
                                             <td><?php echo $row['city'];?></td>
                                             <td><?php echo $row['state'];?></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                <button type="button"  userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueConfiguration"
                                                         class="btn btn-primary btn-xs f-rev-config">Revenue Configuration
                                                 </button>
@@ -185,7 +185,7 @@
                                             <div class="col-lg-12">
                                                 <label>DMF Share</label>
                                                 <label><input class="form-control" name="direct_dmf_share"
-                                                              id="direct_dmf_share" type="text"></label>
+                                                              id="direct_dmf_share" type="text" ></label>
                                             </div>
                                         </label>
                                     </div>
