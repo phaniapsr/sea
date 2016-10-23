@@ -648,5 +648,5 @@
         <script src="Scripts/admin/jquery-ui.js"></script>
 
     </div>
-    <footer><p>All right reserved by: <a href="#">LemonBridge</a></p></footer>
+    <footer><p>All right reserved by: <a href="#">FriendsFocus</a></p></footer>
 </div>

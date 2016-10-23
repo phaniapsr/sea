@@ -1,8 +1,5 @@
 <div id="page-wrapper">
     <div id="page-inner">
-        <link href="Content/css/tjquery-ui.css" rel="stylesheet" />
-        <script src="Scripts/admin/validations/jquery-teacher.js"></script>
-        <script src="Scripts/admin/jquery-ui.js"></script>
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">
@@ -14,12 +11,10 @@
             <div class="col-lg-6">
                 <div>
                     <label>
-                        <input id="cbx-inactive" name="InActive" value="InActive" onchange="LoadStateFranchises()"
-                               checked="checked" type="checkbox"> Active Franchisee
+                        <input id="cbx-inactive" name="InActive" value="InActive" onchange="LoadStateFranchises()" checked="checked" type="checkbox"> Active Franchisee
                     </label>
                     <label id="margin-left">
-                        <input id="cbx-active" name="IsActive" value="IsActive" onchange="LoadStateFranchises()"
-                               type="checkbox"> Inactive Franchisee
+                        <input id="cbx-active" name="IsActive" value="IsActive" onchange="LoadStateFranchises()" type="checkbox"> Inactive Franchisee
                     </label>
                 </div>
             </div>

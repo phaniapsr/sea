@@ -60,6 +60,14 @@ $(window).load(function () {
 
         $(".f-rev-split").click(function(){
             //$('#license_amt_paid')
+            $.ajax({
+                url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getStudentRevenueTypes',
+                dataType:'json',
+                method:'GET',
+                data:{},
+                success:function(data){},
+                error:function(){}
+            })
         })
        
         $(".f-rev-config").click(function() {

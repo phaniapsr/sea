@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * Created by Phani Kumar.
  * Date: 8/6/2016
@@ -24,15 +25,15 @@ class RevenueManagement extends CI_Controller
 
     public function saveStudentRevenueConfig()
     {
-        foreach($_POST['student_revenue_type'] as $key=>$val){
-            $data=array(
-                'user_id'=>$_POST['UserId'],
-                'revenue_type_id'=>$val,
-                'consultant_share'=>isset($_POST['consultant_share'][$key]) && $_POST['consultant_share'][$key]!=''?$_POST['consultant_share'][$key]:null,
-                'state_share'=>isset($_POST['state_share'][$key]) && $_POST['state_share'][$key]!=''?$_POST['state_share'][$key]:null,
-                'district_share'=>isset($_POST['district_share'][$key]) && $_POST['district_share'][$key]!=''?$_POST['district_share'][$key]:null,
-                'unit_share'=>isset($_POST['unit_share'][$key]) && $_POST['unit_share'][$key]!=''?$_POST['unit_share'][$key]:null,
-                'units'=>$_POST['units'],
+        foreach ($_POST['student_revenue_type'] as $key => $val) {
+            $data = array(
+                'user_id' => $_POST['UserId'],
+                'revenue_type_id' => $val,
+                'consultant_share' => isset($_POST['consultant_share'][$key]) && $_POST['consultant_share'][$key] != '' ? $_POST['consultant_share'][$key] : null,
+                'state_share' => isset($_POST['state_share'][$key]) && $_POST['state_share'][$key] != '' ? $_POST['state_share'][$key] : null,
+                'district_share' => isset($_POST['district_share'][$key]) && $_POST['district_share'][$key] != '' ? $_POST['district_share'][$key] : null,
+                'unit_share' => isset($_POST['unit_share'][$key]) && $_POST['unit_share'][$key] != '' ? $_POST['unit_share'][$key] : null,
+                'units' => $_POST['units'],
             );
             $this->revenue->insertNewRecord('sea_student_revenue_config', $data);
         }
@@ -121,11 +122,13 @@ class RevenueManagement extends CI_Controller
 
     }
 
-    public function getStudentRevenueTypes(){
+    public function getStudentRevenueTypes()
+    {
         $this->load->model('revenue_mod');
-        header('application/json');
-        echo json_encode(array('student_revenue_type'=>$this->revenue_mod->getStudentRevenueTypes()));
+        //header('application/json');
+        echo json_encode(array('student_revenue_type' => $this->revenue_mod->getStudentRevenueTypes()));
     }
+
 	
 	public function checkRevenueConfig(){
 		$this->load->model('revenue_mod');

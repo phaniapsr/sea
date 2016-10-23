@@ -1,7 +1,7 @@
 <script type="application/javascript" src="<?php echo base_url()?>scripts/admin/studentRegistration/update.js"></script>
 <div id="page-wrapper">
     <div id="page-inner">
-        <script src="Skills%20Education%20Academy_files/Franchisees.js"></script>
+        <!--<script src="Skills%20Education%20Academy_files/Franchisees.js"></script>-->
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">

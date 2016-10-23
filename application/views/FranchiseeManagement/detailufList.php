@@ -1,4 +1,3 @@
-<!--<script type="application/javascript" src="<?php /*echo base_url()*/?>scripts/admin/franchiseeRegistration/franchiseeRegistration.js"></script>-->
 <div id="page-wrapper">
     <div id="page-inner">
 	<link href="Content/css/tjquery-ui.css" rel="stylesheet" />
@@ -93,5 +92,5 @@
         <script src="Scripts/admin/jquery-ui.js"></script>
 
     </div>
-    <footer><p>All right reserved by: <a href="http://friendsfocus.in/">LemonBridge</a></p></footer>
+    <footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
 </div>
