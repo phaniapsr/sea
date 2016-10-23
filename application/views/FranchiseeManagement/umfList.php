@@ -80,6 +80,9 @@
                                         <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
                                             class="text-center sorting_disabled">Deactive
                                         </th>
+                                        <th aria-label="Split License Amount" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Split License Amount
+                                        </th>
 										<th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
                                             class="text-center sorting_disabled">Edit
                                         </th>
@@ -110,6 +113,12 @@
                                                     <button type="button" class="btn btn-primary btn-xs">Deactivate
                                                     </button>
                                                 </a></td>
+                                            <td class="text-center selected">
+                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                        data-target="#myModalSMFRevenueSplit"
+                                                        class="btn btn-primary btn-xs f-rev-split">Split
+                                                </button>
+                                            </td>
 											<td class=" text-center"><a href="editsmfList/<?php echo $row['user_id']?>" class="popup-with-zoom-anim-mec btn-activate"
                                                                         userid="8" status="0" href="#small-dialog3">
                                                     <button type="button" class="btn btn-primary btn-xs">Edit</button>
@@ -156,6 +165,85 @@
         <!-- /. ROW  -->
         <div id="details" class="row">
         </div>
+        <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueSplit" role="dialog">
+            <div class="modal-dialog modal-lg" id="split_sizeofmodel">
+                <div class="modal-content" id="split_contentbackground">
+                    <div class="modal-body" id="split_bodybackground">
+                        <div id="split_border">
+                            <div class="modal-header">
+                                <div id="split_headerbackground">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            style="color:red;font-size:29px;">×
+                                    </button>
+                                    <center><h2 class="modal-title">Unit Franchisee Revenue Split</h2></center>
+                                </div>
+                            </div>
+                            <br>
+                            <form id="SplitRevenueConfigurationForm" name="SplitRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueSplit" method="post">
+                                <div class="row">
+                                    <div class="row col-lg-12"><label>Total License Amount Paid : <span id="license_amt_paid"></span></label></div>
+                                    <div class="row col-lg-12"><label>Tax Amount Paid : <span id="tax_amt_paid"></span></label></div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Kit Fee</label>
+                                                <label><input class="form-control number" min="0"  name="kit_fee_identified"
+                                                              id="kit_fee_identified" type="number"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="row col-lg-12"><label>Amount to be Split : <span id="splitting_amount"></span></label></div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Company Amount</label>
+                                                <label><input class="form-control" readonly name="license_company_amount" id="license_company_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>District Amount ( <span id="district_share_value"></span>)</label>
+                                                <label><input class="form-control" readonly name="license_district_amount" id="license_district_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>State Amount ( <span id="state_share_value"></span>)</label>
+                                                <label><input class="form-control" readonly name="license_state_amount"
+                                                              id="license_state_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Consultant Amount ( <span id="consultant_share_value"></span>)</label>
+                                                <label><input class="form-control" readonly name="license_consultant_amount"
+                                                              id="license_consultant_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row" id="roww1">
+                                    <center>
+                                        <label class="danger" id="rev-config-msg"></label>
+                                        <button class="btn primaryCta small" type="button"
+                                                role="button"
+                                                id="revenue_split_button_save"><span>Save</span></button>
+                                        <button class="btn primaryCta small" type="button" id="buttonCancel"
+                                                data-dismiss="modal"><span>Cancel</span></button>
+                                    </center>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div aria-hidden="true" style="display: none;" class="modal fade" id="myModalSMFRevenueConfiguration"
              role="dialog">
             <div class="modal-dialog modal-lg" id="sizeofmodel">
@@ -177,8 +265,7 @@
                                 <div class="col-lg-12">
                                     <div class="panel panel-default">
                                         <div id="margin-top" class="panel-body">
-                                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration"
-                                                  action="<?php echo base_url() ?>RevenueManagement/saveStudentRevenueConfig"
+                                            <form id="RevenueConfigurationForm" name="ConsRevenueConfiguration" action="<?php echo base_url() ?>RevenueManagement/saveStudentRevenueConfig"
                                                   method="post">
                                                 <input id="RevConfigUserId" name="UserId" type="hidden">
                                                 <input id="RevConfigId" name="RevConfigId" type="hidden">
@@ -245,7 +332,6 @@
             </div>
 
             <div id="small-dialog3" class="mfp-hide">
-
                 <form id="DeactivateYes" method="post" class="form-horizontal" name="DeactivateYes">
                     <div class="pop_up">
                         <div class="row form-group">

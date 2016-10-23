@@ -86,7 +86,6 @@ class RevenueManagement extends CI_Controller
         $data['state'] = $this->revenue_mod->getAllStateRevenue();
         $data['content'] = 'Revenue/stateRevenue';
         $this->load->view('includes/template', $data);
-
     }
 
     public function districtRevenue()
@@ -95,19 +94,29 @@ class RevenueManagement extends CI_Controller
         $data['dmf'] = $this->revenue_mod->getAllStateRevenue();
         $data['content'] = 'Revenue/districtRevenue';
         $this->load->view('includes/template', $data);
-
     }
 
     public function getStudentRevenueTypes()
     {
         $this->load->model('revenue_mod');
-        //header('application/json');
         echo json_encode(array('student_revenue_type' => $this->revenue_mod->getStudentRevenueTypes()));
     }
 
-    /*public function getStudentRevenueTypes(){
+    public function getRevenueConfigurations(){
+        $userId = $this->input->post('userId');
         $this->load->model('revenue_mod');
-        //header('application/json');
-        echo json_encode(array('student_revenue_type'=>$this->revenue_mod->getStudentRevenueTypes()));
-    }*/
+        echo json_encode(array('revenue_configurations'=>$this->revenue_mod->getRevenueSplit($userId)));
+    }
+
+    public function saveRevenueSplit(){
+        $data=array(
+            'kf_amount'=>$this->input->post('kit_amount'),
+            'lf_consultant_amount'=>$this->input->post('consultant_amount'),
+            'lf_company_amount'=>$this->input->post('company_amount'),
+            'lf_smf_amount'=>$this->input->post('state_amount'),
+            'lf_dmf_amount'=>$this->input->post('district_amount'),
+        );
+        $this->load->model('revenue_mod');
+        echo json_encode($this->revenue_mod->updateRowWhere('sea_franchise_revenue',array('revenue_id'=>$this->input->post('revenue_config_id')),$data));
+    }
 }

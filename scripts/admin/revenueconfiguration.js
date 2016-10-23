@@ -8,7 +8,6 @@ $(window).load(function () {
             }
             return false;
         });
-
         $('#revenue_button_save').click(function(){
             var data = {
                 UserId: $("#RevConfigUserId").val(),
@@ -39,7 +38,6 @@ $(window).load(function () {
             $('#RevenueConfigurationForm').submit();
         });
         $('#RevenueConfigurationForm').submit(function(e){
-
             e.preventDefault();
             var data=$(this).serializeArray();
             $.ajax({
@@ -56,19 +54,127 @@ $(window).load(function () {
             e.preventDefault();
             return false;
         });
-
+        var rev_config={};
         $(".f-rev-split").click(function(){
-            //$('#license_amt_paid')
             $.ajax({
-                url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getStudentRevenueTypes',
+                url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getRevenueConfigurations',
                 dataType:'json',
-                method:'GET',
-                data:{},
-                success:function(data){},
-                error:function(){}
+                method:'POST',
+                data:{userId:$(this).attr('userid')},
+                success:function(revenueSplit){
+                    $('#kit_fee_identified').val('');
+                    rev_config=revenueSplit
+                    $('#license_amt_paid').text(revenueSplit.revenue_configurations[0].lf_amount);
+                    $('#tax_amt_paid').text(revenueSplit.revenue_configurations[0].tax_amount);
+                    if(revenueSplit.revenue_configurations[0].kf_amount>0) {
+                        $('#kit_fee_identified').prop('readonly', true).val(revenueSplit.revenue_configurations[0].kf_amount),
+                        $('#splitting_amount').text(revenueSplit.revenue_configurations[0].lf_amount-revenueSplit.revenue_configurations[0].kf_amount);
+                        $('#license_district_amount').val(revenueSplit.revenue_configurations[0].lf_dmf_amount),
+                        $('#license_company_amount').val(revenueSplit.revenue_configurations[0].lf_company_amount),
+                        $('#license_state_amount').val(revenueSplit.revenue_configurations[0].lf_smf_amount),
+                        $('#license_consultant_amount').val(revenueSplit.revenue_configurations[0].lf_consultant_amount)
+                    }
+                    $.each(revenueSplit.revenue_configurations,function(rev_key,rev_obj){
+                        //For SMF
+                        if(rev_obj.role_id==2){
+                            if(rev_obj.smf_id==rev_obj.created_by){
+                                var unit= rev_obj.units==1?'%':'Rs';
+                                $('#state_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.direct_unit_amount+unit);
+                            }
+                            else if(rev_obj.smf_id!=null){
+                                var unit= rev_obj.units==1?'%':'Rs';
+                                $('#state_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.indirect_uf_amount+unit);
+                            }
+                        }
+                        //For DMF
+                        if(rev_obj.role_id==3){
+                            if(rev_obj.dmf_id==rev_obj.created_by){
+                                var unit= rev_obj.units==1?'%':'Rs';
+                                $('#district_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.direct_unit_amount+unit);
+                            }
+                            else if(rev_obj.dmf_id!=null){
+                                var unit= rev_obj.units==1?'%':'Rs';
+                                $('#district_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.indirect_uf_amount+unit);
+                            }
+                        }
+                        //For Consultant
+                        if(rev_obj.role_id==5){
+                            if(rev_obj.consultant_id==rev_obj.created_by){
+                                var unit= rev_obj.units==1?'%':'Rs';
+                                $('#consultant_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.direct_unit_amount+unit);
+                            }
+                            else if(rev_obj.consultant_id!=null){
+                                var unit= rev_obj.units==1?'%':'Rs';
+                                $('#consultant_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.indirect_uf_amount+unit);
+                            }
+                        }
+                    })
+                },
+                error:function(){
+                    alert('There is server not properly responded');
+                }
             })
         })
+        $('#kit_fee_identified').change(function(){
+            if($(this).val()>0){
+                var split_amt=parseFloat(rev_config.revenue_configurations[0].lf_amount-$(this).val());
+                $('#splitting_amount').text(split_amt);
+                $.each(rev_config.revenue_configurations,function(rev_key,rev_obj){
+                    //For SMF
+                    if(rev_obj.role_id==2){
+                        if(rev_obj.smf_id==rev_obj.created_by){
+                            $('#license_state_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.direct_unit_amount):(split_amt-rev_obj.direct_unit_amount));
+                        }
+                        else if(rev_obj.smf_id!=null){
+                            $('#license_state_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.indirect_uf_amount):(split_amt-rev_obj.indirect_uf_amount));
+                        }
+                    }
+                    //For DMF
+                    if(rev_obj.role_id==3){
+                        if(rev_obj.dmf_id==rev_obj.created_by){
+                            $('#license_district_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.direct_unit_amount):(split_amt-rev_obj.direct_unit_amount));
+                        }
+                        else if(rev_obj.dmf_id!=null){
+                            $('#license_district_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.indirect_uf_amount):(split_amt-rev_obj.indirect_uf_amount));
+                        }
+                    }
+                    //For Consultant
+                    if(rev_obj.role_id==5){
+                        if(rev_obj.consultant_id==rev_obj.created_by){
+                            $('#license_consultant_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.direct_unit_amount):(split_amt-rev_obj.direct_unit_amount));
+                        }
+                        else if(rev_obj.consultant_id!=null){
+                            $('#license_consultant_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.indirect_uf_amount):(split_amt-rev_obj.indirect_uf_amount));
+                        }
+                    }
 
+                })
+                $('#license_company_amount').val(split_amt-(parseFloat($('#license_consultant_amount').val())+parseFloat($('#license_district_amount').val())+parseFloat($('#license_state_amount').val())))
+            }
+        })
+        $('#revenue_split_button_save').click(function(){
+            $.ajax({
+                url: $('#SplitRevenueConfigurationForm').attr('action'),
+                type: "POST",
+                dataType:'json',
+                data: {
+                    revenue_config_id:rev_config.revenue_configurations[0].revenue_id,
+                    kit_amount:$('#kit_fee_identified').val(),
+                    company_amount:$('#license_company_amount').val(),
+                    district_amount:$('#license_district_amount').val(),
+                    state_amount:$('#license_state_amount').val(),
+                    consultant_amount:$('#license_consultant_amount').val()
+                },
+                success: function () {
+                    alert("Successfully Submitted......!!");
+                    $('#kit_fee_identified').prop('readonly', true);
+                    //$('#kit_fee_identified').attr('readonly','readonly');
+                },
+                error: function () {
+                    alert('There is some error in data saving please try again');
+                }
+            })
+        })
         $(".f-rev-config").click(function () {
             var userId = $(this).attr('userid');
             $("#RevConfigUserId").val($(this).attr('userid'));
