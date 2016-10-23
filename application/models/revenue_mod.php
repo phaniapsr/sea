@@ -78,7 +78,6 @@ class Revenue_mod extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-
     public function getRevenueSplit($filter){
         $this->db->select('users.*,hierarchy.*,config.*,role.role_id,revenue.lf_amount,revenue.tax_amount,revenue.revenue_id,revenue.kf_amount,revenue.lf_consultant_amount,revenue.lf_smf_amount,revenue.lf_dmf_amount,revenue.lf_company_amount',false);
         $this->db->from('sea_user_hierarchy AS hierarchy');
@@ -97,4 +96,28 @@ class Revenue_mod extends CI_Model
         $this->db->where($where);
         $this->db->update($table, $data);
     }
+	////for updating the values of Revenue configuration
+	public function getRevConfig($id){
+		 $this->db->select('*');
+		 $this->db->from('sea_franchise_revenue_config');
+		 $this->db->where('sea_franchise_revenue_config.user_id',$id);
+		 $query = $this->db->get();
+		 return $query->num_rows();
+		
+	}
+	
+	public function updateTableRecord($table,$fieldLable,$data,$id){
+        $this->db->where($fieldLable, $id);
+        $this->db->update($table,$data);
+	}
+	
+	public function checkRevenueConfig($id)
+	{
+        $this->db->select('*');
+		$this->db->from('sea_franchise_revenue_config');
+		$this->db->where('sea_franchise_revenue_config.user_id',$id);
+		$query = $this->db->get();         	
+ 	    return $query->result_array();
+	}
+	//end of updating the values of Revenue configuration
 }

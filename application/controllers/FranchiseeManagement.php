@@ -24,24 +24,24 @@ class FranchiseeManagement extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    public function registerFranchisee()
-    {
+
+    public function registerFranchisee(){
         //$this->db->trans_begin();
-        $data = array(
-            'username' => $_POST['franchiseeName'],
-            'password' => $_POST['password'],
-            'email' => $_POST['email'],
-            'first_name' => $_POST['first_name'],
-            'last_name' => $_POST['last_name'],
-            'middle_name' => $_POST['middle_name'],
-            'date_of_birth' => date('Y-m-d', strtotime($_POST['date_of_birth'])),
-            'gender' => $_POST['gender'],
-            'landno' => $_POST['LandlineNumber'],
-            'mobileno' => $_POST['MobileNumber'],
-            'birthplace' => $_POST['PlaceOfBirth'],
-            'franch_name' => $_POST['franchiseeName'],
-            'franchiseetypeId' => $_POST['franchiseetypeId'],
-            'image_path' => trim($_POST['img'], '"'),
+        $data=array(
+            'username'=>$_POST['franchiseeName'],
+            'password'=>$_POST['password'],
+            'email'=>$_POST['email'],
+            'first_name'=>$_POST['first_name'],
+            'last_name'=>$_POST['last_name'],
+            'middle_name'=>$_POST['middle_name'],
+            'date_of_birth'=>date('Y-m-d',strtotime($_POST['DateOfBirth'])),
+            'gender'=>$_POST['gender'],
+            'landno'=>$_POST['LandlineNumber'],
+            'mobileno'=>$_POST['MobileNumber'],
+            'birthplace'=>$_POST['PlaceOfBirth'],
+            'franch_name'=>$_POST['franchiseeName'],
+            'franchiseetypeId'=>$_POST['franchiseetypeId'],
+            'image_path'=>trim($_POST['img'],'"'),
         );
         if($this->checkEmail()==0) {
             $result = $this->franchisee->insertNewRecord('sea_users', $data);
@@ -137,11 +137,6 @@ class FranchiseeManagement extends CI_Controller
                 //End of franchise license fee
                 $revenue = $this->franchisee->insertNewRecord('sea_franchise_revenue', $data_revenue);
                 //$this->franchiseeRevenueDistribution($result);
-                /*if ($this->db->trans_status() === FALSE) {
-                    $this->db->trans_rollback();
-                } else {
-                    $this->db->trans_commit();
-                }*/
             }
             if (isset($_POST['ACMAS']))
                 $ca = 1;

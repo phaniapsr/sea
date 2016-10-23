@@ -1,6 +1,6 @@
 $(window).load(function () {
-    $(document).ready(function () {
-        $('.number,#direct_smf_share,#direct_dmf_share,#direct_umf_share,#indirect_dmf_share,#indirect_umf_share,#student_commission').blur(function(){
+	$(document).ready(function () {
+		$('.number,#direct_smf_share,#direct_dmf_share,#direct_umf_share,#indirect_dmf_share,#indirect_umf_share,#student_commission').blur(function(){
             if (parseFloat($(this).val()) > 0 ) {
 
             } else {
@@ -181,6 +181,26 @@ $(window).load(function () {
             $("#RevConfigId").val($(this).attr('rowid'));
             $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
             $.ajax({
+					    
+                             type:'post',
+                             url:'/sea/RevenueManagement/checkRevenueConfig',
+                             data:{user_id:userId},
+							 success:function(res){
+								var obj=JSON.parse(res);
+								$.each(obj,function(k,v){
+									$('#direct_smf_share').val(v.direct_state_amount);
+									$('#direct_dmf_share').val(v.direct_district_amount);
+									$('#direct_umf_share').val(v.direct_unit_amount);
+									$('#indirect_dmf_share').val(v.indirect_dmf_amount);
+									$('#indirect_umf_share').val(v.indirect_uf_amount);
+									
+								});
+								
+							 }
+							 
+                             
+            });
+			$.ajax({
                 url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getStudentRevenueTypes',
                 dataType:'json',
                 method:'GET',
@@ -206,7 +226,7 @@ $(window).load(function () {
         });
 
         $('#DMFFranchiseeKitFee').keyup(function () {
-            if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {
+			if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {
                 $('#DMFFranchiseeLicenseFee').val(parseFloat($('#DMFPaidFranchiseeFee').val()) - parseFloat($('#DMFFranchiseeKitFee').val()));
             } else {
                 $('#DMFFranchiseeKitFee').val(0);
@@ -310,36 +330,3 @@ $(window).load(function () {
         });
     });
 });
-function ValidateShares() {
-    var DMFCompanyPercentage = parseFloat($("#DMFCompanyPercentage").val()) || 0;
-    var DMFSMFPercentage = parseFloat($("#DMFSMFPercentage").val()) || 0;
-    var UFCompanyPercentage = parseFloat($("#UFCompanyPercentage").val()) || 0;
-    var UFSMFPercentage = parseFloat($("#UFSMFPercentage").val()) || 0;
-    var UFDMFPercentage = parseFloat($("#UFDMFPercentage").val()) || 0;
-    var StudentCompanyPercentage = parseFloat($("#StudentCompanyPercentage").val()) || 0;
-    var StudentSMFPercentage = parseFloat($("#StudentSMFPercentage").val()) || 0;
-    var StudentDMFPercentage = parseFloat($("#StudentDMFPercentage").val()) || 0;
-    var StudentUFPercentage = parseFloat($("#StudentUFPercentage").val()) || 0;
-    var total = DMFCompanyPercentage + DMFSMFPercentage + UFCompanyPercentage
-                + UFSMFPercentage + UFDMFPercentage + StudentCompanyPercentage + StudentSMFPercentage +
-                StudentDMFPercentage + StudentUFPercentage;
-    if (total == 100) {
-        if (StudentCompanyPercentage != 0) {
-            $("studentrev-config-msg").text("");
-             return true;
-        } else {
-            $("#rev-config-msg").text("");
-            return true;
-        }
-    } else {
-        if (StudentCompanyPercentage != 0) {
-
-            $("#studentrev-config-msg").text("Invalid share distribution.");
-            return false;
-        }
-        else {
-            $("#rev-config-msg").text("Invalid share distribution.");
-            return false;
-        }
-    }
-}

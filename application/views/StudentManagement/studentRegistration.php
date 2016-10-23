@@ -457,12 +457,6 @@
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="CourseFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Coursefee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="CourseFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
                                     </div>
 									<div class="form-group">
-                                        <label class="col-lg-5  control-label " style="text-align:left">Tax( ST/GST ) *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="KitFee" class="form-control" id="tax" name="Tax" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Kit Fee *</label>
                                         <div class="col-lg-6 has-feedback">
                                             <input data-fv-field="KitFee" class="form-control" id="KitFee" name="KitFee" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
@@ -474,7 +468,18 @@
                                             <input data-fv-field="KitFee" class="form-control" id="AcFee" name="AcFee" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
                                     </div>
-
+									<div class="form-group">
+                                        <label class="col-lg-5  control-label " style="text-align:left">Tax( ST/GST ) *</label>
+                                        <div class="col-lg-6 has-feedback">
+                                            <input data-fv-field="KitFee" class="form-control" id="tax" name="Tax" placeholder="Kitorder Fee" value="0" type="text" required readonly/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
+                                    </div>
+									<div class="form-group">
+                                        <label class="col-lg-5  control-label " style="text-align:left">Total Amount *</label>
+                                        <div class="col-lg-6 has-feedback">
+                                            <input data-fv-field="TotalAmount" class="form-control" id="total_amt" name="Tax" placeholder="Total Amount" value="0" type="text" required readonly/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="TotalAmount" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -495,9 +500,47 @@
                                 </div>
                             </div>
                             <script>
+							    $("#RegistrationFee").change(function () {
+                                       if (parseFloat($(this).val()) > 0) {
+                                          $('#tax').val((parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val()))*15/100);
+										  $('#total_amt').val(parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val())+parseFloat($('#tax').val()));
+                                        } else {
+                                            $(this).val('');
+                                        }
+                                        return false;
+                                    });	
+								$("#CourseFee").change(function(){
+									if (parseFloat($(this).val()) > 0) {
+										$('#tax').val((parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val()))*15/100);
+										$('#total_amt').val(parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val())+parseFloat($('#tax').val()));
+									}
+									else {
+                                            $(this).val('');
+                                        }
+								});	
+								$("#KitFee").change(function(){
+									if (parseFloat($(this).val()) > 0) {
+										$('#tax').val((parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val()))*15/100);
+										$('#total_amt').val(parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val())+parseFloat($('#tax').val()));
+									}
+									else {
+                                            $(this).val('');
+                                        }
+								});	
+								$("#AcFee").change(function(){
+									if (parseFloat($(this).val()) > 0) {
+										$('#tax').val((parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val()))*15/100);
+										$('#total_amt').val(parseFloat($('#RegistrationFee').val())+parseFloat($('#CourseFee').val())+parseFloat($('#KitFee').val())+parseFloat($('#AcFee').val())+parseFloat($('#tax').val()));
+									}
+									else {
+                                            $(this).val('');
+                                        }
+								});	
+								
                                 var lookupManager = new Lookup();
                                 var studentManager = new Students();
-                                $(document).ready(function () {
+								$(document).ready(function () {
+									
                                     $('#btn').click(function () {
                                         $("#datepicker-my").datepicker({
                                             changeMonth: true, changeYear: true, yearRange: '1950:2015',
@@ -556,7 +599,7 @@
                                             }
                                         });
                                     });
-                                });
+								});
                             </script>
                             <script>
                                 $('#btn').click(function () {

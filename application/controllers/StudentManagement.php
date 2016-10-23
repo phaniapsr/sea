@@ -24,18 +24,18 @@ class StudentManagement extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    public function registerStudent()
-    {
-        $data = array(
-            'franchiseetypeId' => 4,
-            'password' => $_POST['password'],
-            'email' => $_POST['email'],
-            'first_name' => $_POST['first_name'],
-            'last_name' => $_POST['last_name'],
-            'middle_name' => $_POST['middle_name'],
-            'date_of_birth' => $_POST['date_of_birth'],
-            'gender' => $_POST['gender'],
-            'age' => $_POST['Age'],
+
+    public function registerStudent(){
+        $data=array(
+            //'franchiseetypeId'=>4,
+            'password'=>$_POST['password'],
+            'email'=>$_POST['email'],
+            'first_name'=>$_POST['first_name'],
+            'last_name'=>$_POST['last_name'],
+            'middle_name'=>$_POST['middle_name'],
+            'date_of_birth'=>$_POST['date_of_birth'],
+            'gender'=>$_POST['gender'],
+            'age'=>$_POST['Age'],
         );
 
         $result = $this->student->insertNewRecord('sea_users', $data);
@@ -116,7 +116,8 @@ class StudentManagement extends CI_Controller
 
     public function currentStudentsList()
     {
-        $data['data']['smf'] = $this->student->listFromTable('sea_users', '4');
+
+        $data['data']['smf'] =$this->student->listFromTable('sea_users','6');
         $this->load->view('includes/header');
         $this->load->view('StudentManagement/currentStudentsList', $data);
         $this->load->view('includes/footer');
