@@ -25,6 +25,12 @@ class RevenueManagement extends CI_Controller
 
     public function saveStudentRevenueConfig()
     {
+		$this->load->model('revenue_mod');
+		//$id=$_POST['UserId'];
+		$id=5;
+		$exrec=$this->revenue_mod->getStuConfig($id);
+		if($exrec==0)
+		{
         foreach ($_POST['student_revenue_type'] as $key => $val) {
             $data = array(
                 'user_id' => $_POST['UserId'],
@@ -37,6 +43,20 @@ class RevenueManagement extends CI_Controller
             );
             $this->revenue->insertNewRecord('sea_student_revenue_config', $data);
         }
+		}
+		else
+		{
+			foreach ($_POST['student_revenue_type'] as $key => $val) {
+            $data = array(
+                'consultant_share' => isset($_POST['consultant_share'][$key]) && $_POST['consultant_share'][$key] != '' ? $_POST['consultant_share'][$key] : null,
+                'state_share' => isset($_POST['state_share'][$key]) && $_POST['state_share'][$key] != '' ? $_POST['state_share'][$key] : null,
+                'district_share' => isset($_POST['district_share'][$key]) && $_POST['district_share'][$key] != '' ? $_POST['district_share'][$key] : null,
+                'unit_share' => isset($_POST['unit_share'][$key]) && $_POST['unit_share'][$key] != '' ? $_POST['unit_share'][$key] : null,
+                'units' => $_POST['units'],
+            );
+            $this->revenue->updateStuRev('sea_student_revenue_config','user_id','revenue_type_id',$data,$_POST['UserId'],$val);
+        }
+		}
     }
 
     public function saveRevenueConfig()
@@ -149,5 +169,12 @@ class RevenueManagement extends CI_Controller
 		$data=$this->revenue_mod->checkRevenueConfig($_POST['user_id']);
 		echo json_encode($data);
 		
+	}
+	
+	public function unitRevenueConfig()
+	{
+		$this->load->model('revenue_mod');
+		$data=$this->revenue_mod->unitRevenueConfig($_POST['user_id']);
+		echo json_encode($data);
 	}
 }

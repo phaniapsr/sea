@@ -119,5 +119,29 @@ class Revenue_mod extends CI_Model
 		$query = $this->db->get();         	
  	    return $query->result_array();
 	}
+	
+	public function unitRevenueConfig($id)
+	{
+		$this->db->select('*');
+		$this->db->from('sea_student_revenue_config');
+		$this->db->where('sea_student_revenue_config.user_id',$id);
+		$query = $this->db->get();         	
+ 	    return $query->result_array();
+	}
+	
+	public function getStuConfig($id){
+		 $this->db->select('*');
+		 $this->db->from('sea_student_revenue_config');
+		 $this->db->where('sea_student_revenue_config.user_id',$id);
+		 $query = $this->db->get();
+		 return $query->num_rows();
+		
+	}
+	public function updateStuRev($table,$fieldLable1,$fieldLable2,$data,$id1,$id2){
+        $this->db->where($fieldLable1, $id1);
+		$this->db->where($fieldLable2,$id2);
+        $this->db->update($table,$data);
+	}
+	
 	//end of updating the values of Revenue configuration
 }

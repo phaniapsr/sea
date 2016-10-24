@@ -175,7 +175,7 @@ $(window).load(function () {
                 }
             })
         })
-        $(".f-rev-config").click(function () {
+        $(".f-rev-config").click(function(e) {
             var userId = $(this).attr('userid');
             $("#RevConfigUserId").val($(this).attr('userid'));
             $("#RevConfigId").val($(this).attr('rowid'));
@@ -200,11 +200,13 @@ $(window).load(function () {
 							 
                              
             });
+			 
 			$.ajax({
                 url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getStudentRevenueTypes',
                 dataType:'json',
                 method:'GET',
                 success:function(data){
+					$('#RevenueConfigurationForm').siblings().remove().not(':first');
                     $.each(data.student_revenue_type,function(data_key,data_val){
                         var cloned =$('#tbl_student_revenue_types_1').clone(true).insertAfter('#RevenueConfigurationForm > table:last');
                         cloned.attr('id',cloned.attr('id').replace(/\d+/, data_val.ssrt_id));
@@ -217,12 +219,54 @@ $(window).load(function () {
                     $('#tbl_student_revenue_types_1').each(function () {
                         $('[id="' + this.id + '"]:gt(0)').remove();
                     })
+					$.ajax({
+				type:'post',
+				url:'/sea/RevenueManagement/unitRevenueConfig',
+				data:{user_id:userId},
+				success:function(res){
+					var obj=JSON.parse(res);
+					var i=1;
+					//alert("CLICK OK TO PROCEED");
+					$.each(obj,function(k,v){
+						$('#consultant_share_'+i).val(v.consultant_share);
+						$('#state_share_'+i).val(v.state_share);
+						$('#district_share_'+i).val(v.district_share);
+						$('#unit_share_'+i).val(v.unit_share);
+						i++;
+					});
+				  	
+				}	   
+			  
+			});
                 },
                 error:function(){
                     alert('Some thing went wrong in collecting the student revenue type data')
                 }
             });
-
+			
+			
+			
+			/*$.ajax({
+				type:'post',
+				url:'/sea/RevenueManagement/unitRevenueConfig',
+				data:{user_id:userId},
+				async:false,
+				success:function(res){
+					var obj=JSON.parse(res);
+					var i=1;
+					//alert("CLICK OK TO PROCEED");
+					$.each(obj,function(k,v){
+						$('#consultant_share_'+i).val(v.consultant_share);
+						$('#state_share_'+i).val(v.state_share);
+						$('#district_share_'+i).val(v.district_share);
+						$('#unit_share_'+i).val(v.unit_share);
+						i++;
+					});
+				  	
+				}	   
+			  
+			});*/
+            
         });
 
         $('#DMFFranchiseeKitFee').keyup(function () {
