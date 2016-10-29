@@ -148,6 +148,5 @@ class RevenueManagement extends CI_Controller
 		$this->load->model('revenue_mod');
 		$data=$this->revenue_mod->checkRevenueConfig($_POST['user_id']);
 		echo json_encode($data);
-		
 	}
 }
