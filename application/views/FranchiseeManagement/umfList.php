@@ -114,7 +114,7 @@
                                                     </button>
                                                 </a></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                <button type="button" userid="<?php echo $row['user_id'];?>" listType="uf" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueSplit"
                                                         class="btn btn-primary btn-xs f-rev-split">Split
                                                 </button>

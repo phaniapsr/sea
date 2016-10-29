@@ -13,6 +13,7 @@ class StudentManagement extends CI_Controller
         // Construct the parent class
         parent::__construct();
         $this->load->model('student_mod', 'student');
+        $this->load->model('franchisee_mod', 'franchisee');
         //$this->load->model('merchant_mod');
         //$this->load->library('form_validation');
     }
@@ -87,7 +88,11 @@ class StudentManagement extends CI_Controller
             'stu_level' => $_POST['ProgramCourseLevelId'],
         );
         $result3 = $this->student->insertNewRecord('sea_student_course_level', $data3);
-
+        $data = array(
+            'user_id' => $result,
+            'role_id' => 6,
+        );
+        $role = $this->franchisee->insertNewRecord('sea_user_role', $data);
         //Logic for inserting record in hierarchy table
         //If admin/consultant login and creating SMF/DMF/UF
         if ($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5) {
@@ -117,8 +122,7 @@ class StudentManagement extends CI_Controller
 
     public function currentStudentsList()
     {
-
-        $data['data']['smf'] =$this->student->listFromTable('sea_users','6');
+        $data['data']['smf'] =$this->student->listFromTable('sea_users');
         $this->load->view('includes/header');
         $this->load->view('StudentManagement/currentStudentsList', $data);
         $this->load->view('includes/footer');

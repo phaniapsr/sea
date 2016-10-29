@@ -1,14 +1,14 @@
 $(window).load(function () {
-	$(document).ready(function () {
-		$('.number,#direct_smf_share,#direct_dmf_share,#direct_umf_share,#indirect_dmf_share,#indirect_umf_share,#student_commission').blur(function(){
-            if (parseFloat($(this).val()) > 0 ) {
+    $(document).ready(function () {
+        $('.number,#direct_smf_share,#direct_dmf_share,#direct_umf_share,#indirect_dmf_share,#indirect_umf_share,#student_commission').blur(function () {
+            if (parseFloat($(this).val()) > 0) {
 
             } else {
                 $(this).val('');
             }
             return false;
         });
-        $('#revenue_button_save').click(function(){
+        $('#revenue_button_save').click(function () {
             var data = {
                 UserId: $("#RevConfigUserId").val(),
                 Id: $("#RevConfigId").val(),
@@ -34,12 +34,12 @@ $(window).load(function () {
                 }
             });
         });
-        $('#student_revenue_button_save').click(function(){
+        $('#student_revenue_button_save').click(function () {
             $('#RevenueConfigurationForm').submit();
         });
-        $('#RevenueConfigurationForm').submit(function(e){
+        $('#RevenueConfigurationForm').submit(function (e) {
             e.preventDefault();
-            var data=$(this).serializeArray();
+            var data = $(this).serializeArray();
             $.ajax({
                 url: $('#RevenueConfigurationForm').attr('action'),
                 type: "POST",
@@ -54,116 +54,121 @@ $(window).load(function () {
             e.preventDefault();
             return false;
         });
-        var rev_config={};
-        $(".f-rev-split").click(function(){
+        var rev_config = {};
+        var list_type = '';
+        $(".f-rev-split").click(function () {
+            list_type = $(this).attr('listType');
             $.ajax({
-                url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getRevenueConfigurations',
-                dataType:'json',
-                method:'POST',
-                data:{userId:$(this).attr('userid')},
-                success:function(revenueSplit){
+                url: $('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0] + 'RevenueManagement/getRevenueConfigurations',
+                dataType: 'json',
+                method: 'POST',
+                data: {userId: $(this).attr('userid')},
+                success: function (revenueSplit) {
                     $('#kit_fee_identified').val('');
-                    rev_config=revenueSplit
+                    rev_config = revenueSplit
                     $('#license_amt_paid').text(revenueSplit.revenue_configurations[0].lf_amount);
                     $('#tax_amt_paid').text(revenueSplit.revenue_configurations[0].tax_amount);
-                    if(revenueSplit.revenue_configurations[0].kf_amount>0) {
+                    if (revenueSplit.revenue_configurations[0].kf_amount > 0) {
                         $('#kit_fee_identified').prop('readonly', true).val(revenueSplit.revenue_configurations[0].kf_amount),
-                        $('#splitting_amount').text(revenueSplit.revenue_configurations[0].lf_amount-revenueSplit.revenue_configurations[0].kf_amount);
+                            $('#splitting_amount').text(revenueSplit.revenue_configurations[0].lf_amount - revenueSplit.revenue_configurations[0].kf_amount);
                         $('#license_district_amount').val(revenueSplit.revenue_configurations[0].lf_dmf_amount),
-                        $('#license_company_amount').val(revenueSplit.revenue_configurations[0].lf_company_amount),
-                        $('#license_state_amount').val(revenueSplit.revenue_configurations[0].lf_smf_amount),
-                        $('#license_consultant_amount').val(revenueSplit.revenue_configurations[0].lf_consultant_amount)
+                            $('#license_company_amount').val(revenueSplit.revenue_configurations[0].lf_company_amount),
+                            $('#license_state_amount').val(revenueSplit.revenue_configurations[0].lf_smf_amount),
+                            $('#license_consultant_amount').val(revenueSplit.revenue_configurations[0].lf_consultant_amount)
                     }
-                    $.each(revenueSplit.revenue_configurations,function(rev_key,rev_obj){
+                    $.each(revenueSplit.revenue_configurations, function (rev_key, rev_obj) {
                         //For SMF
-                        if(rev_obj.role_id==2){
-                            if(rev_obj.smf_id==rev_obj.created_by){
-                                var unit= rev_obj.units==1?'%':'Rs';
-                                $('#state_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.direct_unit_amount+unit);
+                        if (rev_obj.role_id == 2 && list_type != 'smf') {
+                            if (rev_obj.smf_id == rev_obj.created_by) {
+                                var unit = rev_obj.units == 1 ? '%' : 'Rs';
+                                $('#state_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.direct_unit_amount + unit);
                             }
-                            else if(rev_obj.smf_id!=null){
-                                var unit= rev_obj.units==1?'%':'Rs';
-                                $('#state_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.indirect_uf_amount+unit);
+                            else if (rev_obj.smf_id != null) {
+                                var unit = rev_obj.units == 1 ? '%' : 'Rs';
+                                $('#state_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.indirect_uf_amount + unit);
                             }
                         }
                         //For DMF
-                        if(rev_obj.role_id==3){
-                            if(rev_obj.dmf_id==rev_obj.created_by){
-                                var unit= rev_obj.units==1?'%':'Rs';
-                                $('#district_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.direct_unit_amount+unit);
+                        if (rev_obj.role_id == 3 && list_type != 'dmf') {
+                            if (rev_obj.dmf_id == rev_obj.created_by) {
+                                var unit = rev_obj.units == 1 ? '%' : 'Rs';
+                                $('#district_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.direct_unit_amount + unit);
                             }
-                            else if(rev_obj.dmf_id!=null){
-                                var unit= rev_obj.units==1?'%':'Rs';
-                                $('#district_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.indirect_uf_amount+unit);
+                            else if (rev_obj.dmf_id != null) {
+                                var unit = rev_obj.units == 1 ? '%' : 'Rs';
+                                $('#district_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.indirect_uf_amount + unit);
                             }
                         }
                         //For Consultant
-                        if(rev_obj.role_id==5){
-                            if(rev_obj.consultant_id==rev_obj.created_by){
-                                var unit= rev_obj.units==1?'%':'Rs';
-                                $('#consultant_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.direct_unit_amount+unit);
+                        if (rev_obj.role_id == 5) {
+                            if (rev_obj.consultant_id == rev_obj.created_by) {
+                                var unit = rev_obj.units == 1 ? '%' : 'Rs';
+                                $('#consultant_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.direct_unit_amount + unit);
                             }
-                            else if(rev_obj.consultant_id!=null){
-                                var unit= rev_obj.units==1?'%':'Rs';
-                                $('#consultant_share_value').text(' '+rev_obj.franch_name+' - '+rev_obj.indirect_uf_amount+unit);
+                            else if (rev_obj.consultant_id != null) {
+                                var unit = rev_obj.units == 1 ? '%' : 'Rs';
+                                $('#consultant_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.indirect_uf_amount + unit);
                             }
                         }
                     })
                 },
-                error:function(){
+                error: function () {
                     alert('There is server not properly responded');
                 }
             })
         })
-        $('#kit_fee_identified').change(function(){
-            if($(this).val()>0){
-                var split_amt=parseFloat(rev_config.revenue_configurations[0].lf_amount-$(this).val());
+        $('#kit_fee_identified').change(function () {
+            if ($(this).val() > 0) {
+                var split_amt = parseFloat(rev_config.revenue_configurations[0].lf_amount - $(this).val());
                 $('#splitting_amount').text(split_amt);
-                $.each(rev_config.revenue_configurations,function(rev_key,rev_obj){
+                var exclude_company = 0;
+                $.each(rev_config.revenue_configurations, function (rev_key, rev_obj) {
                     //For SMF
-                    if(rev_obj.role_id==2){
-                        if(rev_obj.smf_id==rev_obj.created_by){
-                            $('#license_state_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.direct_unit_amount):(split_amt-rev_obj.direct_unit_amount));
+                    if (rev_obj.role_id == 2 && list_type != 'smf') {
+                        if (rev_obj.smf_id == rev_obj.created_by) {
+                            $('#license_state_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.direct_unit_amount) : (split_amt - rev_obj.direct_unit_amount));
                         }
-                        else if(rev_obj.smf_id!=null){
-                            $('#license_state_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.indirect_uf_amount):(split_amt-rev_obj.indirect_uf_amount));
+                        else if (rev_obj.smf_id != null) {
+                            $('#license_state_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.indirect_uf_amount) : (split_amt - rev_obj.indirect_uf_amount));
                         }
+                        exclude_company += parseFloat($('#license_state_amount').val())
                     }
                     //For DMF
-                    if(rev_obj.role_id==3){
-                        if(rev_obj.dmf_id==rev_obj.created_by){
-                            $('#license_district_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.direct_unit_amount):(split_amt-rev_obj.direct_unit_amount));
+                    if (rev_obj.role_id == 3 && list_type != 'dmf') {
+                        if (rev_obj.dmf_id == rev_obj.created_by) {
+                            $('#license_district_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.direct_unit_amount) : (split_amt - rev_obj.direct_unit_amount));
                         }
-                        else if(rev_obj.dmf_id!=null){
-                            $('#license_district_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.indirect_uf_amount):(split_amt-rev_obj.indirect_uf_amount));
+                        else if (rev_obj.dmf_id != null) {
+                            $('#license_district_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.indirect_uf_amount) : (split_amt - rev_obj.indirect_uf_amount));
                         }
+                        exclude_company += parseFloat($('#license_district_amount').val())
                     }
                     //For Consultant
-                    if(rev_obj.role_id==5){
-                        if(rev_obj.consultant_id==rev_obj.created_by){
-                            $('#license_consultant_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.direct_unit_amount):(split_amt-rev_obj.direct_unit_amount));
+                    if (rev_obj.role_id == 5) {
+                        if (rev_obj.consultant_id == rev_obj.created_by) {
+                            $('#license_consultant_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.direct_unit_amount) : (split_amt - rev_obj.direct_unit_amount));
                         }
-                        else if(rev_obj.consultant_id!=null){
-                            $('#license_consultant_amount').val(rev_obj.units==1?((split_amt/100)*rev_obj.indirect_uf_amount):(split_amt-rev_obj.indirect_uf_amount));
+                        else if (rev_obj.consultant_id != null) {
+                            $('#license_consultant_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.indirect_uf_amount) : (split_amt - rev_obj.indirect_uf_amount));
                         }
+                        exclude_company += parseFloat($('#license_consultant_amount').val());
                     }
-
                 })
-                $('#license_company_amount').val(split_amt-(parseFloat($('#license_consultant_amount').val())+parseFloat($('#license_district_amount').val())+parseFloat($('#license_state_amount').val())))
+                $('#license_company_amount').val(split_amt - exclude_company);
             }
         })
-        $('#revenue_split_button_save').click(function(){
+        $('#revenue_split_button_save').click(function () {
             $.ajax({
                 url: $('#SplitRevenueConfigurationForm').attr('action'),
                 type: "POST",
-                dataType:'json',
+                dataType: 'json',
                 data: {
-                    revenue_config_id:rev_config.revenue_configurations[0].revenue_id,
-                    kit_amount:$('#kit_fee_identified').val(),
-                    company_amount:$('#license_company_amount').val(),
-                    district_amount:$('#license_district_amount').val(),
-                    state_amount:$('#license_state_amount').val(),
-                    consultant_amount:$('#license_consultant_amount').val()
+                    revenue_config_id: rev_config.revenue_configurations[0].revenue_id,
+                    kit_amount: $('#kit_fee_identified').val(),
+                    company_amount: $('#license_company_amount').val(),
+                    district_amount: $('#license_district_amount').val(),
+                    state_amount: $('#license_state_amount').val(),
+                    consultant_amount: $('#license_consultant_amount').val()
                 },
                 success: function () {
                     alert("Successfully Submitted......!!");
@@ -175,30 +180,30 @@ $(window).load(function () {
                 }
             })
         })
-        $(".f-rev-config").click(function(e) {
+        $(".f-rev-config").click(function (e) {
             var userId = $(this).attr('userid');
             $("#RevConfigUserId").val($(this).attr('userid'));
             $("#RevConfigId").val($(this).attr('rowid'));
             $("#SMFPaidFranchiseeFee").val($(this).attr('fee'));
             $.ajax({
-					    
-                             type:'post',
-                             url:'/sea/RevenueManagement/checkRevenueConfig',
-                             data:{user_id:userId},
-							 success:function(res){
-								var obj=JSON.parse(res);
-								$.each(obj,function(k,v){
-									$('#direct_smf_share').val(v.direct_state_amount);
-									$('#direct_dmf_share').val(v.direct_district_amount);
-									$('#direct_umf_share').val(v.direct_unit_amount);
-									$('#indirect_dmf_share').val(v.indirect_dmf_amount);
-									$('#indirect_umf_share').val(v.indirect_uf_amount);
-									
-								});
-								
-							 }
-							 
-                             
+
+                type: 'post',
+                url: '/sea/RevenueManagement/checkRevenueConfig',
+                data: {user_id: userId},
+                success: function (res) {
+                    var obj = JSON.parse(res);
+                    $.each(obj, function (k, v) {
+                        $('#direct_smf_share').val(v.direct_state_amount);
+                        $('#direct_dmf_share').val(v.direct_district_amount);
+                        $('#direct_umf_share').val(v.direct_unit_amount);
+                        $('#indirect_dmf_share').val(v.indirect_dmf_amount);
+                        $('#indirect_umf_share').val(v.indirect_uf_amount);
+
+                    });
+
+                }
+
+
             });
 			 
 			$.ajax({
@@ -243,38 +248,37 @@ $(window).load(function () {
 			  
 			});
                 },
-                error:function(){
+                error: function () {
                     alert('Some thing went wrong in collecting the student revenue type data')
                 }
             });
-			
-			
-			
-			/*$.ajax({
-				type:'post',
-				url:'/sea/RevenueManagement/unitRevenueConfig',
-				data:{user_id:userId},
-				async:false,
-				success:function(res){
-					var obj=JSON.parse(res);
-					var i=1;
-					//alert("CLICK OK TO PROCEED");
-					$.each(obj,function(k,v){
-						$('#consultant_share_'+i).val(v.consultant_share);
-						$('#state_share_'+i).val(v.state_share);
-						$('#district_share_'+i).val(v.district_share);
-						$('#unit_share_'+i).val(v.unit_share);
-						i++;
-					});
-				  	
-				}	   
-			  
-			});*/
-            
+
+
+            /*$.ajax({
+             type:'post',
+             url:'/sea/RevenueManagement/unitRevenueConfig',
+             data:{user_id:userId},
+             async:false,
+             success:function(res){
+             var obj=JSON.parse(res);
+             var i=1;
+             //alert("CLICK OK TO PROCEED");
+             $.each(obj,function(k,v){
+             $('#consultant_share_'+i).val(v.consultant_share);
+             $('#state_share_'+i).val(v.state_share);
+             $('#district_share_'+i).val(v.district_share);
+             $('#unit_share_'+i).val(v.unit_share);
+             i++;
+             });
+
+             }
+
+             });*/
+
         });
 
         $('#DMFFranchiseeKitFee').keyup(function () {
-			if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {
+            if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) <= parseFloat($('#DMFPaidFranchiseeFee').val())) {
                 $('#DMFFranchiseeLicenseFee').val(parseFloat($('#DMFPaidFranchiseeFee').val()) - parseFloat($('#DMFFranchiseeKitFee').val()));
             } else {
                 $('#DMFFranchiseeKitFee').val(0);
@@ -291,7 +295,7 @@ $(window).load(function () {
             }
             return false;
         });
-       
+
 
         $('#UFKitFee').keyup(function () {
             if (parseFloat($(this).val()) > 0 && parseFloat($(this).val()) < parseFloat($('#UFPaidFranchiseeFee').val())) {
@@ -343,22 +347,22 @@ $(window).load(function () {
             return false;
         });
         $('#StudentCompanyShare').keyup(function () {
-          //  var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
+            //  var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
             $('#StudentCompanyPercentage').val(parseFloat($('#StudentCompanyShare').val()) * 100 / parseFloat($('#StudentLevelFee').val()));
             return false;
         });
         $('#StudentSMFShare').keyup(function () {
-         //   var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
+            //   var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
             $('#StudentSMFPercentage').val(parseFloat($('#StudentSMFShare').val()) * 100 / parseFloat($('#StudentLevelFee').val()));
             return false;
         });
         $('#StudentDMFShare').keyup(function () {
-         //   var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
+            //   var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
             $('#StudentDMFPercentage').val(parseFloat($('#StudentDMFShare').val()) * 100 / parseFloat($('#StudentLevelFee').val()));
             return false;
         });
         $('#StudentUFShare').keyup(function () {
-          //  var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
+            //  var sharableFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()) + parseFloat($('#StudentKitFee').val()));
             $('#StudentUFPercentage').val(parseFloat($('#StudentUFShare').val()) * 100 / parseFloat($('#StudentLevelFee').val()));
             return false;
         });

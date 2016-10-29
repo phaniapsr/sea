@@ -110,7 +110,7 @@
                                                     <button type="button" class="btn btn-primary btn-xs">Deactivate</button>
                                                 </a></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                <button type="button" userid="<?php echo $row['user_id'];?>" listType="dmf" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueSplit"
                                                         class="btn btn-primary btn-xs f-rev-split">Split
                                                 </button>
@@ -248,26 +248,53 @@
                                 </div>
                             </div>
                             <br>
-                            <form id="SplitRevenueConfigurationForm" name="SplitRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/splitSMFRevenue" method="post">
+                            <form id="SplitRevenueConfigurationForm" name="SplitRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueSplit" method="post">
                                 <div class="row">
                                     <div class="row col-lg-12"><label>Total License Amount Paid : <span id="license_amt_paid"></span></label></div>
+                                    <div class="row col-lg-12"><label>Tax Amount Paid : <span id="tax_amt_paid"></span></label></div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
                                                 <label>Kit Fee</label>
-                                                <label><input class="form-control" name="kit_fee_identified"
-                                                              id="kit_fee_identified" type="text"></label>
+                                                <label><input class="form-control number" min="0"  name="kit_fee_identified"
+                                                              id="kit_fee_identified" type="number"></label>
                                             </div>
                                         </label>
                                     </div>
-                                    <div class="row col-lg-12"><label id="splitting_amount">Amount to be Split : <span id="splitting_amount"></span></label></div>
+                                    <div class="row col-lg-12"><label>Amount to be Split : <span id="splitting_amount"></span></label></div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Company Amount</label>
+                                                <label><input class="form-control" readonly name="license_company_amount" id="license_company_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>State Amount ( <span id="state_share_value"></span>)</label>
+                                                <label><input class="form-control" readonly name="license_state_amount"
+                                                              id="license_state_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Consultant Amount ( <span id="consultant_share_value"></span>)</label>
+                                                <label><input class="form-control" readonly name="license_consultant_amount"
+                                                              id="license_consultant_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="row" id="roww1">
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
                                                 role="button"
-                                                id="revenue_button_save"><span>Save</span></button>
+                                                id="revenue_split_button_save"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>
