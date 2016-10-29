@@ -285,7 +285,34 @@ $(function () {
             document.forms["form1"]["State"].focus();
             return false;
         }
-
+		var reg_fee=document.forms["form1"]["RegistrationFee"].value;
+		if(reg_fee==0||reg_fee=='')
+		{
+			alert("Please Enter Registration Fee");
+			document.forms["form1"]["RegistrationFee"].focus();
+			return false;
+		}
+        var level_fee=document.forms["form1"]["CourseFee"].value;
+		if(level_fee==0||level_fee=='')
+		{
+			alert("Please Enter Level Fee");
+			document.forms["form1"]["CourseFee"].focus();
+			return false;
+		}
+		var kit_fee=document.forms["form1"]["KitFee"].value;
+		if(kit_fee==0||kit_fee=='')
+		{
+			alert("Please Enter Kit Fee");
+			document.forms["form1"]["KitFee"].focus();
+			return false;
+		}
+		var acomp_fee=document.forms["form1"]["AcFee"].value;
+		if(acomp_fee==0||acomp_fee=='')
+		{
+			alert("Please Enter Kit Fee");
+			document.forms["form1"]["AcFee"].focus();
+			return false;
+		}
         //return false;
         //$('#studentRegistration').submit();
     });
@@ -297,17 +324,30 @@ $(function () {
                 url: formURL,
                 type: "POST",
                 data: postData,
-                success: function (data, textStatus, jqXHR) {
+				dataType:'json',
+                success: function (data, textStatus, jqXHR) 
+				{
+					//alert("");
                     //alert('phani'+data);
-                    if (data > 0)
+                   /* if (data > 0)
                         $('#message_from_server').text('Student registered successfully');
-                    else $('#message_from_server').text('Student registration failed');
-                    alert('Student registration completed successfully');
+                    else $('#message_from_server').text('Student registration failed');*/
+					if(data>0)
+					{
+						
+						if(confirm('Registration successfully completed. Press Okay to proceed for Payment')){
+                            $('#page-inner').load(formURL.split('/registerStudent')[0]+'/registrationAmountToBePaid',{userId:data})
+                        }
+                        else{
+                            $('#message_from_server').text('Franchisee registered successfully');
+                        }
+					}
+                    else alert(data.error);
                     //window.location.href = formURL.split('StudentManagement/')[0];
-
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     //alert('An'+jqXHR);
+					alert('There is some technical issue to complete this registration process. Please try later');
                 }
             });
         e.preventDefault();

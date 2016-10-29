@@ -111,7 +111,8 @@ class StudentManagement extends CI_Controller
                 'created_by' => $this->session->user_logged_in['id'],
             );
         }
-        $hierarchy = $this->franchisee->insertNewRecord('sea_user_hierarchy', $data_hierarchy);
+        //$hierarchy = $this->franchisee->insertNewRecord('sea_user_hierarchy', $data_hierarchy);
+		$hierarchy = $this->student->insertNewRecord('sea_user_hierarchy', $data_hierarchy);
         //End of hierarchy table data insertion
         $this->studentRevenueDistribution($result);
         //header('application/json');
@@ -323,5 +324,12 @@ class StudentManagement extends CI_Controller
             );
             $this->student->insertNewRecord('sea_student_revenue', $revenue_split);
         }
+    }
+
+	public function registrationAmountToBePaid()
+    {
+        $userId = $this->input->post('userId');
+        $data['data'] = $this->student->getRegistrationFeeDetails($userId);
+        $this->load->view('StudentManagement/registrationAmountToBePaid',$data);
     }
 }

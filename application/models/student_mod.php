@@ -66,5 +66,14 @@ class Student_mod extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+	
+	public function getRegistrationFeeDetails($userId){
+        $this->db->select('*');
+        $this->db->from('sea_users');
+        $this->db->join('sea_student_revenue','sea_student_revenue.student_id=sea_users.id');
+        $this->db->where('sea_users.id',$userId);
+        $query=$this->db->get();
+        return $query->result_array();
+    }
 //class close
 }
