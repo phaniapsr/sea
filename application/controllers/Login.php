@@ -92,5 +92,91 @@ class Login extends CI_Controller {
         $data['message_display'] = 'Successfully Logout';
         redirect('login');
     }
+	
+	public function  reset_password(){
+		
+		$this->load->view('reset_password');
+	}
+	public function  changepassword(){
+
+			$data = array();
+			$npassword =  $this->input->post('npassword');
+			$cpassword =  $this->input->post('cpassword');
+			if(isset($_POST['save'])){
+			if($npassword == $cpassword){
+				
+				$user_id = $this->session->user_logged_in['id'];
+				$result = $this->login_mod->change_password($user_id,$npassword);
+				$data['error_message']= 'password successfully changed';
+				redirect(site_url().'FranchiseeManagement');
+			}else{
+				$data['error_message'] = 'Please Enter correct password';
+			}
+			}	
+	
+			$this->load->view('changepassword', $data);
+		
+	}
 //class close
+	
+	
+	public function forgotpassword()
+	{
+	    $this->load->helper('url');
+		$email= $this->input->post('email');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('email','email','required|trim');
+		 $data = array();
+		if($this->form_validation->run()){
+			$email = $this->input->post('email');
+			$this->load->model('login_mod');
+			$user = $this->login_mod->get_user_by_email($email);
+			$slug = md5($user->id . $user->email . date('Ymd'));
+			$this->load->library('email');
+			$this->email->from('noreply@example.com', 'Example App'); // Change these details
+			$this->email->to($email); 
+			$this->email->subject('Reset your Password');
+			$this->email->message('To reset your password please click the link below and follow the instructions:<a href="'. site_url('reset/'. $user->id ) .'">reset Your password</a>
+If you did not request to reset your password then please just ignore this email and no changes will occur.
+Note: This reset code will expire after '. date('j M Y') .'.');	
+			@$this->email->send();
+			
+			$data['success'] = true;
+		}
+		$this->load->view('forgotpassword', $data);
+	}
+	
+	// reset password
+	public function reset()
+	{
+		// Redirect to your logged in landing page here
+		//if(user_logged_in()) redirect('FranchiseeManagement');
+		 
+		$this->load->library('form_validation');
+		$this->load->helper('form');
+		$data['success'] = false;
+		 
+	    $user_id = $this->uri->segment(3);
+		/*if(!$user_id) show_error('Invalid reset code.');
+		$hash = $this->uri->segment(4);
+		if(!$hash) show_error('Invalid reset code.');
+		*/
+		$this->load->model('login_mod');
+		$user = $this->login_mod->get_user($user_id);
+		if(!$user) show_error('Invalid reset code.');
+		$slug = md5($user->id . $user->email . date('Ymd'));
+		//if($hash != $slug) show_error('Invalid reset code.');
+		
+	 
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('password_conf', 'Confirm Password', 'required|matches[password]');
+		
+		if($this->form_validation->run()){
+			$result = $this->login_mod->change_password($user_id, $this->input->post('password'));
+			$data['success'] = true;
+		}
+		
+		$this->load->view('reset_password', $data);
+	}
+	
 }

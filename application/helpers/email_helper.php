@@ -81,4 +81,24 @@ if ( ! function_exists('send_email'))
 	{
 		return mail($recipient, $subject, $message);
 	}
+	
+	function sendEmail($recipient=0,$subject=0,$message=0)
+{
+    $CI =& get_instance();
+
+        $CI->load->library('email');               
+        //or autoload it from /application/config/autoload.php
+
+        $CI->email->from('sea@test.com', 'test');
+        $CI->email->to($to);
+        $CI->email->subject($subject);
+        $CI->email->message("Test
+
+            message :
+            ".$message);
+
+        $CI->email->send();
+
+}
+	
 }
