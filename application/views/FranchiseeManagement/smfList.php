@@ -1,8 +1,5 @@
 <div id="page-wrapper">
     <div id="page-inner">
-        <link href="Content/css/tjquery-ui.css" rel="stylesheet" />
-        <script src="Scripts/admin/validations/jquery-teacher.js"></script>
-        <script src="Scripts/admin/jquery-ui.js"></script>
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">
@@ -14,12 +11,10 @@
             <div class="col-lg-6">
                 <div>
                     <label>
-                        <input id="cbx-inactive" name="InActive" value="InActive" onchange="LoadStateFranchises()"
-                               checked="checked" type="checkbox"> Active Franchisee
+                        <input id="cbx-inactive" name="InActive" value="InActive" onchange="LoadStateFranchises()" checked="checked" type="checkbox"> Active Franchisee
                     </label>
                     <label id="margin-left">
-                        <input id="cbx-active" name="IsActive" value="IsActive" onchange="LoadStateFranchises()"
-                               type="checkbox"> Inactive Franchisee
+                        <input id="cbx-active" name="IsActive" value="IsActive" onchange="LoadStateFranchises()" type="checkbox"> Inactive Franchisee
                     </label>
                 </div>
             </div>
@@ -83,13 +78,16 @@
                                         <th aria-label="Split License Amount" style="width: 108px;" colspan="1" rowspan="1"
                                             class="text-center sorting_disabled">Split License Amount
                                         </th>
+										<th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Edit
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                     $i=1;
                                     foreach ($data['smf'] as $row){ ?>
-                                        <tr class="odd">
+									    <tr class="odd">
                                             <td class="selected sorting_1"><?php echo $row['id'];?></td>
                                             <td class=" selected"><a data-ajax="true" data-ajax-mode="replace"
                                                                      data-ajax-update="#details"
@@ -97,7 +95,7 @@
                                             <td><?php echo $row['city'];?></td>
                                             <td><?php echo $row['state'];?></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                <button type="button"  userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueConfiguration"
                                                         class="btn btn-primary btn-xs f-rev-config">Revenue Configuration
                                                 </button>
@@ -107,11 +105,15 @@
                                                     <button type="button" class="btn btn-primary btn-xs">Deactivate</button>
                                                 </a></td>
                                             <td class="text-center selected">
-                                                <button type="button" userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
+                                                <button type="button" userid="<?php echo $row['user_id'];?>" listType="smf" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueSplit"
                                                         class="btn btn-primary btn-xs f-rev-split">Split
                                                 </button>
                                             </td>
+											<td class=" text-center"><a href="editsmfList/<?php echo $row['user_id']?>" class="popup-with-zoom-anim-mec btn-activate"
+                                                                        userid="8" status="0" href="#small-dialog3">
+                                                    <button type="button" class="btn btn-primary btn-xs">Edit</button>
+                                                </a></td>	
                                         </tr>
                                     <?php }?>
                                     </tbody>
@@ -178,7 +180,7 @@
                                             <div class="col-lg-12">
                                                 <label>DMF Share</label>
                                                 <label><input class="form-control" name="direct_dmf_share"
-                                                              id="direct_dmf_share" type="text"></label>
+                                                              id="direct_dmf_share" type="text" ></label>
                                             </div>
                                         </label>
                                     </div>
@@ -260,26 +262,44 @@
                                 </div>
                             </div>
                             <br>
-                            <form id="SplitRevenueConfigurationForm" name="SplitRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/splitSMFRevenue" method="post">
+                            <form id="SplitRevenueConfigurationForm" name="SplitRevenueConfiguration" action="<?php echo base_url()?>RevenueManagement/saveRevenueSplit" method="post">
                                 <div class="row">
                                     <div class="row col-lg-12"><label>Total License Amount Paid : <span id="license_amt_paid"></span></label></div>
+                                    <div class="row col-lg-12"><label>Tax Amount Paid : <span id="tax_amt_paid"></span></label></div>
                                     <div class="col-lg-4">
                                         <label>
                                             <div class="col-lg-12">
                                                 <label>Kit Fee</label>
-                                                <label><input class="form-control" name="kit_fee_identified"
-                                                              id="kit_fee_identified" type="text"></label>
+                                                <label><input class="form-control number" min="0"  name="kit_fee_identified"
+                                                              id="kit_fee_identified" type="number"></label>
                                             </div>
                                         </label>
                                     </div>
-                                    <div class="row col-lg-12"><label id="splitting_amount">Amount to be Split : <span id="splitting_amount"></span></label></div>
+                                    <div class="row col-lg-12"><label>Amount to be Split : <span id="splitting_amount"></span></label></div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Company Amount</label>
+                                                <label><input class="form-control" readonly name="license_company_amount" id="license_company_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>
+                                            <div class="col-lg-12">
+                                                <label>Consultant Amount ( <span id="consultant_share_value"></span>)</label>
+                                                <label><input class="form-control" readonly name="license_consultant_amount"
+                                                              id="license_consultant_amount" type="text"></label>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="row" id="roww1">
                                     <center>
                                         <label class="danger" id="rev-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
                                                 role="button"
-                                                id="revenue_button_save"><span>Save</span></button>
+                                                id="revenue_split_button_save"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
                                     </center>

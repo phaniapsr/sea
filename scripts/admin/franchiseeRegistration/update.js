@@ -1,42 +1,6 @@
-/**
- * Created by phani kumar on 8/6/2016.
- */
 $(function(){
-
-	$('#checkbox').click(function(){
-		if(document.forms["form2"]["checkbox"].checked==true)
-		{
-			document.forms["form2"]["RflatNo"].value=document.forms["form2"]["FlatNo"].value;
-			document.forms["form2"]["RstreetName"].value=document.forms["form2"]["StreetName"].value;
-			document.forms["form2"]["Rarea"].value=document.forms["form2"]["Area"].value;
-			document.forms["form2"]["Rcity"].value=document.forms["form2"]["City"].value;
-			document.forms["form2"]["RpinCode"].value=document.forms["form2"]["PinCode"].value;
-			document.forms["form2"]["Rstate"].value=document.forms["form2"]["State"].value;
-			document.forms["form2"]["Rnationality"].value=document.forms["form2"]["Nationality"].value;
-
-		}
-		else
-		{
-			document.forms["form2"]["RflatNo"].value='';
-			document.forms["form2"]["RstreetName"].value='';
-			document.forms["form2"]["Rarea"].value='';
-			document.forms["form2"]["Rcity"].value='';
-			document.forms["form2"]["RpinCode"].value='';
-			document.forms["form2"]["Rstate"].value='';
-			document.forms["form2"]["Rnationality"].value='';
-
-		}
-	});
 	$('#signup').click(function(){
-		//alert("manu");
-		var fr_id=document.forms["form2"]["franchiseetypeId"].value;
-		if(fr_id=='')
-		{
-			alert("Please Select Franchisee in drop down list");
-			document.forms["form2"]["franchiseetypeId"].focus();
-			return false;
-		}
-		var fr_name=document.forms["form2"]["franchiseeName"].value;
+	var fr_name=document.forms["form2"]["franchiseeName"].value;
 		if(fr_name=='')
 		{
 			alert("Please Enter FranchiseeName");
@@ -59,22 +23,6 @@ $(function(){
 			return false;
 		}
 		var regexp_name=/^[a-zA-Z]+$/;
-		/*if(!regexp_name.test(fr_name))
-		{
-			alert("Franchisee Name Should Contain Only Alphabets");
-			document.forms["form2"]["franchiseeName"].focus();
-			return false;
-		}
-		*/
-		var fr_pass=document.forms["form2"]["password"].value;
-		var regexp_pass=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-		if(!regexp_pass.test(fr_pass))
-		{
-			alert("password should contain atleast one number one special character one capital letter");
-			document.forms["form2"]["password"].focus();
-			return false;
-
-		}
 		var fr_fname=document.forms["form2"]["first_name"].value;
 		if(fr_fname=='')
 		{
@@ -102,7 +50,7 @@ $(function(){
 			document.forms["form2"]["last_name"].focus();
 			return false;
 		}
-
+		
 		var fr_dob=document.forms["form2"]["date_of_birth"].value;
 		if(fr_dob=='01/01/0001')
 		{
@@ -138,14 +86,7 @@ $(function(){
 			document.forms["form2"]["PlaceOfBirth"].focus();
 			return false;
 		}
-		var fr_marital=document.forms["form2"]["MaritalStatus"].value;
-		if(fr_marital=='')
-		{
-			alert("please choose correct one from drop down");
-			document.forms["form2"]["MaritalStatus"].focus();
-			return false;
-		}
-		var fr_course_apply=document.forms["form2"]["CourseApplied"].value;
+        var fr_course_apply=document.forms["form2"]["CourseApplied"].value;
 		if(fr_course_apply=='')
 		{
 			alert("please select minimum one course");
@@ -249,51 +190,9 @@ $(function(){
 			document.forms["form2"]["Nationality"].focus();
 			return false;
 		}
-		var fr_fee=document.forms["form2"]["FranchiseFee"].value;
-		var regexp_fee=/^\d{0,10}$/;
-		if(!regexp_fee.test(fr_fee)|fr_fee==0)
-		{
-			alert("please enter correct amount as fee");
-			document.forms["form2"]["FranchiseFee"].focus();
-			return false;
-		}
-
-		//while submitting
-		//$('#franchiseeRegistration').submit();
-
-
-	});
-	$('#franchiseeRegistration').submit(function(e){
-		var postData = $(this).serializeArray();
-		var formURL = $(this).attr("action");
-		$.ajax(
-			{
-				url : formURL,
-				type: "POST",
-				data : postData,
-                dataType:'json',
-				success:function(data, textStatus, jqXHR)
-				{
-					/*if(data>0)
-						$('#message_from_server').text('Franchisee registered successfully');
-					else $('#message_from_server').text('Registration failed');*/
-					if(data.id>0){
-						if(confirm('Registration successfully completed. Press Okay to proceed for Payment')){
-                            $('#page-inner').load(formURL.split('/registerFranchisee')[0]+'/registrationAmountToBePaid',{userId:data.id})
-                        }
-                        else{
-                            $('#message_from_server').text('Franchisee registered successfully');
-                        }
-					}
-					else alert(data.error);
-				},
-				error: function(jqXHR, textStatus, errorThrown)
-				{
-					alert('There is some technical issue to complete this registration process. Please try later');
-				}
-			});
-		e.preventDefault();
-		e.unbind();
-		return false;
-	})
+		
+		alert("update successfully");
+		return true;
+		
+});
 });

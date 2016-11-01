@@ -7,11 +7,15 @@ class Student_mod extends CI_Model
         parent::__Construct();
     }
 
-    public function listFromTable($table, $filter)
+    public function listFromTable($table)
     {
-        $query = "select * from $table where franchiseetypeId = '$filter'";
-        $sql = $this->db->query($query);
-        return $sql->result_array();
+        //$query = "select * from $table";
+        $this->db->select('*');
+        $this->db->from('sea_users');
+        $this->db->join('sea_user_role', 'sea_user_role.user_id = sea_users.id');
+        $this->db->where('sea_user_role.role_id=6');
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function currentStudentsList($table, $filter)
@@ -41,6 +45,18 @@ class Student_mod extends CI_Model
         $this->db->update($table, $data);
     }
 
+    public function franchiseDetailView($filter)
+    {
+        $this->db->select('*');
+        $this->db->from('sea_users');
+        $this->db->join('sea_student_pers_details', 'sea_student_pers_details.stud_id=sea_users.id');
+        $this->db->join('sea_franchise_resid_address', 'sea_franchise_resid_address.user_id=sea_users.id');
+        $this->db->join('sea_student_course_level', 'sea_student_course_level.user_id=sea_users.id');
+        $this->db->where('sea_users.id', $filter);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function getStudentRevenueConfigurations($filter)
     {
         $this->db->select('*');
@@ -48,6 +64,15 @@ class Student_mod extends CI_Model
         $this->db->where('user_id', $filter['user_id']);
         $this->db->where('revenue_type_id', $filter['revenue_type_id']);
         $query = $this->db->get();
+        return $query->result_array();
+    }
+	
+	public function getRegistrationFeeDetails($userId){
+        $this->db->select('*');
+        $this->db->from('sea_users');
+        $this->db->join('sea_student_revenue','sea_student_revenue.student_id=sea_users.id');
+        $this->db->where('sea_users.id',$userId);
+        $query=$this->db->get();
         return $query->result_array();
     }
 //class close

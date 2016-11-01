@@ -29,8 +29,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">License Amount</label>
-                                <div id="franchisee_license_amount_id" class="col-lg-6"><?php echo $data[0]['lf_amount']?></div>
+                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Registration Fee</label>
+                                <div id="franchisee_license_amount_id" class="col-lg-6"><?php echo $data[0]['company_amount']?></div>
                                 <input type="hidden" name="license_amount" id="hid_franchisee_license_amount_id" value="<?php echo $data[0]['lf_amount']?>">
                             </div>
                         </div>

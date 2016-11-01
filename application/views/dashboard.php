@@ -401,5 +401,5 @@
             <script src="Scripts/admin/jquery-ui.js"></script>
 
         </div>
-        <footer><p>All right reserved by: <a href="http://friendsfocus.in/">LemonBridge</a></p></footer>
+        <footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
     </div>

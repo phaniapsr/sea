@@ -22,6 +22,7 @@ class Login_mod extends CI_Model{
         $this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id','left');
         $this->db->where($data);
         $query=$this->db->get();
+        //print_r($query->result_array());exit;
         return $query->result_array();
     }
     public function user_level_data($data) {
