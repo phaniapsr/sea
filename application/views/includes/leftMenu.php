@@ -1,5 +1,6 @@
 <nav class="navbar-default navbar-side" role="navigation">
     <div class="sidebar-collapse">
+	<?php //print_r($this->session->user_logged_in['role_id']); exit;?>
         <ul class="nav" id="main-menu">
             <li>
                 <a href="<?php echo base_url(); ?>FranchiseeManagement/dashboard"><i class="fa fa-dashboard"></i>
@@ -13,19 +14,38 @@
             <li>
                 <a href="#"><i class="fa fa-gift"></i> Franchisee Details<span class="fa fa-angle-right"></span></a>
                 <ul class="nav nav-second-level">
+				<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5 
+				|| $this->session->user_logged_in['role_id'] == 2 ){?>
                     <li>
                         <a href="<?php echo base_url(); ?>FranchiseeManagement/smfList">State Master Franchisee(s)</a>
                     </li>
+					<?php }else{
+						
+					} ?>
+					<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
+					 || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3){?>
                     <li>
                         <a href="<?php echo base_url(); ?>FranchiseeManagement/dmfList">District Master
                             Franchisee(s)</a>
                     </li>
+					<?php }else{?>
+						
+					<?php } ?>
+					<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
+					 || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3
+					 || $this->session->user_logged_in['role_id'] == 4){?>
                     <li>
                         <a href="<?php echo base_url(); ?>FranchiseeManagement/ufList">Unit Franchisee(s)</a>
                     </li>
+					 <?php }else{?> 
+					 <?php } ?>
+					<?php if($this->session->user_logged_in['role_id'] == 1 ){?>
                     <li>
                         <a href="<?php echo base_url(); ?>FranchiseeManagement/consultantsList">Consultants</a>
                     </li>
+					<?php }else{?> 
+					
+					<?php }?>
                 </ul>
             </li>
 

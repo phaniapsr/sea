@@ -33,4 +33,28 @@ class Login_mod extends CI_Model{
         $query=$this->db->get();
         return $query->result_array();
     }
+	function change_password($user_id,$npassword)
+	{
+    	$data = array(
+			'password'  => $npassword,
+			);
+			
+			$this->db->where('id', $user_id);
+			$this->db->update('sea_users', $data); 
+	
+	}
+	
+	public function get_user_by_email($email)
+	{
+		$query = $this->db->get_where('sea_users', array('email' => $email));
+		if($query->num_rows()) return $query->row();
+		return false;
+	}
+	
+	public function get_user($user_id)
+	{
+		$query = $this->db->get_where('sea_users', array('id' => $user_id));
+		if($query->num_rows()) return $query->row();
+		return false;
+	}
 }

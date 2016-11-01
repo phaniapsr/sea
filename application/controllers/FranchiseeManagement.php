@@ -163,8 +163,13 @@ class FranchiseeManagement extends CI_Controller
                 'course_funmaths' => $cf,
             );
             $result4 = $this->franchisee->insertNewRecord('sea_franchise_courses', $data4);
-            //header('application/json');
-            echo json_encode(array('id'=>$result));
+            $this->load->library('email');
+			$this->email->from('noreply@example.com', 'Example App'); // Change these details
+			$this->email->to($_POST['email']); 
+			$this->email->subject('Login Details');
+			$this->email->message('Email :"'.$_POST['email'].'"<br>Password:"'.$_POST['password'].'"');	
+			@$this->email->send();
+			echo json_encode(array('id'=>$result));
         }
         else echo json_encode(array('error'=>'Email already taken'));
     }

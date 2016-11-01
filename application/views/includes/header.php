@@ -207,7 +207,7 @@
                         <a href="/UserProfile"><i class="fa fa-user fa-fw"></i><?php echo $this->session->user_logged_in['first_name']?></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <a href="<?php echo base_url();?>Login/changepassword"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                     </li>
                     <li class="divider"></li>
                     <li>
