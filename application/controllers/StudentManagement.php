@@ -29,63 +29,63 @@ class StudentManagement extends CI_Controller
     public function registerStudent(){
         $data=array(
             //'franchiseetypeId'=>4,
-            'password'=>$_POST['password'],
-            'email'=>$_POST['email'],
-            'first_name'=>$_POST['first_name'],
-            'last_name'=>$_POST['last_name'],
-            'middle_name'=>$_POST['middle_name'],
-            'date_of_birth'=>$_POST['date_of_birth'],
-            'gender'=>$_POST['gender'],
-            'age'=>$_POST['Age'],
+            'password'=>$this->input->post('password'),
+            'email'=>$this->input->post('email'),
+            'first_name'=>$this->input->post('first_name'),
+            'last_name'=>$this->input->post('last_name'),
+            'middle_name'=>$this->input->post('middle_name'),
+            'date_of_birth'=>$this->input->post('date_of_birth'),
+            'gender'=>$this->input->post('gender'),
+            'age'=>$this->input->post('Age'),
         );
 
         $result = $this->student->insertNewRecord('sea_users', $data);
         $data1 = array(
             'stud_id' => $result,
-            'stud_mothertong' => $_POST['MotherTounge'],
-            'fath_name' => $_POST['FatherName'],
-            'fath_mobno' => $_POST['FatherMobileNumber'],
-            'moth_name' => $_POST['MotherName'],
-            'moth_mobno' => $_POST['MotherMobileNumber'],
-            'fath_email' => $_POST['ParentEmailId'],
-            'fath_qualif' => $_POST['FatherQualicfation'],
-            'fath_occup' => $_POST['FatherOccupation'],
-            'moth_qualif' => $_POST['MotherQualicfation'],
-            'moth_occup' => $_POST['MotherOccupation'],
-            'land_no' => $_POST['LandlineNumber'],
-            'school_name' => $_POST['SchoolName'],
-            'school_add' => $_POST['SchoolAddress'],
-            'school_mobno' => $_POST['SchoolNumber'],
-            'program_name' => $_POST['ProgramId'],
-            'course_name' => $_POST['CourseId'],
-            'level_name' => $_POST['ProgramCourseLevelId'],
-            'fsib_name' => $_POST['Sibling1Name'],
-            'ssib_name' => $_POST['Sibling2Name'],
-            'fsib_sname' => $_POST['Sibling1SchoolName'],
-            'fsib_age' => $_POST['Sibling1Age'],
-            'fsib_gender' => $_POST['Sibling1Gender'],
-            'fsib_stand' => $_POST['Sibling1Standard'],
-            'ssib_sname' => $_POST['Sibling2SchoolName'],
-            'ssib_age' => $_POST['Sibling2Age'],
-            'ssib_gender' => $_POST['Sibling2Gender'],
-            'ssib_stand' => $_POST['Sibling2Standard'],
+            'stud_mothertong' => $this->input->post('MotherTounge'),
+            'fath_name' => $this->input->post('FatherName'),
+            'fath_mobno' => $this->input->post('FatherMobileNumber'),
+            'moth_name' => $this->input->post('MotherName'),
+            'moth_mobno' => $this->input->post('MotherMobileNumber'),
+            'fath_email' => $this->input->post('ParentEmailId'),
+            'fath_qualif' => $this->input->post('FatherQualicfation'),
+            'fath_occup' => $this->input->post('FatherOccupation'),
+            'moth_qualif' => $this->input->post('MotherQualicfation'),
+            'moth_occup' => $this->input->post('MotherOccupation'),
+            'land_no' => $this->input->post('LandlineNumber'),
+            'school_name' => $this->input->post('SchoolName'),
+            'school_add' => $this->input->post('SchoolAddress'),
+            'school_mobno' => $this->input->post('SchoolNumber'),
+            'program_name' => $this->input->post('ProgramId'),
+            'course_name' => $this->input->post('CourseId'),
+            'level_name' => $this->input->post('ProgramCourseLevelId'),
+            'fsib_name' => $this->input->post('Sibling1Name'),
+            'ssib_name' => $this->input->post('Sibling2Name'),
+            'fsib_sname' => $this->input->post('Sibling1SchoolName'),
+            'fsib_age' => $this->input->post('Sibling1Age'),
+            'fsib_gender' => $this->input->post('Sibling1Gender'),
+            'fsib_stand' => $this->input->post('Sibling1Standard'),
+            'ssib_sname' => $this->input->post('Sibling2SchoolName'),
+            'ssib_age' => $this->input->post('Sibling2Age'),
+            'ssib_gender' => $this->input->post('Sibling2Gender'),
+            'ssib_stand' => $this->input->post('Sibling2Standard'),
         );
         $result1 = $this->student->insertNewRecord('sea_student_pers_details', $data1);
         $data2 = array(
             'user_id' => $result,
-            'doorno' => $_POST['FlatNo'],
-            'streetname' => $_POST['StreetName'],
-            'area' => $_POST['Area'],
-            'city' => $_POST['City'],
-            'pincode' => $_POST['PinCode'],
-            'state' => $_POST['State'],
+            'doorno' => $this->input->post('FlatNo'),
+            'streetname' => $this->input->post('StreetName'),
+            'area' => $this->input->post('Area'),
+            'city' => $this->input->post('City'),
+            'pincode' => $this->input->post('PinCode'),
+            'state' => $this->input->post('State'),
         );
         $result2 = $this->student->insertNewRecord('sea_franchise_resid_address', $data2);
         $data3 = array(
             'user_id' => $result,
-            'stu_program' => $_POST['ProgramId'],
-            'stu_category' => $_POST['CourseId'],
-            'stu_level' => $_POST['ProgramCourseLevelId'],
+            'stu_program' => $this->input->post('ProgramId'),
+            'stu_category' => $this->input->post('CourseId'),
+            'stu_level' => $this->input->post('ProgramCourseLevelId'),
         );
         $result3 = $this->student->insertNewRecord('sea_student_course_level', $data3);
         $data = array(
@@ -146,64 +146,64 @@ class StudentManagement extends CI_Controller
 
     public function updateStudent()
     {
-        $id = $_POST['how'];
+        $id = $this->input->post('how');
         $fl = "id";
         $data = array(
-            'email' => $_POST['email'],
-            'first_name' => $_POST['first_name'],
-            'last_name' => $_POST['last_name'],
-            'middle_name' => $_POST['middle_name'],
-            'date_of_birth' => date('Y-m-d', strtotime($_POST['DateOfBirth'])),
-            'gender' => $_POST['gender'],
-            'age' => $_POST['Age'],
+            'email' => $this->input->post('email'),
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'middle_name' => $this->input->post('middle_name'),
+            'date_of_birth' => date('Y-m-d', strtotime($this->input->post('DateOfBirth'))),
+            'gender' => $this->input->post('gender'),
+            'age' => $this->input->post('Age'),
         );
         $result = $this->student->updateTableRecord('sea_users', $fl, $data, $id);
         $data = array(
-            'stud_mothertong' => $_POST['MotherTounge'],
-            'fath_name' => $_POST['FatherName'],
-            'fath_mobno' => $_POST['FatherMobileNumber'],
-            'moth_name' => $_POST['MotherName'],
-            'moth_mobno' => $_POST['MotherMobileNumber'],
-            'fath_email' => $_POST['ParentEmailId'],
-            'fath_qualif' => $_POST['FatherQualicfation'],
-            'fath_occup' => $_POST['FatherOccupation'],
-            'moth_qualif' => $_POST['MotherQualicfation'],
-            'moth_occup' => $_POST['MotherOccupation'],
-            'land_no' => $_POST['LandlineNumber'],
-            'school_name' => $_POST['SchoolName'],
-            'school_add' => $_POST['SchoolAddress'],
-            'school_mobno' => $_POST['SchoolNumber'],
-            'program_name' => $_POST['ProgramId'],
-            'course_name' => $_POST['CourseId'],
-            'level_name' => $_POST['ProgramCourseLevelId'],
-            'fsib_name' => $_POST['Sibling1Name'],
-            'ssib_name' => $_POST['Sibling2Name'],
-            'fsib_sname' => $_POST['Sibling1SchoolName'],
-            'fsib_age' => $_POST['Sibling1Age'],
-            'fsib_gender' => $_POST['Sibling1Gender'],
-            'fsib_stand' => $_POST['Sibling1Standard'],
-            'ssib_sname' => $_POST['Sibling2SchoolName'],
-            'ssib_age' => $_POST['Sibling2Age'],
-            'ssib_gender' => $_POST['Sibling2Gender'],
-            'ssib_stand' => $_POST['Sibling2Standard'],
+            'stud_mothertong' => $this->input->post('MotherTounge'),
+            'fath_name' => $this->input->post('FatherName'),
+            'fath_mobno' => $this->input->post('FatherMobileNumber'),
+            'moth_name' => $this->input->post('MotherName'),
+            'moth_mobno' => $this->input->post('MotherMobileNumber'),
+            'fath_email' => $this->input->post('ParentEmailId'),
+            'fath_qualif' => $this->input->post('FatherQualicfation'),
+            'fath_occup' => $this->input->post('FatherOccupation'),
+            'moth_qualif' => $this->input->post('MotherQualicfation'),
+            'moth_occup' => $this->input->post('MotherOccupation'),
+            'land_no' => $this->input->post('LandlineNumber'),
+            'school_name' => $this->input->post('SchoolName'),
+            'school_add' => $this->input->post('SchoolAddress'),
+            'school_mobno' => $this->input->post('SchoolNumber'),
+            'program_name' => $this->input->post('ProgramId'),
+            'course_name' => $this->input->post('CourseId'),
+            'level_name' => $this->input->post('ProgramCourseLevelId'),
+            'fsib_name' => $this->input->post('Sibling1Name'),
+            'ssib_name' => $this->input->post('Sibling2Name'),
+            'fsib_sname' => $this->input->post('Sibling1SchoolName'),
+            'fsib_age' => $this->input->post('Sibling1Age'),
+            'fsib_gender' => $this->input->post('Sibling1Gender'),
+            'fsib_stand' => $this->input->post('Sibling1Standard'),
+            'ssib_sname' => $this->input->post('Sibling2SchoolName'),
+            'ssib_age' => $this->input->post('Sibling2Age'),
+            'ssib_gender' => $this->input->post('Sibling2Gender'),
+            'ssib_stand' => $this->input->post('Sibling2Standard'),
         );
         $fl = "stud_id";
         $result = $this->student->updateTableRecord('sea_student_pers_details', $fl, $data, $id);
         $data = array(
-            'doorno' => $_POST['FlatNo'],
-            'streetname' => $_POST['StreetName'],
-            'area' => $_POST['Area'],
-            'city' => $_POST['City'],
-            'pincode' => $_POST['PinCode'],
-            'state' => $_POST['State'],
+            'doorno' => $this->input->post('FlatNo'),
+            'streetname' => $this->input->post('StreetName'),
+            'area' => $this->input->post('Area'),
+            'city' => $this->input->post('City'),
+            'pincode' => $this->input->post('PinCode'),
+            'state' => $this->input->post('State'),
 
         );
         $fl = "user_id";
         $result = $this->student->updateTableRecord('sea_franchise_resid_address', $fl, $data, $id);
         $data = array(
-            'stu_program' => $_POST['ProgramId'],
-            'stu_category' => $_POST['CourseId'],
-            'stu_level' => $_POST['ProgramCourseLevelId'],
+            'stu_program' => $this->input->post('ProgramId'),
+            'stu_category' => $this->input->post('CourseId'),
+            'stu_level' => $this->input->post('ProgramCourseLevelId'),
 
         );
         $fl = "user_id";
@@ -221,11 +221,11 @@ class StudentManagement extends CI_Controller
 
     public function studentRevenueDistribution($student_id)
     {
-        if ($this->session->user_logged_in['role_id'] == 1 && isset($_POST['ProgramId']) && $_POST['ProgramId'] != '') {
+        if ($this->session->user_logged_in['role_id'] == 1 && isset($_POST['ProgramId']) && $this->input->post('ProgramId') != '') {
 
             //For Student Registration Fee
             $revenue_split = array(
-                'company_amount' => $_POST['RegistrationFee'],
+                'company_amount' => $this->input->post('RegistrationFee'),
                 'student_id' => $student_id,
                 'revenue_type_id' => GlobalsHelper::$course_level_config_array['SR_FEE']
             );
@@ -233,7 +233,7 @@ class StudentManagement extends CI_Controller
 
             //For Kit fee split
             $revenue_split = array(
-                'company_amount' => $_POST['KitFee'],
+                'company_amount' => $this->input->post('KitFee'),
                 'student_id' => $student_id,
                 'revenue_type_id' => GlobalsHelper::$course_level_config_array['KIT_FEE'][$_POST['ProgramId']][$_POST['ProgramCourseLevelId']]
             );
@@ -241,7 +241,7 @@ class StudentManagement extends CI_Controller
 
             //For Level Fee
             $revenue_split = array(
-                'company_amount' => $_POST['CourseFee'],
+                'company_amount' => $this->input->post('CourseFee'),
                 'student_id' => $student_id,
                 'revenue_type_id' => GlobalsHelper::$course_level_config_array['LEVEL_FEE'][$_POST['ProgramId']]
             );
@@ -249,17 +249,17 @@ class StudentManagement extends CI_Controller
 
             //For Annual competition Fee
             $revenue_split = array(
-                'company_amount' => $_POST['AcFee'],
+                'company_amount' => $this->input->post('AcFee'),
                 'student_id' => $student_id,
                 'revenue_type_id' => GlobalsHelper::$course_level_config_array['AC_FEE']
             );
             $this->student->insertNewRecord('sea_student_revenue', $revenue_split);
         } //Logged in user is UF
-        elseif ($this->session->user_logged_in['role_id'] == 4 && isset($_POST['ProgramId']) && $_POST['ProgramId'] != '') {
+        elseif ($this->session->user_logged_in['role_id'] == 4 && isset($_POST['ProgramId']) && $this->input->post('ProgramId') != '') {
             //For Student Registration Fee
             $revenueShares = $this->student->getFranchiseRevenueConfigurations(array('user_id' => $this->session->user_logged_in['id'], 'revenue_type_id' => GlobalsHelper::$course_level_config_array['SR_FEE']));
             $revenue_split = array(
-                'company_amount' => $_POST['RegistrationFee'],
+                'company_amount' => $this->input->post('RegistrationFee'),
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['RegistrationFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
                 'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['RegistrationFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
@@ -276,7 +276,7 @@ class StudentManagement extends CI_Controller
             //For Kit fee split
             $revenueShares = $this->student->getFranchiseRevenueConfigurations(array('user_id' => $this->session->user_logged_in['id'], 'revenue_type_id' => GlobalsHelper::$course_level_config_array['KIT_FEE'][$_POST['ProgramId']][$_POST['ProgramCourseLevelId']]));
             $revenue_split = array(
-                'company_amount' => $_POST['KitFee'],
+                'company_amount' => $this->input->post('KitFee'),
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['KitFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
                 'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['KitFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
@@ -293,7 +293,7 @@ class StudentManagement extends CI_Controller
             //For Level Fee
             $revenueShares = $this->student->getFranchiseRevenueConfigurations(array('user_id' => $this->session->user_logged_in['id'], 'revenue_type_id' => GlobalsHelper::$course_level_config_array['LEVEL_FEE'][$_POST['ProgramId']]));
             $revenue_split = array(
-                'company_amount' => $_POST['CourseFee'],
+                'company_amount' => $this->input->post('CourseFee'),
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['CourseFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
                 'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['CourseFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
@@ -310,7 +310,7 @@ class StudentManagement extends CI_Controller
             //For Annual competition Fee
             $revenueShares = $this->student->getFranchiseRevenueConfigurations(array('user_id' => $this->session->user_logged_in['id'], 'revenue_type_id' => GlobalsHelper::$course_level_config_array['AC_FEE']));
             $revenue_split = array(
-                'company_amount' => $_POST['AcFee'],
+                'company_amount' => $this->input->post('AcFee'),
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['AcFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
                 'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['AcFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
