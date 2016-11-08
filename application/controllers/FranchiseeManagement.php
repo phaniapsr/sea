@@ -15,6 +15,7 @@ class FranchiseeManagement extends CI_Controller
         $this->load->model('franchisee_mod', 'franchisee');
         //$this->load->model('merchant_mod');
         $this->load->library('form_validation');
+		 $this->load->helper('array');
     }
 
     public function index()
@@ -27,6 +28,9 @@ class FranchiseeManagement extends CI_Controller
 
     public function registerFranchisee(){
         //$this->db->trans_begin();
+		$from=new Datetime($this->input->post('DateOfBirth'));
+		$to=new Datetime('today');
+		$age=$from->diff($to)->y;
         $data=array(
             'username'=>$this->input->post('franchiseeName'),
             'password'=>$this->input->post('password'),
@@ -35,7 +39,8 @@ class FranchiseeManagement extends CI_Controller
             'last_name'=>$this->input->post('last_name'),
             'middle_name'=>$this->input->post('middle_name'),
             'date_of_birth'=>date('Y-m-d',strtotime($this->input->post('DateOfBirth'))),
-            'gender'=>$this->input->post('gender'),
+			'age'=>$age,
+			'gender'=>$this->input->post('gender'),
             'landno'=>$this->input->post('LandlineNumber'),
             'mobileno'=>$this->input->post('MobileNumber'),
             'birthplace'=>$this->input->post('PlaceOfBirth'),
@@ -169,7 +174,7 @@ class FranchiseeManagement extends CI_Controller
 			$this->email->subject('Login Details');
 			$this->email->message('Email :"'.$_POST['email'].'"<br>Password:"'.$_POST['password'].'"');	
 			@$this->email->send();
-			echo json_encode(array('id'=>$result));
+			echo json_encode(array('id'=>$result,'utype'=>$this->input->post('userType')));
         }
         else echo json_encode(array('error'=>'Email already taken'));
     }
@@ -261,6 +266,9 @@ class FranchiseeManagement extends CI_Controller
     {
         $fl = "id";
         $id = $this->input->post('id');
+		$from=new Datetime($this->input->post('DateOfBirth'));
+		$to=new Datetime('today');
+		$age=$from->diff($to)->y;
         $data = array(
             'username' => $this->input->post('franchiseeName'),
             'email' => $this->input->post('email'),
@@ -268,13 +276,12 @@ class FranchiseeManagement extends CI_Controller
             'middle_name' => $this->input->post('middle_name'),
             'last_name' => $this->input->post('last_name'),
             'date_of_birth' => date('Y-m-d', strtotime($this->input->post('DateOfBirth'))),
+			'age'=>$age,
             'gender' => $this->input->post('gender'),
             'landno' => $this->input->post('LandlineNumber'),
             'mobileno' => $this->input->post('MobileNumber'),
-
-
-
             'birthplace' => $this->input->post('PlaceOfBirth'),
+			'image_path'=>trim($this->input->post('img'),'"'),
         );
         $result = $this->franchisee->updateTableRecord('sea_users', $fl, $data, $id);
         $fl = "user_id";
@@ -583,4 +590,30 @@ class FranchiseeManagement extends CI_Controller
         $data['data'] = $this->franchisee->getRegistrationFeeDetails($userId);
         $this->load->view('FranchiseeManagement/registrationAmountToBePaid', $data);
     }
+	
+	public function franchiseDropDown()
+	{
+	  	$rid=$this->session->user_logged_in['role_id'];
+		if($rid==1)
+		{
+			$array=array('2'=>'State Master Franchisee','3'=>'District Master Franchisee','4'=>'Unit Franchisee','5'=>'Consultant');
+			print json_encode($array);
+		}
+		if($rid==5)
+		{
+			$array=array('2'=>'State Master Franchisee','3'=>'District Master Franchisee','4'=>'Unit Franchisee','5'=>'Consultant');
+			print json_encode($array);
+		}
+		if($rid==2)
+		{
+			$array=array('3'=>'District Master Franchisee','4'=>'Unit Franchisee');
+			print json_encode($array);
+		}
+		if($rid==3)
+		{
+			$array=array('4'=>'Unit Franchisee');
+			print json_encode($array);
+		}	
+		
+	}
 }

@@ -1,8 +1,21 @@
 /**
  * Created by phani kumar on 8/6/2016.
  */
+ 
 $(function(){
-
+	
+	 $.ajax({
+            type:'post',
+            url:'FranchiseeManagement/franchiseDropDown',
+            success:function(res){
+				var obj = JSON.parse(res);
+				 document.forms["form2"]["franchiseetypeId"].options.length = 1; 
+			  $.each(obj,function(k,v){
+				 $('#franchiseetypeId').append("<option value="+k+">"+v+"</option>");
+			  });
+			 }
+	 });
+	
 	$('#checkbox').click(function(){
 		if(document.forms["form2"]["checkbox"].checked==true)
 		{
@@ -29,6 +42,19 @@ $(function(){
 	});
 	$('#signup').click(function(){
 		//alert("manu");
+		var utype=document.forms["form2"]["reUser"].value;
+		alert(utype);
+		if(utype==0)
+		{
+	    document.forms["form2"]["franchiseFee"].value=0;		
+		document.forms["form2"]["franchiseFee"].readOnly=true;
+		}
+		if(utype=='')
+		{
+			  alert("Please Select User Type Either New User OR Rigistered USer");
+			  document.forms["form2"]["reUser"].focus();
+			  return false;
+		}
 		var fr_id=document.forms["form2"]["franchiseetypeId"].value;
 		if(fr_id=='')
 		{
@@ -67,10 +93,11 @@ $(function(){
 		}
 		*/
 		var fr_pass=document.forms["form2"]["password"].value;
-		var regexp_pass=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-		if(!regexp_pass.test(fr_pass))
+		//var regexp_pass=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+		//!regexp_pass.test(fr_pass)
+		if(fr_pass=='')
 		{
-			alert("password should contain atleast one number one special character one capital letter");
+			alert("Please Enter password with 6 characters");
 			document.forms["form2"]["password"].focus();
 			return false;
 
@@ -103,7 +130,8 @@ $(function(){
 			return false;
 		}
 
-		var fr_dob=document.forms["form2"]["date_of_birth"].value;
+		//var fr_dob=document.forms["form2"]["date_of_birth"].value;
+		var fr_dob=document.forms["form2"]["DateOfBirth"].value;
 		if(fr_dob=='01/01/0001')
 		{
 			alert("select date of birth from datepicker");
@@ -121,6 +149,7 @@ $(function(){
 		var regexp_mobno=/^\d{10}$/;
 		if(!regexp_mobno.test(fr_mobno))
 		{
+			 
 			alert("please enter mobno with 10 digits");
 			document.forms["form2"]["MobileNumber"].focus();
 			return false;
@@ -278,12 +307,19 @@ $(function(){
 						$('#message_from_server').text('Franchisee registered successfully');
 					else $('#message_from_server').text('Registration failed');*/
 					if(data.id>0){
+						if(data.utype==0)
+						{
+							$('#message_from_server').text('Franchisee registered successfully');
+						}
+						if(data.utype==1)
+						{
 						if(confirm('Registration successfully completed. Press Okay to proceed for Payment')){
                             $('#page-inner').load(formURL.split('/registerFranchisee')[0]+'/registrationAmountToBePaid',{userId:data.id})
                         }
                         else{
                             $('#message_from_server').text('Franchisee registered successfully');
                         }
+						}
 					}
 					else alert(data.error);
 				},

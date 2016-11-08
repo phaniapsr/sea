@@ -56,12 +56,12 @@
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Date Of Birth *</label>
                                             <div class="col-lg-6">
                                                 <div class="input-group input-append date" id="datePicker">
-                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
-                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my1" placeholder="DD/MM/YYYY" value="01/01/0001" />
+                                        <span class="input-group-addon add-on" id="btn1" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                                 </div>
-                                                <input type="hidden" id="hiddenFieldID" name="DateOfBirth"/>
+                                                <input type="hidden" id="hiddenFieldID1" name="DateOfBirth"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -74,12 +74,12 @@
                                                 </select><i data-fv-icon-for="Gender" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="Gender" data-fv-validator="notEmpty" class="help-block" style="display: none;">Gender is required</small></div>
                                         </div>
-                                        <div class="form-group">
+                                        <!--<div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Age *</label>
                                             <div class="col-lg-6 has-feedback">
                                                 <input data-fv-field="Age" class="form-control" name="Age" placeholder="Age" type="text"/><i data-fv-icon-for="Age" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="Age" data-fv-validator="notEmpty" class="help-block" style="display: none;">Age is required</small></div>
-                                        </div>
+                                        </div>-->
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Mother Tongue *</label>
                                             <div class="col-lg-6 has-feedback">
@@ -390,24 +390,24 @@
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Class Start Date *</label>
                                         <div class="col-lg-6">
                                              <div class="input-group input-append date" id="datePicker">
-                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
-                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my2" placeholder="DD/MM/YYYY" value="01/01/0001" />
+                                        <span class="input-group-addon add-on" id="btn2" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                                 </div>
-                                            <input type="hidden" id="csd" name="ClassStartDate"/>
+                                            <input type="hidden" id="hiddenFieldID2" name="ClassStartDate"/>
                                         </div>
                                         </div>
 									<div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Level End Date *</label>
                                         <div class="col-lg-6">
                                             <div class="input-group input-append date" id="datePicker">
-                                                <input type="text" class="form-control" name="level_end_date" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
-                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                                <input type="text" class="form-control" name="level_end_date" id="datepicker-my3" placeholder="DD/MM/YYYY" value="01/01/0001" />
+                                        <span class="input-group-addon add-on" id="btn3" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                             </div>
-                                            <input type="hidden" id="led" name="LevelEndDate"/>
+                                            <input type="hidden" id="hiddenFieldID3" name="LevelEndDate"/>
                                         </div>
                                         </div>
                                     <div class="form-group">
@@ -602,13 +602,39 @@
 								});
                             </script>
                             <script>
-                                $('#btn').click(function () {
+                                $('#btn1').click(function () {
                                     //alert('clcikec');
                                     $(document).ready(function () {
-                                        $("#datepicker-my").datepicker({
+                                        $("#datepicker-my1").datepicker({
                                             //dateFormat: "dd-mm-yy".replace('T00:00:00', ''),
                                             changeMonth: true,
-                                            altField: '#hiddenFieldID',
+                                            altField: '#hiddenFieldID1',
+                                            altFormat: "mm/dd/yy",
+                                            changeYear: true,
+                                            yearRange: '1950:2017'
+                                        }).focus();
+                                    });
+                                });
+								$('#btn2').click(function () {
+                                    //alert('clcikec');
+                                    $(document).ready(function () {
+                                        $("#datepicker-my2").datepicker({
+                                            //dateFormat: "dd-mm-yy".replace('T00:00:00', ''),
+                                            changeMonth: true,
+                                            altField: '#hiddenFieldID2',
+                                            altFormat: "mm/dd/yy",
+                                            changeYear: true,
+                                            yearRange: '1950:2017'
+                                        }).focus();
+                                    });
+                                });
+								$('#btn3').click(function () {
+                                    //alert('clcikec');
+                                    $(document).ready(function () {
+                                        $("#datepicker-my3").datepicker({
+                                            //dateFormat: "dd-mm-yy".replace('T00:00:00', ''),
+                                            changeMonth: true,
+                                            altField: '#hiddenFieldID3',
                                             altFormat: "mm/dd/yy",
                                             changeYear: true,
                                             yearRange: '1950:2017'
@@ -630,9 +656,12 @@
             <!-- /.panel -->
         </div>
         <!-- /.col-lg-12 -->
-        <link href="Skills%20Education%20Academy_files/tjquery-ui.css" rel="stylesheet">
+        <!--<link href="Skills%20Education%20Academy_files/tjquery-ui.css" rel="stylesheet">
         <script src="Skills%20Education%20Academy_files/jquery-students.js"></script>
-        <script src="Skills%20Education%20Academy_files/jquery-ui.js"></script>
+        <script src="Skills%20Education%20Academy_files/jquery-ui.js"></script>-->
+		<link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
+        <script src="Scripts/admin/validations/jquery-teacher.js"></script>
+        <script src="Scripts/admin/jquery-ui.js"></script>
     </div>
     <footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
 </div>

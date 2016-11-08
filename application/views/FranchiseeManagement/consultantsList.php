@@ -56,22 +56,22 @@
 
                                     <tr role="row">
                                         <th aria-label="Franchisee Id: activate to sort column ascending"
-                                            aria-sort="ascending" style="width: 165px;" colspan="1" rowspan="1"
+                                            aria-sort="ascending" style="width: 100px;" colspan="1" rowspan="1"
                                             aria-controls="dt-state-franchisee" tabindex="0"
-                                            class="selected sorting_asc">Franchisee Id
+                                            class="text-center sorting_disabled">Franchisee Id
                                         </th>
                                         <th aria-label="Franchisee Name: activate to sort column ascending"
-                                            style="width: 209px;" colspan="1" rowspan="1"
-                                            aria-controls="dt-state-franchisee" tabindex="0" class="selected sorting">
+                                            style="width: 108px;" colspan="1" rowspan="1"
+                                            aria-controls="dt-state-franchisee" tabindex="0" class="text-center sorting_disabled">
                                             Franchisee Name
                                         </th>
-                                        <th aria-label="City: activate to sort column ascending" style="width: 53px;"
+                                        <th aria-label="City: activate to sort column ascending" style="width: 108px;"
                                             colspan="1" rowspan="1" aria-controls="dt-state-franchisee" tabindex="0"
-                                            class="sorting">City
+                                            class="text-center sorting_disabled">City
                                         </th>
-                                        <th aria-label="State: activate to sort column ascending" style="width: 68px;"
+                                        <th aria-label="State: activate to sort column ascending" style="width: 108px;"
                                             colspan="1" rowspan="1" aria-controls="dt-state-franchisee" tabindex="0"
-                                            class="sorting">State
+                                            class="text-center sorting_disabled">State
                                         </th>
                                         <th aria-label="Revenue Configuration" style="width: 272px;" colspan="1"
                                             rowspan="1" class="text-center selected sorting_disabled">Revenue
@@ -90,12 +90,12 @@
                                     $i=1;
                                     foreach ($data['smf'] as $row){ ?>
 									    <tr class="odd">
-                                            <td class="selected sorting_1"><?php echo $row['id'];?></td>
-                                            <td class=" selected"><a data-ajax="true" data-ajax-mode="replace"
+                                            <td style="text-align:center" class="selected sorting_1"><?php echo $row['id'];?></td>
+                                            <td style="text-align:center" class=" selected"><a data-ajax="true" data-ajax-mode="replace"
                                                                      data-ajax-update="#details"
                                                                      href="detailConsulView/<?php echo $row['user_id']?>"><?php echo $row['first_name'];?></a></td>
-                                            <td><?php echo $row['city'];?></td>
-                                            <td><?php echo $row['state'];?></td>
+                                            <td style="text-align:center"><?php echo $row['city'];?></td>
+                                            <td style="text-align:center"><?php echo $row['state'];?></td>
                                             <td class="text-center selected">
                                                 <button type="button"  userid="<?php echo $row['user_id'];?>" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueConfiguration"

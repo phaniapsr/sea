@@ -1,20 +1,21 @@
 <script type="application/javascript"
         src="<?php echo base_url()?>scripts/admin/franchiseeRegistration/update.js"></script>
+<?php foreach ($data['smf'] as $row){?>
 <div id="page-wrapper">
     <div id="page-inner">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">EDIT FRANCHISEE</h1>
-            </div>
-        </div>
+		   </div>
+			
+	    </div>
         <!-- /. ROW  -->
-		<?php foreach ($data['smf'] as $row){?>
-        <label style="color:Green;font-size:28px;"></label>
+		<label style="color:Green;font-size:28px;"></label>
         <div class="row">
-            <div class="col-lg-12">
+    	    <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div id="margin-top" class="panel-body">
-                        <form id="franchiseeRegistration"
+					    <form id="franchiseeRegistration"
                               action="<?php echo base_url()?>FranchiseeManagement/updateFranchisee" name="form2"
                               class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl"
                               enctype="multipart/form-data">
@@ -53,14 +54,6 @@
                                             </script>
                                         </div>
                                     </div>
-                                   <div class="form-group">
-                                       <!-- <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Password
-                                            *</label>-->
-                                        <div class="col-lg-6">
-                                            <!--<input type="password" class="form-control" name="password"
-                                                   placeholder="Password"/>-->
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">First
                                             Name *</label>
@@ -88,15 +81,15 @@
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Date
                                             Of Birth *</label>
-                                        <div class="col-lg-6">
+								        <div class="col-lg-6">
                                             <div class="input-group input-append date" id="datePicker">
                                                 <input type="text" class="form-control" name="date_of_birth"
-                                                       id="datepicker-my" placeholder="DD/MM/YYYY" value="<?php echo $row['date_of_birth'];?>"/>
+                                                       id="datepicker-my" placeholder="DD/MM/YYYY" value="<?php echo date('d-m-Y',strtotime($row['date_of_birth']));?>"/>
                                         <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                             </div>
-                                            <input type="hidden" id="hiddenFieldID" name="DateOfBirth" value="<?php echo $row['date_of_birth'];?>"/>
+                                            <input type="hidden" id="hiddenFieldID" name="DateOfBirth" value="<?php echo date('d-m-Y',strtotime($row['date_of_birth']));?>"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -158,7 +151,7 @@
                                                     <input type="checkbox" name="ACMAS" value="ACMAS" <?php if($row['course_acmas']==1)echo "checked";?>/>
                                                     ACMAS
                                                 </label>
-                                                <label>
+                                                <label style="padding-left:20px">
                                                     <input type="checkbox" name="WRITEASY" value="WRITEASY" <?php if($row['course_writeasy']==1)echo "checked";?>/>
                                                     WRITEASY
                                                 </label>
@@ -167,7 +160,7 @@
                                                     <input type="checkbox" name="IAA" value="IAA" <?php if($row['course_iaa']==1)echo "checked";?>/>
                                                     IAA
                                                 </label>
-                                                <label>
+                                                <label style="padding-left:48px">
                                                     <input type="checkbox" name="FUNMATHS" value="FUNMATHS" <?php if($row['course_funmaths']==1)echo "checked";?>/>
                                                     FUNMATHS
                                                 </label>
@@ -182,7 +175,7 @@
                                         <div class="col-lg-6">
                                             <a id="pic" class="btn btn-block btn-success btn-sm drops"><span
                                                     class="glyphicon glyphicon-plus"></span> Select Image to Upload </a>
-                                            <input type="hidden" id="himg" name="img" value="">
+                                            <input type="hidden" id="himg" name="img" value="<?php echo $row['image_path']?>">
                                             <input type="file" class="form-control" id="FranchiseeImage"
                                                    name="FranchiseeImage"/>
                                             <script>
@@ -258,7 +251,7 @@
                                             Number *</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="FlatNo"
-                                                   placeholder="flate/door Number" value="<?php echo $row['doorno'];?>"/>
+                                                   placeholder="flat/door Number" value="<?php echo $row['doorno'];?>"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -353,7 +346,7 @@
                                             Number *</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="RflatNo"
-                                                   placeholder="flate/door Number" value="<?php echo $row['r_doorno'];?>"/>
+                                                   placeholder="flat/door Number" value="<?php echo $row['r_doorno'];?>"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -643,9 +636,9 @@
             </div>
         </div>
         <!-- /.col-lg-12 -->
-        <link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
-        <script src="Scripts/admin/validations/jquery-teacher.js"></script>
-        <script src="Scripts/admin/jquery-ui.js"></script>
+        <link href="<?php echo base_url()?>Content/css/tjquery-ui.css" rel="stylesheet"/>
+        <script src="<?php echo base_url()?>Scripts/admin/validations/jquery-teacher.js"></script>
+        <script src="<?php echo base_url()?>Scripts/admin/jquery-ui.js"></script>
 												<?php }?>
     </div>
     <footer><p>All right reserved by: <a href="#">LemonBridge</a></p></footer>
