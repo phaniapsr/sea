@@ -71,6 +71,7 @@ class GlobalsHelper
             ),
             'WRITEASY',
         );
+        //These are the different type of student revenues based on student course,level
         self::$course_level_config_array =array(
             'SR_FEE'=>1,
             'KIT_FEE'=>array(
