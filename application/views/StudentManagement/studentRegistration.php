@@ -477,7 +477,7 @@
 									<div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Total Amount *</label>
                                         <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="TotalAmount" class="form-control" id="total_amt" name="Tax" placeholder="Total Amount" value="0" type="text" required readonly/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <input data-fv-field="TotalAmount" class="form-control" id="total_amt" name="Total" placeholder="Total Amount" value="0" type="text" required readonly/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="TotalAmount" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
                                     </div>
                                 </div>

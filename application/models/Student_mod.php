@@ -1,5 +1,4 @@
 <?php
-
 class Student_mod extends CI_Model
 {
     function __Construct()
@@ -73,7 +72,12 @@ class Student_mod extends CI_Model
         $this->db->join('sea_student_revenue','sea_student_revenue.student_id=sea_users.id');
         $this->db->where('sea_users.id',$userId);
         $query=$this->db->get();
-        return $query->result_array();
+        $data=array();
+        /*foreach($query->result() as $row){
+            $data['name']=$row['first_name'].' '.$row['middle_name'].' '.$row['last_name'];
+            $data['']=
+        }*/
+        return $data;
     }
 //class close
 }

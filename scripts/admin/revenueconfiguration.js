@@ -78,10 +78,11 @@ $(window).load(function () {
                     }
                     $.each(revenueSplit.revenue_configurations, function (rev_key, rev_obj) {
                         //For SMF
-                        if (rev_obj.role_id == 2 && list_type != 'smf') {
+                        if (rev_obj.role_id == 2) {
                             if (rev_obj.smf_id == rev_obj.created_by) {
                                 var unit = rev_obj.units == 1 ? '%' : 'Rs';
-                                $('#state_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.direct_unit_amount + unit);
+                                var share_val=list_type=='dmf'?rev_obj.direct_district_amount:rev_obj.direct_unit_amount;
+                                $('#state_share_value').text(' ' + rev_obj.franch_name + ' - ' + share_val + unit);
                             }
                             else if (rev_obj.smf_id != null) {
                                 var unit = rev_obj.units == 1 ? '%' : 'Rs';
@@ -89,31 +90,34 @@ $(window).load(function () {
                             }
                         }
                         //For DMF
-                        if (rev_obj.role_id == 3 && list_type != 'dmf') {
+                        if (rev_obj.role_id == 3) {
                             if (rev_obj.dmf_id == rev_obj.created_by) {
                                 var unit = rev_obj.units == 1 ? '%' : 'Rs';
+                                //var share_val=list_type=='smf'?rev_obj.direct_state_amount:(list_type=='dmf'?rev_obj.direct_district_amount:rev_obj.direct_unit_amount);
                                 $('#district_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.direct_unit_amount + unit);
                             }
-                            else if (rev_obj.dmf_id != null) {
+                            /*else if (rev_obj.dmf_id != null) {
                                 var unit = rev_obj.units == 1 ? '%' : 'Rs';
                                 $('#district_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.indirect_uf_amount + unit);
-                            }
+                            }*/
                         }
                         //For Consultant
                         if (rev_obj.role_id == 5) {
                             if (rev_obj.consultant_id == rev_obj.created_by) {
                                 var unit = rev_obj.units == 1 ? '%' : 'Rs';
-                                $('#consultant_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.direct_unit_amount + unit);
+                                var share_val=list_type=='smf'?rev_obj.direct_state_amount:(list_type=='dmf'?rev_obj.direct_district_amount:rev_obj.direct_unit_amount);
+                                $('#consultant_share_value').text(' ' + rev_obj.franch_name + ' - ' + share_val + unit);
                             }
                             else if (rev_obj.consultant_id != null) {
                                 var unit = rev_obj.units == 1 ? '%' : 'Rs';
-                                $('#consultant_share_value').text(' ' + rev_obj.franch_name + ' - ' + rev_obj.indirect_uf_amount + unit);
+                                var share_val=list_type=='dmf'?rev_obj.indirect_dmf_amount:rev_obj.indirect_uf_amount;
+                                $('#consultant_share_value').text(' ' + rev_obj.franch_name + ' - ' + share_val + unit);
                             }
                         }
                     })
                 },
                 error: function () {
-                    alert('There is server not properly responded');
+                    alert('Server not properly responded');
                 }
             })
         })
@@ -124,9 +128,10 @@ $(window).load(function () {
                 var exclude_company = 0;
                 $.each(rev_config.revenue_configurations, function (rev_key, rev_obj) {
                     //For SMF
-                    if (rev_obj.role_id == 2 && list_type != 'smf') {
+                    if (rev_obj.role_id == 2) {
                         if (rev_obj.smf_id == rev_obj.created_by) {
-                            $('#license_state_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.direct_unit_amount) : (split_amt - rev_obj.direct_unit_amount));
+                            var share_val=list_type=='dmf'?rev_obj.direct_district_amount:rev_obj.direct_unit_amount;
+                            $('#license_state_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * share_val) : (split_amt - share_val));
                         }
                         else if (rev_obj.smf_id != null) {
                             $('#license_state_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.indirect_uf_amount) : (split_amt - rev_obj.indirect_uf_amount));
@@ -134,22 +139,24 @@ $(window).load(function () {
                         exclude_company += parseFloat($('#license_state_amount').val())
                     }
                     //For DMF
-                    if (rev_obj.role_id == 3 && list_type != 'dmf') {
+                    if (rev_obj.role_id == 3) {
                         if (rev_obj.dmf_id == rev_obj.created_by) {
                             $('#license_district_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.direct_unit_amount) : (split_amt - rev_obj.direct_unit_amount));
                         }
-                        else if (rev_obj.dmf_id != null) {
+                        /*else if (rev_obj.dmf_id != null) {
                             $('#license_district_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.indirect_uf_amount) : (split_amt - rev_obj.indirect_uf_amount));
-                        }
+                        }*/
                         exclude_company += parseFloat($('#license_district_amount').val())
                     }
                     //For Consultant
                     if (rev_obj.role_id == 5) {
                         if (rev_obj.consultant_id == rev_obj.created_by) {
-                            $('#license_consultant_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.direct_unit_amount) : (split_amt - rev_obj.direct_unit_amount));
+                            var share_val=list_type=='smf'?rev_obj.direct_state_amount:(list_type=='dmf'?rev_obj.direct_district_amount:rev_obj.direct_unit_amount);
+                            $('#license_consultant_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * share_val) : (split_amt - share_val));
                         }
                         else if (rev_obj.consultant_id != null) {
-                            $('#license_consultant_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * rev_obj.indirect_uf_amount) : (split_amt - rev_obj.indirect_uf_amount));
+                            var share_val=list_type=='dmf'?rev_obj.indirect_dmf_amount:rev_obj.indirect_uf_amount;
+                            $('#license_consultant_amount').val(rev_obj.units == 1 ? ((split_amt / 100) * share_val) : (split_amt - share_val));
                         }
                         exclude_company += parseFloat($('#license_consultant_amount').val());
                     }
@@ -157,11 +164,13 @@ $(window).load(function () {
                 $('#license_company_amount').val(split_amt - exclude_company);
             }
         })
-        $('#revenue_split_button_save').click(function () {
+        $('#revenue_split_button_save').click(function (e) {
+            e.preventDefault();
             $.ajax({
                 url: $('#SplitRevenueConfigurationForm').attr('action'),
                 type: "POST",
                 dataType: 'json',
+                async:false,
                 data: {
                     revenue_config_id: rev_config.revenue_configurations[0].revenue_id,
                     kit_amount: $('#kit_fee_identified').val(),
@@ -188,72 +197,67 @@ $(window).load(function () {
             $.ajax({
 
                 type: 'post',
-                url: '/sea/RevenueManagement/checkRevenueConfig',
+                url: $('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0] + 'RevenueManagement/checkRevenueConfig',
                 data: {user_id: userId},
                 success: function (res) {
                     var obj = JSON.parse(res);
+                    $('#units_id').val()
                     $.each(obj, function (k, v) {
                         $('#direct_smf_share').val(v.direct_state_amount);
                         $('#direct_dmf_share').val(v.direct_district_amount);
                         $('#direct_umf_share').val(v.direct_unit_amount);
                         $('#indirect_dmf_share').val(v.indirect_dmf_amount);
                         $('#indirect_umf_share').val(v.indirect_uf_amount);
-
+                        $('#units_id').val(v.units)
                     });
-
                 }
-
-
             });
-			 
-			$.ajax({
-                url:$('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/getStudentRevenueTypes',
-                dataType:'json',
-                method:'GET',
-                success:function(data){
-					//alert(data.student_revenue_type);
-					$('#RevenueConfigurationForm').siblings().remove().not(':first');
-					$.each(data.student_revenue_type,function(data_key,data_val){
-					    var cloned =$('#tbl_student_revenue_types_1').clone(true).insertAfter('#RevenueConfigurationForm > table:last');
-                        cloned.attr('id',cloned.attr('id').replace(/\d+/, data_val.ssrt_id));
-                        cloned.find('span,input').each(function(){
-                            $(this).attr('id',$(this).attr("id").replace(/\d+/, data_val.ssrt_id))
+
+            $.ajax({
+                url: $('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0] + 'RevenueManagement/getStudentRevenueTypes',
+                dataType: 'json',
+                method: 'GET',
+                success: function (data) {
+                    //alert(data.student_revenue_type);
+                    $('#RevenueConfigurationForm').siblings().remove().not(':first');
+                    $.each(data.student_revenue_type, function (data_key, data_val) {
+                        var cloned = $('#tbl_student_revenue_types_1').clone(true).insertAfter('#RevenueConfigurationForm > table:last');
+                        cloned.attr('id', cloned.attr('id').replace(/\d+/, data_val.ssrt_id));
+                        cloned.find('span,input').each(function () {
+                            $(this).attr('id', $(this).attr("id").replace(/\d+/, data_val.ssrt_id))
                         });
-						$('#student_revenue_type_'+data_val.ssrt_id).text(data_val.ssrt_revenue_type);
-                        $('#hid_student_revenue_type_'+data_val.ssrt_id).val(data_val.ssrt_id)
+                        $('#student_revenue_type_' + data_val.ssrt_id).text(data_val.ssrt_revenue_type);
+                        $('#hid_student_revenue_type_' + data_val.ssrt_id).val(data_val.ssrt_id)
                     });
-					for(var j=0;j<=13;j++)
-					{
-						$('#tbl_student_revenue_types_'+j).each(function () {
-					    $('[id="' + this.id + '"]:gt(0)').remove();
-                       })
-					}
-				   $.ajax({
-				type:'post',
-				url:'/sea/RevenueManagement/unitRevenueConfig',
-				data:{user_id:userId},
-				success:function(res){
-					var obj=JSON.parse(res);
-					var i=1;
-					$.each(obj,function(k,v){
-						$('#consultant_share_'+i).val(v.consultant_share);
-						$('#state_share_'+i).val(v.state_share);
-						$('#district_share_'+i).val(v.district_share);
-						$('#unit_share_'+i).val(v.unit_share);
-						i++;
-						
-					});
-					
-				}	   
-			  
-			});
+                    for (var j = 0; j <= 13; j++) {
+                        $('#tbl_student_revenue_types_' + j).each(function () {
+                            $('[id="' + this.id + '"]:gt(0)').remove();
+                        })
+                    }
+                    $.ajax({
+                        type: 'post',
+                        url: $('#RevenueConfigurationForm').attr('action').split('RevenueManagement/')[0]+'RevenueManagement/unitRevenueConfig',
+                        data: {user_id: userId},
+                        success: function (res) {
+                            var obj = JSON.parse(res);
+                            var i = 1;
+                            $.each(obj, function (k, v) {
+                                $('#consultant_share_' + i).val(v.consultant_share);
+                                $('#state_share_' + i).val(v.state_share);
+                                $('#district_share_' + i).val(v.district_share);
+                                $('#unit_share_' + i).val(v.unit_share);
+                                i++;
+
+                            });
+
+                        }
+
+                    });
                 },
                 error: function () {
                     alert('Some thing went wrong in collecting the student revenue type data')
                 }
             });
-
-
             /*$.ajax({
              type:'post',
              url:'/sea/RevenueManagement/unitRevenueConfig',

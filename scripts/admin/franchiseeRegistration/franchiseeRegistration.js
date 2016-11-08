@@ -295,12 +295,14 @@ $(function(){
 	$('#franchiseeRegistration').submit(function(e){
 		var postData = $(this).serializeArray();
 		var formURL = $(this).attr("action");
+		e.preventDefault();
 		$.ajax(
 			{
 				url : formURL,
 				type: "POST",
 				data : postData,
                 dataType:'json',
+                async:false,
 				success:function(data, textStatus, jqXHR)
 				{
 					/*if(data>0)
