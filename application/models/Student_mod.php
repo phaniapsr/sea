@@ -75,5 +75,24 @@ class Student_mod extends CI_Model
         $query=$this->db->get();
         return $query->result_array();
     }
+    public function getUploadRows($id = ''){
+        $this->db->select('*');
+        $this->db->from('sea_student_exams');
+        if($id){
+            $this->db->where('exam_id',$id);
+            $query = $this->db->get();
+            $result = $query->row_array();
+        }else{
+            $this->db->order_by('exam_id','desc');
+            $query = $this->db->get();
+            $result = $query->result_array();
+        }
+        return !empty($result)?$result:false;
+    }
+    
+    public function insertUploadExams($data = array()){
+        $insert = $this->db->insert_batch('sea_student_exams',$data);
+        return $insert?true:false;
+    }
 //class close
 }

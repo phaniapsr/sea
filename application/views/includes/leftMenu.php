@@ -93,6 +93,23 @@
                     </li>
                 </ul>
             </li>
+			<li>
+                <a href="#"><i class="fa fa-envelope"></i>Exams<span class="fa fa-angle-right"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="StudentManagement/creatExams">Create Exams</a>
+                    </li>
+                    <li>
+                        <a href="StudentManagement/viewExams">View Exams</a>
+                    </li>
+                  
+                   
+                </ul>
+            </li>
+			
+			
+			
+			
             <li>
                 <a href="/Kitorders"><i class="fa fa-shopping-cart"></i> Kit Orders</a>
             </li>

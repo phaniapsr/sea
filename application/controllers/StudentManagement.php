@@ -332,4 +332,61 @@ class StudentManagement extends CI_Controller
         $data['data'] = $this->student->getRegistrationFeeDetails($userId);
         $this->load->view('StudentManagement/registrationAmountToBePaid',$data);
     }
+	public function creatExams()
+	{
+
+		$data = array();
+		if($this->input->post('fileSubmit') && !empty($_FILES['userFiles']['name'])){
+			$filesCount = count($_FILES['userFiles']['name']);
+			for($i = 0; $i < $filesCount; $i++){
+				$_FILES['userFile']['name'] = $_FILES['userFiles']['name'][$i];
+				$_FILES['userFile']['type'] = $_FILES['userFiles']['type'][$i];
+				$_FILES['userFile']['tmp_name'] = $_FILES['userFiles']['tmp_name'][$i];
+				$_FILES['userFile']['error'] = $_FILES['userFiles']['error'][$i];
+				$_FILES['userFile']['size'] = $_FILES['userFiles']['size'][$i];
+
+				$uploadPath = 'uploads/exams/';
+				$config['upload_path'] = $uploadPath;
+				$config['allowed_types'] = 'gif|jpg|png';
+				//$config['max_size']	= '100';
+				//$config['max_width'] = '1024';
+				//$config['max_height'] = '768';
+				
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				if($this->upload->do_upload('userFile')){
+					$fileData = $this->upload->data();
+					$uploadData[$i]['exam_name'] = $fileData['file_name'];
+					$uploadData[$i]['program_name'] = $this->input->post('program_name');
+					$uploadData[$i]['course_name'] = $this->input->post('course_name');
+					$uploadData[$i]['level_name'] = $this->input->post('level_name');
+				}
+			}
+			if(!empty($uploadData)){
+				//Insert files data into the database
+				$insert = $this->student->insertUploadExams($uploadData);
+				$statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
+				$this->session->set_flashdata('statusMsg',$statusMsg);
+			}
+		}
+		//get files data from database
+        $data['files'] = $this->student->getUploadRows();
+		//pass the files data to view
+		//$this->load->view('upload_files/index', $data);
+		$this->load->view('includes/header');
+        $this->load->view('StudentManagement/creatExams', $data);
+        $this->load->view('includes/footer');
+		
+	
+	}
+	
+	public function viewExams()
+	{
+		 $data['files'] = $this->student->getUploadRows();
+		$this->load->view('includes/header');
+        $this->load->view('StudentManagement/viewExams',$data);
+        $this->load->view('includes/footer');
+		
+	
+	}
 }
