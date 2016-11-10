@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `sea_studen_exams`
 --
 
-CREATE TABLE `sea_studen_exams` (
+CREATE TABLE `sea_exam_papers` (
   `exam_id` int(11) NOT NULL,
   `program_name` varchar(10) NOT NULL,
   `course_name` varchar(30) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `sea_studen_exams` (
 --
 -- Indexes for table `sea_studen_exams`
 --
-ALTER TABLE `sea_student_exams`
+ALTER TABLE `sea_exam_papers`
   ADD PRIMARY KEY (`exam_id`);
 
 --
@@ -52,7 +52,7 @@ ALTER TABLE `sea_student_exams`
 --
 -- AUTO_INCREMENT for table `sea_studen_exams`
 --
-ALTER TABLE `sea_student_exams`
+ALTER TABLE `sea_exam_papers`
   MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
