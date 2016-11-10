@@ -5,6 +5,7 @@ class Franchisee_mod extends CI_Model{
     }
 
 	public function listFromTable($role) {
+		$id=$this->session->user_logged_in['id'];
 		$this->db->select('*');
         $this->db->from('sea_users');
         $this->db->join('sea_user_role','sea_users.id=sea_user_role.user_id');
@@ -12,8 +13,13 @@ class Franchisee_mod extends CI_Model{
             $this->db->join('sea_franchise_resid_address','sea_users.id=sea_franchise_resid_address.user_id');
 			//$this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id');
         }
+		if($id!=1)
+		{
+			$this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id');
+			$this->db->where('sea_user_hierarchy.created_by='.$id);
+		}
 		$this->db->where('sea_user_role.role_id='.$role);
-        $query=$this->db->get();
+		$query=$this->db->get();
         return $query->result_array();
 	}
 

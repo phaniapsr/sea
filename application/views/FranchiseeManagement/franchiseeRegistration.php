@@ -19,11 +19,14 @@
                               enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="form-group">
+								  <div class="form-group">
+                                        <label  style="text-align: left">Reigistered User<input type="radio" id="reUser" name="userType" value="0"> New User <input type="radio" id="reUser" name="userType" value="1"></label>
+                                    </div>
+								    <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Select
                                             Franchisee *</label>
-                                        <div class="col-lg-6">
-                                            <select class="form-control" name="franchiseetypeId">
+									    <div class="col-lg-6">
+                                            <select id="franchiseetypeId" class="form-control" name="franchiseetypeId">
                                                 <option value="">Select</option>
 												<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5 || $this->session->user_logged_in['role_id'] == 2 ){?>
                                                 <option value="2">State Master Franchisee</option>
@@ -143,7 +146,7 @@
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Mobile
                                             Number *</label>
                                         <div class="col-lg-6">
-                                            <input type="number" class="form-control" name="MobileNumber"
+                                            <input type="text" class="form-control" name="MobileNumber"
                                                    placeholder="Mobile Number"/>
                                         </div>
                                     </div>
@@ -174,11 +177,10 @@
                                         <div class="col-lg-6">
                                             <div class="course-section">
                                                 <label>
-
                                                     <input type="checkbox" name="ACMAS" value="ACMAS"/>
                                                     ACMAS
                                                 </label>
-                                                <label>
+												<label style="padding-left:20px">
                                                     <input type="checkbox" name="WRITEASY" value="WRITEASY"/>
                                                     WRITEASY
                                                 </label>
@@ -187,7 +189,7 @@
                                                     <input type="checkbox" name="IAA" value="IAA"/>
                                                     IAA
                                                 </label>
-                                                <label>
+                                                <label style="padding-left:48px">
                                                     <input type="checkbox" name="FUNMATHS" value="FUNMATHS"/>
                                                     FUNMATHS
                                                 </label>
@@ -248,12 +250,7 @@
                                                    placeholder="College/University"/>
                                         </div>
                                     </div>
-
-
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
+                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Qualification
                                             *</label>
                                         <div class="col-lg-6">
@@ -266,11 +263,11 @@
                                             Year *</label>
                                         <div class="col-lg-6">
 
-                                            <input type="number" class="form-control" name="CompletedYear"
+                                            <input type="text" class="form-control" name="CompletedYear"
                                                    placeholder="Completed in Year" value="0" required/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+									<div class="form-group">
                                         <center style="font-size:20px;">BUSINESS ADDRESS</center>
                                     </div>
                                     <div class="form-group">
@@ -278,7 +275,7 @@
                                             Number *</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="FlatNo"
-                                                   placeholder="flate/door Number"/>
+                                                   placeholder="Flat/door Number"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -289,12 +286,14 @@
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
+									 <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Area *</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="Area" placeholder="Area"/>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Town/City
                                             *</label>
@@ -371,7 +370,7 @@
                                             Number *</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="RflatNo"
-                                                   placeholder="flate/door Number"/>
+                                                   placeholder="Flat/door Number"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -651,9 +650,9 @@
             </div>
         </div>
         <!-- /.col-lg-12 -->
-        <link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
-        <script src="Scripts/admin/validations/jquery-teacher.js"></script>
-        <script src="Scripts/admin/jquery-ui.js"></script>
+        <link href="<?php echo base_url()?>Content/css/tjquery-ui.css" rel="stylesheet"/>
+        <script src="<?php echo base_url()?>Scripts/admin/validations/jquery-teacher.js"></script>
+        <script src="<?php echo base_url()?>Scripts/admin/jquery-ui.js"></script>
 
     </div>
     <footer><p>All right reserved by: <a href="#">FriendsFocus</a></p></footer>

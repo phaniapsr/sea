@@ -21,14 +21,12 @@ body {
     padding: 15px 15px;
     min-height: 600px;
     background:#E5EBF2;
-   
 }
 #page-inner {
     width:100%;
     margin:10px 20px 10px 0px;
     background-color:transparent;
     padding:10px;
-    min-height:1200px;
 }
 
 .text-center {
@@ -410,7 +408,6 @@ line-height: 1.428571429;
      #page-wrapper{
                margin: 0 0 0 260px;
         padding: 15px 30px;
-        min-height: 1200px;
 		
     }
 	
@@ -434,4 +431,9 @@ font-size: 19px;
 }
 }
 
-
+table.repeat_tr{ margin:20px 0; border:1px solid #ccc; background:#fafafa;}
+table.repeat_tr tr td{ padding:5px;}
+table.repeat_tr input[type="text"]{ border:1px solid #ccc; padding:2px 5px;}
+table.repeat_tr tr:last-child td{ padding-bottom:20px;}
+table.repeat_tr tr td:first-child{ font-weight:bold; padding-right:10px; position:relative; font-size:13px; text-align:right}
+table.repeat_tr tr td:first-child:before{ content:":"; position:absolute; right:0;}

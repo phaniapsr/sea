@@ -26,8 +26,8 @@ class RevenueManagement extends CI_Controller
     public function saveStudentRevenueConfig()
     {
 		$this->load->model('revenue_mod');
-		//$id=$_POST['UserId'];
-		$id=5;
+		$id=$_POST['UserId'];
+		//$id=5;
 		$exrec=$this->revenue_mod->getStuConfig($id);
 		if($exrec==0)
 		{

@@ -15,6 +15,7 @@ class FranchiseeManagement extends CI_Controller
         $this->load->model('franchisee_mod', 'franchisee');
         //$this->load->model('merchant_mod');
         $this->load->library('form_validation');
+		 $this->load->helper('array');
     }
 
     public function index()
@@ -27,69 +28,73 @@ class FranchiseeManagement extends CI_Controller
 
     public function registerFranchisee(){
         //$this->db->trans_begin();
+		$from=new Datetime($this->input->post('DateOfBirth'));
+		$to=new Datetime('today');
+		$age=$from->diff($to)->y;
         $data=array(
-            'username'=>$_POST['franchiseeName'],
-            'password'=>$_POST['password'],
-            'email'=>$_POST['email'],
-            'first_name'=>$_POST['first_name'],
-            'last_name'=>$_POST['last_name'],
-            'middle_name'=>$_POST['middle_name'],
-            'date_of_birth'=>date('Y-m-d',strtotime($_POST['DateOfBirth'])),
-            'gender'=>$_POST['gender'],
-            'landno'=>$_POST['LandlineNumber'],
-            'mobileno'=>$_POST['MobileNumber'],
-            'birthplace'=>$_POST['PlaceOfBirth'],
-            'franch_name'=>$_POST['franchiseeName'],
-            'franchiseetypeId'=>$_POST['franchiseetypeId'],
-            'image_path'=>trim($_POST['img'],'"'),
+            'username'=>$this->input->post('franchiseeName'),
+            'password'=>$this->input->post('password'),
+            'email'=>$this->input->post('email'),
+            'first_name'=>$this->input->post('first_name'),
+            'last_name'=>$this->input->post('last_name'),
+            'middle_name'=>$this->input->post('middle_name'),
+            'date_of_birth'=>date('Y-m-d',strtotime($this->input->post('DateOfBirth'))),
+			'age'=>$age,
+			'gender'=>$this->input->post('gender'),
+            'landno'=>$this->input->post('LandlineNumber'),
+            'mobileno'=>$this->input->post('MobileNumber'),
+            'birthplace'=>$this->input->post('PlaceOfBirth'),
+            'franch_name'=>$this->input->post('franchiseeName'),
+            'franchiseetypeId'=>$this->input->post('franchiseetypeId'),
+            'image_path'=>trim($this->input->post('img'),'"'),
         );
         if($this->checkEmail()==0) {
             $result = $this->franchisee->insertNewRecord('sea_users', $data);
             $data1 = array(
                 'user_id' => $result,
-                'college_university' => $_POST['University'],
-                'qualification' => $_POST['Qualification'],
-                'completed_in_year' => $_POST['CompletedYear'],
+                'college_university' => $this->input->post('University'),
+                'qualification' => $this->input->post('Qualification'),
+                'completed_in_year' => $this->input->post('CompletedYear'),
             );
             $result1 = $this->franchisee->insertNewRecord('sea_franchise_education_details', $data1);
             $data = array(
                 'user_id' => $result,
-                'level_id' => $_POST['franchiseetypeId'],
+                'level_id' => $this->input->post('franchiseetypeId'),
             );
             $data2 = array(
                 'user_id' => $result,
-                'doorno' => $_POST['FlatNo'],
-                'streetname' => $_POST['StreetName'],
-                'area' => $_POST['Area'],
-                'city' => $_POST['City'],
-                'pincode' => $_POST['PinCode'],
-                'state' => $_POST['State'],
-                'nationality' => $_POST['Nationality'],
-                'r_doorno' => $_POST['RflatNo'],
-                'r_streetname' => $_POST['RstreetName'],
-                'r_area' => $_POST['Rarea'],
-                'r_city' => $_POST['Rcity'],
-                'r_pincode' => $_POST['RpinCode'],
-                'r_state' => $_POST['Rstate'],
-                'r_nationality' => $_POST['Rnationality'],
+                'doorno' => $this->input->post('FlatNo'),
+                'streetname' => $this->input->post('StreetName'),
+                'area' => $this->input->post('Area'),
+                'city' => $this->input->post('City'),
+                'pincode' => $this->input->post('PinCode'),
+                'state' => $this->input->post('State'),
+                'nationality' => $this->input->post('Nationality'),
+                'r_doorno' => $this->input->post('RflatNo'),
+                'r_streetname' => $this->input->post('RstreetName'),
+                'r_area' => $this->input->post('Rarea'),
+                'r_city' => $this->input->post('Rcity'),
+                'r_pincode' => $this->input->post('RpinCode'),
+                'r_state' => $this->input->post('Rstate'),
+                'r_nationality' => $this->input->post('Rnationality'),
             );
             $result2 = $this->franchisee->insertNewRecord('sea_franchise_resid_address', $data2);
             $data3 = array(
                 'user_id' => $result,
-                'course_type' => $_POST['OfCourse'],
-                'course_name' => $_POST['CourseName'],
-                'institution' => $_POST['Instiution'],
-                'course_compl_year' => $_POST['OtherCompletedYear'],
-                'occupation' => $_POST['PresentOcupation'],
-                'purpose' => $_POST['Goal'],
-                'fees' => $_POST['FranchiseLicenseFee'],
+                'course_type' => $this->input->post('OfCourse'),
+                'course_name' => $this->input->post('CourseName'),
+                'institution' => $this->input->post('Instiution'),
+                'course_compl_year' => $this->input->post('OtherCompletedYear'),
+                'occupation' => $this->input->post('PresentOcupation'),
+                'purpose' => $this->input->post('Goal'),
+                'fees' => $this->input->post('FranchiseLicenseFee'),
             );
             $result3 = $this->franchisee->insertNewRecord('sea_franchise_oth_train_att', $data3);
             if ($result > 0) {
                 $level = $this->franchisee->insertNewRecord('sea_franchise_level', $data);
                 $data = array(
                     'user_id' => $result,
-                    'role_id' => $_POST['franchiseetypeId'],
+                    'role_id' => $this->input->post('franchiseetypeId'),
                 );
                 $role = $this->franchisee->insertNewRecord('sea_user_role', $data);
 
@@ -130,27 +135,28 @@ class FranchiseeManagement extends CI_Controller
                 //Store franchise license fee
                 $data_revenue=array(
                     'user_id'=>$result,
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'created_by_id'=>$this->session->user_logged_in['id']
                 );
                 //End of franchise license fee
                 $revenue = $this->franchisee->insertNewRecord('sea_franchise_revenue', $data_revenue);
                 //$this->franchiseeRevenueDistribution($result);
             }
-            if (isset($_POST['ACMAS']))
+            //if (isset($_POST['ACMAS']))
+			if($this->input->post('ACMAS')!==null)	
                 $ca = 1;
             else
                 $ca = 0;
-            if (isset($_POST['WRITEASY']))
+            if($this->input->post('WRITEASY')!==null)	
                 $cw = 1;
             else
                 $cw = 0;
-            if (isset($_POST['IAA']))
+            if($this->input->post('IAA')!==null)	
                 $ci = 1;
             else
                 $ci = 0;
-            if (isset($_POST['FUNMATHS']))
+			if($this->input->post('FUNMATHS')!==null)	
                 $cf = 1;
             else
                 $cf = 0;
@@ -168,7 +174,7 @@ class FranchiseeManagement extends CI_Controller
 			$this->email->subject('Login Details');
 			$this->email->message('Email :"'.$_POST['email'].'"<br>Password:"'.$_POST['password'].'"');	
 			@$this->email->send();
-			echo json_encode(array('id'=>$result));
+			echo json_encode(array('id'=>$result,'utype'=>$this->input->post('userType')));
         }
         else echo json_encode(array('error'=>'Email already taken'));
     }
@@ -259,66 +265,71 @@ class FranchiseeManagement extends CI_Controller
     public function updateFranchisee()
     {
         $fl = "id";
-        $id = $_POST['id'];
+        $id = $this->input->post('id');
+		$from=new Datetime($this->input->post('DateOfBirth'));
+		$to=new Datetime('today');
+		$age=$from->diff($to)->y;
         $data = array(
-            'username' => $_POST['franchiseeName'],
-            'email' => $_POST['email'],
-            'first_name' => $_POST['first_name'],
-            'middle_name' => $_POST['middle_name'],
-            'last_name' => $_POST['last_name'],
-            'date_of_birth' => date('Y-m-d', strtotime($_POST['DateOfBirth'])),
-            'gender' => $_POST['gender'],
-            'landno' => $_POST['LandlineNumber'],
-            'mobileno' => $_POST['MobileNumber'],
-            'birthplace' => $_POST['PlaceOfBirth'],
+            'username' => $this->input->post('franchiseeName'),
+            'email' => $this->input->post('email'),
+            'first_name' => $this->input->post('first_name'),
+            'middle_name' => $this->input->post('middle_name'),
+            'last_name' => $this->input->post('last_name'),
+            'date_of_birth' => date('Y-m-d', strtotime($this->input->post('DateOfBirth'))),
+			'age'=>$age,
+            'gender' => $this->input->post('gender'),
+            'landno' => $this->input->post('LandlineNumber'),
+            'mobileno' => $this->input->post('MobileNumber'),
+            'birthplace' => $this->input->post('PlaceOfBirth'),
+			'image_path'=>trim($this->input->post('img'),'"'),
         );
         $result = $this->franchisee->updateTableRecord('sea_users', $fl, $data, $id);
         $fl = "user_id";
         $data = array(
-            'college_university' => $_POST['University'],
-            'qualification' => $_POST['Qualification'],
-            'completed_in_year' => $_POST['CompletedYear'],
+            'college_university' => $this->input->post('University'),
+            'qualification' => $this->input->post('Qualification'),
+            'completed_in_year' => $this->input->post('CompletedYear'),
         );
         $result = $this->franchisee->updateTableRecord('sea_franchise_education_details', $fl, $data, $id);
         $data = array(
-            'doorno' => $_POST['FlatNo'],
-            'streetname' => $_POST['StreetName'],
-            'area' => $_POST['Area'],
-            'city' => $_POST['City'],
-            'pincode' => $_POST['PinCode'],
-            'state' => $_POST['State'],
-            'nationality' => $_POST['Nationality'],
-            'r_doorno' => $_POST['RflatNo'],
-            'r_streetname' => $_POST['RstreetName'],
-            'r_area' => $_POST['Rarea'],
-            'r_city' => $_POST['Rcity'],
-            'r_pincode' => $_POST['RpinCode'],
-            'r_state' => $_POST['Rstate'],
-            'r_nationality' => $_POST['Rnationality'],
+            'doorno' => $this->input->post('FlatNo'),
+            'streetname' => $this->input->post('StreetName'),
+            'area' => $this->input->post('Area'),
+            'city' => $this->input->post('City'),
+            'pincode' => $this->input->post('PinCode'),
+            'state' => $this->input->post('State'),
+            'nationality' => $this->input->post('Nationality'),
+            'r_doorno' => $this->input->post('RflatNo'),
+            'r_streetname' => $this->input->post('RstreetName'),
+            'r_area' => $this->input->post('Rarea'),
+            'r_city' => $this->input->post('Rcity'),
+            'r_pincode' => $this->input->post('RpinCode'),
+            'r_state' => $this->input->post('Rstate'),
+            'r_nationality' => $this->input->post('Rnationality'),
         );
         $result = $this->franchisee->updateTableRecord('sea_franchise_resid_address', $fl, $data, $id);
         $data = array(
-            'course_type' => $_POST['OfCourse'],
-            'course_name' => $_POST['CourseName'],
-            'institution' => $_POST['Instiution'],
-            'course_compl_year' => $_POST['OtherCompletedYear'],
-            'occupation' => $_POST['PresentOcupation'],
-            'purpose' => $_POST['Goal'],
+            'course_type' => $this->input->post('OfCourse'),
+            'course_name' => $this->input->post('CourseName'),
+            'institution' => $this->input->post('Instiution'),
+            'course_compl_year' => $this->input->post('OtherCompletedYear'),
+            'occupation' => $this->input->post('PresentOcupation'),
+            'purpose' => $this->input->post('Goal'),
         );
         $result = $this->franchisee->updateTableRecord('sea_franchise_oth_train_att', $fl, $data, $id);
-        if (isset($_POST['ACMAS']))
+        if($this->input->post('ACMAS')!==null)
             $ca = 1;
         else
             $ca = 0;
-        if (isset($_POST['WRITEASY']))
+        if($this->input->post('WRITEASY')!==null)	
             $cw = 1;
         else
             $cw = 0;
-        if (isset($_POST['IAA']))
+        if($this->input->post('IAA')!==null)	
             $ci = 1;
         else
             $ci = 0;
-        if (isset($_POST['FUNMATHS']))
+        if($this->input->post('FUNMATHS')!==null)	
             $cf = 1;
         else
             $cf = 0;
@@ -341,7 +352,7 @@ class FranchiseeManagement extends CI_Controller
 
     public function checkEmail()
     {
-        $this->franchisee->checkmail($_POST['email']) == 0 ? 0 : 1;
+        $this->franchisee->checkmail($this->input->post('email')) == 0 ? 0 : 1;
     }
 
     public function franchiseeRevenueDistribution($userId)
@@ -352,10 +363,10 @@ class FranchiseeManagement extends CI_Controller
 
         if ($this->session->user_logged_in['role_id'] == 1) {
             $revenue_data = array(
-                //'kf_amount'=>$_POST['FranchiseKitFee'],
-                'lf_amount' => $_POST['FranchiseLicenseFee'],
-                'lf_company_amount' => $_POST['FranchiseLicenseFee'],
-                'tax_amount' => $_POST['FranchiseTax'],
+                //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                'lf_company_amount' => $this->input->post('FranchiseLicenseFee'),
+                'tax_amount' => $this->input->post('FranchiseTax'),
                 'user_id' => $userId,
                 'created_by_id' => $this->session->user_logged_in['id']
             );
@@ -363,20 +374,20 @@ class FranchiseeManagement extends CI_Controller
         elseif ($this->session->user_logged_in['role_id'] == 5) {
             $revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
             //Consultant directly creating SMF
-            if ($_POST['franchiseetypeId'] == 2) {
+            if ($this->input->post('franchiseetypeId') == 2) {
                 //if share in percentage
                 if ($revenueShares[0]['units'] == 1) {
-                    $consultant_amount = round(($_POST['FranchiseLicenseFee'] * $revenueShares[0]['direct_state_amount']) / 100, 2);
-                    $company_amount = round($_POST['FranchiseLicenseFee'] - $consultant_amount, 2);
+                    $consultant_amount = round(($this->input->post('FranchiseLicenseFee') * $revenueShares[0]['direct_state_amount']) / 100, 2);
+                    $company_amount = round($this->input->post('FranchiseLicenseFee') - $consultant_amount, 2);
                 } //else if share in amount
                 else {
                     $consultant_amount = $revenueShares[0]['direct_state_amount'];
-                    $company_amount = round($_POST['FranchiseLicenseFee'] - $consultant_amount, 2);
+                    $company_amount = round($this->input->post('FranchiseLicenseFee') - $consultant_amount, 2);
                 }
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_consultant_amount' => $consultant_amount,
                     'consultant_id' => $this->session->user_logged_in['id'],
@@ -384,20 +395,20 @@ class FranchiseeManagement extends CI_Controller
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //Consultant directly creating DMF
-            elseif ($_POST['franchiseetypeId'] == 3) {
+            elseif ($this->input->post('franchiseetypeId') == 3) {
                 //if share in percentage
                 if ($revenueShares[0]['units'] == 1) {
-                    $consultant_amount = round(($_POST['FranchiseLicenseFee'] * $revenueShares[0]['direct_district_amount']) / 100, 2);
-                    $company_amount = round($_POST['FranchiseLicenseFee'] - $consultant_amount, 2);
+                    $consultant_amount = round(($this->input->post('FranchiseLicenseFee') * $revenueShares[0]['direct_district_amount']) / 100, 2);
+                    $company_amount = round($this->input->post('FranchiseLicenseFee') - $consultant_amount, 2);
                 } //else if share in amount
                 else {
                     $consultant_amount = $revenueShares[0]['direct_district_amount'];
-                    $company_amount = round($_POST['FranchiseLicenseFee'] - $consultant_amount, 2);
+                    $company_amount = round($this->input->post('FranchiseLicenseFee') - $consultant_amount, 2);
                 }
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_consultant_amount' => $consultant_amount,
                     'consultant_id' => $this->session->user_logged_in['id'],
@@ -405,20 +416,20 @@ class FranchiseeManagement extends CI_Controller
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //Consultant directly creating UMF
-            elseif ($_POST['franchiseetypeId'] == 4) {
+            elseif ($this->input->post('franchiseetypeId') == 4) {
                 //if share in percentage
                 if ($revenueShares[0]['units'] == 1) {
-                    $consultant_amount = round(($_POST['FranchiseLicenseFee'] * $revenueShares[0]['direct_unit_amount']) / 100, 2);
-                    $company_amount = round($_POST['FranchiseLicenseFee'] - $consultant_amount, 2);
+                    $consultant_amount = round(($this->input->post('FranchiseLicenseFee') * $revenueShares[0]['direct_unit_amount']) / 100, 2);
+                    $company_amount = round($this->input->post('FranchiseLicenseFee') - $consultant_amount, 2);
                 } //else if share in amount
                 else {
                     $consultant_amount = $revenueShares[0]['direct_unit_amount'];
-                    $company_amount = round($_POST['FranchiseLicenseFee'] - $consultant_amount, 2);
+                    $company_amount = round($this->input->post('FranchiseLicenseFee') - $consultant_amount, 2);
                 }
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_consultant_amount' => $consultant_amount,
                     'consultant_id' => $this->session->user_logged_in['id'],
@@ -430,28 +441,28 @@ class FranchiseeManagement extends CI_Controller
         elseif ($this->session->user_logged_in['role_id'] == 2) {
             $smf_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
             //SMF creating DMF and this SMF is directly appointed by Admin
-            if ($_POST['franchiseetypeId'] == 3 && $this->session->user_logged_in['parent_consultant_id'] == '') {
-                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $smf_revenueShares[0]['direct_district_amount']) / 100, 2) : round($smf_revenueShares[0]['direct_district_amount'], 2);
-                $company_amount = $smf_revenueShares[0]['units'] == 1 ? round($_POST['FranchiseLicenseFee'] - $smf_amount, 2) : round($_POST['FranchiseLicenseFee'] - $smf_amount, 2);
+            if ($this->input->post('franchiseetypeId') == 3 && $this->session->user_logged_in['parent_consultant_id'] == '') {
+                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $smf_revenueShares[0]['direct_district_amount']) / 100, 2) : round($smf_revenueShares[0]['direct_district_amount'], 2);
+                $company_amount = $smf_revenueShares[0]['units'] == 1 ? round($this->input->post('FranchiseLicenseFee') - $smf_amount, 2) : round($this->input->post['FranchiseLicenseFee'] - $smf_amount, 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_smf_amount' => $smf_amount,
                     'lf_company_amount' => $company_amount,
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //SMF creating DMF and this SMF is directly appointed by Consultant
-            elseif ($_POST['franchiseetypeId'] == 3 && $this->session->user_logged_in['parent_consultant_id'] != '') {
+            elseif ($this->input->post('franchiseetypeId') == 3 && $this->session->user_logged_in['parent_consultant_id'] != '') {
                 $consultant_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $smf_revenueShares[0]['direct_district_amount']) / 100, 2) : round($smf_revenueShares[0]['direct_district_amount'], 2);
-                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $consultant_revenueShares[0]['indirect_dmf_amount']) / 100, 2) : $consultant_revenueShares[0]['direct_district_amount'];
-                $company_amount = round(($_POST['FranchiseLicenseFee'] - $smf_amount - $consultant_amount), 2);
+                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $smf_revenueShares[0]['direct_district_amount']) / 100, 2) : round($smf_revenueShares[0]['direct_district_amount'], 2);
+                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $consultant_revenueShares[0]['indirect_dmf_amount']) / 100, 2) : $consultant_revenueShares[0]['direct_district_amount'];
+                $company_amount = round(($this->input->post['FranchiseLicenseFee'] - $smf_amount - $consultant_amount), 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_smf_amount' => $smf_amount,
                     'smf_id' => $this->session->user_logged_in['id'],
@@ -461,13 +472,13 @@ class FranchiseeManagement extends CI_Controller
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //SMF creating UMF directly and this SMF is directly appointed by Admin
-            elseif ($_POST['franchiseetypeId'] == 4 && $this->session->user_logged_in['parent_consultant_id'] == '') {
-                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $smf_revenueShares[0]['direct_unit_amount']) / 100, 2) : $smf_revenueShares[0]['direct_unit_amount'];
-                $company_amount = round($_POST['FranchiseLicenseFee'] - $smf_amount, 2);
+            elseif ($this->input->post('franchiseetypeId') == 4 && $this->session->user_logged_in['parent_consultant_id'] == '') {
+                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $smf_revenueShares[0]['direct_unit_amount']) / 100, 2) : $smf_revenueShares[0]['direct_unit_amount'];
+                $company_amount = round($this->input->post('FranchiseLicenseFee') - $smf_amount, 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_smf_amount' => $smf_amount,
                     'smf_id' => $this->session->user_logged_in['id'],
@@ -475,15 +486,15 @@ class FranchiseeManagement extends CI_Controller
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //SMF creating UMF directly and this SMF is directly appointed by Consultant
-            elseif ($_POST['franchiseetypeId'] == 4 && $this->session->user_logged_in['parent_consultant_id'] != '') {
+            elseif ($this->input->post('franchiseetypeId') == 4 && $this->session->user_logged_in['parent_consultant_id'] != '') {
                 $consultant_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $smf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($smf_revenueShares[0]['direct_unit_amount'], 2);
-                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $consultant_revenueShares[0]['indirect_uf_amount']) / 100, 2) : $consultant_revenueShares[0]['indirect_uf_amount'];
-                $company_amount = round(($_POST['FranchiseLicenseFee'] - $smf_amount - $consultant_amount), 2);
+                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $smf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($smf_revenueShares[0]['direct_unit_amount'], 2);
+                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $consultant_revenueShares[0]['indirect_uf_amount']) / 100, 2) : $consultant_revenueShares[0]['indirect_uf_amount'];
+                $company_amount = round(($this->input->post('FranchiseLicenseFee') - $smf_amount - $consultant_amount), 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_smf_amount' => $smf_amount,
                     'smf_id' => $this->session->user_logged_in['id'],
@@ -497,28 +508,28 @@ class FranchiseeManagement extends CI_Controller
         elseif ($this->session->user_logged_in['role_id'] == 3) {
             //DMF creating UMF and this DMF is directly appointed by Admin
             $dmf_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['id']);
-            if ($_POST['franchiseetypeId'] == 4 && $this->session->user_logged_in['parent_smf_id'] == '' && $this->session->user_logged_in['parent_consultant_id'] == '') {
-                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
-                $company_amount = round($_POST['FranchiseLicenseFee'] - $dmf_amount, 2);
+            if ($this->input->post('franchiseetypeId') == 4 && $this->session->user_logged_in['parent_smf_id'] == '' && $this->session->user_logged_in['parent_consultant_id'] == '') {
+                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
+                $company_amount = round($this->input->post('FranchiseLicenseFee') - $dmf_amount, 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_dmf_amount' => $dmf_amount,
                     'lf_company_amount' => $company_amount,
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //DMF creating UMF and this DMF is directly appointed by State and this State is created by Admin
-            else if ($_POST['franchiseetypeId'] == 4 && $this->session->user_logged_in['parent_smf_id'] != '' && $this->session->user_logged_in['parent_consultant_id'] == '') {
+            else if ($this->input->post('franchiseetypeId') == 4 && $this->session->user_logged_in['parent_smf_id'] != '' && $this->session->user_logged_in['parent_consultant_id'] == '') {
                 $smf_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_smf']);
-                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $smf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($smf_revenueShares[0]['indirect_uf_amount'], 2);
-                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
-                $company_amount = round($_POST['FranchiseLicenseFee'] - $smf_amount - $dmf_amount, 2);
+                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $smf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($smf_revenueShares[0]['indirect_uf_amount'], 2);
+                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
+                $company_amount = round($this->input->post('FranchiseLicenseFee') - $smf_amount - $dmf_amount, 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_smf_amount' => $smf_amount,
                     'smf_id' => $this->session->user_logged_in['parent_smf_id'],
@@ -528,17 +539,17 @@ class FranchiseeManagement extends CI_Controller
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //DMF creating UMF and this DMF is directly appointed by State and this State is created by Consultant
-            else if ($_POST['franchiseetypeId'] == 4 && $this->session->user_logged_in['parent_smf_id'] != '' && $this->session->user_logged_in['parent_consultant_id'] != '') {
+            else if ($this->input->post('franchiseetypeId') == 4 && $this->session->user_logged_in['parent_smf_id'] != '' && $this->session->user_logged_in['parent_consultant_id'] != '') {
                 $smf_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_smf_id']);
                 $consultant_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $consultant_revenueShares[0]['indirect_uf_amount']) / 100, 2) : round($consultant_revenueShares[0]['indirect_uf_amount'], 2);
-                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $smf_revenueShares[0]['indirect_uf_amount']) / 100, 2) : round($smf_revenueShares[0]['indirect_uf_amount'], 2);
-                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
-                $company_amount = round($_POST['FranchiseLicenseFee'] - $smf_amount - $dmf_amount - $consultant_amount, 2);
+                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $consultant_revenueShares[0]['indirect_uf_amount']) / 100, 2) : round($consultant_revenueShares[0]['indirect_uf_amount'], 2);
+                $smf_amount = $smf_revenueShares[0]['units'] == 1 ? round(($this->input->post['FranchiseLicenseFee'] * $smf_revenueShares[0]['indirect_uf_amount']) / 100, 2) : round($smf_revenueShares[0]['indirect_uf_amount'], 2);
+                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($this->input->post['FranchiseLicenseFee'] * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
+                $company_amount = round($this->input->post('FranchiseLicenseFee') - $smf_amount - $dmf_amount - $consultant_amount, 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_consultant_amount' => $consultant_amount,
                     'consultant_id' => $this->session->user_logged_in['parent_smf_id'],
@@ -550,15 +561,15 @@ class FranchiseeManagement extends CI_Controller
                     'created_by_id' => $this->session->user_logged_in['id']
                 );
             } //DMF creating UMF and this DMF is directly appointed by Consultant
-            else if ($_POST['franchiseetypeId'] == 4 && $this->session->user_logged_in['parent_smf_id'] == '' && $this->session->user_logged_in['parent_consultant_id'] != '') {
+            else if ($this->input->post('franchiseetypeId') == 4 && $this->session->user_logged_in['parent_smf_id'] == '' && $this->session->user_logged_in['parent_consultant_id'] != '') {
                 $consultant_revenueShares = $this->franchisee->getFranchiseRevenueConfigurations($this->session->user_logged_in['parent_consultant_id']);
-                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $consultant_revenueShares[0]['indirect_uf_amount']) / 100, 2) : round($consultant_revenueShares[0]['indirect_uf_amount'], 2);
-                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($_POST['FranchiseLicenseFee'] * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
-                $company_amount = round($_POST['FranchiseLicenseFee'] - $consultant_amount - $dmf_amount, 2);
+                $consultant_amount = $consultant_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $consultant_revenueShares[0]['indirect_uf_amount']) / 100, 2) : round($consultant_revenueShares[0]['indirect_uf_amount'], 2);
+                $dmf_amount = $dmf_revenueShares[0]['units'] == 1 ? round(($this->input->post('FranchiseLicenseFee') * $dmf_revenueShares[0]['direct_unit_amount']) / 100, 2) : round($dmf_revenueShares[0]['direct_unit_amount'], 2);
+                $company_amount = round($this->input->post('FranchiseLicenseFee') - $consultant_amount - $dmf_amount, 2);
                 $revenue_data = array(
-                    //'kf_amount'=>$_POST['FranchiseKitFee'],
-                    'lf_amount' => $_POST['FranchiseLicenseFee'],
-                    'tax_amount' => $_POST['FranchiseTax'],
+                    //'kf_amount'=>$this->input->post['FranchiseKitFee'],
+                    'lf_amount' => $this->input->post('FranchiseLicenseFee'),
+                    'tax_amount' => $this->input->post('FranchiseTax'),
                     'user_id' => $userId,
                     'lf_consultant_amount' => $consultant_amount,
                     'consultant_id' => $this->session->user_logged_in['parent_smf_id'],
@@ -579,4 +590,30 @@ class FranchiseeManagement extends CI_Controller
         $data['data'] = $this->franchisee->getRegistrationFeeDetails($userId);
         $this->load->view('FranchiseeManagement/registrationAmountToBePaid', $data);
     }
+	
+	public function franchiseDropDown()
+	{
+	  	$rid=$this->session->user_logged_in['role_id'];
+		if($rid==1)
+		{
+			$array=array('2'=>'State Master Franchisee','3'=>'District Master Franchisee','4'=>'Unit Franchisee','5'=>'Consultant');
+			print json_encode($array);
+		}
+		if($rid==5)
+		{
+			$array=array('2'=>'State Master Franchisee','3'=>'District Master Franchisee','4'=>'Unit Franchisee','5'=>'Consultant');
+			print json_encode($array);
+		}
+		if($rid==2)
+		{
+			$array=array('3'=>'District Master Franchisee','4'=>'Unit Franchisee');
+			print json_encode($array);
+		}
+		if($rid==3)
+		{
+			$array=array('4'=>'Unit Franchisee');
+			print json_encode($array);
+		}	
+		
+	}
 }

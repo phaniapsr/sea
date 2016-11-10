@@ -18,7 +18,7 @@
 				   <?php
                     $i=1;
 					foreach ($data['smf'] as $row){ ?>
-					<H2>FRANCHISE DETAILS</H2>
+					<H2>FRANCHISE DETAILS<img align="right" src="<?php echo base_url()?>uploads/<?php echo $row['image_path']?>" class="img-circle" width="100px" height="100px"></H2>
 					 <table class="table table-striped table-bordered table-hover no-footer dataTable" id="dt-state-franchisee" style="font-size:14px;" aria-describedby="dt-state-franchisee_info">
                      <tbody>
                          <tr><td>FRANCHISE NAME</td><td><?php echo $row['username'];?></td></tr>
@@ -26,11 +26,10 @@
 						 <tr><td>FIRST NAME</td><td><?php echo $row['first_name'];?></td></tr>
 						 <tr><td>LAST NAME</td><td><?php echo $row['last_name'];?></td></tr>
 						 <tr><td>MIDDLE NAME</td><td><?php echo $row['middle_name'];?></td></tr>
-						 <tr><td>DATE OF BIRTH</td><td><?php echo $row['date_of_birth'];?></td></tr>
+						 <tr><td>DATE OF BIRTH</td><td><?php echo date('d-m-Y',strtotime($row['date_of_birth']));?></td></tr>
 						 <tr><td>GENDER</td><td><?php echo $row['gender'];?></td></tr>
 						 <tr><td>AGE</td><td><?php echo $row['age'];?></td></tr>
 						 <tr><td>MOBILE NO</td><td><?php echo $row['mobileno'];?></td></tr>
-						 <tr><td>IMAGE</td><td><image href=<?php echo base_url()?>uploads/<?php echo $row['image_path'];?>><?php echo $row['image_path'];?></image></td></tr>
 					 </tbody>
                     </table>
 				</br></br>
@@ -44,7 +43,7 @@
 					 </tbody>
                     </table>
 				</br></br>
-				<H2> FRANCHISE RESIDENTIAL ADDRESS</H2>
+				<H2> FRANCHISE BUSINESS ADDRESS</H2>
 					 <table class="table table-striped table-bordered table-hover no-footer dataTable" id="dt-state-franchisee" style="font-size:14px;" aria-describedby="dt-state-franchisee_info">
                      <tbody>
                          <tr><td>DOOR NO</td><td><?php echo $row['doorno'];?></td></tr>
@@ -58,6 +57,20 @@
 					 </tbody>
                     </table>
 				</br></br>
+				<H2> FRANCHISE RESIDENTIAL ADDRESS</H2>
+					 <table class="table table-striped table-bordered table-hover no-footer dataTable" id="dt-state-franchisee" style="font-size:14px;" aria-describedby="dt-state-franchisee_info">
+                     <tbody>
+                         <tr><td>DOOR NO</td><td><?php echo $row['r_doorno'];?></td></tr>
+						 <tr><td>STREET NAME</td><td><?php echo $row['r_streetname'];?></td></tr>
+						 <tr><td>AREA</td><td><?php echo $row['r_area'];?></td></tr>
+						 <tr><td>CITY</td><td><?php echo $row['r_city'];?></td></tr>
+						 <tr><td>PINCODE</td><td><?php echo $row['r_pincode'];?></td></tr>
+						 <tr><td>STATE</td><td><?php echo $row['r_state'];?></td></tr>
+						 <tr><td>NATIONALITY</td><td><?php echo $row['r_nationality'];?></td></tr>
+						  </tr>
+					 </tbody>
+                    </table>
+					</br></br>
                	<H2> FRANCHISE OTHER TRAINING(S) ATTENDED</H2>
 					 <table class="table table-striped table-bordered table-hover no-footer dataTable" id="dt-state-franchisee" style="font-size:14px;" aria-describedby="dt-state-franchisee_info">
                      <tbody>
@@ -67,7 +80,7 @@
 						 <tr><td>COURSE COMPLETION YEAR</td><td><?php echo $row['course_compl_year'];?></td></tr>
 						 <tr><td>OCCUPATION</td><td><?php echo $row['occupation'];?></td></tr>
 						 <tr><td>PURPOSE</td><td><?php echo $row['purpose'];?></td></tr>
-						 <tr><td>FEES</td><td><?php echo $row['fees'];?></td></tr>
+						 <tr><td>LICENSE FEE</td><td><?php echo $row['fees'];?></td></tr>
 						  </tr>
 					 </tbody>			
 					</table>

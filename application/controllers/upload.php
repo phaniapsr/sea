@@ -13,7 +13,7 @@ class Upload extends CI_Controller
         $output_dir = "uploads/";
         $fn = $_FILES["hi"]["name"];
         //$to = base_url() . $output_dir . $_FILES["hi"]["name"];
-        $to = "D:/xampp/htdocs/sea/uploads/". $_FILES["hi"]["name"];
+        $to = "C:/xampp/htdocs/sea/uploads/". $_FILES["hi"]["name"];
         $pinfo = pathinfo($to);
         $dir = $_FILES["hi"]["name"];
         $toold = base_url() . $output_dir . $_FILES["hi"]["name"];
