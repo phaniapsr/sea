@@ -77,7 +77,7 @@ class Student_mod extends CI_Model
     }
     public function getUploadRows($id = ''){
         $this->db->select('*');
-        $this->db->from('sea_student_exams');
+        $this->db->from('sea_exam_papers');
         if($id){
             $this->db->where('exam_id',$id);
             $query = $this->db->get();
@@ -91,7 +91,7 @@ class Student_mod extends CI_Model
     }
     
     public function insertUploadExams($data = array()){
-        $insert = $this->db->insert_batch('sea_student_exams',$data);
+        $insert = $this->db->insert_batch('sea_exam_papers',$data);
         return $insert?true:false;
     }
 //class close

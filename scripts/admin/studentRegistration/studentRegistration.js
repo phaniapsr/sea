@@ -3,6 +3,7 @@
  */
 $(function () {
     $('#program').change(function () {
+		
         var pid = $(this);
         if (pid.val() === "ACMAS") {
             document.forms["form1"]["CourseId"].options.length = 1;
@@ -28,6 +29,7 @@ $(function () {
 
     });
     $('#course').change(function () {
+		
         var pid = document.forms["form1"]["ProgramId"].value;
         var cid = $(this);
         if (pid == 'ACMAS') {

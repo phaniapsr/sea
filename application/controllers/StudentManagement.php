@@ -357,9 +357,9 @@ class StudentManagement extends CI_Controller
 				if($this->upload->do_upload('userFile')){
 					$fileData = $this->upload->data();
 					$uploadData[$i]['exam_name'] = $fileData['file_name'];
-					$uploadData[$i]['program_name'] = $this->input->post('program_name');
-					$uploadData[$i]['course_name'] = $this->input->post('course_name');
-					$uploadData[$i]['level_name'] = $this->input->post('level_name');
+					$uploadData[$i]['program_name'] = $this->input->post('ProgramId');
+					$uploadData[$i]['course_name'] = $this->input->post('CourseId');
+					$uploadData[$i]['level_name'] = $this->input->post('ProgramCourseLevelId');
 				}
 			}
 			if(!empty($uploadData)){
@@ -367,6 +367,7 @@ class StudentManagement extends CI_Controller
 				$insert = $this->student->insertUploadExams($uploadData);
 				$statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
 				$this->session->set_flashdata('statusMsg',$statusMsg);
+				redirect('StudentManagement/viewExams', 'refresh');
 			}
 		}
 		//get files data from database

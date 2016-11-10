@@ -15,8 +15,8 @@
                     <div id="margin-top" class="panel-body">
 
                         <form id="creatExams"
-                              action="<?php echo base_url() ?>StudentManagement/creatExams" name="form"
-                              class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl"
+                              action="<?php echo base_url() ?>StudentManagement/creatExams" name="form1"
+                              class="form-horizontal" method="POST" 
                               enctype="multipart/form-data">
 
                             <div class="row">
@@ -29,7 +29,7 @@
                                     <div class="form-group">
                                             <label class="col-lg-5 control-label" style="text-align:left"> Program *</label>
                                             <div class="col-lg-6">
-                                                <select id="program" class="form-control" name="program_name">
+                                                <select id="program" class="form-control" name="ProgramId">
                                                     <option selected="selected" value="">Select</option>
                                                     <option value="ACMAS">ACMAS</option>
                                                     <option value="WRITEASY">WRITEASY</option>
@@ -42,7 +42,7 @@
                                             <label class="col-lg-5 control-label" style="text-align:left"> Course *</label>
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <select id="course" class="form-control" name="course_name">
+                                                    <select id="course" class="form-control" name="CourseId">
                                                         <option selected="selected" value="">Select</option>
                                                     </select>
                                                 </div>
@@ -52,7 +52,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-5  control-label " style="text-align:left">Level *</label>
                                             <div class="col-lg-6">
-                                                <select id="level" class="form-control" name="level_name">
+                                                <select id="level" class="form-control" name="ProgramCourseLevelId">
                                                     <option selected="selected" value="">Select</option>
                                                 </select>
                                             </div>
@@ -121,55 +121,7 @@
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
                             <!-- /Modal -->
-                            <script type='text/javascript'>
-                                // CalTax is for calicualting 15% tax on Franchisee License Fee
-                            $(function () {
-                                alert('hi');
-                                $(document).ready(function () {
-                                    $("#program").change(function () {
-                                        alert('hi');
-                                        $("#course").html('<option value="">Select</option>');
-                                        $("#level").html('<option value="">Select</option>');
-                                        lookupManager.GetCourseLevels($(this).val(), function (courses) {
-                                            var temp = [];
-                                            for (i = 0; i < courses.length; i++) {
-                                                var course = courses[i];
-                                                if (temp.indexOf(course.CourseId) == -1) {
-                                                    $("#course").append('<option value="' + course.CourseId + '" >' + course.CourseName + '</option>');
-                                                    temp.push(course.CourseId)
-                                                }
-                                            }
-                                        });
-                                    });
-                                    $("#course").change(function () {
-                                        $("#level").html('<option value="">Select</option>');
-                                        lookupManager.GetCourseLevels($("#program").val(), function (courses) {
-                                            var temp = [];
-                                            for (i = 0; i < courses.length; i++) {
-                                                var course = courses[i];
-                                                if (course.CourseId == parseInt($("#course").val())) {
-                                                    if (temp.indexOf(course.LevelName) == -1) {
-                                                        $("#level").append('<option value="' + course.CourseLevelId + '">' + course.LevelName + '</option>');
-                                                        temp.push(course.LevelName)
-                                                    }
-                                                }
-
-                                            }
-                                        });
-                                    });
-                                    $("#level").change(function () {
-                                        studentManager.GetStudentFeeByCourse($(this).val(), function (result) {
-                                            if (result) {
-                                                $("#RegistrationFee").val(result.RegistrationFee);
-                                                $("#CourseFee").val(result.CourseFee);
-                                                $("#KitFee").val(result.KitFee);
-                                            }
-                                        });
-									
-                                });
-                            });
-                            </script>
-                        
+                           
 
                         </form>
                         <!-- /.col-lg-6 (nested) -->
