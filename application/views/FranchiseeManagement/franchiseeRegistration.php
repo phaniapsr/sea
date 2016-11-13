@@ -19,27 +19,33 @@
                               enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-lg-6">
-								  <div class="form-group">
-                                        <label  style="text-align: left">Reigistered User<input type="radio" id="reUser" name="userType" value="0"> New User <input type="radio" id="reUser" name="userType" value="1"></label>
+                                    <div class="form-group">
+                                        <label><span class="col-lg-12"><input type="radio" id="reUser" name="userType" value="0">Registered User</span></label>
+                                         <label><span class="col-lg-12"><input type="radio" id="reUser" name="userType" value="1">New User</span></label>
                                     </div>
-								    <div class="form-group">
+                                    <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Select
                                             Franchisee *</label>
-									    <div class="col-lg-6">
+                                        <div class="col-lg-6">
                                             <select id="franchiseetypeId" class="form-control" name="franchiseetypeId">
                                                 <option value="">Select</option>
-												<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5 || $this->session->user_logged_in['role_id'] == 2 ){?>
-                                                <option value="2">State Master Franchisee</option>
-												<?php } if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
-					 || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3){ ?>
-                                                <option value="3">District Master Franchisee</option>
-												<?php } if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
-					 || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3
-					 || $this->session->user_logged_in['role_id'] == 4){?>
-                                                <option value="4">Unit Franchisee</option>
-					 <?php } if($this->session->user_logged_in['role_id'] == 1 ){?>
-                                                <option value="5">Consultant</option>
-					 <?php } ?>
+                                                <?php if ($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5 || $this->session->user_logged_in['role_id'] == 2) { ?>
+                                                    <option value="2">State Master Franchisee</option>
+                                                <?php }
+                                                if ($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
+                                                    || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3
+                                                ) { ?>
+                                                    <option value="3">District Master Franchisee</option>
+                                                <?php }
+                                                if ($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
+                                                    || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3
+                                                    || $this->session->user_logged_in['role_id'] == 4
+                                                ) { ?>
+                                                    <option value="4">Unit Franchisee</option>
+                                                <?php }
+                                                if ($this->session->user_logged_in['role_id'] == 1) { ?>
+                                                    <option value="5">Consultant</option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -58,15 +64,14 @@
                                             <input id="email" type="text" class="form-control" name="email"
                                                    placeholder="Email address"/>
                                             <script>
-                                                $('#email').blur(function(){
-                                                    var em=$('#email').val();
+                                                $('#email').blur(function () {
+                                                    var em = $('#email').val();
                                                     $.ajax({
-                                                        type:'post',
-                                                        url:'<?php echo base_url()?>/FranchiseeManagement/checkEmail',
-                                                        data:{email:em},
-                                                        success:function(res){
-                                                            if(res==1)
-                                                            {
+                                                        type: 'post',
+                                                        url: '<?php echo base_url()?>/FranchiseeManagement/checkEmail',
+                                                        data: {email: em},
+                                                        success: function (res) {
+                                                            if (res == 1) {
                                                                 alert("This email id already taken");
                                                                 $('#email').val('').focus();
                                                             }
@@ -180,7 +185,7 @@
                                                     <input type="checkbox" name="ACMAS" value="ACMAS"/>
                                                     ACMAS
                                                 </label>
-												<label style="padding-left:20px">
+                                                <label style="padding-left:20px">
                                                     <input type="checkbox" name="WRITEASY" value="WRITEASY"/>
                                                     WRITEASY
                                                 </label>
@@ -250,7 +255,7 @@
                                                    placeholder="College/University"/>
                                         </div>
                                     </div>
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Qualification
                                             *</label>
                                         <div class="col-lg-6">
@@ -267,7 +272,7 @@
                                                    placeholder="Completed in Year" value="0" required/>
                                         </div>
                                     </div>
-									<div class="form-group">
+                                    <div class="form-group">
                                         <center style="font-size:20px;">BUSINESS ADDRESS</center>
                                     </div>
                                     <div class="form-group">
@@ -286,7 +291,7 @@
 
                                         </div>
                                     </div>
-									 <div class="form-group">
+                                    <div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Area *</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="Area" placeholder="Area"/>
@@ -582,7 +587,7 @@
                                 // CalTax is for calicualting 15% tax on Franchisee License Fee
 
                                 $(document).ready(function () {
-									$('#myModal2').on('shown.bs.modal', function () {
+                                    $('#myModal2').on('shown.bs.modal', function () {
                                         $(this).find('.modal-dialog').css({
                                             width: '50%',
                                             height: 'auto',
@@ -592,7 +597,7 @@
                                     $('#franchiseFee').change(function () {
                                         if (parseFloat($(this).val()) > 0) {
                                             $('#tax').val(parseFloat($('#franchiseFee').val()) * 15 / 100);
-                                            $('#total_amt').val(parseFloat($('#franchiseFee').val()) +parseFloat($('#tax').val()))
+                                            $('#total_amt').val(parseFloat($('#franchiseFee').val()) + parseFloat($('#tax').val()))
                                         } else {
                                             $(this).val('');
                                         }
@@ -650,9 +655,9 @@
             </div>
         </div>
         <!-- /.col-lg-12 -->
-        <link href="<?php echo base_url()?>Content/css/tjquery-ui.css" rel="stylesheet"/>
-        <script src="<?php echo base_url()?>Scripts/admin/validations/jquery-teacher.js"></script>
-        <script src="<?php echo base_url()?>Scripts/admin/jquery-ui.js"></script>
+        <link href="<?php echo base_url() ?>Content/css/tjquery-ui.css" rel="stylesheet"/>
+        <script src="<?php echo base_url() ?>Scripts/admin/validations/jquery-teacher.js"></script>
+        <script src="<?php echo base_url() ?>Scripts/admin/jquery-ui.js"></script>
 
     </div>
     <footer><p>All right reserved by: <a href="#">FriendsFocus</a></p></footer>

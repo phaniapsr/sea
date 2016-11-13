@@ -153,5 +153,49 @@ class Revenue_mod extends CI_Model
     }
 
     //end of updating the values of Revenue configuration
+    public function franchiseRevenueGrid(){
+        $this->db->select("sea_franchise_revenue.*,
+        concat(username.first_name,' ',username.last_name) as frname,
+        concat(createdby.first_name,' ',createdby.last_name) as createdbyname,
+        concat(smf_name.first_name,' ',smf_name.last_name) as smfname,
+        concat(dmf_name.first_name,' ',dmf_name.last_name) as dmfname,
+        concat(consultant_name.first_name,' ',consultant_name.last_name) as consultantname,
+        DATE_FORMAT(sea_franchise_revenue.created_datetime,'%d-%m-%Y %T')AS created_datetime,
+        sea_roles.role as role")
+            ->from('sea_franchise_revenue')
+            ->join('sea_user_hierarchy','sea_user_hierarchy.user_id=sea_franchise_revenue.user_id')
+            ->join('sea_user_role','sea_user_hierarchy.user_id=sea_user_role.user_id')
+            ->join('sea_roles','sea_roles.id=sea_user_role.role_id')
+            ->join('sea_users as username','sea_user_hierarchy.user_id=username.id','left')
+            ->join('sea_users as consultant_name','sea_user_hierarchy.consultant_id=consultant_name.id','left')
+            ->join('sea_users as smf_name','sea_user_hierarchy.smf_id=smf_name.id','left')
+            ->join('sea_users as dmf_name','sea_user_hierarchy.dmf_id=dmf_name.id','left')
+            ->join('sea_users as createdby','sea_user_hierarchy.created_by=createdby.id','left');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
+    public function studentRevenueGrid(){
+        $this->db->select("sea_student_revenue.*,
+        concat(username.first_name,' ',username.last_name) as stname,
+        concat(createdby.first_name,' ',createdby.last_name) as createdbyname,
+        concat(smf_name.first_name,' ',smf_name.last_name) as smfname,
+        concat(dmf_name.first_name,' ',dmf_name.last_name) as dmfname,
+        concat(uf_name.first_name,' ',uf_name.last_name) as ufname,
+        concat(consultant_name.first_name,' ',consultant_name.last_name) as consultantname,
+        DATE_FORMAT(sea_student_revenue.created_datetime,'%d-%m-%Y %T')AS created_datetime,
+        sea_student_revenue_type.ssrt_revenue_type AS revenue_type
+        ")
+            ->from('sea_student_revenue')
+            ->join('sea_user_hierarchy','sea_user_hierarchy.user_id=sea_student_revenue.student_id')
+            ->join('sea_student_revenue_type','sea_student_revenue_type.ssrt_id=sea_student_revenue.revenue_type_id')
+            ->join('sea_users as username','sea_user_hierarchy.user_id=username.id','left')
+            ->join('sea_users as consultant_name','sea_user_hierarchy.consultant_id=consultant_name.id','left')
+            ->join('sea_users as smf_name','sea_user_hierarchy.smf_id=smf_name.id','left')
+            ->join('sea_users as dmf_name','sea_user_hierarchy.dmf_id=dmf_name.id','left')
+            ->join('sea_users as uf_name','sea_user_hierarchy.uf_id=uf_name.id','left')
+            ->join('sea_users as createdby','sea_user_hierarchy.created_by=createdby.id','left');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

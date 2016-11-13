@@ -19,6 +19,7 @@ class Franchisee_mod extends CI_Model{
 			$this->db->where('sea_user_hierarchy.created_by='.$id);
 		}
 		$this->db->where('sea_user_role.role_id='.$role);
+        $this->db->order_by('sea_users.id','desc');
 		$query=$this->db->get();
         return $query->result_array();
 	}

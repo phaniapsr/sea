@@ -292,7 +292,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 control-label " style="text-align:left">Flat/Door Number *</label>
                                             <div class="col-lg-6 has-feedback">
-                                                <input data-fv-field="FlatNo" class="form-control" name="FlatNo" placeholder="flate/doorNumber" type="text"/><i data-fv-icon-for="FlatNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <input data-fv-field="FlatNo" class="form-control" name="FlatNo" placeholder="Flat/DoorNumber" type="text"/><i data-fv-icon-for="FlatNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
 
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="FlatNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Flate/Door Number is required</small></div>
                                         </div>
@@ -463,7 +463,7 @@
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
                                     </div>
 									<div class="form-group">
-                                        <label class="col-lg-5  control-label " style="text-align:left">Anual Competetion Fee *</label>
+                                        <label class="col-lg-5  control-label " style="text-align:left">Annual Competition Fee *</label>
                                         <div class="col-lg-6 has-feedback">
                                             <input data-fv-field="KitFee" class="form-control" id="AcFee" name="AcFee" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>

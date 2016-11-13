@@ -70,14 +70,14 @@ class StudentManagement extends CI_Controller
     {
         $data = array(
             //'franchiseetypeId'=>4,
-            'password'=>$this->input->post('password'),
-            'email'=>$this->input->post('email'),
-            'first_name'=>$this->input->post('first_name'),
-            'last_name'=>$this->input->post('last_name'),
-            'middle_name'=>$this->input->post('middle_name'),
-            'date_of_birth'=>$this->input->post('date_of_birth'),
-            'gender'=>$this->input->post('gender'),
-            'age'=>$this->input->post('Age'),
+            'password' => $this->input->post('password'),
+            'email' => $this->input->post('email'),
+            'first_name' => ucwords($this->input->post('first_name')),
+            'last_name' => ucwords($this->input->post('last_name')),
+            'middle_name' => ucwords($this->input->post('middle_name')),
+            'date_of_birth' => $this->input->post('date_of_birth'),
+            'gender' => $this->input->post('gender'),
+            'age' => $this->input->post('Age'),
         );
 
         $result = $this->student->insertNewRecord('sea_users', $data);
@@ -262,9 +262,7 @@ class StudentManagement extends CI_Controller
 
     public function studentRevenueDistribution($student_id)
     {
-<<<<<<< HEAD
         if ($this->session->user_logged_in['role_id'] == 1 && isset($_POST['ProgramId']) && $this->input->post('ProgramId') != '') {
-
             //For Student Registration Fee
             $revenue_split = array(
                 'company_amount' => $this->input->post('RegistrationFee'),
@@ -315,13 +313,13 @@ class StudentManagement extends CI_Controller
                 'tax_amount' => $_POST['Tax'],
                 'total_amount' => $_POST['RegistrationFee'],
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['RegistrationFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
-                'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
+                //'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['RegistrationFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
-                'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
+                //'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
                 'dmf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['RegistrationFee'] * $revenueShares[0]['district_share']) / 100, 2) : round($revenueShares[0]['district_share'], 2),
-                'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
+                //'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
                 'uf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['RegistrationFee'] * $revenueShares[0]['unit_share']) / 100, 2) : round($revenueShares[0]['unit_share'], 2),
-                'uf_id' => $this->session->user_logged_in['id'],
+                //'uf_id' => $this->session->user_logged_in['id'],
                 'student_id' => $student_id,
                 'revenue_type_id' => $this->course_level_config_array['SR_FEE']
             );
@@ -335,13 +333,13 @@ class StudentManagement extends CI_Controller
                 'tax_amount' => $_POST['Tax'],
                 'total_amount' => $_POST['KitFee'],
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['KitFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
-                'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
+                //'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['KitFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
-                'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
+                //'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
                 'dmf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['KitFee'] * $revenueShares[0]['district_share']) / 100, 2) : round($revenueShares[0]['district_share'], 2),
-                'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
+                //'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
                 'uf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['KitFee'] * $revenueShares[0]['unit_share']) / 100, 2) : round($revenueShares[0]['unit_share'], 2),
-                'uf_id' => $this->session->user_logged_in['id'],
+                //'uf_id' => $this->session->user_logged_in['id'],
                 'student_id' => $student_id,
                 'revenue_type_id' => $this->course_level_config_array['KIT_FEE'][$_POST['ProgramId']][$_POST['ProgramCourseLevelId']]
             );
@@ -354,13 +352,13 @@ class StudentManagement extends CI_Controller
                 'tax_amount' => $_POST['Tax'],
                 'total_amount' => $_POST['CourseFee'],
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['CourseFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
-                'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
+                //'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['CourseFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
-                'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
+                //'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
                 'dmf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['CourseFee'] * $revenueShares[0]['district_share']) / 100, 2) : round($revenueShares[0]['district_share'], 2),
-                'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
+                //'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
                 'uf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['CourseFee'] * $revenueShares[0]['unit_share']) / 100, 2) : round($revenueShares[0]['unit_share'], 2),
-                'uf_id' => $this->session->user_logged_in['id'],
+                //'uf_id' => $this->session->user_logged_in['id'],
                 'student_id' => $student_id,
                 'revenue_type_id' => $this->course_level_config_array['LEVEL_FEE'][$_POST['ProgramId']]
             );
@@ -373,13 +371,13 @@ class StudentManagement extends CI_Controller
                 'tax_amount' => $_POST['Tax'],
                 'total_amount' => $_POST['AcFee'],
                 'smf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['AcFee'] * $revenueShares[0]['state_share']) / 100, 2) : round($revenueShares[0]['state_share'], 2),
-                'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
+                //'smf_id' => $this->session->user_logged_in['parent_smf_id'] == '' ? null : $this->session->user_logged_in['parent_smf_id'],
                 'consultant_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['AcFee'] * $revenueShares[0]['consultant_share']) / 100, 2) : round($revenueShares[0]['consultant_share'], 2),
-                'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
+                //'consultant_id' => $this->session->user_logged_in['parent_consultant_id'] == '' ? null : $this->session->user_logged_in['parent_consultant_id'],
                 'dmf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['AcFee'] * $revenueShares[0]['district_share']) / 100, 2) : round($revenueShares[0]['district_share'], 2),
-                'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
+                //'dmf_id' => $this->session->user_logged_in['parent_dmf_id'] == '' ? null : $this->session->user_logged_in['parent_dmf_id'],
                 'uf_amount' => $revenueShares[0]['units'] == 1 ? round(($_POST['AcFee'] * $revenueShares[0]['unit_share']) / 100, 2) : round($revenueShares[0]['unit_share'], 2),
-                'uf_id' => $this->session->user_logged_in['id'],
+                //'uf_id' => $this->session->user_logged_in['id'],
                 'student_id' => $student_id,
                 'revenue_type_id' => $this->course_level_config_array['AC_FEE']
             );
@@ -392,65 +390,60 @@ class StudentManagement extends CI_Controller
     {
         $userId = $this->input->post('userId');
         $data['data'] = $this->student->getRegistrationFeeDetails($userId);
-
         $this->load->view('StudentManagement/stuRegistrationAmountToBePaid', $data);
     }
-	public function creatExams()
-	{
 
-		$data = array();
-		if($this->input->post('fileSubmit') && !empty($_FILES['userFiles']['name'])){
-			$filesCount = count($_FILES['userFiles']['name']);
-			for($i = 0; $i < $filesCount; $i++){
-				$_FILES['userFile']['name'] = $_FILES['userFiles']['name'][$i];
-				$_FILES['userFile']['type'] = $_FILES['userFiles']['type'][$i];
-				$_FILES['userFile']['tmp_name'] = $_FILES['userFiles']['tmp_name'][$i];
-				$_FILES['userFile']['error'] = $_FILES['userFiles']['error'][$i];
-				$_FILES['userFile']['size'] = $_FILES['userFiles']['size'][$i];
+    public function creatExams()
+    {
+        $data = array();
+        if ($this->input->post('fileSubmit') && !empty($_FILES['userFiles']['name'])) {
+            $filesCount = count($_FILES['userFiles']['name']);
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['userFile']['name'] = $_FILES['userFiles']['name'][$i];
+                $_FILES['userFile']['type'] = $_FILES['userFiles']['type'][$i];
+                $_FILES['userFile']['tmp_name'] = $_FILES['userFiles']['tmp_name'][$i];
+                $_FILES['userFile']['error'] = $_FILES['userFiles']['error'][$i];
+                $_FILES['userFile']['size'] = $_FILES['userFiles']['size'][$i];
 
-				$uploadPath = 'uploads/exams/';
-				$config['upload_path'] = $uploadPath;
-				$config['allowed_types'] = 'gif|jpg|png';
-				//$config['max_size']	= '100';
-				//$config['max_width'] = '1024';
-				//$config['max_height'] = '768';
-				
-				$this->load->library('upload', $config);
-				$this->upload->initialize($config);
-				if($this->upload->do_upload('userFile')){
-					$fileData = $this->upload->data();
-					$uploadData[$i]['exam_name'] = $fileData['file_name'];
-					$uploadData[$i]['program_name'] = $this->input->post('ProgramId');
-					$uploadData[$i]['course_name'] = $this->input->post('CourseId');
-					$uploadData[$i]['level_name'] = $this->input->post('ProgramCourseLevelId');
-				}
-			}
-			if(!empty($uploadData)){
-				//Insert files data into the database
-				$insert = $this->student->insertUploadExams($uploadData);
-				$statusMsg = $insert?'Files uploaded successfully.':'Some problem occurred, please try again.';
-				$this->session->set_flashdata('statusMsg',$statusMsg);
-				redirect('StudentManagement/viewExams', 'refresh');
-			}
-		}
-		//get files data from database
+                $uploadPath = 'uploads/exams/';
+                $config['upload_path'] = $uploadPath;
+                $config['allowed_types'] = 'gif|jpg|png';
+                //$config['max_size']	= '100';
+                //$config['max_width'] = '1024';
+                //$config['max_height'] = '768';
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('userFile')) {
+                    $fileData = $this->upload->data();
+                    $uploadData[$i]['exam_name'] = $fileData['file_name'];
+                    $uploadData[$i]['program_name'] = $this->input->post('ProgramId');
+                    $uploadData[$i]['course_name'] = $this->input->post('CourseId');
+                    $uploadData[$i]['level_name'] = $this->input->post('ProgramCourseLevelId');
+                }
+            }
+            if (!empty($uploadData)) {
+                //Insert files data into the database
+                $insert = $this->student->insertUploadExams($uploadData);
+                $statusMsg = $insert ? 'Files uploaded successfully.' : 'Some problem occurred, please try again.';
+                $this->session->set_flashdata('statusMsg', $statusMsg);
+                redirect('StudentManagement/viewExams', 'refresh');
+            }
+        }
+        //get files data from database
         $data['files'] = $this->student->getUploadRows();
-		//pass the files data to view
-		//$this->load->view('upload_files/index', $data);
-		$this->load->view('includes/header');
+        //pass the files data to view
+        //$this->load->view('upload_files/index', $data);
+        $this->load->view('includes/header');
         $this->load->view('StudentManagement/creatExams', $data);
         $this->load->view('includes/footer');
-		
-	
-	}
-	
-	public function viewExams()
-	{
-		 $data['files'] = $this->student->getUploadRows();
-		$this->load->view('includes/header');
-        $this->load->view('StudentManagement/viewExams',$data);
+    }
+
+    public function viewExams()
+    {
+        $data['files'] = $this->student->getUploadRows();
+        $this->load->view('includes/header');
+        $this->load->view('StudentManagement/viewExams', $data);
         $this->load->view('includes/footer');
-		
-	
-	}
+    }
 }

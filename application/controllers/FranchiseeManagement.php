@@ -13,6 +13,7 @@ class FranchiseeManagement extends CI_Controller
         // Construct the parent class
         parent::__construct();
         $this->load->model('franchisee_mod', 'franchisee');
+
         //$this->load->model('merchant_mod');
         $this->load->library('form_validation');
 		 $this->load->helper('array');
@@ -32,12 +33,12 @@ class FranchiseeManagement extends CI_Controller
 		$to=new Datetime('today');
 		$age=$from->diff($to)->y;
         $data=array(
-            'username'=>$this->input->post('franchiseeName'),
+            'username'=>ucwords($this->input->post('franchiseeName')),
             'password'=>$this->input->post('password'),
             'email'=>$this->input->post('email'),
-            'first_name'=>$this->input->post('first_name'),
-            'last_name'=>$this->input->post('last_name'),
-            'middle_name'=>$this->input->post('middle_name'),
+            'first_name'=>ucwords($this->input->post('first_name')),
+            'last_name'=>ucwords($this->input->post('last_name')),
+            'middle_name'=>ucwords($this->input->post('middle_name')),
             'date_of_birth'=>date('Y-m-d',strtotime($this->input->post('DateOfBirth'))),
 			'age'=>$age,
 			'gender'=>$this->input->post('gender'),
@@ -616,4 +617,6 @@ class FranchiseeManagement extends CI_Controller
 		}	
 		
 	}
+
+
 }

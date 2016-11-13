@@ -13,41 +13,63 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Franchisee Name</label>
-                                <div id="franchisee_name_id" class="col-lg-6"><?php echo $data[0]['first_name'].' '.$data[0]['last_name']?></div>
-                                <input type="hidden" name="user_id" id="user_id" value="<?php echo $data[0]['id']?>">
+                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Student Name</label>
+                                <div id="student_name_id" class="col-lg-6"><?php echo $data['name']?></div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Franchisee Email</label>
-                                <div id="franchisee_email_id" class="col-lg-6"><?php echo $data[0]['email']?></div>
-                                <input type="hidden" name="email" id="hid_franchisee_email_id" value="<?php echo $data[0]['email']?>">
+                                <div id="student_email_id" class="col-lg-6"><?php echo $data['email']?></div>
+                                <input type="hidden" name="email" id="hid_student_email_id" value="<?php echo $data['email']?>">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">License Amount</label>
-                                <div id="franchisee_license_amount_id" class="col-lg-6"><?php echo $data[0]['lf_amount']?></div>
-                                <input type="hidden" name="license_amount" id="hid_franchisee_license_amount_id" value="<?php echo $data[0]['lf_amount']?>">
+                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Registration Fee</label>
+                                <div id="registration_amount_id" class="col-lg-6"><?php echo $data['fee_list'][0]?></div>
+                                <input type="hidden" name="registration_amount" id="hid_student_registration_amount_id" value="<?php echo $data['fee_list'][0]?>">
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Level Fee</label>
+                                <div id="level_id" class="col-lg-6"><?php echo $data['fee_list'][2]?></div>
+                                <input type="hidden" name="level_amount_id" id="hid_student_level_amount_id" value="<?php echo $data['fee_list'][2]?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Kit Fee</label>
+                                <div id="student_kit_amount_id" class="col-lg-6"><?php echo $data['fee_list'][1]?></div>
+                                <input type="hidden" name="student_kit_amount" id="hid_student_kit_amount_id" value="<?php echo $data['fee_list'][1]?>">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Annual Competition Fee</label>
+                                <div id="student_annual_amount_id" class="col-lg-6"><?php echo $data['fee_list'][3]?></div>
+                                <input type="hidden" name="student_annual_amount" id="hid_student_annual_amount_id" value="<?php echo $data['fee_list'][3]?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Tax Amount</label>
-                                <div id="franchisee_tax_amount_id" class="col-lg-6"><?php echo $data[0]['tax_amount']?></div>
-                                <input type="hidden" name="tax_amount" id="hid_franchisee_tax_amount_id" value="<?php echo $data[0]['tax_amount']?>">
+                                <div id="student_tax_amount_id" class="col-lg-6"><?php echo $data['tax_amount']?></div>
+                                <input type="hidden" name="tax_amount" id="hid_student_tax_amount_id" value="<?php echo $data['tax_amount']?>">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Total Amount</label>
-                                <div id="franchisee_total_amount_id" class="col-lg-6"><?php echo $data[0]['lf_amount']+$data[0]['tax_amount']?></div>
-                                <input type="hidden" name="total_amount" id="hid_franchisee_total_amount_id" value="<?php echo $data[0]['lf_amount']+$data[0]['tax_amount']?>">
+                                <div id="franchisee_total_amount_id" class="col-lg-6"><?php echo $data['fee_list'][0]+$data['fee_list'][1]+$data['fee_list'][2]+$data['fee_list'][3]+$data['tax_amount']?></div>
+                                <input type="hidden" name="total_amount" id="hid_franchisee_total_amount_id" value="<?php echo $data['fee_list'][0]+$data['fee_list'][1]+$data['fee_list'][2]+$data['fee_list'][3]+$data['tax_amount']?>">
                             </div>
                         </div>
                     </div>

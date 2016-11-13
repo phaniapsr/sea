@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header">
-                    Company Revenue
+                    Franchise Revenue
                 </h1>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow: auto;">
                             <div id="dt-state-franchisee_wrapper" class="dataTables_wrapper form-inline" role="grid">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -53,59 +53,79 @@
                                        class="table table-striped table-bordered table-hover dataTable no-footer"
                                        id="dt-state-franchisee" style="font-size:14px;">
                                     <thead>
-
                                     <tr role="row">
-                                        <th aria-label="Franchisee Id: activate to sort column ascending"
-                                            aria-sort="ascending" style="width: 165px;" colspan="1" rowspan="1"
-                                            aria-controls="dt-state-franchisee" tabindex="0"
-                                            class="selected sorting_asc">Name
-                                        </th>
                                         <th aria-label="Franchisee Name: activate to sort column ascending"
                                             style="width: 209px;" colspan="1" rowspan="1"
                                             aria-controls="dt-state-franchisee" tabindex="0" class="selected sorting">
-                                            Type
+                                            Fr Type
                                         </th>
-                                        <th aria-label="City: activate to sort column ascending" style="width: 53px;"
-                                            colspan="1" rowspan="1" aria-controls="dt-state-franchisee" tabindex="0"
-                                            class="sorting">LicenseFee
+                                        <th aria-label="Franchisee Id: activate to sort column ascending"
+                                            aria-sort="ascending" style="width: 165px;" colspan="1" rowspan="1"
+                                            aria-controls="dt-state-franchisee" tabindex="0"
+                                            class="selected sorting_asc">Fr Name
                                         </th>
+
                                         <th aria-label="State: activate to sort column ascending" style="width: 68px;"
                                             colspan="1" rowspan="1" aria-controls="dt-state-franchisee" tabindex="0"
-                                            class="sorting">KitFee
+                                            class="sorting">SMF
                                         </th>
                                         <th aria-label="Revenue Configuration" style="width: 272px;" colspan="1"
                                             rowspan="1" class="text-center selected sorting_disabled">
-                                            Tax
+                                            DMF
                                         </th>
                                         <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
-                                            class="text-center sorting_disabled">Company Share
+                                            class="text-center sorting_disabled">Consultant
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">SMF Share
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">DMF Share
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Const Share
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Company
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Total License
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Kit Fee
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Tax
+                                        </th>
+                                        <th aria-label="City: activate to sort column ascending" style="width: 53px;"
+                                            colspan="1" rowspan="1" aria-controls="dt-state-franchisee" tabindex="0"
+                                            class="sorting">CreatedBy
+                                        </th>
+                                        <th aria-label="Deactive" style="width: 108px;" colspan="1" rowspan="1"
+                                            class="text-center sorting_disabled">Paid On
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    // print_r($company);exit;
-                                    foreach ($company as $row) {
+                                    foreach ($data as $row) {
                                         ?>
                                         <tr class="odd">
-                                            <td class="selected sorting_1"><?php echo $row['first_name']; ?></td>
-                                            <td class="text-center selected">
-                                                <?php
-                                                $RoleId = $row['role_id'];
-                                                $this->db->select('role');
-                                                $this->db->from('sea_roles');
-                                                $this->db->where('id', $RoleId);
-                                                $Role = $this->db->get()->row();
-                                                echo $Role->role;
-                                                ?>
-                                            </td>
-                                            <td class=" selected"><?php echo $row['lf_amount']; ?></td>
+                                            <td><?php echo $row['role']?></td>
+                                            <td><?php echo $row['frname'];?></td>
+
+                                            <td><?php echo $row['smfname'];?></td>
+                                            <td><?php echo $row['dmfname'];?></td>
+                                            <td><?php echo $row['consultantname'];?></td>
+                                            <td><?php echo $row['lf_smf_amount']; ?></td>
+                                            <td><?php echo $row['lf_dmf_amount']; ?></td>
+                                            <td><?php echo $row['lf_consultant_amount']; ?></td>
+                                            <td><?php echo $row['lf_company_amount']; ?></td>
+                                            <td><?php echo $row['lf_amount']; ?></td>
                                             <td><?php echo $row['kf_amount']; ?></td>
                                             <td><?php echo $row['tax_amount']; ?></td>
-
-                                            <td class=" text-center"><?php echo $row['lf_company_amount']; ?>
-
-                                                </a></td>
+                                            <td><?php echo $row['createdbyname'];?></td>
+                                            <td><?php echo $row['created_datetime']; ?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>

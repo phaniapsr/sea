@@ -13,6 +13,7 @@ class Student_mod extends CI_Model
         $this->db->from('sea_users');
         $this->db->join('sea_user_role', 'sea_user_role.user_id = sea_users.id');
         $this->db->where('sea_user_role.role_id=6');
+        $this->db->order_by('sea_users.id','desc');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -73,12 +74,15 @@ class Student_mod extends CI_Model
         $this->db->where('sea_users.id',$userId);
         $query=$this->db->get();
         $data=array();
-        /*foreach($query->result() as $row){
+        foreach($query->result_array() as $row){
             $data['name']=$row['first_name'].' '.$row['middle_name'].' '.$row['last_name'];
-            $data['']=
-        }*/
+            $data['tax_amount']=$row['tax_amount'];
+            $data['fee_list'][]=$row['total_amount'];
+            $data['email']=$row['email'];
+        }
         return $data;
     }
+
     public function getUploadRows($id = ''){
         $this->db->select('*');
         $this->db->from('sea_exam_papers');
