@@ -355,6 +355,24 @@ class FranchiseeManagement extends CI_Controller
     {
         $this->franchisee->checkmail($this->input->post('email')) == 0 ? 0 : 1;
     }
+	
+	public function checkStatus()
+	{
+		$id=$this->input->post('id');
+		$st=$this->franchisee->checkstatus($id);
+		if($st==0)
+		{
+			$data=array('user_status'=>1);
+			$this->franchisee->updateTableRecord('sea_users','id',$data,$id);
+		}
+		if($st==1)
+		{
+			$data=array('user_status'=>0);
+			$this->franchisee->updateTableRecord('sea_users','id',$data,$id);
+		}
+		echo $st;
+		
+	}
 
     public function franchiseeRevenueDistribution($userId)
     {

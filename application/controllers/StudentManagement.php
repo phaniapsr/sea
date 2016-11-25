@@ -127,6 +127,11 @@ class StudentManagement extends CI_Controller
             'stu_program' => $this->input->post('ProgramId'),
             'stu_category' => $this->input->post('CourseId'),
             'stu_level' => $this->input->post('ProgramCourseLevelId'),
+			'class_start_date'=>date('Y-m-d',strtotime($this->input->post('ClassStartDate'))),
+		   'level_end_date'=>date('Y-m-d',strtotime($this->input->post('LevelEndDate'))),
+		   'class_time'=>$this->input->post('ClassTime'),
+		   'class_day'=>$this->input->post('ClassDay'),
+		   'course_instructor_name'=>$this->input->post('CName'),
         );
         $result3 = $this->student->insertNewRecord('sea_student_course_level', $data3);
         $data = array(
@@ -134,7 +139,7 @@ class StudentManagement extends CI_Controller
             'role_id' => 6,
         );
         $role = $this->franchisee->insertNewRecord('sea_user_role', $data);
-        //Logic for inserting record in hierarchy table
+		     //Logic for inserting record in hierarchy table
         //If admin/consultant login and creating SMF/DMF/UF
         if ($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5) {
             $data_hierarchy = array(

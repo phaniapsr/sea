@@ -67,6 +67,14 @@ class Franchisee_mod extends CI_Model{
         $query=$this->db->get();
         return count($query->result_array());
     }
+	public function checkstatus($id){
+        $this->db->select('user_status');
+        $this->db->from('sea_users');
+        $this->db->where('sea_users.id',$id);
+        $query=$this->db->get();
+        $row=$query->row();
+		return $row->user_status;		
+    }
 
     public function getRegistrationFeeDetails($userId){
         $this->db->select('*');
@@ -74,6 +82,6 @@ class Franchisee_mod extends CI_Model{
         $this->db->join('sea_franchise_revenue','sea_franchise_revenue.user_id=sea_users.id');
         $this->db->where('sea_users.id',$userId);
         $query=$this->db->get();
-        return $query->result_array();
+        return $query->result();
     }
 }

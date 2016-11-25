@@ -371,26 +371,10 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="col-lg-5  control-label " style="text-align:left">UF Franchisee Code *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="loginName" class="form-control" name="uffcode" placeholder="UF Franchisee Code" type="text"/><i data-fv-icon-for="loginName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Login name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="stringLength" class="help-block" style="display: none;">Login name must be more than 6 and less than 30 characters long</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="regexp" class="help-block" style="display: none;">Login name can only consist of alphabetical, number, dot and underscore</small></div>
-                                    </div>
-                                </div>
-							</div>	
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Student Code *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="StudentCode" class="form-control" name="StudentCode" placeholder="Student Code" type="text" required/><i data-fv-icon-for="StudentCode" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="StudentCode" data-fv-validator="notEmpty" class="help-block" style="display: none;">Student Code is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="StudentCode" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Class Start Date *</label>
                                         <div class="col-lg-6">
                                              <div class="input-group input-append date" id="datePicker">
-                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my2" placeholder="DD/MM/YYYY" value="01/01/0001" />
+                                                    <input type="text" class="form-control" name="class_start_date" id="datepicker-my2" placeholder="DD/MM/YYYY" value="01/01/0001" />
                                         <span class="input-group-addon add-on" id="btn2" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -410,18 +394,66 @@
                                             <input type="hidden" id="hiddenFieldID3" name="LevelEndDate"/>
                                         </div>
                                         </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Class Time *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="ReceiptNo" class="form-control" name="ClassTime" placeholder="Class Time" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Class Day *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="ReceiptNo" class="form-control" name="ClassDay" placeholder="Class Day" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
-                                    </div>
+                                   <div class="form-group">
+                                            <label class="col-lg-5 control-label " style="text-align:left">Class Time *</label>
+                                            <div class="col-lg-6 has-feedback">
+                                                <select data-fv-field="State" class="form-control" name="ClassTime">
+                                                    <option selected="selected" value="">Select</option>
+                                                    <option value="05:00">05:00am</option>
+													<option value="05:30">05:30am</option>
+													<option value="06:00">06:00am</option>
+													<option value="06:30">06:30am</option>
+													<option value="07:00">07:00am</option>
+													<option value="07:30">07:30am</option>
+													<option value="08:00">08:00am</option>
+													<option value="08:30">08:30am</option>
+													<option value="09:00">09:00am</option>
+													<option value="09:30">09:30am</option>
+													<option value="10:00">10:00am</option>
+													<option value="10:30">10:30am</option>
+													<option value="11:00">11:00am</option>
+													<option value="11:30">11:30am</option>
+													<option value="12:00">12:00pm</option>
+													<option value="12:30">12:30pm</option>
+													<option value="13:00">01:00pm</option>
+													<option value="13:30">01:30pm</option>
+													<option value="14:00">02:00pm</option>
+													<option value="14:30">02:30pm</option>
+													<option value="15:00">03:00pm</option>
+													<option value="15:30">03:30pm</option>
+													<option value="16:00">04:00pm</option>
+													<option value="16:30">04:30pm</option>
+													<option value="17:00">05:00pm</option>
+													<option value="17:30">05:30pm</option>
+													<option value="18:00">06:00pm</option>
+													<option value="18:30">06:30pm</option>
+													<option value="19:00">07:00pm</option>
+													<option value="19:30">07:30pm</option>
+													<option value="20:00">08:00pm</option>
+													<option value="20:30">08:30pm</option>
+													<option value="21:00">09:00pm</option>
+													<option value="21:30">09:30pm</option>
+													<option value="22:00">10:00pm</option>
+													<option value="22:30">10:30pm</option>
+													</select><i data-fv-icon-for="State" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <small data-fv-result="NOT_VALIDATED" data-fv-for="State" data-fv-validator="notEmpty" class="help-block" style="display: none;">State is required</small></div>
+                                        </div>
+									<div class="form-group">
+                                            <label class="col-lg-5 control-label " style="text-align:left">Class Day *</label>
+                                            <div class="col-lg-6 has-feedback">
+                                                <select data-fv-field="State" class="form-control" name="ClassDay">
+                                                    <option selected="selected" value="">Select</option>
+                                                    <option value="0">Sunday</option>
+													<option value="1">Monday</option>
+													<option value="2">Tueseday</option>    
+													<option value="3">Wednesday</option>
+													<option value="4">Thurseday</option>
+													<option value="5">Friday</option>
+													<option value="6">Saturday</option>
+													
+                                                </select><i data-fv-icon-for="State" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <small data-fv-result="NOT_VALIDATED" data-fv-for="State" data-fv-validator="notEmpty" class="help-block" style="display: none;">State is required</small></div>
+                                        </div>
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Upload Image</label>
                                         <div class="col-lg-6 has-feedback">
@@ -436,14 +468,15 @@
                                             <i id="franchiseecoursename">File size should not be grater than 2MB</i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="StudentImage" data-fv-validator="notEmpty" class="help-block" style="display: none;">Please Select Image</small><small data-fv-result="NOT_VALIDATED" data-fv-for="StudentImage" data-fv-validator="file" class="help-block" style="display: none;">The selected file is not valid</small></div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-								<div class="form-group">
+									<div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Course Instructor Name *</label>
                                         <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="ReceiptNo" class="form-control" name="CiName" placeholder="Course Instructor Name" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <input data-fv-field="ReceiptNo" class="form-control" name="CName" placeholder="Course Instructor Name" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
                                     </div>
+                                </div>
+                                <div class="col-lg-6">
+								
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Registration Fee *</label>
                                         <div class="col-lg-6 has-feedback">
