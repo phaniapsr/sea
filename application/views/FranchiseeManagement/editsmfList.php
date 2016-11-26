@@ -84,12 +84,12 @@
 								        <div class="col-lg-6">
                                             <div class="input-group input-append date" id="datePicker">
                                                 <input type="text" class="form-control" name="date_of_birth"
-                                                       id="datepicker-my" placeholder="DD/MM/YYYY" value="<?php echo date('d-m-Y',strtotime($row['date_of_birth']));?>"/>
+                                                       id="datepicker-my" placeholder="DD/MM/YYYY" value="<?php echo date('d/m/Y',strtotime($row['date_of_birth']));?>"/>
                                         <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                             </div>
-                                            <input type="hidden" id="hiddenFieldID" name="DateOfBirth" value="<?php echo date('d-m-Y',strtotime($row['date_of_birth']));?>"/>
+                                            <input type="hidden" id="hiddenFieldID" name="DateOfBirth" value="<?php echo date('d/m/Y',strtotime($row['date_of_birth']));?>"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -117,7 +117,7 @@
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Mobile
                                             Number *</label>
                                         <div class="col-lg-6">
-                                            <input type="number" class="form-control" name="MobileNumber"
+                                            <input type="text" class="form-control" name="MobileNumber"
                                                    placeholder="Mobile Number" value="<?php echo $row['mobileno'];?>"/>
                                         </div>
                                     </div>
@@ -239,7 +239,7 @@
                                             Year *</label>
                                         <div class="col-lg-6">
 
-                                            <input type="number" class="form-control" name="CompletedYear"
+                                            <input type="text" class="form-control" name="CompletedYear"
                                                    placeholder="Completed in Year"  value="<?php echo $row['completed_in_year'];?>" required/>
                                         </div>
                                     </div>

@@ -32,10 +32,45 @@
                             <td><?php echo $row['middle_name'];?></td>
                             <td><?php echo $row['email'];?></td>
                             <td><input type="button" class="btn btn-info" value="Courses Info" onclick="window.location.href='sdetailView/<?php echo $row['id']?>'"/></td>
-                            <td><input type="button" class="btn btn-info" value="Active" /></td>
-							<td class=" text-center"><a href="editstuList/<?php echo $row['id']?>" class="popup-with-zoom-anim-mec btn-activate"
+							<?php if($row['user_status']==0){ ?>
+                                            <td class="text-center"><a userid="<?php echo $row['user_id'];?>">
+                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-info">Deactivate</button>
+                                                </a></td>
+											<?php } ?>
+											<?php if($row['user_status']==1){ ?>
+                                            <td class="text-center"><a userid="<?php echo $row['user_id'];?>">
+                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-info">Activate</button>
+                                                </a></td>
+											<?php } ?>	
+											<script>
+											$('#dact_<?php echo $row['user_id'];?>').click(function(){
+												var id="<?php echo $row['id']?>";
+												$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/FranchiseeManagement/checkStatus',
+													data: {id: id},
+													success: function (res) {
+														  if(res==0)
+														  {
+															  alert("deactivated sucessfully");
+															  $('#dact_'+id).text('Activate');
+															  
+														  }
+														  if(res==1)
+														  {
+															  alert("activated successfully");
+															  $('#dact_'+id).text('Deactivate');
+														  }	  
+														  
+													}
+												});
+
+
+											});
+											</script>
+                            <td class=" text-center"><a href="editstuList/<?php echo $row['id']?>" class="popup-with-zoom-anim-mec btn-activate"
                                                                         userid="8" status="0" href="#small-dialog3">
-                                                    <button type="button" class="btn btn-primary btn-xs">Edit</button>
+                                                    <button type="button" class="btn btn-info">Edit</button>
                                                 </a></td>
                         </tr>
                     <?php }?>

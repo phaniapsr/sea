@@ -52,7 +52,6 @@ $(function(){
 		if(utype=='')
 		{
 			  alert("Please Select User Type Either New User OR Rigistered USer");
-			  document.forms["form2"]["reUser"].focus();
 			  return false;
 		}
 		var fr_id=document.forms["form2"]["franchiseetypeId"].value;

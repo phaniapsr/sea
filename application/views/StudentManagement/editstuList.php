@@ -61,12 +61,12 @@
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Date Of Birth *</label>
                                             <div class="col-lg-6">
                                                 <div class="input-group input-append date" id="datePicker">
-                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" value="<?php echo $row['date_of_birth']?>" />
+                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" value="<?php echo date('d/m/Y',strtotime($row['date_of_birth']));?>" />
                                         <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                                 </div>
-                                                <input type="hidden" id="hiddenFieldID" name="DateOfBirth" value="<?php echo $row['date_of_birth']?>"/>
+                                                <input type="hidden" id="hiddenFieldID" name="DateOfBirth" value="<?php echo date('d/m/Y',strtotime($row['date_of_birth']));?>"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -493,59 +493,103 @@
                             <br>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="col-lg-5  control-label " style="text-align:left">UF Franchisee Code *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="loginName" class="form-control" name="uffcode" placeholder="UF Franchisee Code" type="text"/><i data-fv-icon-for="loginName" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="notEmpty" class="help-block" style="display: none;">Login name is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="stringLength" class="help-block" style="display: none;">Login name must be more than 6 and less than 30 characters long</small><small data-fv-result="NOT_VALIDATED" data-fv-for="loginName" data-fv-validator="regexp" class="help-block" style="display: none;">Login name can only consist of alphabetical, number, dot and underscore</small></div>
-                                    </div>
-                                </div>
-							</div>	
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Student Code *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="StudentCode" class="form-control" name="StudentCode" placeholder="Student Code" type="text"/><i data-fv-icon-for="StudentCode" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="StudentCode" data-fv-validator="notEmpty" class="help-block" style="display: none;">Student Code is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="StudentCode" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
-                                    </div>
-                                    <div class="form-group">
+                                   <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Class Start Date *</label>
                                         <div class="col-lg-6">
                                              <div class="input-group input-append date" id="datePicker">
-                                                    <input type="text" class="form-control" name="date_of_birth" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
-                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                                    <input type="text" class="form-control" name="class_start_date" id="datepicker-my2" placeholder="DD/MM/YYYY" value="<?php echo date('d/m/Y',strtotime($row['class_start_date']));?>" />
+                                        <span class="input-group-addon add-on" id="btn2" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                                 </div>
-                                            <input type="hidden" id="csd" name="ClassStartDate"/>
+                                            <input type="hidden" id="hiddenFieldID2" name="ClassStartDate" value="<?php echo date('d/m/Y',strtotime($row['class_start_date']));?>"/>
                                         </div>
                                         </div>
 									<div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Level End Date *</label>
                                         <div class="col-lg-6">
                                             <div class="input-group input-append date" id="datePicker">
-                                                <input type="text" class="form-control" name="level_end_date" id="datepicker-my" placeholder="DD/MM/YYYY" value="01/01/0001" />
-                                        <span class="input-group-addon add-on" id="btn" style="cursor: pointer;">
+                                                <input type="text" class="form-control" name="level_end_date" id="datepicker-my3" placeholder="DD/MM/YYYY" value="<?php echo date('d/m/Y',strtotime($row['level_end_date']));?>" />
+                                        <span class="input-group-addon add-on" id="btn3" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                             </div>
-                                            <input type="hidden" id="led" name="LevelEndDate"/>
+                                            <input type="hidden" id="hiddenFieldID3" name="LevelEndDate" value="<?php echo date('d/m/Y',strtotime($row['level_end_date']));?>"/>
                                         </div>
                                         </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Class Time *</label>
+										<?php $ct=$row['class_time'];?>
+                                   <div class="form-group">
+                                            <label class="col-lg-5 control-label " style="text-align:left">Class Time *</label>
+                                            <div class="col-lg-6 has-feedback">
+                                                <select data-fv-field="State" class="form-control" name="ClassTime">
+                                                    <option selected="selected" value="">Select</option>
+                                                    <option value="05:00" <?php if($ct=="05:00:00") echo "selected";?>>05:00am</option>
+													<option value="05:30"<?php if($ct=="05:30:00") echo "selected";?>>05:30am</option>
+													<option value="06:00"<?php if($ct=="06:00:00") echo "selected";?>>06:00am</option>
+													<option value="06:30"<?php if($ct=="06:30:00") echo "selected";?>>06:30am</option>
+													<option value="07:00"<?php if($ct=="07:00:00") echo "selected";?>>07:00am</option>
+													<option value="07:30"<?php if($ct=="07:30:00") echo "selected";?>>07:30am</option>
+													<option value="08:00"<?php if($ct=="08:00:00") echo "selected";?>>08:00am</option>
+													<option value="08:30"<?php if($ct=="08:30:00") echo "selected";?>>08:30am</option>
+													<option value="09:00"<?php if($ct=="09:00:00") echo "selected";?>>09:00am</option>
+													<option value="09:30"<?php if($ct=="09:30:00") echo "selected";?>>09:30am</option>
+													<option value="10:00"<?php if($ct=="10:00:00") echo "selected";?>>10:00am</option>
+													<option value="10:30"<?php if($ct=="10:30:00") echo "selected";?>>10:30am</option>
+													<option value="11:00"<?php if($ct=="11:00:00") echo "selected";?>>11:00am</option>
+													<option value="11:30"<?php if($ct=="11:30:00") echo "selected";?>>11:30am</option>
+													<option value="12:00"<?php if($ct=="12:00:00") echo "selected";?>>12:00pm</option>
+													<option value="12:30"<?php if($ct=="12:30:00") echo "selected";?>>12:30pm</option>
+													<option value="13:00"<?php if($ct=="13:00:00") echo "selected";?>>01:00pm</option>
+													<option value="13:30"<?php if($ct=="13:30:00") echo "selected";?>>01:30pm</option>
+													<option value="14:00"<?php if($ct=="14:00:00") echo "selected";?>>02:00pm</option>
+													<option value="14:30"<?php if($ct=="14:30:00") echo "selected";?>>02:30pm</option>
+													<option value="15:00"<?php if($ct=="15:00:00") echo "selected";?>>03:00pm</option>
+													<option value="15:30"<?php if($ct=="15:30:00") echo "selected";?>>03:30pm</option>
+													<option value="16:00"<?php if($ct=="16:00:00") echo "selected";?>>04:00pm</option>
+													<option value="16:30"<?php if($ct=="16:30:00") echo "selected";?>>04:30pm</option>
+													<option value="17:00"<?php if($ct=="17:00:00") echo "selected";?>>05:00pm</option>
+													<option value="17:30"<?php if($ct=="17:30:00") echo "selected";?>>05:30pm</option>
+													<option value="18:00"<?php if($ct=="18:00:00") echo "selected";?>>06:00pm</option>
+													<option value="18:30"<?php if($ct=="18:30:00") echo "selected";?>>06:30pm</option>
+													<option value="19:00"<?php if($ct=="19:00:00") echo "selected";?>>07:00pm</option>
+													<option value="19:30"<?php if($ct=="19:30:00") echo "selected";?>>07:30pm</option>
+													<option value="20:00"<?php if($ct=="20:00:00") echo "selected";?>>08:00pm</option>
+													<option value="20:30"<?php if($ct=="20:30:00") echo "selected";?>>08:30pm</option>
+													<option value="21:00"<?php if($ct=="21:00:00") echo "selected";?>>09:00pm</option>
+													<option value="21:30"<?php if($ct=="21:30:00") echo "selected";?>>09:30pm</option>
+													<option value="22:00"<?php if($ct=="22:00:00") echo "selected";?>>10:00pm</option>
+													<option value="22:30"<?php if($ct=="22:30:00") echo "selected";?>>10:30pm</option>
+													</select><i data-fv-icon-for="State" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <small data-fv-result="NOT_VALIDATED" data-fv-for="State" data-fv-validator="notEmpty" class="help-block" style="display: none;">State is required</small></div>
+                                        </div>
+                                    
+                                </div>
+								<?php $cd=$row['class_day'];?>
+                                <div class="col-lg-6">
+								<div class="form-group">
+                                            <label class="col-lg-5 control-label " style="text-align:left">Class Day *</label>
+                                            <div class="col-lg-6 has-feedback">
+                                                <select data-fv-field="State" class="form-control" name="ClassDay">
+                                                    <option selected="selected" value="">Select</option>
+                                                    <option value="0"<?php if($cd=="0") echo "selected";?>>Sunday</option>
+													<option value="1"<?php if($cd=="1") echo "selected";?>>Monday</option>
+													<option value="2"<?php if($cd=="2") echo "selected";?>>Tueseday</option>    
+													<option value="3"<?php if($cd=="3") echo "selected";?>>Wednesday</option>
+													<option value="4"<?php if($cd=="4") echo "selected";?>>Thurseday</option>
+													<option value="5"<?php if($cd=="5") echo "selected";?>>Friday</option>
+													<option value="6"<?php if($cd=="6") echo "selected";?>>Saturday</option>
+													
+                                                </select><i data-fv-icon-for="State" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                                <small data-fv-result="NOT_VALIDATED" data-fv-for="State" data-fv-validator="notEmpty" class="help-block" style="display: none;">State is required</small></div>
+                                        </div>
+                                    
+								<div class="form-group">
+								        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Course Instructor Name *</label>
                                         <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="ReceiptNo" class="form-control" name="ClassTime" placeholder="Class Time" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
+                                            <input data-fv-field="ReceiptNo" class="form-control" name="CName" placeholder="Course Instructor Name" type="text" value="<?php echo $row['course_instructor_name'] ?>" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Class Day *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="ReceiptNo" class="form-control" name="ClassDay" placeholder="Class Day" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
-                                    </div>
-                                    <div class="form-group">
+									<div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Upload Image</label>
                                         <div class="col-lg-6 has-feedback">
 
@@ -559,15 +603,7 @@
                                             <i id="franchiseecoursename">File size should not be grater than 2MB</i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="StudentImage" data-fv-validator="notEmpty" class="help-block" style="display: none;">Please Select Image</small><small data-fv-result="NOT_VALIDATED" data-fv-for="StudentImage" data-fv-validator="file" class="help-block" style="display: none;">The selected file is not valid</small></div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-								<div class="form-group">
-                                        <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Course Instructor Name *</label>
-                                        <div class="col-lg-6 has-feedback">
-                                            <input data-fv-field="ReceiptNo" class="form-control" name="CiName" placeholder="Course Instructor Name" type="text" /><i data-fv-icon-for="ReceiptNo" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
-                                            <small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="notEmpty" class="help-block" style="display: none;">Phone Number is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="ReceiptNo" data-fv-validator="integer" class="help-block" style="display: none;">Value is not an integer</small></div>
-                                    </div>
-                                    <div class="form-group">
+                                   <!-- <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align:left">Registration Fee *</label>
                                         <div class="col-lg-6 has-feedback">
                                             <input data-fv-field="RegistrationFee" class="form-control" id="RegistrationFee" name="RegistrationFee" placeholder="Registration Fee" value="0" type="text" required/><i data-fv-icon-for="RegistrationFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
@@ -596,7 +632,7 @@
                                         <div class="col-lg-6 has-feedback">
                                             <input data-fv-field="KitFee" class="form-control" id="AcFee" name="AcFee" placeholder="Kitorder Fee" value="0" type="text" required/><i data-fv-icon-for="KitFee" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                             <small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="notEmpty" class="help-block" style="display: none;">Kitfee is required</small><small data-fv-result="NOT_VALIDATED" data-fv-for="KitFee" data-fv-validator="regexp" class="help-block" style="display: none;">Charecters are not allowed</small></div>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                             </div>
@@ -695,6 +731,32 @@
                                         }).focus();
                                     });
                                 });
+								$('#btn2').click(function () {
+                                    //alert('clcikec');
+                                    $(document).ready(function () {
+                                        $("#datepicker-my2").datepicker({
+                                            //dateFormat: "dd-mm-yy".replace('T00:00:00', ''),
+                                            changeMonth: true,
+                                            altField: '#hiddenFieldID2',
+                                            altFormat: "mm/dd/yy",
+                                            changeYear: true,
+                                            yearRange: '1950:2017'
+                                        }).focus();
+                                    });
+                                });
+								$('#btn3').click(function () {
+                                    //alert('clcikec');
+                                    $(document).ready(function () {
+                                        $("#datepicker-my3").datepicker({
+                                            //dateFormat: "dd-mm-yy".replace('T00:00:00', ''),
+                                            changeMonth: true,
+                                            altField: '#hiddenFieldID3',
+                                            altFormat: "mm/dd/yy",
+                                            changeYear: true,
+                                            yearRange: '1950:2017'
+                                        }).focus();
+                                    });
+                                });
                             </script>
 
                         </form>
@@ -710,9 +772,9 @@
             <!-- /.panel -->
         </div>
         <!-- /.col-lg-12 -->
-        <link href="Skills%20Education%20Academy_files/tjquery-ui.css" rel="stylesheet">
-        <script src="Skills%20Education%20Academy_files/jquery-students.js"></script>
-        <script src="Skills%20Education%20Academy_files/jquery-ui.js"></script>
+        <link href="<?php echo base_url() ?>Content/css/tjquery-ui.css" rel="stylesheet"/>
+        <script src="<?php echo base_url() ?>Scripts/admin/validations/jquery-teacher.js"></script>
+        <script src="<?php echo base_url() ?>Scripts/admin/jquery-ui.js"></script>
     </div>
 	<?php }?>
     <footer><p>All right reserved by: <a href="http://lemonbridgeit.com/">LemonBridge</a></p></footer>

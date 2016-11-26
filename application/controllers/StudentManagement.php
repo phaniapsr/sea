@@ -250,6 +250,11 @@ class StudentManagement extends CI_Controller
             'stu_program' => $this->input->post('ProgramId'),
             'stu_category' => $this->input->post('CourseId'),
             'stu_level' => $this->input->post('ProgramCourseLevelId'),
+			'class_start_date'=>date('Y-m-d',strtotime($this->input->post('ClassStartDate'))),
+		   'level_end_date'=>date('Y-m-d',strtotime($this->input->post('LevelEndDate'))),
+		   'class_time'=>$this->input->post('ClassTime'),
+		   'class_day'=>$this->input->post('ClassDay'),
+		   'course_instructor_name'=>$this->input->post('CName'),
 
         );
         $fl = "user_id";

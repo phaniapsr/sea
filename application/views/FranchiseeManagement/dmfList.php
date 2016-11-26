@@ -105,10 +105,44 @@
                                                         class="btn btn-primary btn-xs f-rev-config">Revenue Configuration
                                                 </button>
                                             </td>
-                                            <td class=" text-center"><a class="popup-with-zoom-anim-mec btn-activate"
-                                                                        userid="8" status="0" href="#small-dialog3">
-                                                    <button type="button" class="btn btn-primary btn-xs">Deactivate</button>
+                                           <?php if($row['user_status']==0){?>
+                                            <td class="text-center"><a class="popup-with-zoom-anim-mec btn-activate"
+                                                                        userid="<?php echo $row['user_id'];?>" status="0">
+                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-primary btn-xs">Deactivate</button>
                                                 </a></td>
+											<?php } ?>
+											<?php if($row['user_status']==1){?>
+                                            <td class="text-center"><a class="popup-with-zoom-anim-mec btn-activate"
+                                                                        userid="<?php echo $row['user_id'];?>" status="0">
+                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-primary btn-xs">Activate</button>
+                                                </a></td>
+											<?php } ?>	
+											<script>
+											$('#dact_<?php echo $row['user_id'];?>').click(function(){
+												var id="<?php echo $row['id']?>";
+												$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/FranchiseeManagement/checkStatus',
+													data: {id: id},
+													success: function (res) {
+														  if(res==0)
+														  {
+															  alert("deactivated sucessfully");
+															  $('#dact_'+id).text('Activate');
+															  
+														  }
+														  if(res==1)
+														  {
+															  alert("activated successfully");
+															  $('#dact_'+id).text('Deactivate');
+														  }	  
+														  
+													}
+												});
+
+
+											});
+											</script>
                                             <td class="text-center selected">
                                                 <button type="button" userid="<?php echo $row['user_id'];?>" listType="dmf" rowid="<?php echo $row['id'];?>" data-toggle="modal"
                                                         data-target="#myModalSMFRevenueSplit"
