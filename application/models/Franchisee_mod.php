@@ -8,7 +8,7 @@ class Franchisee_mod extends CI_Model{
 		$id=$this->session->user_logged_in['id'];
 		$this->db->select('*');
         $this->db->from('sea_users');
-        $this->db->join('sea_user_role','sea_users.id=sea_user_role.user_id');
+        $this->db->join('sea_user_role', 'sea_user_role.user_id = sea_users.id');
 		if($role==2||$role==3||$role==4||$role==5){
             $this->db->join('sea_franchise_resid_address','sea_users.id=sea_franchise_resid_address.user_id');
 			//$this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id');
@@ -19,6 +19,7 @@ class Franchisee_mod extends CI_Model{
 			$this->db->where('sea_user_hierarchy.created_by='.$id);
 		}
 		$this->db->where('sea_user_role.role_id='.$role);
+		$this->db->where('sea_users.user_delete=0');
         $this->db->order_by('sea_users.id','desc');
 		$query=$this->db->get();
         return $query->result_array();
@@ -74,6 +75,17 @@ class Franchisee_mod extends CI_Model{
         $query=$this->db->get();
         $row=$query->row();
 		return $row->user_status;		
+    }
+	public function deleteStatus($id){
+        $this->db->select('*');
+        $this->db->from('sea_users');
+		$this->db->join('sea_user_role','sea_users.id=sea_user_role.user_id');
+        $this->db->where('sea_users.id',$id);
+		$this->db->where('sea_user_role.user_id',$id);
+        $query=$this->db->get();
+        //return $row=$query->row();
+		return $query->result_array();
+		//return $row->user_delete;		
     }
 
     public function getRegistrationFeeDetails($userId){

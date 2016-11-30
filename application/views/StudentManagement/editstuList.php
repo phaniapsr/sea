@@ -28,7 +28,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">E-mail*</label>
                                             <div class="col-lg-6 has-feedback">
-											    <input type="hidden" name="how" value="<?php echo $row['user_id'];?>"> 
+											    <input type="hidden" name="how" id="how" value="<?php echo $row['user_id'];?>"> 
                                                 <input data-fv-field="EmailId" class="form-control" name="email" placeholder="E-mail" type="email" value="<?php echo $row['email'] ?>"/><i data-fv-icon-for="EmailId" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="EmailId" data-fv-validator="regexp" class="help-block" style="display: none;">The value is not a valid email address</small></div>
                                         </div>
@@ -80,12 +80,12 @@
                                                 </select><i data-fv-icon-for="Gender" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="Gender" data-fv-validator="notEmpty" class="help-block" style="display: none;">Gender is required</small></div>
                                         </div>
-                                        <div class="form-group">
+                                       <!-- <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align:left">Age *</label>
                                             <div class="col-lg-6 has-feedback">
                                                 <input data-fv-field="Age" class="form-control" name="Age" placeholder="Age" type="text" value="<?php echo $row['age'] ?>"/><i data-fv-icon-for="Age" class="form-control-feedback fv-icon-no-label" style="display: none;"></i>
                                                 <small data-fv-result="NOT_VALIDATED" data-fv-for="Age" data-fv-validator="notEmpty" class="help-block" style="display: none;">Age is required</small></div>
-                                        </div>
+                                        </div>-->
                                         <div class="form-group">
                                             <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align:left">Mother Tongue *</label>
                                             <div class="col-lg-6 has-feedback">
@@ -641,7 +641,26 @@
                                     <center>
                                         <div>
                                             <button type="submit" id="signup" role="button" class="btn btn-primary" name="signup" value="Sign up" style="margin:10px;"><span class="glyphicon glyphicon-save" style="margin:3px;"></span>UPDATE</button>
-                                            <button type="reset" class="btn btn-primary" name="cancel" style="margin:10px;"><span class="glyphicon glyphicon-remove" style="margin:3px;"></span>CANCEL</button>
+                                            <button type="reset" class="btn btn-primary" name="delete" id="delete" style="margin:10px;"><span class="glyphicon glyphicon-remove" style="margin:3px;"></span>DELETE</button>
+											<script>
+											 $('#delete').click(function () {
+                                                    var id;
+													id=$('#how').val();
+													$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/StudentManagement/deleteStudent',
+													data: {id: id},
+													success: function (res) {
+													 if(res==0)
+													  {
+														  alert("record deleted successfully");
+														  window.location = "<?php echo base_url()?>StudentManagement/currentStudentsList";
+													  }
+													
+													}
+												 });
+                                                });
+											</script>
                                         </div>
 
                                     </center>

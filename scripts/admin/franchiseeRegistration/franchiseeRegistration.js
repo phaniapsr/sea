@@ -92,15 +92,16 @@ $(function(){
 		}
 		*/
 		var fr_pass=document.forms["form2"]["password"].value;
+		var n=fr_pass.length;
 		//var regexp_pass=new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 		//!regexp_pass.test(fr_pass)
-		if(fr_pass=='')
+		if(fr_pass==''||n<6)
 		{
-			alert("Please Enter password with 6 characters");
+			alert("Please Enter password with Minimum 6 characters");
 			document.forms["form2"]["password"].focus();
 			return false;
-
 		}
+		
 		var fr_fname=document.forms["form2"]["first_name"].value;
 		if(fr_fname=='')
 		{

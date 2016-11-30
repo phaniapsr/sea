@@ -25,7 +25,7 @@
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Franchisee
                                             Name *</label>
                                         <div class="col-lg-6">
-										    <input type="hidden" name="id" value="<?php echo $row['user_id'];?>">
+										    <input type="hidden" name="id" id="id" value="<?php echo $row['user_id'];?>">
                                             <input type="text" class="form-control" name="franchiseeName" value="<?php echo $row['username'];?>"/>
 											</div>
                                     </div>
@@ -221,12 +221,7 @@
                                                    placeholder="College/University" value="<?php echo $row['college_university'];?>"/>
                                         </div>
                                     </div>
-
-
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
+									 <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label " style="text-align: left">Qualification
                                             *</label>
                                         <div class="col-lg-6">
@@ -234,7 +229,7 @@
                                                    placeholder="Qualification" value="<?php echo $row['qualification'];?>"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+									 <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Completed in
                                             Year *</label>
                                         <div class="col-lg-6">
@@ -243,7 +238,7 @@
                                                    placeholder="Completed in Year"  value="<?php echo $row['completed_in_year'];?>" required/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+									<div class="form-group">
                                         <center style="font-size:20px;">BUSINESS ADDRESS</center>
                                     </div>
                                     <div class="form-group">
@@ -254,7 +249,7 @@
                                                    placeholder="flat/door Number" value="<?php echo $row['doorno'];?>"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+									<div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Street Name
                                             *</label>
                                         <div class="col-lg-6"><input type="text" class="form-control" name="StreetName"
@@ -262,12 +257,22 @@
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
+									<div class="form-group">
                                         <label class="col-lg-5 control-label " style="text-align: left">Area *</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" name="Area" placeholder="Area" value="<?php echo $row['area'];?>"/>
                                         </div>
                                     </div>
+
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                   
+                                   
+                                    
+                                    
+                                    
                                     <div class="form-group">
                                         <label class="col-lg-5  control-label " style="text-align: left">Town/City
                                             *</label>
@@ -522,10 +527,40 @@
                                                     name="signup" value="Sign up" style="margin:10px;"><span
                                                     class="glyphicon glyphicon-save" style="margin:3px;"></span>UPDATE
                                             </button>
-                                            <button type="reset" class="btn btn-primary" name="cancel"
-                                                    style="margin:10px;"><span class="glyphicon glyphicon-remove"
-                                                                               style="margin:3px;"></span>CANCEL
-                                            </button>
+                                            <button type="reset" class="btn btn-primary" name="delete" id="delete" style="margin:10px;"><span class="glyphicon glyphicon-remove" style="margin:3px;"></span>DELETE</button>
+											<script>
+											 $('#delete').click(function () {
+                                                    var id;
+													id=$('#id').val();
+													$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/FranchiseeManagement/deleteStudent',
+													data: {id: id},
+													success: function (res) {
+														 var objJSON = JSON.parse(res);
+														 var ds=objJSON.ds;                                   
+														 var rid=objJSON.id;
+														 if(rid==2)
+														 {
+															 window.location = "<?php echo base_url()?>FranchiseeManagement/smfList";
+														 }
+														 if(rid==3)
+														 {
+															 window.location = "<?php echo base_url()?>FranchiseeManagement/dmfList";
+														 }
+														 if(rid==4)
+														 {
+															 window.location = "<?php echo base_url()?>FranchiseeManagement/ufList";
+														 }
+														 if(rid==5)
+														 {
+															 window.location = "<?php echo base_url()?>FranchiseeManagement/consultantsList";
+														 }
+														 
+														}
+												 });
+                                                });
+											</script>
                                         </div>
                                     </center>
                                 </div>
@@ -535,8 +570,6 @@
                                     <p id="message_from_server" class="text-success"></p>
                                 </div>
                             </div>
-
-
                             <div class="modal fade" id="success" tabindex="-1" role="dialog"
                                  aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

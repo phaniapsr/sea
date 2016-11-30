@@ -66,9 +66,10 @@ $(function () {
             return false;
         }
         var stu_pass = document.forms["form1"]["password"].value;
-        var regexp_pass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-        if (!regexp_pass.test(stu_pass)) {
-            alert("password should contain atleast one number one special character one capital letter");
+		var n=stu_pass.length;
+        //var regexp_pass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        if (stu_pass==''||n<6) {
+            alert("Please Enter password with Minimum 6 characters");
             document.forms["form1"]["password"].focus();
             return false;
 

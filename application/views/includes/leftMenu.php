@@ -6,11 +6,15 @@
                 <a href="<?php echo base_url(); ?>FranchiseeManagement/dashboard"><i class="fa fa-dashboard"></i>
                     Dashboard</a>
             </li>
+			<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
+					 || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3 ) { ?>
             <li>
                 <a href="<?php echo base_url(); ?>FranchiseeManagement"><i class="fa fa-list-alt"></i> Franchisee
                     Registration</a>
             </li>
-
+               <?php } ?>
+			<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5
+					 || $this->session->user_logged_in['role_id'] == 2 || $this->session->user_logged_in['role_id'] == 3 ) { ?>   
             <li>
                 <a href="#"><i class="fa fa-gift"></i> Franchisee Details<span class="fa fa-angle-right"></span></a>
                 <ul class="nav nav-second-level">
@@ -48,11 +52,13 @@
 					<?php }?>
                 </ul>
             </li>
-
+					 <?php } ?>     
 
             <li>
+			<?php if($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 4) { ?> 
                 <a href="<?php echo base_url() ?>StudentManagement"><i class="fa fa-list-alt"></i> Student Registration</a>
             </li>
+			<?php } ?>
             <li>
 
                 <a href="#"><i class="fa fa-users"></i> Student Details<span class="fa fa-angle-right"></span></a>

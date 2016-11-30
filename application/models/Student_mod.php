@@ -13,6 +13,7 @@ class Student_mod extends CI_Model
         $this->db->from('sea_users');
         $this->db->join('sea_user_role', 'sea_user_role.user_id = sea_users.id');
         $this->db->where('sea_user_role.role_id=6');
+		$this->db->where('sea_users.user_delete=0');
         $this->db->order_by('sea_users.id','desc');
         $query = $this->db->get();
         return $query->result_array();

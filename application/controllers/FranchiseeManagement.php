@@ -373,6 +373,21 @@ class FranchiseeManagement extends CI_Controller
 		echo $st;
 		
 	}
+	public function deleteStudent()
+	{
+		$id=$this->input->post('id');
+		$ar=$this->franchisee->deleteStatus($id);
+		$data=array(
+		 'ds'=>$ar[0]['user_delete'],
+		 'id'=>$ar[0]['role_id']
+		);
+		
+		$data1=array('user_delete'=>1);
+		$this->franchisee->updateTableRecord('sea_users','id',$data1,$id);
+		
+		
+		print json_encode($data);
+	}
 
     public function franchiseeRevenueDistribution($userId)
     {
