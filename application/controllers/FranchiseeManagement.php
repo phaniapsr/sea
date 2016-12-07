@@ -663,8 +663,4 @@ class FranchiseeManagement extends CI_Controller
 		}	
 		
 	}
-	
-	
-
-
 }

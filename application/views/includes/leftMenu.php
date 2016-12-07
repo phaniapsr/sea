@@ -67,7 +67,7 @@
                         <a href="<?php echo base_url() ?>StudentManagement/currentStudentsList">Current Students</a>
                     </li>
                     <li>
-                        <a href="/CourseComlpetedStudents">Course Completed Students</a>
+                        <a href="CourseComlpetedStudents">Course Completed Students</a>
                     </li>
                 </ul>
             </li>
@@ -103,10 +103,10 @@
                 <a href="#"><i class="fa fa-envelope"></i>Exams<span class="fa fa-angle-right"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="StudentManagement/creatExams">Create Exams</a>
+                        <a href="<?php echo base_url()?>StudentManagement/creatExams">Create Exams</a>
                     </li>
                     <li>
-                        <a href="StudentManagement/viewExams">View Exams</a>
+                        <a href="<?php echo base_url()?>StudentManagement/viewExams">View Exams</a>
                     </li>
                   
                    
@@ -147,7 +147,7 @@
                 </ul>
             </li>
             <li>
-                <a href="/Attendance"><i class="fa fa-book"></i> Attendance</a>
+                <a href="<?php echo base_url()?>StudentManagement/attendanceManagement"><i class="fa fa-book"></i> Attendance</a>
             </li>
         </ul>
     </div>

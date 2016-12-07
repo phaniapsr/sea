@@ -1,6 +1,6 @@
 <div id="page-wrapper">
     <div id="page-inner">
-        <link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
+        <link href="Content/css/jquery-ui.css" rel="stylesheet"/>
         <script src="Scripts/admin/validations/jquery-teacher.js"></script>
         <script src="Scripts/admin/jquery-ui.js"></script>
         <div class="row">

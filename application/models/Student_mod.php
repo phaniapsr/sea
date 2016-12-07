@@ -112,7 +112,25 @@ class Student_mod extends CI_Model
         $insert = $this->db->insert_batch('sea_exam_papers',$data);
         return $insert?true:false;
     }
-	
-	
-//class close
+
+    public function getAttendance($level_id=''){
+        $this->db->select('*,DATE_FORMAT(scheduled_class_date,"%d/%m/%Y") AS scheduled_class_date');
+        $this->db->from('sea_student_attendance');
+        //$this->db->join('sea_student_course_level','sea_student_course_level.course_level_id=sea_student_attendance.course_level_id');
+        $this->db->where('sea_student_attendance.course_level_id',$level_id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getCourseLevelDetails($user_id){
+        /*
+         * todo: This logic has to be changed to take courseId as input and give student course details. Right now assuming one student one course itself.
+         * */
+        $this->db->select('*');
+        $this->db->from('sea_student_course_level');
+        $this->db->join('sea_student_pers_details','sea_student_pers_details.stud_id=sea_student_course_level.user_id');
+        $this->db->where('sea_student_course_level.user_id',$user_id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

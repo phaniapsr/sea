@@ -134,6 +134,17 @@ class StudentManagement extends CI_Controller
 		   'course_instructor_name'=>$this->input->post('CName'),
         );
         $result3 = $this->student->insertNewRecord('sea_student_course_level', $data3);
+        if($result3>1){
+            $attendance_dates=strtotime($this->input->post('ClassStartDate'));
+            for($i=0;$i<14;$i++){
+                $data_att = array(
+                    'course_level_id'=>$result3,
+                    'scheduled_class_date'=>date('Y-m-d',$attendance_dates)
+                );
+                $result3 = $this->student->insertNewRecord('sea_student_attendance', $data_att);
+                $attendance_dates=strtotime('+1 week', $attendance_dates);
+            }
+        }
         $data = array(
             'user_id' => $result,
             'role_id' => 6,
@@ -474,5 +485,20 @@ class StudentManagement extends CI_Controller
 		
 	}
 	
-	
+
+    public function attendanceManagement()
+    {
+        $data['data']['smf'] = $this->student->listFromTable('sea_users');
+        $this->load->view('includes/header');
+        $this->load->view('StudentManagement/attendanceManagement', $data);
+        $this->load->view('includes/footer');
+    }
+
+    public function getAttendance(){
+        $data=array();
+        $data=$this->student->getCourseLevelDetails($this->input->post('user_id'));
+        $data[0]['attendance']=$this->student->getAttendance($data[0]['course_level_id']);
+        echo json_encode($data);
+    }
+
 }

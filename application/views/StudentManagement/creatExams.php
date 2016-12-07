@@ -143,9 +143,6 @@
             </div>
         </div>
         <!-- /.col-lg-12 -->
-        <link href="Skills%20Education%20Academy_files/tjquery-ui.css" rel="stylesheet">
-        <script src="Skills%20Education%20Academy_files/jquery-students.js"></script>
-        <script src="Skills%20Education%20Academy_files/jquery-ui.js"></script>
     </div>
     <footer><p>All right reserved by: <a href="#">FriendsFocus</a></p></footer>
 </div>
