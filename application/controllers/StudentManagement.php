@@ -432,7 +432,7 @@ class StudentManagement extends CI_Controller
 
                 $uploadPath = 'uploads/exams/';
                 $config['upload_path'] = $uploadPath;
-                $config['allowed_types'] = 'gif|jpg|png';
+                $config['allowed_types'] = 'pdf';
                 //$config['max_size']	= '100';
                 //$config['max_width'] = '1024';
                 //$config['max_height'] = '768';
@@ -468,9 +468,11 @@ class StudentManagement extends CI_Controller
     {
         $data['files'] = $this->student->getUploadRows();
         $this->load->view('includes/header');
-        $this->load->view('StudentManagement/viewExams', $data);
+        $this->load->view('StudentManagement/viewexams', $data);
         $this->load->view('includes/footer');
+       //print_r( $data['files']);
     }
+
 	
 	public function deleteStudent()
 	{
@@ -500,5 +502,41 @@ class StudentManagement extends CI_Controller
         $data[0]['attendance']=$this->student->getAttendance($data[0]['course_level_id']);
         echo json_encode($data);
     }
+
+
+    
+    public function saveExamStatus()
+    {
+         $id = $this->input->post('id');
+         $status = $this->input->post('status');
+        $data['saveExamStatus'] = $this->student->examStatus($id,$status);
+
+    }
+    
+    public function upload($id) {
+        //load the download helper
+        $this->load->helper('download');
+         $data['files'] = $this->student->getUploadRows();
+         $data = $this->student->getUploadImage($id);
+         echo $data['exam_name'];
+        //Get the file from whatever the user uploaded (NOTE: Users needs to upload first), @See http://localhost/CI/index.php/upload
+        
+             # code...
+            $path = file_get_contents("./uploads/exams/".$data['exam_name']);
+            $name = $data['exam_name'];
+            force_download($name, $path);
+       
+
+    }
+   public function examPapers()
+    {
+        $data['files'] = $this->student->getUploadRow();
+        
+        $this->load->view('includes/header');
+        $this->load->view('StudentManagement/examPapers', $data);
+        $this->load->view('includes/footer');
+
+    }
+    
 
 }

@@ -102,15 +102,26 @@
 			<li>
                 <a href="#"><i class="fa fa-envelope"></i>Exams<span class="fa fa-angle-right"></span></a>
                 <ul class="nav nav-second-level">
+                    <?php if($this->session->user_logged_in['role_id'] == 1  ){?>
+                
                     <li>
+
                         <a href="<?php echo base_url()?>StudentManagement/creatExams">Create Exams</a>
                     </li>
+                    
                     <li>
-                        <a href="<?php echo base_url()?>StudentManagement/viewExams">View Exams</a>
+                        <a href="<?php echo base_url() ?>StudentManagement/viewExams">View Exams</a>
+
                     </li>
                   
                    
-                </ul>
+                
+                     <?php }elseif($this->session->user_logged_in['role_id'] == 4){?> 
+                     <li>
+                        <a href="<?php echo base_url() ?>StudentManagement/examPapers">Exam Download</a>
+                    </li>
+                     <?php } ?>
+              </ul>
             </li>
 			
 			

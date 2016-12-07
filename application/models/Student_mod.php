@@ -101,7 +101,7 @@ class Student_mod extends CI_Model
             $query = $this->db->get();
             $result = $query->row_array();
         }else{
-            $this->db->order_by('exam_id','desc');
+            $this->db->order_by('exam_id','program_name','course_name','level_name','exam_name','exam_status');
             $query = $this->db->get();
             $result = $query->result_array();
         }
@@ -112,6 +112,7 @@ class Student_mod extends CI_Model
         $insert = $this->db->insert_batch('sea_exam_papers',$data);
         return $insert?true:false;
     }
+
 
     public function getAttendance($level_id=''){
         $this->db->select('*,DATE_FORMAT(scheduled_class_date,"%d/%m/%Y") AS scheduled_class_date');
@@ -133,4 +134,30 @@ class Student_mod extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function examStatus($id,$status){
+        
+        $data=array('exam_status'=>$status);
+            $this->db->where('exam_id',$id);
+            return $this->db->update('sea_exam_papers',$data);
+    }
+    public function getUploadRow(){
+        $this->db->select('*');
+        $this->db->from('sea_exam_papers');
+        $this->db->where('exam_status','active');
+        $query=$this->db->get();
+        return $query->result_array();
+    }
+    public function getUploadImage($id){
+        $this->db->select('exam_name');
+        $this->db->from('sea_exam_papers');
+        $this->db->where('exam_status','active');
+        $this->db->where('exam_id',$id);
+        $query=$this->db->get();
+        return $query->row_array();
+        
+    }
+    
+
+
 }
