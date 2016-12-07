@@ -189,7 +189,10 @@ class FranchiseeManagement extends CI_Controller
 
     public function smfList()
     {
-        $data['data']['smf'] = $this->franchisee->listFromTable('2');
+		$filter=array(
+		'name'=>$this->input->post('search'),
+		);
+        $data['data']['smf'] = $this->franchisee->listFromTable('2',$filter);
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/smfList', $data);
         $this->load->view('includes/footer');
@@ -197,7 +200,10 @@ class FranchiseeManagement extends CI_Controller
 
     public function dmfList()
     {
-        $data['data']['smf'] = $this->franchisee->listFromTable('3');
+		$filter=array(
+		'name'=>$this->input->post('search'),
+		);
+        $data['data']['smf'] = $this->franchisee->listFromTable('3',$filter);
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/dmfList', $data);
         $this->load->view('includes/footer');
@@ -205,7 +211,10 @@ class FranchiseeManagement extends CI_Controller
 
     public function ufList()
     {
-        $data['data']['smf'] = $this->franchisee->listFromTable('4');
+		$filter=array(
+		'name'=>$this->input->post('search'),
+		);
+        $data['data']['smf'] = $this->franchisee->listFromTable('4',$filter);
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/umfList', $data);
         $this->load->view('includes/footer');
@@ -213,7 +222,10 @@ class FranchiseeManagement extends CI_Controller
 
     public function consultantsList()
     {
-        $data['data']['smf'] = $this->franchisee->listFromTable('5');
+		$filter=array(
+		'name'=>$this->input->post('find'),
+		);
+        $data['data']['smf'] = $this->franchisee->listFromTable('5',$filter);
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/consultantsList', $data);
         $this->load->view('includes/footer');
@@ -623,6 +635,7 @@ class FranchiseeManagement extends CI_Controller
         $userId = $this->input->post('userId');
         $data['data'] = $this->franchisee->getRegistrationFeeDetails($userId);
         $this->load->view('FranchiseeManagement/registrationAmountToBePaid', $data);
+		
     }
 	
 	public function franchiseDropDown()
@@ -650,6 +663,8 @@ class FranchiseeManagement extends CI_Controller
 		}	
 		
 	}
+	
+	
 
 
 }

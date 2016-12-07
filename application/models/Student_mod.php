@@ -6,7 +6,7 @@ class Student_mod extends CI_Model
         parent::__Construct();
     }
 
-    public function listFromTable($table)
+    public function listFromTable($table,$filter)
     {
         //$query = "select * from $table";
         $this->db->select('*');
@@ -14,6 +14,15 @@ class Student_mod extends CI_Model
         $this->db->join('sea_user_role', 'sea_user_role.user_id = sea_users.id');
         $this->db->where('sea_user_role.role_id=6');
 		$this->db->where('sea_users.user_delete=0');
+		if(isset($filter))
+		{
+		$s_name=$filter['name'];
+		$s_email=$filter['email'];
+        if($s_name!='') 		
+		$this->db->where("first_name LIKE '%$s_name%'");
+	    if($s_email!='')
+		$this->db->where("email LIKE '%$s_email%'");	
+		}
         $this->db->order_by('sea_users.id','desc');
         $query = $this->db->get();
         return $query->result_array();
@@ -103,5 +112,7 @@ class Student_mod extends CI_Model
         $insert = $this->db->insert_batch('sea_exam_papers',$data);
         return $insert?true:false;
     }
+	
+	
 //class close
 }

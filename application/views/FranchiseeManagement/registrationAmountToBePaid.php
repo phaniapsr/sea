@@ -11,14 +11,14 @@
             <div id="margin-top" class="panel-body">
                 <form id="registrationAmountToBePaid" action="<?php echo base_url() ?>FranchiseeManagement/paymentGatewayPage" name="form2" class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-lg-6">
+					<div class="col-lg-6">
                             <div class="form-group">
                                 <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Franchisee Name</label>
                                 <div id="franchisee_name_id" class="col-lg-6"><?php echo $data[0]['first_name'].$data[0]['middle_name'].' '.$data[0]['last_name']?></div>
                                 <input type="hidden" name="user_id" id="user_id" value="<?php echo $data[0]['id']?>">
                             </div>
                         </div>
-                        <div class="col-lg-6">
+					    <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Franchisee Email</label>
                                 <div id="franchisee_email_id" class="col-lg-6"><?php echo $data[0]['email']?></div>

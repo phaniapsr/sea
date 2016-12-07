@@ -4,7 +4,7 @@ class Franchisee_mod extends CI_Model{
         parent::__Construct();
     }
 
-	public function listFromTable($role) {
+	public function listFromTable($role,$filter) {
 		$id=$this->session->user_logged_in['id'];
 		$this->db->select('*');
         $this->db->from('sea_users');
@@ -18,9 +18,15 @@ class Franchisee_mod extends CI_Model{
 			$this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id');
 			$this->db->where('sea_user_hierarchy.created_by='.$id);
 		}
+		if(isset($filter))
+		{
+		$s_name=$filter['name'];
+		if($s_name!='') 		
+		$this->db->where("first_name LIKE '%$s_name%'");
+		}
 		$this->db->where('sea_user_role.role_id='.$role);
 		$this->db->where('sea_users.user_delete=0');
-        $this->db->order_by('sea_users.id','desc');
+		$this->db->order_by('sea_users.id','desc');
 		$query=$this->db->get();
         return $query->result_array();
 	}
@@ -94,6 +100,6 @@ class Franchisee_mod extends CI_Model{
         $this->db->join('sea_franchise_revenue','sea_franchise_revenue.user_id=sea_users.id');
         $this->db->where('sea_users.id',$userId);
         $query=$this->db->get();
-        return $query->result();
+        return $query->result_array();
     }
 }

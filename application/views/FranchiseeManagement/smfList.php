@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
         <!-- /. ROW  -->
         <div class="row">
             <div class="col-md-12">
-                <!-- Advanced Tables -->
+			   <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -41,9 +41,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                                                 </select> records per page</label></div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="dataTables_filter" id="dt-state-franchisee_filter"><label>Search
-                                                <input aria-controls="dt-state-franchisee" class="form-control input-sm"
-                                                       type="search"></label></div>
+                                        <form id="searchStudentByName"
+                              action="<?php echo base_url()?>FranchiseeManagement/smfList" name="form1"
+                              class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl"
+                              enctype="multipart/form-data">
+							   <input type="text" name="search" id="search" placeholder="searchByName" ></input>
+			<input type="submit" class="btn btn-primary btn-xs" name="man_f" id="man_f" value="SEARCH">
+		   </form>
                                     </div>
                                 </div>
                                 <table aria-describedby="dt-state-franchisee_info"

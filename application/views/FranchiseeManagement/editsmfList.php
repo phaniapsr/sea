@@ -540,6 +540,7 @@
 														 var objJSON = JSON.parse(res);
 														 var ds=objJSON.ds;                                   
 														 var rid=objJSON.id;
+														 alert("Record Deleted Successfully");
 														 if(rid==2)
 														 {
 															 window.location = "<?php echo base_url()?>FranchiseeManagement/smfList";

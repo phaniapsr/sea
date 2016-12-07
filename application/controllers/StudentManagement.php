@@ -168,7 +168,11 @@ class StudentManagement extends CI_Controller
 
     public function currentStudentsList()
     {
-        $data['data']['smf'] = $this->student->listFromTable('sea_users');
+		$filter=array(
+		'name'=>$this->input->post('search'),
+		'email'=>$this->input->post('email')
+		);
+        $data['data']['smf'] = $this->student->listFromTable('sea_users',$filter);
         $this->load->view('includes/header');
         $this->load->view('StudentManagement/currentStudentsList', $data);
         $this->load->view('includes/footer');
@@ -469,4 +473,6 @@ class StudentManagement extends CI_Controller
 		echo $st;
 		
 	}
+	
+	
 }

@@ -5,6 +5,19 @@
                 <h1 class="page-header">Students List</h1>
             </div>
         </div>
+		<div class="row">
+		   <div class="col-md-12">
+		   <form id="searchStudentByName"
+                              action="<?php echo base_url()?>studentManagement/currentStudentsList" name="form1"
+                              class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl"
+                              enctype="multipart/form-data">
+		    <input type="text" name="search" id="search" placeholder="searchByName"></input>
+			<input type="text" name="email" id="email" placeholder="searchByEmail"></input>
+			<input type="submit" class="btn btn-primary btn-xs f-rev-config" name="find" id="find" value="SEARCH">
+		   </form>
+		   </div>
+		</div>  
+		  
         <!-- /. ROW  -->
         <label style="color:Green;font-size:28px;"></label>
         <div class="row">
@@ -31,15 +44,15 @@
                             <td><?php echo $row['last_name'];?></td>
                             <td><?php echo $row['middle_name'];?></td>
                             <td><?php echo $row['email'];?></td>
-                            <td><input type="button" class="btn btn-info" value="Courses Info" onclick="window.location.href='sdetailView/<?php echo $row['id']?>'"/></td>
+                            <td><input type="button" class="btn btn-primary btn-xs f-rev-config" value="Courses Info" onclick="window.location.href='sdetailView/<?php echo $row['id']?>'"/></td>
 							<?php if($row['user_status']==0){ ?>
                                             <td class="text-center"><a userid="<?php echo $row['user_id'];?>">
-                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-info">Deactivate</button>
+                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-primary btn-xs f-rev-config">Deactivate</button>
                                                 </a></td>
 											<?php } ?>
 											<?php if($row['user_status']==1){ ?>
                                             <td class="text-center"><a userid="<?php echo $row['user_id'];?>">
-                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-info">Activate</button>
+                                                    <button type="button" id="dact_<?php echo $row['user_id'];?>" class="btn btn-primary btn-xs f-rev-config">Activate</button>
                                                 </a></td>
 											<?php } ?>	
 											<script>
@@ -70,7 +83,7 @@
 											</script>
                             <td class=" text-center"><a href="editstuList/<?php echo $row['id']?>" class="popup-with-zoom-anim-mec btn-activate"
                                                                         userid="8" status="0" href="#small-dialog3">
-                                                    <button type="button" class="btn btn-info">Edit</button>
+                                                    <button type="button" class="btn btn-primary btn-xs f-rev-config">Edit</button>
                                                 </a></td>
                         </tr>
                     <?php }?>

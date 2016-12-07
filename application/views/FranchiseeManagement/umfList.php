@@ -44,9 +44,13 @@
                                                 </select> records per page</label></div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="dataTables_filter" id="dt-state-franchisee_filter"><label>Search
-                                                <input aria-controls="dt-state-franchisee" class="form-control input-sm"
-                                                       type="search"></label></div>
+                                        <form id="searchStudentByName"
+                              action="<?php echo base_url()?>FranchiseeManagement/ufList" name="form1"
+                              class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl"
+                              enctype="multipart/form-data">
+							   <input type="text" name="search" id="search" placeholder="searchByName" ></input>
+			<input type="submit" class="btn btn-primary btn-xs" name="find" id="find" value="SEARCH">
+		   </form>
                                     </div>
                                 </div>
                                 <table aria-describedby="dt-state-franchisee_info"
