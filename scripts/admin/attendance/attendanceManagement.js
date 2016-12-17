@@ -22,9 +22,18 @@ $(function(){
                 $('#data_crs_int_name').text(res[0].course_instructor_name)
                 $('#data_cls_day').text(class_day[res[0].class_day])
                 $('#data_cls_time').text(res[0].class_time)
-                $.each(res[0].attendance, function (key, val) {
-
+                var replace_id=0;
+                $('#hid_course_level_id').val(res[0].attendance[0].course_level_id)
+                $.each(res[0].attendance, function (key, value) {
+                    replace_id++
+                    var cloned=$('.attendance_tr:first').clone(true).insertAfter(".attendance_tr:last");
+                    cloned.find('input.schedule_date').removeData('datepicker').datepicker().val(value.actual_class_conducted_date);
+                    cloned.find('input[type=radio]').attr('name',cloned.find('input[type=radio]').attr("name").replace(/\d+/, replace_id))
+                    value.punctual==0?cloned.find('input[type=radio][value=0]').attr('checked', 'checked'):cloned.find('input[type=radio][value=1]').attr('checked', 'checked')
+                    cloned.find('td:nth-child(2)').text(value.scheduled_class_date);
+                    cloned.find('input.attendance_cls').val(value.attendance_id);
                 });
+                $('.attendance_tr:first').remove();
             }
         });
     })
@@ -34,5 +43,25 @@ $(function(){
             altFormat: "mm/dd/yy",
             changeYear: true,
         });
+    })
+    
+    $('#attendance_button_save').click(function (e) {
+        $('#AttendanceForm').submit();
+    })
+    $('#AttendanceForm').submit(function(e){
+        e.preventDefault();
+        var data=$(this).serialize();
+        $.ajax({
+            url:$(this).attr('action'),
+            data:data,
+            method:'post',
+            success:function(){
+                alert('Data saved successfully');
+            },
+            error:function(){
+                alert('technical issue')
+            }
+        })
+        e.preventDefault();
     })
 })

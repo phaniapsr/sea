@@ -104,14 +104,14 @@
                                 </div>
                                 <section>
                                     <div class="row table-responsive">
-                                        <table class="table">
-                                            <tr class="attendance_div">
-                                                <td><label>Scheduled Date</label></td>
-                                                <td><input type="hidden" name="attendance_id[]"></td>
+                                        <table class="table attendance_table">
+                                            <tr class="attendance_tr">
+                                                <td><label>Scheduled Date</label><input type="hidden" class="attendance_cls" name="attendance_id[]"></td>
+                                                <td></td>
                                                 <td><label>Actual Date</label></td>
-                                                <td><input type="text" size="10" class="schedule_date" name="actual_date[]"></td>
+                                                <td><input type="text" size="10" class="schedule_date" name="actual_date[]"/></td>
                                                 <td><label>Punctual</label></td>
-                                                <td><span><input type="radio" name="punctual" value="1">Yes</span><span><input type="radio" name="punctual" value="0">No</span></td>
+                                                <td><label><input type="radio" name="punctual_0" value="1"/>Yes</label><label><input type="radio" name="punctual_0" value="0"/>No</label></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -119,6 +119,7 @@
                                 <div class="row text-center" id="roww1">
                                     <div class="span12">
                                         <input type="hidden" id="hid_user_id" name="user_id" value="">
+                                        <input type="hidden" id="hid_course_level_id" name="course_level" value="">
                                         <label class="danger" id="stu-config-msg"></label>
                                         <button class="btn primaryCta small" type="button"
                                                 role="button"

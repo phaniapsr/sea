@@ -7,9 +7,9 @@ $(function () {
         var pid = $(this);
         if (pid.val() === "ACMAS") {
             document.forms["form1"]["CourseId"].options.length = 1;
-            $('#course').append("<option value='Subjunior'>Subjunior</option>");
-            $('#course').append("<option value='Junior'>Junior</option)");
-            $('#course').append("<option value='Senior'>Senior</option>");
+            $('#course').append("<option value='Subjunior'>Subjunior</option><option value='Junior'>Junior</option><option value='Senior'>Senior</option>");
+            /*$('#course').append("<option value='Junior'>Junior</option>");
+            $('#course').append("<option value='Senior'>Senior</option>");*/
 
 
         }
