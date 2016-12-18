@@ -690,9 +690,11 @@
             <!-- /.panel -->
         </div>
         <!-- /.col-lg-12 -->
+
         <link href="<?php echo base_url()?>content/css/tjquery-ui.css" rel="stylesheet"/>
         <script src="<?php echo base_url()?>scripts/admin/validations/jquery-teacher.js"></script>
         <script src="<?php echo base_url()?>scripts/admin/jquery-ui.js"></script>
+
     </div>
     <footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
 </div>

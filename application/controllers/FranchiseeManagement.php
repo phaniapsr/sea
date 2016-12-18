@@ -191,7 +191,11 @@ class FranchiseeManagement extends CI_Controller
     {
 		$filter=array(
 		'name'=>$this->input->post('search'),
-		);
+		'conid'=>$this->input->post('conid'),
+        'smfid'=>null,
+		'dmfid'=>null
+        );
+		
         $data['data']['smf'] = $this->franchisee->listFromTable('2',$filter);
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/smfList', $data);
@@ -202,9 +206,12 @@ class FranchiseeManagement extends CI_Controller
     {
 		$filter=array(
 		'name'=>$this->input->post('search'),
+	    'conid'=>$this->input->post('conid'),
+        'smfid'=>$this->input->post('smfid'),
+		'dmfid'=>null
 		);
-        $data['data']['smf'] = $this->franchisee->listFromTable('3',$filter);
-        $this->load->view('includes/header');
+		$data['data']['smf'] = $this->franchisee->listFromTable('3',$filter);
+		$this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/dmfList', $data);
         $this->load->view('includes/footer');
     }
@@ -213,6 +220,9 @@ class FranchiseeManagement extends CI_Controller
     {
 		$filter=array(
 		'name'=>$this->input->post('search'),
+		 'conid'=>$this->input->post('conid'),
+        'smfid'=>$this->input->post('smfid'),
+		'dmfid'=>$this->input->post('dmfid')
 		);
         $data['data']['smf'] = $this->franchisee->listFromTable('4',$filter);
         $this->load->view('includes/header');
@@ -223,7 +233,10 @@ class FranchiseeManagement extends CI_Controller
     public function consultantsList()
     {
 		$filter=array(
-		'name'=>$this->input->post('find'),
+		'name'=>$this->input->post('search'),
+		'conid'=>null,
+		'smfid'=>null,
+		'dmfid'=>null
 		);
         $data['data']['smf'] = $this->franchisee->listFromTable('5',$filter);
         $this->load->view('includes/header');
@@ -662,4 +675,32 @@ class FranchiseeManagement extends CI_Controller
 		}	
 		
 	}
+
+	
+	public function getCons()
+	{
+		$rid=$this->input->post('id');
+		$conid=$this->session->user_logged_in['id'];
+		$result=$this->franchisee->getCons($rid,$conid);
+		print json_encode($result);
+	}
+	
+	public function getSmf()
+	{
+		$rid=$this->input->post('id');
+		$conid=$this->input->post('conid');
+		$result=$this->franchisee->getSmf($rid,$conid);
+		print json_encode($result);
+	}
+	
+	public function getDmf()
+	{
+		$rid=$this->input->post('id');
+		$smfid=$this->input->post('smfid');
+		$result=$this->franchisee->getSmf($rid,$smfid);
+		print json_encode($result);
+	}
+
+
+
 }

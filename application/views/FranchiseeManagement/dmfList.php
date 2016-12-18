@@ -48,11 +48,61 @@
                               action="<?php echo base_url()?>FranchiseeManagement/dmfList" name="form1"
                               class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl"
                               enctype="multipart/form-data">
+							    <select class="form-control" name="conid" id="conid">
+                                                <option value="">Select</option>
+                                                
+                                            </select>
+											<select class="form-control" name="smfid" id="smfid">
+                                                <option value="">Select</option>
+                                                
+                                            </select>
 							   <input type="text" name="search" id="search" placeholder="searchByName" ></input>
-			<input type="submit" class="btn btn-primary btn-xs" name="find" id="find" value="SEARCH">
+			<input type="submit" class="btn btn-primary btn-xs" name="man_f" id="man_f" value="SEARCH">
 		   </form>
                                     </div>
                                 </div>
+								<script>
+								$(document).ready(function(){
+									$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/FranchiseeManagement/getCons',
+													data: {id:'5'},
+													success: function (res) {
+														  var s="";
+														  var obj = jQuery.parseJSON(res);
+														  $.each(obj,function(k,v){
+															  s += "<option value="+v.id+">" + v.username + "</option>";
+														  });
+														  $("#conid").append(s);
+														  }
+ 													
+									});	
+                                  $('#conid').change(function(){
+									var conid=$('#conid').val();
+									document.getElementById('smfid').options.length = 1; 
+									//alert(conid);
+									$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/FranchiseeManagement/getSmf',
+													data: {id:'2',
+													       conid:conid
+													},
+													success: function (res) {
+														  var s="";
+														  var obj = jQuery.parseJSON(res);
+														  $.each(obj,function(k,v){
+															  //alert(v.id);
+															  s += "<option value="+v.id+">" + v.username + "</option>";
+														  });
+														  $("#smfid").append(s);
+														  }
+ 													
+									});	
+									
+								});									
+													
+								});
+								</script>
                                 <table aria-describedby="dt-state-franchisee_info"
                                        class="table table-striped table-bordered table-hover dataTable no-footer"
                                        id="dt-state-franchisee" style="font-size:14px;">
