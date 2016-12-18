@@ -78,7 +78,7 @@
                             <center>
                                 <div>
                                     <button type="submit" id="paynow" role="button" class="btn btn-primary" name="signup" value="Sign up" style="margin:10px;">
-                                        <span class="glyphicon glyphicon-save" style="margin:3px;"></span>Pay Now
+                                        <span class="glyphicon glyphicon-save" onclick="alert('Payment done successfully')" style="margin:3px;"></span>Pay Now
                                     </button>
                                     <button type="reset" class="btn btn-primary" name="cancel" style="margin:10px;">
                                         <span class="glyphicon glyphicon-remove" style="margin:3px;"></span>CANCEL

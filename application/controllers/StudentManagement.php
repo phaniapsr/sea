@@ -127,19 +127,30 @@ class StudentManagement extends CI_Controller
             'stu_program' => $this->input->post('ProgramId'),
             'stu_category' => $this->input->post('CourseId'),
             'stu_level' => $this->input->post('ProgramCourseLevelId'),
-			'class_start_date'=>date('Y-m-d',strtotime($this->input->post('ClassStartDate'))),
-		   'level_end_date'=>date('Y-m-d',strtotime($this->input->post('LevelEndDate'))),
-		   'class_time'=>$this->input->post('ClassTime'),
-		   'class_day'=>$this->input->post('ClassDay'),
-		   'course_instructor_name'=>$this->input->post('CName'),
+            'class_start_date' => date('Y-m-d', strtotime($this->input->post('ClassStartDate'))),
+            'level_end_date' => date('Y-m-d', strtotime($this->input->post('LevelEndDate'))),
+            'class_time' => $this->input->post('ClassTime'),
+            'class_day' => $this->input->post('ClassDay'),
+            'course_instructor_name' => $this->input->post('CName'),
         );
         $result3 = $this->student->insertNewRecord('sea_student_course_level', $data3);
+        if ($result3 > 1) {
+            $attendance_dates = strtotime($this->input->post('ClassStartDate'));
+            for ($i = 0; $i < 14; $i++) {
+                $data_att = array(
+                    'course_level_id' => $result3,
+                    'scheduled_class_date' => date('Y-m-d', $attendance_dates)
+                );
+                $result3 = $this->student->insertNewRecord('sea_student_attendance', $data_att);
+                $attendance_dates = strtotime('+1 week', $attendance_dates);
+            }
+        }
         $data = array(
             'user_id' => $result,
             'role_id' => 6,
         );
         $role = $this->franchisee->insertNewRecord('sea_user_role', $data);
-		     //Logic for inserting record in hierarchy table
+        //Logic for inserting record in hierarchy table
         //If admin/consultant login and creating SMF/DMF/UF
         if ($this->session->user_logged_in['role_id'] == 1 || $this->session->user_logged_in['role_id'] == 5) {
             $data_hierarchy = array(
@@ -168,11 +179,11 @@ class StudentManagement extends CI_Controller
 
     public function currentStudentsList()
     {
-		$filter=array(
-		'name'=>$this->input->post('search'),
-		'email'=>$this->input->post('email')
-		);
-        $data['data']['smf'] = $this->student->listFromTable('sea_users',$filter);
+        $filter = array(
+            'name' => $this->input->post('search'),
+            'email' => $this->input->post('email')
+        );
+        $data['data']['smf'] = $this->student->listFromTable('sea_users', $filter);
         $this->load->view('includes/header');
         $this->load->view('StudentManagement/currentStudentsList', $data);
         $this->load->view('includes/footer');
@@ -254,11 +265,11 @@ class StudentManagement extends CI_Controller
             'stu_program' => $this->input->post('ProgramId'),
             'stu_category' => $this->input->post('CourseId'),
             'stu_level' => $this->input->post('ProgramCourseLevelId'),
-			'class_start_date'=>date('Y-m-d',strtotime($this->input->post('ClassStartDate'))),
-		   'level_end_date'=>date('Y-m-d',strtotime($this->input->post('LevelEndDate'))),
-		   'class_time'=>$this->input->post('ClassTime'),
-		   'class_day'=>$this->input->post('ClassDay'),
-		   'course_instructor_name'=>$this->input->post('CName'),
+            'class_start_date' => date('Y-m-d', strtotime($this->input->post('ClassStartDate'))),
+            'level_end_date' => date('Y-m-d', strtotime($this->input->post('LevelEndDate'))),
+            'class_time' => $this->input->post('ClassTime'),
+            'class_day' => $this->input->post('ClassDay'),
+            'course_instructor_name' => $this->input->post('CName'),
 
         );
         $fl = "user_id";
@@ -421,7 +432,7 @@ class StudentManagement extends CI_Controller
 
                 $uploadPath = 'uploads/exams/';
                 $config['upload_path'] = $uploadPath;
-                $config['allowed_types'] = 'gif|jpg|png';
+                $config['allowed_types'] = 'pdf';
                 //$config['max_size']	= '100';
                 //$config['max_width'] = '1024';
                 //$config['max_height'] = '768';
@@ -457,22 +468,88 @@ class StudentManagement extends CI_Controller
     {
         $data['files'] = $this->student->getUploadRows();
         $this->load->view('includes/header');
-        $this->load->view('StudentManagement/viewExams', $data);
+        $this->load->view('StudentManagement/viewexams', $data);
+        $this->load->view('includes/footer');
+        //print_r( $data['files']);
+    }
+
+
+    public function deleteStudent()
+    {
+        $id = $this->input->post('id');
+        $st = $this->franchisee->deleteStatus($id);
+        if ($st == 0) {
+            $data = array('user_delete' => 1);
+            $this->franchisee->updateTableRecord('sea_users', 'id', $data, $id);
+        }
+        echo $st;
+
+    }
+
+
+    public function attendanceManagement()
+    {
+        $data['data']['smf'] = $this->student->listFromTable('sea_users', array('name' => '', 'email' => ''));
+        $this->load->view('includes/header');
+        $this->load->view('StudentManagement/attendanceManagement', $data);
         $this->load->view('includes/footer');
     }
-	
-	public function deleteStudent()
-	{
-		$id=$this->input->post('id');
-		$st=$this->franchisee->deleteStatus($id);
-		if($st==0)
-		{
-			$data=array('user_delete'=>1);
-			$this->franchisee->updateTableRecord('sea_users','id',$data,$id);
-		}
-		echo $st;
-		
-	}
-	
-	
+
+    public function getAttendance()
+    {
+        $data = array();
+        $data = $this->student->getCourseLevelDetails($this->input->post('user_id'));
+        $data[0]['attendance'] = $this->student->getAttendance($data[0]['course_level_id']);
+        echo json_encode($data);
+    }
+
+
+    public function saveExamStatus()
+    {
+        $id = $this->input->post('id');
+        $status = $this->input->post('status');
+        $data['saveExamStatus'] = $this->student->examStatus($id, $status);
+
+    }
+
+    public function upload($id)
+    {
+        //load the download helper
+        $this->load->helper('download');
+        $data['files'] = $this->student->getUploadRows();
+        $data = $this->student->getUploadImage($id);
+        echo $data['exam_name'];
+        //Get the file from whatever the user uploaded (NOTE: Users needs to upload first), @See http://localhost/CI/index.php/upload
+
+        # code...
+        $path = file_get_contents("./uploads/exams/" . $data['exam_name']);
+        $name = $data['exam_name'];
+        force_download($name, $path);
+
+
+    }
+
+    public function examPapers()
+    {
+        $data['files'] = $this->student->getUploadRow();
+        $this->load->view('includes/header');
+        $this->load->view('StudentManagement/examPapers', $data);
+        $this->load->view('includes/footer');
+
+    }
+
+    public function saveAttendance(){
+        $course_level = $this->input->post('course_level');
+        $attendance_id = $this->input->post('attendance_id');
+        $actual_date = $this->input->post('actual_date');
+
+        foreach($actual_date as $key=>$val){
+            $punctual = $this->input->post('punctual_'.($key+1));
+            $data=array(
+                'actual_class_conducted_date'=>date('Y-m-d',strtotime($val)),
+                'punctual'=>$punctual,
+               );
+            $this->student->saveAttendance($attendance_id[$key],$course_level[$key], $data);
+        }
+    }
 }

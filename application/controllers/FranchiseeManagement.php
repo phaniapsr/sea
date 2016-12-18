@@ -676,6 +676,7 @@ class FranchiseeManagement extends CI_Controller
 		}	
 		
 	}
+
 	
 	public function getCons()
 	{
@@ -700,6 +701,7 @@ class FranchiseeManagement extends CI_Controller
 		$result=$this->franchisee->getSmf($rid,$smfid);
 		print json_encode($result);
 	}
+
 
 
 }

@@ -370,19 +370,6 @@ $(window).load(function () {
             $('#StudentUFPercentage').val(parseFloat($('#StudentUFShare').val()) * 100 / parseFloat($('#StudentLevelFee').val()));
             return false;
         });
-        //
-        $('#StudentLevelFee').keyup(function () {
-            //var vStudentKitFee = parseFloat($('#StudentRegistrationFee').val()) - (parseFloat($('#StudentLevelFee').val()));
-            //if (vStudentKitFee > parseFloat($('#StudentRegistrationFee').val())) {
-            //    vStudentKitFee = parseFloat($('#StudentRegistrationFee').val());
-            //}
-            //if (vStudentKitFee < 0) {
-            //    vStudentKitFee = 0;
-            //}
-            //if (parseFloat(vStudentKitFee) > 0) {
-            //    $('#StudentKitFee').val(parseFloat(vStudentKitFee));
-            //}            
-            return false;
-        });
+
     });
 });

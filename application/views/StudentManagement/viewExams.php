@@ -1,5 +1,8 @@
 <script type = "text/javascript" src ="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="application/javascript" src="<?php echo base_url()?>scripts/admin/studentRegistration/studentRegistration.js"></script>
+<?php //$this->load->view('includes/header'); ?>
+<?php //$this->load->view('includes/leftMenu'); ?>
+
+
 <div id="page-wrapper">
     <div id="page-inner">
         <div class="row">
@@ -18,23 +21,55 @@
                             
                     
                                 <div class="col-lg-12">
+
                                 <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="table table-striped table-bordered table-hover no-footer dataTable" id="dt-state-franchisee" style="font-size:14px;" aria-describedby="dt-state-franchisee_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th>ID</th>
+                                            <th>EXAM PAPER</th>
+                                            <th>PROGRAM NAME</th>
+                                            <th>COURSE NAME</th>
+                                            <th>LEVEL NAME</th>
+                                            <th></th>
+                                            
 
-                                <table border="1">
-                                    <tr><td><b>Exam Paper</b></td><td><b>Program Name</b></td><td><b>Course Name</b></td><td><b>Level Name</b></td></tr>
-                                     <?php if(!empty($files)): foreach($files as $file): ?>
-                                     <tr><td><img src="<?php echo base_url('uploads/exams/'.$file['exam_name']); ?>" alt="" height="42" width="42" ></td><td><?php echo $file['program_name']; ?></td><td><?php echo $file['course_name']; ?></td><td><?php echo $file['level_name']; ?></td></tr>
-                                      <?php endforeach; else: ?>
-                                        <tr><td colspan="4">File(s) not found.....</td></tr>
+                                        </tr></thead>
+                                        <tbody>
+                                        <?php
+                                        $i=1;
+                                        if(!empty($files)): foreach($files as $file): ?>
+
+                                       <?php  //print_r($file['exam_status']); ?>
+                                            <tr class="odd">
+                                                <td><?php echo $i;?></td>
+                                                <td>
+
+
+<a href="<?php echo base_url(); ?>index.php/StudentManagement/upload/"><img src="<?php echo base_url('uploads/exams/'.$file['exam_name']); ?>" alt="" height="42" width="42" ></a>
+                                                </td>
+                                                <td><?php echo $file['program_name']; ?></td>
+                                                <td><?php echo $file['course_name']; ?></td>
+                                                <td><?php echo $file['level_name']; ?></td>
+                                                <td><input type="radio" name="status[<?php print $i; ?>]" id="status_id_1" value="active" <?php if ($file['exam_status'] == 'active') echo 'checked="checked"'; ?> onclick="changeStatus('<?php echo $file['exam_id']; ?>','active');"> Active
+                                                    <input type="radio" name="status[<?php print $i; ?>]" id="status_id_2" value="inactive" <?php if ($file['exam_status'] == 'inactive') echo 'checked="checked"'; ?> onclick="changeStatus('<?php echo $file['exam_id']; ?>','inactive');">Inactive
+                                                </td>
+                                                
+                                               
+                                            </tr>
+
+                                        <?php $i++; ?>
+                                         <?php endforeach; else: ?>
+                                        <tr><td colspan="6">File(s) not found.....</td></tr>
                                         <?php endif; ?>
-                                </table>
-
-
-
-
-                                    
+                                        </tbody>
+                                    </table>
+                                    <!-- /.panel-body -->
                                 </div>
+                                <!-- /.panel -->
                             </div>
+
 
 
                             <div class="modal fade" id="success" tabindex="-1" role="dialog"
@@ -59,10 +94,10 @@
                             <script type='text/javascript'>
                                 // CalTax is for calicualting 15% tax on Franchisee License Fee
                             $(function () {
-                                alert('hi');
+                                
                                 $(document).ready(function () {
                                     $("#program").change(function () {
-                                        alert('hi');
+                                        
                                         $("#course").html('<option value="">Select</option>');
                                         $("#level").html('<option value="">Select</option>');
                                         lookupManager.GetCourseLevels($(this).val(), function (courses) {
@@ -104,9 +139,14 @@
                                 });
                             });
                             </script>
-                        
 
-                        </form>
+
+                            </div>
+
+
+
+                           
+                           
                         <!-- /.col-lg-6 (nested) -->
                     </div>
                     <!-- /.row (nested) -->
@@ -114,17 +154,36 @@
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
+              
+
         </div>
-        <div class="modal fade" id="success" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" style="color:green"></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
+       <script type="text/javascript">
+                               
+
+                           function changeStatus(id,status){
+
+                                //alert(id);
+                                //alert(status);
+                                $.ajax({
+                                        type: "POST",
+                                        url: "<?php echo base_url(); ?>" + "index.php/StudentManagement/saveExamStatus",
+                                        dataType: 'json',
+                                        data: {id: id, status: status},
+                                        success: function(res) {
+                                        if (res)
+                                        {
+                                        // Show Entered Value
+                                        alert('save exam status successfull')
+                                        
+                                        }
+                                        }
+                                });
+
+                            }
+
+
+            </script>
+        
         <!-- /.col-lg-12 -->
         <link href="Skills%20Education%20Academy_files/tjquery-ui.css" rel="stylesheet">
         <script src="Skills%20Education%20Academy_files/jquery-students.js"></script>
@@ -132,3 +191,4 @@
     </div>
     <footer><p>All right reserved by: <a href="#">FriendsFocus</a></p></footer>
 </div>
+<?php $this->load->view('includes/footer'); ?>

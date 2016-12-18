@@ -102,25 +102,7 @@
                             </div>
 
 
-                            <div class="modal fade" id="success" tabindex="-1" role="dialog"
-                                 aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <label style="color:Green;font-size:28px;"></label>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                            </button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                            <!-- /Modal -->
+                            
                            
 
                         </form>
@@ -143,9 +125,6 @@
             </div>
         </div>
         <!-- /.col-lg-12 -->
-        <link href="Skills%20Education%20Academy_files/tjquery-ui.css" rel="stylesheet">
-        <script src="Skills%20Education%20Academy_files/jquery-students.js"></script>
-        <script src="Skills%20Education%20Academy_files/jquery-ui.js"></script>
     </div>
     <footer><p>All right reserved by: <a href="#">FriendsFocus</a></p></footer>
 </div>
