@@ -58,6 +58,17 @@ $(function () {
         }
     });
     $('#signup').click(function () {
+        var utype=document.forms["form1"]["reUser"].value;
+        if(utype==0)
+        {
+            document.forms["form1"]["franchiseFee"].value=0;
+            document.forms["form1"]["franchiseFee"].readOnly=true;
+        }
+        if(utype=='')
+        {
+            alert("Please Select Student Type Either New User OR Existing USer");
+            return false;
+        }
         var regexp_name = /^[a-zA-Z]+$/;
         var stu_email = document.forms["form1"]["email"].value;
         if (stu_email == '') {

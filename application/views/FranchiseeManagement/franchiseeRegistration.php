@@ -20,8 +20,8 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label><span class="col-lg-12"><input type="radio" id="reUser" name="userType" value="0">Registered User</span></label>
-                                         <label><span class="col-lg-12"><input type="radio" id="reUser" name="userType" value="1">New User</span></label>
+                                        <label><span class="col-lg-12"><input type="radio" id="exe_rd_user" name="userType" value="0">Existing User</span></label>
+                                        <label><span class="col-lg-12"><input type="radio" id="new_rd_user" name="userType" value="1">New User</span></label>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-5 col-lg-offset-1 control-label" style="text-align: left">Select
@@ -70,7 +70,7 @@
                                                         type: 'post',
                                                         url: '<?php echo base_url()?>/FranchiseeManagement/checkEmail',
                                                         data: {email: em},
-                                                        success: function (res) {
+                                                        success: function (res) {alert(res);
                                                             if (res == 1) {
                                                                 alert("This email id already taken");
                                                                 $('#email').val('').focus();

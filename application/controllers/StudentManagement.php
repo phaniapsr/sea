@@ -141,7 +141,7 @@ class StudentManagement extends CI_Controller
                     'course_level_id' => $result3,
                     'scheduled_class_date' => date('Y-m-d', $attendance_dates)
                 );
-                $result3 = $this->student->insertNewRecord('sea_student_attendance', $data_att);
+                $this->student->insertNewRecord('sea_student_attendance', $data_att);
                 $attendance_dates = strtotime('+1 week', $attendance_dates);
             }
         }
