@@ -692,9 +692,9 @@
         <!--<link href="Skills%20Education%20Academy_files/tjquery-ui.css" rel="stylesheet">
         <script src="Skills%20Education%20Academy_files/jquery-students.js"></script>
         <script src="Skills%20Education%20Academy_files/jquery-ui.js"></script>-->
-		<link href="Content/css/tjquery-ui.css" rel="stylesheet"/>
-        <script src="Scripts/admin/validations/jquery-teacher.js"></script>
-        <script src="Scripts/admin/jquery-ui.js"></script>
+		 <link href="<?php echo base_url() ?>Content/css/tjquery-ui.css" rel="stylesheet"/>
+        <script src="<?php echo base_url() ?>Scripts/admin/validations/jquery-teacher.js"></script>
+        <script src="<?php echo base_url() ?>Scripts/admin/jquery-ui.js"></script>
     </div>
     <footer><p>All right reserved by: <a href="http://friendsfocus.in/">FriendsFocus</a></p></footer>
 </div>
