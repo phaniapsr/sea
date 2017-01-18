@@ -178,12 +178,19 @@ class StudentManagement extends CI_Controller
 
 
     public function currentStudentsList()
-    {
+    { 
+	    $config['base_url']=base_url().'StudentManagement/currentStudentsList';
+		$config['total_rows']=$this->student->record_count('sea_users','6');
+		$config['per_page']=1;
+		$config['uri_segment'] =3;
+		$this->pagination->initialize($config);
         $filter = array(
             'name' => $this->input->post('search'),
             'email' => $this->input->post('email')
         );
-        $data['data']['smf'] = $this->student->listFromTable('sea_users', $filter);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['data']['smf'] = $this->student->listFromTable('sea_users', $filter,$config['per_page'],$page);
+		$data['data']['links']=$this->pagination->create_links();
         $this->load->view('includes/header');
         $this->load->view('StudentManagement/currentStudentsList', $data);
         $this->load->view('includes/footer');
@@ -552,4 +559,93 @@ class StudentManagement extends CI_Controller
             $this->student->saveAttendance($attendance_id[$key],$course_level[$key], $data);
         }
     }
+	
+	public function feedBack()
+	{
+		$stud_id=$this->input->post('stud_id');
+		$stud_exist=$this->student->currentStudentsList('sea_student_feedback', $stud_id);
+        if($stud_exist==null)
+		{
+		$data = array(
+            'stud_id' => $this->input->post('stud_id'),
+			'course_id' =>$this->input->post('course_id'),
+			'unit_feedback'=>$this->input->post('feedback'),
+			'date_time'=> date('Y-m-d H:i:s'),
+			);
+			$this->student->feedback('sea_student_feedback',$data);
+		}	
+       else
+	   { 
+           $fieldLable='stud_id';   
+		   $id=$this->input->post('stud_id');
+		   $data=array(
+		   'course_id' =>$this->input->post('course_id'),
+		   'unit_feedback'=>$this->input->post('feedback'),
+		   'date_time'=> date('Y-m-d H:i:s'),
+		);
+		   
+		   $this->student->updateTableRecord('sea_student_feedback', $fieldLable, $data, $id);
+	   }		   
+	}
+	
+	public function studentFeedbackForm()
+	{
+		$id=$this->session->user_logged_in['id'];
+		$data['data']['smf'] = $this->student->parentFeedback($id);
+		//print_r($data);
+		$this->load->view('includes/header');
+        $this->load->view('StudentManagement/studentFeedbackForm',$data);
+        $this->load->view('includes/footer');
+	}
+	
+	public function parentFeedback()
+	{
+		$id=$this->session->user_logged_in['id'];
+		$stud_exist=$this->student->currentStudentsList('sea_student_feedback', $id);
+		if($stud_exist==null)
+		{
+		$data = array(
+            'stud_id' => $id,
+			'course_id' =>$this->input->post('course_level_id'),
+			'unit_feedback'=>null,
+			'date_time'=>'',
+			'feedback_attendance'=>$this->input->post('attendance'),
+			'feedback_excercise'=>$this->input->post('excercise'),
+			'feedback_practice'=>$this->input->post('practice'),
+			'feedback_motivating'=>$this->input->post('motivating'),
+			'feedback_development'=>$this->input->post('development'),
+			'feedback_franchisee'=>$this->input->post('infra'),
+			'feedback_trainer'=>$this->input->post('trainer'),
+			'feedback_date_time'=>date('Y-m-d H:i:s'),
+			);
+			$this->student->feedback('sea_student_feedback',$data);
+			$this->load->view('includes/header');
+		$id=$this->session->user_logged_in['id'];
+		$data['data']['smf'] = $this->student->parentFeedback($id);
+        $this->load->view('StudentManagement/studentFeedbackForm',$data);
+        $this->load->view('includes/footer');
+		}
+		else
+		{
+			$fieldLable='stud_id';
+			$data=array(
+			'feedback_attendance'=>$this->input->post('attendance'),
+			'feedback_excercise'=>$this->input->post('excercise'),
+			'feedback_practice'=>$this->input->post('practice'),
+			'feedback_motivating'=>$this->input->post('motivating'),
+			'feedback_development'=>$this->input->post('development'),
+			'feedback_franchisee'=>$this->input->post('infra'),
+			'feedback_trainer'=>$this->input->post('trainer'),
+			'feedback_date_time'=>date('Y-m-d H:i:s'),
+			);
+			$this->student->updateTableRecord('sea_student_feedback', $fieldLable, $data, $id);
+			$this->load->view('includes/header');
+		$id=$this->session->user_logged_in['id'];
+		$data['data']['smf'] = $this->student->parentFeedback($id);
+        $this->load->view('StudentManagement/studentFeedbackForm',$data);
+        $this->load->view('includes/footer');
+			
+		}
+		
+	}
 }

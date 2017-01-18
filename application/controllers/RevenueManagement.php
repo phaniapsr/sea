@@ -176,8 +176,21 @@ class RevenueManagement extends CI_Controller
 
     public function franchiseRevenueGrid()
     {
-        $this->load->model('revenue_mod');
-        $data['data'] = $this->revenue_mod->franchiseRevenueGrid();
+		$this->load->model('revenue_mod');
+		$config['base_url']=base_url().'RevenueManagement/franchiseRevenueGrid';
+		$config['total_rows']=$this->revenue_mod->record_count('sea_franchise_revenue');
+		$config['per_page']=10;
+		$config['uri_segment'] =3;
+		$this->pagination->initialize($config);
+		$filter=array(
+		'name'=>$this->input->post('search'),
+		 'conid'=>$this->input->post('conid'),
+        'smfid'=>$this->input->post('smfid'),
+		'dmfid'=>$this->input->post('dmfid')
+		);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['data']['smf'] = $this->revenue_mod->franchiseRevenueGrid($filter,$config['per_page'],$page);
+		$data['data']['links']=$this->pagination->create_links();
         $this->load->view('includes/header');
         $this->load->view('Revenue/franchiseRevenue', $data);
         $this->load->view('includes/footer');

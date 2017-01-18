@@ -42,13 +42,96 @@
                                                     <option value="50">50</option>
                                                     <option value="100">100</option>
                                                 </select> records per page</label></div>
-                                    </div>
+												
+							        </div>
                                     <div class="col-sm-6">
-                                        <div class="dataTables_filter" id="dt-state-franchisee_filter"><label>Search
-                                                <input aria-controls="dt-state-franchisee" class="form-control input-sm"
-                                                       type="search"></label></div>
+                                       <div class="col-sm-6">
+                                        <form id="searchStudentByName"
+                              action="<?php echo base_url()?>/RevenueManagement/franchiseRevenueGrid" name="form1"
+                              class="form-horizontal" method="POST" ng-app="app" ng-controller="Ctrl"
+                              enctype="multipart/form-data">
+							    <select class="form-control" name="conid" id="conid">
+                                                <option value="">Select</option>
+                                                
+                                            </select>
+											<select class="form-control" name="smfid" id="smfid">
+                                                <option value="">Select</option>
+                                                
+                                            </select>
+											<select class="form-control" name="dmfid" id="dmfid">
+                                                <option value="">Select</option>
+                                                
+                                            </select>
+											
+							   <input type="text" name="search" id="search" placeholder="searchByName" ></input>
+			<input type="submit" class="btn btn-primary btn-xs" name="man_f" id="man_f" value="SEARCH">
+		   </form>
+                                    </div>
                                     </div>
                                 </div>
+								<script>
+								$(document).ready(function(){
+									$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/FranchiseeManagement/getCons',
+													data: {id:'5'},
+													success: function (res) {
+														  var s="";
+														  var obj = jQuery.parseJSON(res);
+														  $.each(obj,function(k,v){
+															  s += "<option value="+v.id+">" + v.username + "</option>";
+														  });
+														  $("#conid").append(s);
+														  }
+ 													
+									});	
+                                  $('#conid').change(function(){
+									var conid=$('#conid').val();
+									document.getElementById('smfid').options.length = 1; 
+									//alert('con id'+conid);
+									$.ajax({
+													type: 'post',
+													url: '<?php echo base_url()?>/FranchiseeManagement/getSmf',
+													data: {id:'2',
+													       conid:conid
+													},
+													success: function (res) {
+														  var s="";
+														  var obj = jQuery.parseJSON(res);
+														  $.each(obj,function(k,v){
+															  //alert(v.id);
+															  s += "<option value="+v.id+">" + v.username + "</option>";
+														  });
+														  $("#smfid").append(s);
+														  }
+ 													
+									});	
+									
+								});									
+								
+                                  $('#smfid').change(function(){
+									  var smfid=$('#smfid').val();
+									  document.getElementById('dmfid').options.length = 1; 
+									 // alert('smfid888'+smfid);
+									  $.ajax({
+										          type: 'post',
+												  url: '<?php echo base_url()?>/FranchiseeManagement/getDmf',
+												  data: {id:'3',smfid:smfid},
+												  success: function(res){
+													 // alert("hi");
+												    var s="";
+													var obj=jQuery.parseJSON(res);
+													$.each(obj,function(k,v){
+														//alert(v.id);
+														s += "<option value="+v.id+">" + v.username + "</option>";
+													});
+													$("#dmfid").append(s);
+												  }
+												   
+									  });
+								  });   								
+								});
+								</script>
                                 <table aria-describedby="dt-state-franchisee_info"
                                        class="table table-striped table-bordered table-hover dataTable no-footer"
                                        id="dt-state-franchisee" style="font-size:14px;">
@@ -108,7 +191,7 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                    foreach ($data as $row) {
+                                    foreach ($data['smf'] as $row) {
                                         ?>
                                         <tr class="odd">
                                             <td><?php echo $row['role']?></td>
@@ -130,31 +213,17 @@
                                     <?php } ?>
                                     </tbody>
                                 </table>
-                                <div class="row">
+                            <div class="row">
                                     <div class="col-sm-6">
-                                        <div aria-relevant="all" aria-live="polite" role="alert"
-                                             id="dt-state-franchisee_info" class="dataTables_info">Showing 1 to 10 of 23
-                                            entries
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        <div id="dt-state-franchisee_paginate"
+									<div id="dt-state-franchisee_paginate"
                                              class="dataTables_paginate paging_simple_numbers">
-                                            <ul class="pagination">
-                                                <li id="dt-state-franchisee_previous" tabindex="0"
-                                                    aria-controls="dt-state-franchisee"
-                                                    class="paginate_button previous disabled"><a href="#">Previous</a>
-                                                </li>
-                                                <li tabindex="0" aria-controls="dt-state-franchisee"
-                                                    class="paginate_button active"><a href="#">1</a></li>
-                                                <li tabindex="0" aria-controls="dt-state-franchisee"
-                                                    class="paginate_button "><a href="#">2</a></li>
-                                                <li tabindex="0" aria-controls="dt-state-franchisee"
-                                                    class="paginate_button "><a href="#">3</a></li>
-                                                <li id="dt-state-franchisee_next" tabindex="0"
-                                                    aria-controls="dt-state-franchisee" class="paginate_button next"><a
-                                                        href="#">Next</a></li>
-                                            </ul>
+                                            <?php
+        
+		 echo $data['links'];
+		?>
                                         </div>
                                     </div>
                                 </div>

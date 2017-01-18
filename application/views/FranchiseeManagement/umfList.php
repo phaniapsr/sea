@@ -108,6 +108,7 @@
 								
                                   $('#smfid').change(function(){
 									  var smfid=$('#smfid').val();
+									  document.getElementById('dmf').options.length = 1; 
 									 // alert('smfid888'+smfid);
 									  $.ajax({
 										          type: 'post',
@@ -241,29 +242,15 @@
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div aria-relevant="all" aria-live="polite" role="alert"
-                                             id="dt-state-franchisee_info" class="dataTables_info">Showing 1 to 10 of 23
-                                            entries
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-sm-6">
-                                        <div id="dt-state-franchisee_paginate"
+									<div id="dt-state-franchisee_paginate"
                                              class="dataTables_paginate paging_simple_numbers">
-                                            <ul class="pagination">
-                                                <li id="dt-state-franchisee_previous" tabindex="0"
-                                                    aria-controls="dt-state-franchisee"
-                                                    class="paginate_button previous disabled"><a href="#">Previous</a>
-                                                </li>
-                                                <li tabindex="0" aria-controls="dt-state-franchisee"
-                                                    class="paginate_button active"><a href="#">1</a></li>
-                                                <li tabindex="0" aria-controls="dt-state-franchisee"
-                                                    class="paginate_button "><a href="#">2</a></li>
-                                                <li tabindex="0" aria-controls="dt-state-franchisee"
-                                                    class="paginate_button "><a href="#">3</a></li>
-                                                <li id="dt-state-franchisee_next" tabindex="0"
-                                                    aria-controls="dt-state-franchisee" class="paginate_button next"><a
-                                                        href="#">Next</a></li>
-                                            </ul>
+                                            <?php
+        
+		 echo $data['links'];
+		?>
                                         </div>
                                     </div>
                                 </div>

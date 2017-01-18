@@ -7,13 +7,15 @@ class Student_mod extends CI_Model
         parent::__Construct();
     }
 
-    public function listFromTable($table, $filter = array())
+    public function listFromTable($table, $filter = array(),$sp,$ep)
     {
         //$query = "select * from $table";
         $this->db->select('*');
         $this->db->from('sea_users');
         $this->db->join('sea_user_role', 'sea_user_role.user_id = sea_users.id');
-        $this->db->where('sea_user_role.role_id=6');
+		$this->db->join('sea_student_course_level','sea_student_course_level.user_id=sea_users.id');
+        $this->db->join('sea_student_feedback','sea_student_feedback.stud_id=sea_users.id','left');
+		$this->db->where('sea_user_role.role_id=6');
         $this->db->where('sea_users.user_delete=0');
         if (isset($filter)) {
             $s_name = $filter['name'];
@@ -24,6 +26,7 @@ class Student_mod extends CI_Model
                 $this->db->where("email LIKE '%$s_email%'");
         }
         $this->db->order_by('sea_users.id', 'desc');
+		$this->db->limit($sp, $ep);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -173,5 +176,34 @@ class Student_mod extends CI_Model
         //$this->db->where('course_level_id', $clevid);
         return $this->db->update('sea_student_attendance', $data);
     }
+	public function feedback($tablename,$data)
+	{
+		$default = $this->load->database('default', true);
+		$default->insert($tablename, $data);
+	}
+	
+	public function parentFeedback($id)
+	{
+		$this->db->select('*');
+        $this->db->from('sea_users');
+        $this->db->join('sea_student_course_level', 'sea_student_course_level.user_id=sea_users.id');
+        $this->db->join('sea_student_pers_details', 'sea_student_pers_details.stud_id=sea_users.id');
+		$this->db->join('sea_student_feedback','sea_student_feedback.stud_id=sea_users.id');
+		$this->db->where('sea_users.id', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+		
+	}
+	
+	public function record_count($table,$rid)
+	{
+		$this->db->select('*');
+		$this->db->from($table);
+		$this->db->join('sea_user_role', 'sea_user_role.user_id = '.$table.'.id');
+		$this->db->where('sea_user_role.role_id',$rid);		
+		$query=$this->db->get();
+		return count($query->result_array());
+		
+	}
 
 }

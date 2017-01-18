@@ -153,7 +153,7 @@ class Revenue_mod extends CI_Model
     }
 
     //end of updating the values of Revenue configuration
-    public function franchiseRevenueGrid(){
+    public function franchiseRevenueGrid($filter,$sp,$ep){
         $this->db->select("sea_franchise_revenue.*,
         concat(username.first_name,' ',username.last_name) as frname,
         concat(createdby.first_name,' ',createdby.last_name) as createdbyname,
@@ -171,6 +171,49 @@ class Revenue_mod extends CI_Model
             ->join('sea_users as smf_name','sea_user_hierarchy.smf_id=smf_name.id','left')
             ->join('sea_users as dmf_name','sea_user_hierarchy.dmf_id=dmf_name.id','left')
             ->join('sea_users as createdby','sea_user_hierarchy.created_by=createdby.id','left');
+			if(isset($filter))
+			{
+				$s_name=$filter['name'];
+		        $conid=$filter['conid'];
+                $smfid=$filter['smfid'];
+				$dmfid=$filter['dmfid'];
+				if($dmfid==''&&$smfid==''&&$conid=='')
+					if($s_name!='')
+						$this->db->where("username.first_name LIKE '%$s_name%'");
+					
+                if($dmfid!='')
+				   {
+					$this->db->where('sea_user_hierarchy.created_by='.$dmfid);
+					if($s_name!='')
+						{
+							$this->db->where("dmf_name.first_name LIKE '%$s_name%'");
+						}	
+					}	
+                if($dmfid=='')
+					{	
+						if($smfid!='')
+							{
+								$this->db->where('sea_user_hierarchy.created_by='.$smfid);
+								if($s_name!='')
+									{
+										$this->db->where("smf_name.first_name LIKE '%$s_name%'");
+									}
+								
+							}
+					}	
+                if($smfid=='')
+					{
+						if($conid!='')
+							{
+							   $this->db->where('sea_user_hierarchy.created_by='.$conid);
+							   if($s_name!='')
+									{
+										$this->db->where("consultant_name.first_name LIKE '%$s_name%'");
+									}
+					        }	
+					}					
+			}
+	    $this->db->limit($sp, $ep);		
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -198,4 +241,13 @@ class Revenue_mod extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+	
+	public function record_count($table)
+	{
+		$this->db->select('*');
+		$this->db->from($table);
+		$query=$this->db->get();
+		return count($query->result_array());
+		
+	}
 }

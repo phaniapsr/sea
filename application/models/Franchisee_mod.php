@@ -4,7 +4,7 @@ class Franchisee_mod extends CI_Model{
         parent::__Construct();
     }
 
-	public function listFromTable($role,$filter) {
+	public function listFromTable($role,$filter,$sp,$ep) {
 		$id=$this->session->user_logged_in['id'];
 		$this->db->select('*');
         $this->db->from('sea_users');
@@ -54,8 +54,19 @@ class Franchisee_mod extends CI_Model{
 		$this->db->where('sea_user_role.role_id='.$role);
 		$this->db->where('sea_users.user_delete=0');
 		$this->db->order_by('sea_users.id','desc');
+		$this->db->limit($sp, $ep);
 		$query=$this->db->get();
-        return $query->result_array();
+		return $query->result_array();
+		//print_r($query->result_array());
+		/*if ($query->num_rows() > 0){
+			
+			print_r($query->result_array());
+			/*foreach ($query->result_array() as $row) {
+				$data['data'] = $row;
+				}
+			//return $data;
+		}*/
+        
 	}
 
 	public function deleteRecordFromTable($table,$fieldLable,$id) {
@@ -162,5 +173,16 @@ class Franchisee_mod extends CI_Model{
 		$this->db->join('sea_user_hierarchy','sea_users.id=sea_user_hierarchy.user_id');
 		
 	}*/
+	
+	public function record_count($table,$rid)
+	{
+		$this->db->select('*');
+		$this->db->from($table);
+		$this->db->join('sea_user_role', 'sea_user_role.user_id = '.$table.'.id');
+		$this->db->where('sea_user_role.role_id',$rid);		
+		$query=$this->db->get();
+		return count($query->result_array());
+		
+	}
 	
 }
