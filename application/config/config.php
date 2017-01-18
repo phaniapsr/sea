@@ -512,6 +512,7 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+
 /*
  * SMS Gateway
  * Recommended Format : http://alertbox.in/pushsms.php?username=your_username&api_password=your_api_password&sender=your_senderid&to=your_recipient&message=your_message

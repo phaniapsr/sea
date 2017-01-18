@@ -19,6 +19,7 @@ class FranchiseeManagement extends CI_Controller
 		$this->load->helper('array');
 		$this->load->helper('send_sms_helper');
         //echo send_sms('9295804099','Welcome to SMS gateway','1');
+		$this->load->library('pagination');
     }
 
     public function index()
@@ -204,28 +205,42 @@ class FranchiseeManagement extends CI_Controller
 
     public function smfList()
     {
+		$config['base_url']=base_url().'FranchiseeManagement/smfList';
+		$config['total_rows']=$this->franchisee->record_count('sea_users','2');
+		$config['per_page']=10;
+		$config['uri_segment'] =3;
+    	$this->pagination->initialize($config);
 		$filter=array(
 		'name'=>$this->input->post('search'),
 		'conid'=>$this->input->post('conid'),
         'smfid'=>null,
 		'dmfid'=>null
         );
-		
-        $data['data']['smf'] = $this->franchisee->listFromTable('2',$filter);
-        $this->load->view('includes/header');
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$data['data']['smf'] = $this->franchisee->listFromTable('2',$filter,$config['per_page'],$page);
+		$data['data']['links']=$this->pagination->create_links();
+		//print_r($data);
+		$this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/smfList', $data);
         $this->load->view('includes/footer');
     }
 
     public function dmfList()
     {
+		$config['base_url']=base_url().'FranchiseeManagement/dmfList';
+		$config['total_rows']=$this->franchisee->record_count('sea_users','3');
+		$config['per_page']=10;
+		$config['uri_segment'] =3;
+    	$this->pagination->initialize($config);
 		$filter=array(
 		'name'=>$this->input->post('search'),
 	    'conid'=>$this->input->post('conid'),
         'smfid'=>$this->input->post('smfid'),
 		'dmfid'=>null
 		);
-		$data['data']['smf'] = $this->franchisee->listFromTable('3',$filter);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$data['data']['smf'] = $this->franchisee->listFromTable('3',$filter,$config['per_page'],$page);
+		$data['data']['links']=$this->pagination->create_links();
 		$this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/dmfList', $data);
         $this->load->view('includes/footer');
@@ -233,13 +248,20 @@ class FranchiseeManagement extends CI_Controller
 
     public function ufList()
     {
+		$config['base_url']=base_url().'FranchiseeManagement/ufList';
+		$config['total_rows']=$this->franchisee->record_count('sea_users','4');
+		$config['per_page']=10;
+		$config['uri_segment'] =3;
+		$this->pagination->initialize($config);
 		$filter=array(
 		'name'=>$this->input->post('search'),
 		 'conid'=>$this->input->post('conid'),
         'smfid'=>$this->input->post('smfid'),
 		'dmfid'=>$this->input->post('dmfid')
 		);
-        $data['data']['smf'] = $this->franchisee->listFromTable('4',$filter);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['data']['smf'] = $this->franchisee->listFromTable('4',$filter,$config['per_page'],$page);
+		$data['data']['links']=$this->pagination->create_links();
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/umfList', $data);
         $this->load->view('includes/footer');
@@ -247,13 +269,20 @@ class FranchiseeManagement extends CI_Controller
 
     public function consultantsList()
     {
+		$config['base_url']=base_url().'FranchiseeManagement/consultantsList';
+		$config['total_rows']=$this->franchisee->record_count('sea_users','5');
+		$config['per_page']=10;
+		$config['uri_segment'] =3;
+		$this->pagination->initialize($config);
 		$filter=array(
 		'name'=>$this->input->post('search'),
 		'conid'=>null,
 		'smfid'=>null,
 		'dmfid'=>null
 		);
-        $data['data']['smf'] = $this->franchisee->listFromTable('5',$filter);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['data']['smf'] = $this->franchisee->listFromTable('5',$filter,$config['per_page'],$page);
+		$data['data']['links']=$this->pagination->create_links();
         $this->load->view('includes/header');
         $this->load->view('FranchiseeManagement/consultantsList', $data);
         $this->load->view('includes/footer');

@@ -160,6 +160,11 @@
             <li>
                 <a href="<?php echo base_url()?>StudentManagement/attendanceManagement"><i class="fa fa-book"></i> Attendance</a>
             </li>
+			<?php if($this->session->user_logged_in['role_id'] == 4 || $this->session->user_logged_in['role_id'] == 6){?>
+			<li>
+			    <a href="<?php echo base_url()?>StudentManagement/studentFeedbackForm"><i class="fa fa-book"></i> Student FeedBack Form</a>
+			</li>
+			<?php } ?>
         </ul>
     </div>
 </nav>

@@ -2,6 +2,40 @@
  * Created by pc32261 on 8/8/2016.
  */
 $(function () {
+	$('#feedback_form_save').click(function () {
+		$('#studentFeedback').submit();
+	});
+	$('#studentFeedback').submit(function(e){
+		 e.preventDefault();
+            var data = $(this).serializeArray();
+			$.ajax({
+				url: $('#studentFeedback').attr('action'),
+				type: "POST",
+                data: data,
+                success: function () {
+                    alert("Successfully Submited......!!");
+					$('#feedback').val('');
+                },
+                error: function () {
+
+                }
+			});
+			e.preventDefault();
+            return false;
+	});
+	$(".f-feedback").click(function (e) {
+		document.getElementById('feedback_id').innerHTML=$(this).attr('userid');
+		$('#stud_id').val($(this).attr('userid'));
+		document.getElementById('feedback_course_id').innerHTML=$(this).attr('courseid');
+		$('#course_id').val($(this).attr('courseid'));
+		document.getElementById('attendance').innerHTML=$(this).attr('attendance');
+		document.getElementById('excercise').innerHTML=$(this).attr('excercise');
+	    document.getElementById('practice').innerHTML=$(this).attr('practice');  
+		document.getElementById('motivate').innerHTML=$(this).attr('motivate');
+		document.getElementById('development').innerHTML=$(this).attr('development');
+		document.getElementById('franchisee').innerHTML=$(this).attr('franchisee');
+		document.getElementById('trainer').innerHTML=$(this).attr('trainer');
+	});
     $('#program').change(function () {
 		
         var pid = $(this);

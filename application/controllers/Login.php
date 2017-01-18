@@ -70,10 +70,13 @@ class Login extends CI_Controller {
 				//print_r($session_data);exit;
 				//setting session
 			    $this->session->set_userdata('user_logged_in', $session_data);
-                if($result[0]['role_id']=='1'||$result[0]['role_id']=='3'||$result[0]['role_id']=='2')
+                if($result[0]['role_id']=='1'||$result[0]['role_id']=='3'||$result[0]['role_id']=='2'||$result[0]['role_id']=='5')
 			    redirect('FranchiseeManagement');
-			    elseif($result[0]['role_id']=='4'||$result[0]['role_id']=='5')
+			    //elseif($result[0]['role_id']=='4'||$result[0]['role_id']=='5')
+				elseif($result[0]['role_id']=='4')
 			    redirect('StudentManagement');
+				elseif($result[0]['role_id']=='6')
+				redirect('StudentManagement/sdetailView/'.$result[0]['user_id']);
 			}
 			else
 			{
