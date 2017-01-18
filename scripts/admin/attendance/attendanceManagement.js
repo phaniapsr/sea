@@ -11,7 +11,7 @@ $(function(){
             dataType:'json',
             data: {user_id: $('#hid_user_id').val()},
             success: function(res) {
-                $('.attendance_table').find("tr:gt(0)").remove();
+                $('.attendance_table').find("tr:gt(1)").remove();
                 $('#data_fa_name').text(res[0].fath_name)
                 $('#data_mo_name').text(res[0].moth_name)
                 $('#data_pcn').text(res[0].fath_mobno)
@@ -28,11 +28,13 @@ $(function(){
                 $.each(res[0].attendance, function (key, value) {
                     replace_id++
                     var cloned=$('.attendance_tr:first').clone(true).insertAfter(".attendance_tr:last");
-                    cloned.find('input.schedule_date').removeData('datepicker').datepicker().val(value.actual_class_conducted_date);
-                    cloned.find('input[type=radio]').attr('name',cloned.find('input[type=radio]').attr("name").replace(/\d+/, replace_id))
-                    value.punctual==0?cloned.find('input[type=radio][value=0]').attr('checked', 'checked'):value.punctual==1?cloned.find('input[type=radio][value=1]').attr('checked', 'checked'):cloned.find('input[type=radio][value=1]');
-                    cloned.find('td:nth-child(2)').text(value.scheduled_class_date);
-                    cloned.find('input.attendance_cls').val(value.attendance_id);
+                    cloned.find('input.schedule_date').removeClass('hasDatepicker').removeData('datepicker').unbind().datepicker().val(value.actual_class_conducted_date);
+                    cloned.find('input.punctual').attr('name',cloned.find('input.punctual').attr("name").replace(/\d+/, replace_id))
+                    cloned.find('input.homework').attr('name',cloned.find('input.homework').attr("name").replace(/\d+/, replace_id))
+                    value.punctual==0?cloned.find('input[type=radio][value=0].punctual').attr('checked', 'checked'):value.punctual==1?cloned.find('input[type=radio][value=1].punctual').attr('checked', 'checked'):cloned.find('input[type=radio][value=1].punctual');
+                    value.homework==0?cloned.find('input[type=radio][value=0].homework').attr('checked', 'checked'):value.homework==1?cloned.find('input[type=radio][value=1].homework').attr('checked', 'checked'):cloned.find('input[type=radio][value=1].homework');
+                    cloned.find('td:first').append().text(value.scheduled_class_date);
+                    cloned.find('input.hid_attendance_cls').val(value.attendance_id);
                 });
                 $('.attendance_tr:first').remove();
             }

@@ -16,7 +16,9 @@ class FranchiseeManagement extends CI_Controller
 
         //$this->load->model('merchant_mod');
         $this->load->library('form_validation');
-		 $this->load->helper('array');
+		$this->load->helper('array');
+		$this->load->helper('send_sms_helper');
+        //echo send_sms('9295804099','Welcome to SMS gateway','1');
     }
 
     public function index()
@@ -169,13 +171,26 @@ class FranchiseeManagement extends CI_Controller
                 'course_funmaths' => $cf,
             );
             $result4 = $this->franchisee->insertNewRecord('sea_franchise_courses', $data4);
-            $this->load->library('email');
-			$this->email->from('noreply@example.com', 'Example App'); // Change these details
-			$this->email->to($_POST['email']); 
-			$this->email->subject('Login Details');
-			$this->email->message('Email :"'.$_POST['email'].'"<br>Password:"'.$_POST['password'].'"');	
-			@$this->email->send();
-			echo json_encode(array('id'=>$result,'utype'=>$this->input->post('userType')));
+
+            if($this->input->post('userType')){
+                //Sending Email after registration
+                $this->load->library('email');
+                $this->email->from('noreply@example.com', 'Example App'); // Change these details
+                $this->email->to($_POST['email']);
+                $this->email->subject('Login Details');
+                $this->email->message('Email :"'.$_POST['email'].'"<br>Password:"'.$_POST['password'].'"');
+                @$this->email->send();
+                //Sending SMS confirmation
+                $message='Welcome to Skills Education Academy';
+                $smsRes=send_sms($this->input->post('MobileNumber'),$message);
+                $smsData=array(
+                    'sms_senario'=>1,
+                    'sms_message'=>$message,
+                    'sms_response'=>$smsRes,
+                );
+                $this->franchisee->insertNewRecord('sea_sms_sent_status',$smsData);
+            }
+            echo json_encode(array('id'=>$result,'utype'=>$this->input->post('userType')));
         }
         else echo json_encode(array('error'=>'Email already taken'));
     }

@@ -346,10 +346,13 @@ $(function () {
                    /* if (data > 0)
                         $('#message_from_server').text('Student registered successfully');
                     else $('#message_from_server').text('Student registration failed');*/
-					if(data>0)
+					if(data.id>0)
 					{
-						
-						if(confirm('Registration successfully completed. Press Okay to proceed for Payment')){
+                        if(data.utype==0)
+                        {
+                            alert('Franchisee registered successfully');
+                            $('#message_from_server').text('Franchisee registered successfully');
+                        }else if(confirm('Registration successfully completed. Press Okay to proceed for Payment')){
                             $('#page-inner').load(formURL.split('/registerStudent')[0]+'/registrationAmountToBePaid',{userId:data})
                         }
                         else{

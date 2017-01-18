@@ -173,7 +173,9 @@ class StudentManagement extends CI_Controller
         //End of hierarchy table data insertion
         $this->studentRevenueDistribution($result);
         //header('application/json');
-        echo $result;
+        if($result>0)
+        echo json_encode(array('id'=>$result,'utype'=>$this->input->post('userType')));
+        else echo json_encode(array('error'=>'Unknown error occured'));
     }
 
 
@@ -542,14 +544,15 @@ class StudentManagement extends CI_Controller
         $course_level = $this->input->post('course_level');
         $attendance_id = $this->input->post('attendance_id');
         $actual_date = $this->input->post('actual_date');
-
         foreach($actual_date as $key=>$val){
             $punctual = $this->input->post('punctual_'.($key+1));
+            $homework = $this->input->post('homework_'.($key+1));
             $data=array(
-                'actual_class_conducted_date'=>date('Y-m-d',strtotime($val)),
-                'punctual'=>$punctual,
+                'actual_class_conducted_date'=>$val!=''?date('Y-m-d',strtotime($val)):null,
+                'punctual'=>$punctual!=''?$punctual:null,
+                'homework'=>$homework!=''?$homework:null,
                );
-            $this->student->saveAttendance($attendance_id[$key],$course_level[$key], $data);
+            $this->student->saveAttendance($attendance_id[$key],$course_level, $data);
         }
     }
 }

@@ -55,8 +55,7 @@
                                     <button type="button" class="close" data-dismiss="modal"
                                             style="color:red;font-size:29px;">×
                                     </button>
-                                    <center><h2 class="modal-title">Student Attendance Report</h2>
-                                    </center>
+                                    <center><h2 class="modal-title">Student Attendance Report</h2></center>
                                 </div>
                             </div>
                             <br>
@@ -105,13 +104,17 @@
                                 <section>
                                     <div class="row table-responsive">
                                         <table class="table attendance_table">
-                                            <tr class="attendance_tr">
-                                                <td><label>Scheduled Date</label><input type="hidden" class="attendance_cls" name="attendance_id[]"></td>
+                                            <tr>
+                                                <th>Scheduled Date</th>
+                                                <th>Actual Date</th>
+                                                <th>Punctual</th>
+                                                <th>Home Work Done</th>
+                                            </tr>
+                                            <tr class="attendance_tr"><input type="hidden" class="hid_attendance_cls" name="attendance_id[]">
                                                 <td></td>
-                                                <td><label>Actual Date</label></td>
-                                                <td><input type="text" size="10" class="schedule_date" name="actual_date[]"/></td>
-                                                <td><label>Punctual</label></td>
-                                                <td><label><input type="radio" name="punctual_0" value="1"/>Yes</label><label><input type="radio" name="punctual_0" value="0"/>No</label></td>
+                                                <td><input type="text" size="10" class="schedule_date" name="actual_date[]"></td>
+                                                <td><label><input type="radio" class="punctual" name="punctual_0" value="1"/>Yes</label><label><input type="radio" class="punctual" name="punctual_0" value="0"/>No</label></td>
+                                                <td><label><input type="radio" class="homework" name="homework_0" value="1"/>Yes</label><label><input type="radio" class="homework" name="homework_0" value="0"/>No</label></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -121,8 +124,7 @@
                                         <input type="hidden" id="hid_user_id" name="user_id" value="">
                                         <input type="hidden" id="hid_course_level_id" name="course_level" value="">
                                         <label class="danger" id="stu-config-msg"></label>
-                                        <button class="btn primaryCta small" type="button"
-                                                role="button"
+                                        <button class="btn primaryCta small" type="button" role="button"
                                                 id="attendance_button_save"><span>Save</span></button>
                                         <button class="btn primaryCta small" type="button" id="buttonCancel"
                                                 data-dismiss="modal"><span>Cancel</span></button>
