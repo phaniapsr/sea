@@ -17,6 +17,10 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div id="margin-top" class="panel-body">
+                        <div class="form-group">
+                                <label><span class="col-lg-12"><input type="radio" id="exe_rd_user" name="userType" value="0">Existing User</span></label>
+                                <label><span class="col-lg-12"><input type="radio" id="new_rd_user" name="userType" value="1">New User</span></label>
+                        </div>
                         <form id="studentRegistration" action="<?php echo base_url()?>StudentManagement/registerStudent" name="form1" class="form-horizontal fv-form fv-form-bootstrap" method="post" ng-app="app" ng-controller="Ctrl"  enctype="multipart/form-data" >
                             <div class="row">
                                 <div class="col-lg-6">
@@ -576,13 +580,13 @@
 									
                                     $('#btn').click(function () {
                                         $("#datepicker-my").datepicker({
-                                            changeMonth: true, changeYear: true, yearRange: '1950:2015',
+                                            changeMonth: true, changeYear: true,
                                             altFormat: "mm/dd/yy"
                                         }).focus();
                                     });
                                     $('#btn3').click(function () {
                                         $("#datepicker-my3").datepicker({
-                                            changeMonth: true, changeYear: true, yearRange: '1950:2030',
+                                            changeMonth: true, changeYear: true,
                                             altFormat: "mm/dd/yy"
                                         }).focus();
                                     });
@@ -643,8 +647,7 @@
                                             changeMonth: true,
                                             altField: '#hiddenFieldID1',
                                             altFormat: "mm/dd/yy",
-                                            changeYear: true,
-                                            yearRange: '1950:2017'
+                                            changeYear: true
                                         }).focus();
                                     });
                                 });
@@ -653,11 +656,10 @@
                                     $(document).ready(function () {
                                         $("#datepicker-my2").datepicker({
                                             //dateFormat: "dd-mm-yy".replace('T00:00:00', ''),
-                                            changeMonth: true,
+                                            changeMonth: true,x
                                             altField: '#hiddenFieldID2',
                                             altFormat: "mm/dd/yy",
-                                            changeYear: true,
-                                            yearRange: '1950:2017'
+                                            changeYear: true
                                         }).focus();
                                     });
                                 });
@@ -669,8 +671,7 @@
                                             changeMonth: true,
                                             altField: '#hiddenFieldID3',
                                             altFormat: "mm/dd/yy",
-                                            changeYear: true,
-                                            yearRange: '1950:2017'
+                                            //changeYear: true
                                         }).focus();
                                     });
                                 });

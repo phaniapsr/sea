@@ -43,7 +43,7 @@ $(function(){
 	$('#signup').click(function(){
 		//alert("manu");
 		var utype=document.forms["form2"]["reUser"].value;
-		alert(utype);
+		//alert(utype);
 		if(utype==0)
 		{
 	    document.forms["form2"]["franchiseFee"].value=0;		
@@ -51,7 +51,7 @@ $(function(){
 		}
 		if(utype=='')
 		{
-			  alert("Please Select User Type Either New User OR Rigistered USer");
+			  alert("Please Select User Type Either New User OR Existing USer");
 			  return false;
 		}
 		var fr_id=document.forms["form2"]["franchiseetypeId"].value;
@@ -311,6 +311,7 @@ $(function(){
 					if(data.id>0){
 						if(data.utype==0)
 						{
+							alert('Franchisee registered successfully');
 							$('#message_from_server').text('Franchisee registered successfully');
 						}
 						if(data.utype==1)
@@ -319,6 +320,7 @@ $(function(){
                             $('#page-inner').load(formURL.split('/registerFranchisee')[0]+'/registrationAmountToBePaid',{userId:data.id})
                         }
                         else{
+							alert('Franchisee registered successfully');
                             $('#message_from_server').text('Franchisee registered successfully');
                         }
 						}

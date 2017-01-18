@@ -281,7 +281,6 @@ class FranchiseeManagement extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-//code on 270916 statrs here
     public function detaildmfList($id)
     {
         $data['data']['smf'] = $this->franchisee->franchiseDetailView($id);
@@ -407,7 +406,7 @@ class FranchiseeManagement extends CI_Controller
 
     public function checkEmail()
     {
-        $this->franchisee->checkmail($this->input->post('email')) == 0 ? 0 : 1;
+        echo $this->franchisee->checkmail($this->input->post('email')) == 0 ? 0 : 1;
     }
 	
 	public function checkStatus()
